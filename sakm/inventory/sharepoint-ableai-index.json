@@ -1,0 +1,208 @@
+{
+  "scope": "/Shared Documents/New Business/Able AI/",
+  "generated_at": "2026-04-29T00:00:00Z",
+  "generator": "K.21 Phase 1 Day-1 — manual crawl via SharePoint MCP",
+  "drive_id": "b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV",
+  "root_folder": {
+    "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XQNALNSGFWZNZEYAIPA7IFIBT52",
+    "id": "01ARJ76XQNALNSGFWZNZEYAIPA7IFIBT52",
+    "last_modified": "2026-04-21T07:11:37Z"
+  },
+  "subfolders": ["Chat Center", "CRM + CDP", "Data Center", "Training"],
+  "items": [
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XWNKLZ4P5TGTRFZHGHUBHFIXRQC",
+      "name": "20260421 AI_Able_Strategy.html",
+      "path": "/Shared Documents/New Business/Able AI/20260421 AI_Able_Strategy.html",
+      "subfolder": "(root)",
+      "last_modified": "2026-04-21T07:14:11Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "strategy",
+      "wisdom_summary": "AI Able · Product Strategy 2026 · 4 products overview · Thailand→global · AI replaces real work"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XX4FTON7PVL3FC2DD2N7YY6PFJZ",
+      "name": "AI_Sales_Intelligence_2026.xlsx",
+      "path": "/Shared Documents/New Business/Able AI/AI_Sales_Intelligence_2026.xlsx",
+      "subfolder": "(root)",
+      "last_modified": "2026-04-10T13:56:55Z",
+      "sensitivity_proposed": "SECRET",
+      "tier": 1,
+      "category": "sales",
+      "wisdom_summary": "760 customer accounts analyzed · Grade A/B/C tiering · AI Ecosystem Sales Intelligence 2026 · ANTS lead-gen baseline"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XWQWRXDCMR4J5DLXNNIHOCQTNOX",
+      "name": "Strategic_Marketing_Plan 2.html",
+      "path": "/Shared Documents/New Business/Able AI/Strategic_Marketing_Plan 2.html",
+      "subfolder": "(root)",
+      "last_modified": "2026-04-28T01:30:45Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "marketing",
+      "wisdom_summary": "Strategic Marketing Plan AI Chatbot for SME · Facebook + LINE focus · 2025"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XSKIH25DM4EFVB27FMUBIVJUUSJ",
+      "name": "20260421 AIAble_ChatSME.pptx",
+      "path": "/Shared Documents/New Business/Able AI/Chat Center/20260421 AIAble_ChatSME.pptx",
+      "subfolder": "Chat Center",
+      "last_modified": "2026-04-17T00:57:44Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "product",
+      "wisdom_summary": "AI Able Chat SME · AI ตอบแชทแทนแอดมิน 24 ชม. · LINE + Facebook · ปิดการขาย"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XQJYQEO7UNKTBFIFZ535HXOCOWF",
+      "name": "replybot-landing.html",
+      "path": "/Shared Documents/New Business/Able AI/Chat Center/replybot-landing.html",
+      "subfolder": "Chat Center",
+      "last_modified": "2026-04-28T01:43:17Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "marketing",
+      "wisdom_summary": "ReplyBot landing · 1,240+ businesses · ฿40,000/month savings claim · Thai SME positioning"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XQXLB65STYNM5HK3WBDFN5BXK7V",
+      "name": "20260421 AIAble_CRM_CDP.pptx",
+      "path": "/Shared Documents/New Business/Able AI/CRM + CDP/20260421 AIAble_CRM_CDP.pptx",
+      "subfolder": "CRM + CDP",
+      "last_modified": "2026-04-21T08:42:23Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "product",
+      "wisdom_summary": "AI Able CRM+CDP · สมองขององค์กร · +30-50% data utilization · enterprise positioning"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XUZ4USQASL4INCK75P6BKTYFUEN",
+      "name": "ANTS Sale_crm cdp.html",
+      "path": "/Shared Documents/New Business/Able AI/CRM + CDP/ANTS Sale_crm cdp.html",
+      "subfolder": "CRM + CDP",
+      "last_modified": "2026-04-28T01:29:09Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "sales",
+      "wisdom_summary": "AI ABLE CRM CDP Backoffice · Powered by ANTS · 360° customer · Next Best Action"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XQKA3RHEV6V5VAJMLONJDJWEAA7",
+      "name": "20260402 AIAble_CRM_CDP_Concept.html",
+      "path": "/Shared Documents/New Business/Able AI/CRM + CDP/20260402 AIAble_CRM_CDP_Concept.html",
+      "subfolder": "CRM + CDP",
+      "last_modified": "2026-04-21T08:58:42Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "product",
+      "wisdom_summary": "CRM+CDP+AI Marketing Tech Framework · Internal Review April 2025 · Data Flow + AI Features"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XU6536WAFBQS5D3BB3XYSPGI6A7",
+      "name": "20260402 [S-Curve] AI_Admin_24hr_Strategy.pptx",
+      "path": "/Shared Documents/New Business/Able AI/Data Center/20260402 [S-Curve] AI_Admin_24hr_Strategy.pptx",
+      "subfolder": "Data Center",
+      "last_modified": "2026-04-03T06:52:08Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "strategy",
+      "wisdom_summary": "AI Admin 24 hr Product Strategy · พนักงานขาย+แอดมินที่ไม่ต้องจ้าง · S-Curve ใหม่สำหรับ SME ไทย · Concept→Pricing→GTM→Funnel"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XX4H4ZHUIPGB5EYLEXIL26IPNIB",
+      "name": "20260401 AI_Ecosystem_Strategy_2026.pptx",
+      "path": "/Shared Documents/New Business/Able AI/Data Center/20260401 AI_Ecosystem_Strategy_2026.pptx",
+      "subfolder": "Data Center",
+      "last_modified": "2026-04-10T02:45:39Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "strategy",
+      "wisdom_summary": "AI Ecosystem Strategy 2026 · ภาพรวม Value Chain ครบ Data→Execution→SME→Education · 01 CRM+CDP+AI Core 02 AI Assistant Future Growth"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XUX2WPVRHMTA5DIIV4T5IWD3UGF",
+      "name": "20260327 สคริปต์พูด_AI_สหกรณ์.docx",
+      "path": "/Shared Documents/New Business/Able AI/Training/[01] CMS/20260327 สคริปต์พูด_AI_สหกรณ์.docx",
+      "subfolder": "Training/[01] CMS",
+      "last_modified": "2026-03-27T12:46:37Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "founder_story",
+      "wisdom_summary": "Speaker script · AI กับการยกระดับสหกรณ์สู่ยุคดิจิทัล · ธนกาญ เพิ่มทอง AI Specialist"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XV7REFHEKPF5JD3AS46UGXWGYZW",
+      "name": "20260327 AI กับการยกระดับสหกรณ์.pdf",
+      "path": "/Shared Documents/New Business/Able AI/Training/[01] CMS/20260327 AI กับการยกระดับสหกรณ์.pdf",
+      "subfolder": "Training/[01] CMS",
+      "last_modified": "2026-03-27T12:08:38Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "founder_story",
+      "wisdom_summary": "Slide deck · AI ยกระดับสหกรณ์ · Founder profile + AI training framework"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XT7HK5NOKAAWVHJIWBRQXIXRVHE",
+      "name": "20260327 สคริปต์พูด_AI_สหกรณ์.md",
+      "path": "/Shared Documents/New Business/Able AI/Training/[01] CMS/20260327 สคริปต์พูด_AI_สหกรณ์.md",
+      "subfolder": "Training/[01] CMS",
+      "last_modified": "2026-04-21T07:19:39Z",
+      "sensitivity_proposed": "INTERNAL",
+      "tier": 2,
+      "category": "founder_story",
+      "wisdom_summary": "Markdown speaker script (paired with .docx)"
+    }
+  ],
+  "expanded_scope_approved_29apr": [
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XSADBRMG6R56NFZMI2QDJSVP4PH",
+      "name": "20260325 Management quarter.pptx",
+      "path": "/Shared Documents/New Business/Business Development/[08] Management/20260325 Management quarter.pptx",
+      "last_modified": "2026-03-27T04:03:06Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "finance",
+      "wisdom_summary": "Q1 2026 Revenue 35,966,663 THB · Jan 10.52M · Feb 11.81M · Mar 13.64M · Management dashboard"
+    },
+    {
+      "uri": "file:///b!dF9qdwEg-0mMUyW-HbQOOP1VIwoRAYFKs_v0PNw6m66zJDIS_Id6QLuG1osQUtTV/01ARJ76XRLDIDHXWZHH5ELW3PGP3B7SJ35",
+      "name": "20260428 Management APR.pptx",
+      "path": "/Shared Documents/New Business/Business Development/[08] Management/20260428 Management APR.pptx",
+      "last_modified": "2026-04-28T02:35:54Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "finance",
+      "wisdom_summary": "April YTD 51M THB · April month 13.81M · Objective 100M THB (21.8% progress) · Management dashboard"
+    },
+    {
+      "uri": "file:///b!8Rnijqi64kaSfnfKif4hpdhjetV41o5GkSj_vocMgpLjHGqWptEtR7Di3mjsEjJv/01XXZSCA7P4KL3ZRTDM5G2N6OP5CS7Z2UU",
+      "name": "ANTS 20260312 กยศ POC Presentation.pdf",
+      "path": "/Microsoft Teams Chat Files/ANTS 20260312 กยศ POC Presentation.pdf",
+      "last_modified": "2026-03-19T20:49:05Z",
+      "sensitivity_proposed": "CONFIDENTIAL",
+      "tier": 1,
+      "category": "historical_decisions",
+      "wisdom_summary": "ABLE government POC (กยศ · Student Loan Fund) · เอเบิล AI Automation positioning · B2G case · Customer Engagement framing"
+    }
+  ],
+  "phase_1_metrics": {
+    "items_in_scope_initial": 13,
+    "items_added_via_expansion_29apr": 3,
+    "items_in_scope_total": 16,
+    "tier_1_files": 11,
+    "tier_2_files": 5,
+    "subfolders_mapped": 4,
+    "categories_covered": ["strategy", "sales", "marketing", "product", "founder_story", "finance", "historical_decisions"],
+    "categories_missing_in_scope": ["tech", "legal", "hr", "client_records", "operations"],
+    "expansion_approved_by_nut_29apr": true,
+    "i_new_29_approved": true
+  },
+  "next_actions": [
+    "Senior Legal #34 — review sensitivity_proposed tags · finalize PUBLIC/INTERNAL/CONFIDENTIAL/SECRET",
+    "KM #51 + Senior Research #25 — read Tier-1 .pptx/.html files (open via Word/PowerPoint MCP) and generate first 13 Wisdom Cards using wisdom-card-scaffold.py",
+    "#64 CEcoO — propose Wisdom Card → Agent mapping for these 13 items",
+    "CWO + #65 CDA — Layer-2 review of first 13 cards before federating to 5 Product Shadow Agents",
+    "COO #6 — propose expansion to 3 related items + Management Q1/APR finance folding"
+  ]
+}

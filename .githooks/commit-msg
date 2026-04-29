@@ -1,0 +1,43 @@
+#!/bin/sh
+# .githooks/commit-msg — I-NEW-2 + I-NEW-17 · K.23
+# Validates commit message format: K.<x>: <summary>
+# Owner: HoEng #21 + CCVO #52 + #63 FJA-CDCA
+
+MSG_FILE="$1"
+FIRST_LINE=$(head -1 "$MSG_FILE")
+
+# Allow merge / revert / fixup / squash auto-commits
+case "$FIRST_LINE" in
+    Merge*|Revert*|fixup!*|squash!*|amend!*)
+        exit 0
+        ;;
+esac
+
+# Allow bypass via empty / WIP commits when explicitly tagged
+if [ -z "$FIRST_LINE" ] || echo "$FIRST_LINE" | grep -qE '^(WIP|TEMP):'; then
+    exit 0
+fi
+
+# Validate K.<x>: prefix (allow K.20, K.20.1, K.20.2, etc.)
+if ! echo "$FIRST_LINE" | grep -qE '^K\.[0-9]+(\.[0-9]+)?:'; then
+    echo "❌ COMMIT BLOCKED: first line must start with K.<x>: prefix"
+    echo ""
+    echo "   Got:      $FIRST_LINE"
+    echo "   Expected: K.<x>: <one-line summary>"
+    echo ""
+    echo "   Examples:"
+    echo "     K.23: ship I-NEW-30 + I-NEW-2 + I-NEW-13 + I-NEW-16 + I-NEW-4 (Wise Sprint Round 2)"
+    echo "     K.20.2: Charter Sign-off Pack + I-NEW-24 stub"
+    echo ""
+    echo "   Bypass (use sparingly):"
+    echo "     git commit --no-verify -m 'your message'"
+    exit 1
+fi
+
+# Soft check: warn if no ARAI block in body (don't block · just advisory)
+if ! grep -q "^ARAI:" "$MSG_FILE" && ! grep -q "^A:" "$MSG_FILE"; then
+    echo "⚠️  Advisory: commit body has no ARAI block (Op 12 best practice for substantive changes)"
+    echo "   Add via: git commit --amend  to enrich"
+fi
+
+exit 0

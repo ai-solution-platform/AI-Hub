@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANTS · CX Dashboard v7 — 2026 · CX-Aligned + Reference Definitions</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --ants-navy:#0E2A47; --ants-blue:#1E5AA8; --ants-cyan:#00B5D8;
+  --ants-amber:#F59E0B; --ants-red:#DC2626; --ants-green:#10B981; --ants-purple:#7C3AED; --ants-pink:#EC4899;
+  --bg:#FFFFFF; --bg-soft:#F5F7FA; --border:#E5E7EB;
+  --text:#111827; --text-soft:#4B5563; --text-mute:#9CA3AF;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{margin:0;padding:0;background:var(--bg-soft);color:var(--text);font-family:'Inter','SF Pro Display','Sukhumvit Set','Helvetica Neue',-apple-system,sans-serif;font-size:14.5px;line-height:1.55}
+.wrap{max-width:1320px;margin:0 auto;padding:24px 24px 60px}
+
+.header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-radius:12px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--ants-navy) 0%,var(--ants-blue) 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px}
+.brand-meta h1{margin:0;font-size:16.5px;font-weight:700;color:var(--ants-navy)}
+.brand-meta .sub{font-size:11.5px;color:var(--text-mute)}
+.header .meta-right{font-size:11.5px;color:var(--text-soft);text-align:right;line-height:1.5}
+.scope-pill,.ai-pill,.new-pill,.cx-pill{display:inline-block;padding:3px 8px;border-radius:8px;font-size:10.5px;font-weight:700;margin-left:6px;vertical-align:middle}
+.scope-pill{background:#FEF3C7;color:#92400E}
+.ai-pill{background:linear-gradient(135deg,#7C3AED 0%,#EC4899 100%);color:#fff}
+.new-pill{background:var(--ants-green);color:#fff}
+.cx-pill{background:linear-gradient(135deg,#00B5D8 0%,#1E5AA8 100%);color:#fff}
+
+.filter-bar{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.filter-bar .lbl{font-size:12.5px;color:var(--text-soft);font-weight:600;display:flex;align-items:center;gap:5px}
+.filter-bar .lbl::before{content:"📅";font-size:16px}
+.filter-btns{display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{padding:6px 14px;border:1.5px solid var(--border);background:#fff;color:var(--text-soft);border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
+.filter-btn:hover{border-color:var(--ants-blue);color:var(--ants-blue);background:#EFF6FF}
+.filter-btn.active{background:var(--ants-navy);color:#fff;border-color:var(--ants-navy);box-shadow:0 2px 6px rgba(14,42,71,.25)}
+.filter-status{margin-left:auto;font-size:11.5px;color:var(--text-mute);display:flex;align-items:center;gap:5px}
+.filter-status .dot{width:7px;height:7px;background:var(--ants-green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero{background:linear-gradient(135deg,#0E2A47 0%,#1E5AA8 55%,#00B5D8 100%);color:#fff;padding:22px 26px;border-radius:14px;margin-bottom:18px}
+.hero h2{margin:0 0 4px;font-size:21px;font-weight:700;letter-spacing:-.3px}
+.hero p{margin:0;font-size:13px;color:rgba(255,255,255,.85);max-width:760px}
+.hero .activated{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.13);padding:5px 11px;border-radius:14px;font-size:11.5px;margin-top:10px;border:1px solid rgba(255,255,255,.2)}
+.hero .activated .dot{width:6px;height:6px;background:#00FF95;border-radius:50%;box-shadow:0 0 6px #00FF95}
+
+.section{margin-top:24px}
+.section-title{display:flex;align-items:center;gap:9px;margin-bottom:12px;flex-wrap:wrap}
+.section-title .num{display:inline-flex;align-items:center;justify-content:center;background:var(--ants-navy);color:#fff;width:25px;height:25px;border-radius:7px;font-weight:700;font-size:12px}
+.section-title .num.new{background:var(--ants-green)}
+.section-title .num.ref{background:var(--ants-cyan)}
+.section-title h3{margin:0;font-size:17px;font-weight:700;color:var(--ants-navy);letter-spacing:-.2px}
+.section-title .tag{font-size:11px;color:#3730A3;background:#EEF2FF;padding:2px 9px;border-radius:10px;font-weight:500}
+.section-title .tag.green{background:#D1FAE5;color:#065F46}
+.section-title .tag.cyan{background:#CFFAFE;color:#155E75}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#fff;padding:15px 17px;border-radius:11px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .15s}
+.kpi:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.kpi .label{font-size:10.5px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.kpi .value{font-size:26px;font-weight:800;color:var(--ants-navy);margin-top:4px;letter-spacing:-.5px;line-height:1.1;transition:all .3s}
+.kpi .delta{display:inline-block;margin-top:6px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:8px;transition:all .3s}
+.kpi .delta.up{background:#D1FAE5;color:#065F46}
+.kpi .delta.down{background:#FEE2E2;color:#991B1B}
+.kpi .delta.neutral{background:#E0E7FF;color:#3730A3}
+.kpi .ctx{font-size:11px;color:var(--text-mute);margin-top:5px;transition:all .3s;line-height:1.4}
+.kpi .stripe{position:absolute;top:0;left:0;width:3px;height:100%;background:var(--ants-blue)}
+.kpi.danger .stripe{background:var(--ants-red)}
+.kpi.success .stripe{background:var(--ants-green)}
+.kpi.warn .stripe{background:var(--ants-amber)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:11px;padding:16px}
+.card h4{margin:0 0 3px;font-size:14px;font-weight:700;color:var(--ants-navy)}
+.card .sub{font-size:11.5px;color:var(--text-mute);margin-bottom:10px;line-height:1.45}
+
+.chart-box{position:relative;width:100%}
+.chart-box.h-line{height:230px}
+.chart-box.h-bar-h{height:215px}
+.chart-box.h-bar-v{height:220px}
+.chart-box.h-donut{height:200px}
+.chart-box.h-tall{height:280px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl thead{background:var(--ants-navy);color:#fff}
+.tbl thead th{padding:8px 11px;text-align:left;font-weight:600;font-size:11.5px}
+.tbl tbody td{padding:8px 11px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45}
+.tbl tbody tr:hover{background:#F8FAFC}
+.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl td.c{text-align:center}
+
+.rank{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--ants-navy);color:#fff;font-weight:700;font-size:11px}
+.rank.top1{background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%);box-shadow:0 2px 5px rgba(245,158,11,.4)}
+.rank.top2{background:linear-gradient(135deg,#9CA3AF 0%,#6B7280 100%)}
+.rank.top3{background:linear-gradient(135deg,#92400E 0%,#78350F 100%)}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:9px;font-size:10.5px;font-weight:600}
+.badge.green{background:#D1FAE5;color:#065F46}
+.badge.amber{background:#FEF3C7;color:#92400E}
+.badge.red{background:#FEE2E2;color:#991B1B}
+.badge.blue{background:#DBEAFE;color:#1E40AF}
+.badge.purple{background:#EDE9FE;color:#5B21B6}
+.badge.gray{background:#F3F4F6;color:#374151}
+.badge.cyan{background:#CFFAFE;color:#155E75}
+/* Owner badges */
+.own{display:inline-block;padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:700;letter-spacing:.2px}
+.own.cx{background:#CFFAFE;color:#155E75}
+.own.cto{background:#EDE9FE;color:#5B21B6}
+.own.devops{background:#FEE2E2;color:#991B1B}
+.own.eng{background:#DBEAFE;color:#1E40AF}
+.own.it{background:#FEF3C7;color:#92400E}
+.own.cwo{background:#0E2A47;color:#fff}
+.own.am{background:#D1FAE5;color:#065F46}
+
+.insight{background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%);border:1px solid #FCD34D;border-radius:11px;padding:14px}
+.insight .head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.insight .head .ico{font-size:18px}
+.insight .head .ttl{font-weight:700;color:#78350F;font-size:13px}
+.insight .body{font-size:12.5px;color:#451A03;line-height:1.5}
+.insight.red{background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%);border-color:#FCA5A5}
+.insight.red .ttl{color:#991B1B}.insight.red .body{color:#7F1D1D}
+.insight.green{background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC}
+.insight.green .ttl{color:#166534}.insight.green .body{color:#14532D}
+.insight.purple{background:linear-gradient(135deg,#FAF5FF 0%,#F3E8FF 100%);border-color:#D8B4FE}
+.insight.purple .ttl{color:#6B21A8}.insight.purple .body{color:#581C87}
+
+.mstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.mcard{background:#fff;border-radius:10px;padding:13px 14px;text-align:center;border-top:3px solid var(--ants-blue);box-shadow:0 1px 2px rgba(0,0,0,.04);cursor:pointer;transition:all .15s}
+.mcard:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.08)}
+.mcard.jan{border-top-color:var(--ants-cyan)}
+.mcard.feb{border-top-color:var(--ants-blue)}
+.mcard.mar{border-top-color:var(--ants-amber)}
+.mcard.apr{border-top-color:var(--ants-green)}
+.mcard.active{box-shadow:0 0 0 2.5px var(--ants-navy)}
+.mcard .mlbl{font-size:10.5px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.mcard .mval{font-size:22px;font-weight:800;color:var(--ants-navy);margin:4px 0 2px}
+.mcard .mmeta{font-size:10.5px;color:var(--text-soft);line-height:1.35}
+
+.magic{background:linear-gradient(135deg,#FEF3C7 0%,#FDE68A 100%);border:2px dashed #F59E0B;border-radius:11px;padding:14px 16px;margin:14px 0}
+.magic .head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.magic .head .ico{font-size:19px}
+.magic .head .ttl{font-weight:700;color:#78350F;font-size:13.5px}
+.magic .body{font-size:12.5px;color:#451A03;line-height:1.55}
+.magic .body code{background:#fff;padding:1px 5px;border-radius:3px;font-family:'SF Mono','Consolas',monospace;font-size:11.5px;color:#7C2D12}
+
+/* REFERENCE BANNER */
+.ref-banner{background:linear-gradient(135deg,#ECFEFF 0%,#CFFAFE 100%);border:2px solid #06B6D4;border-radius:11px;padding:14px 16px;margin:14px 0}
+.ref-banner .head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.ref-banner .head .ico{font-size:19px}
+.ref-banner .head .ttl{font-weight:700;color:#0E7490;font-size:13.5px}
+.ref-banner .body{font-size:12.5px;color:#155E75;line-height:1.55}
+.ref-banner .body b{color:#0E2A47}
+
+.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.matrix-cell{padding:12px;border-radius:9px;border:1px solid var(--border);background:#fff}
+.matrix-cell .head{font-size:11.5px;font-weight:700;margin-bottom:5px;letter-spacing:.4px}
+.matrix-cell .body{font-size:11.5px;color:var(--text-soft);line-height:1.45}
+.matrix-cell.q1{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-color:#86EFAC}.matrix-cell.q1 .head{color:#166534}
+.matrix-cell.q2{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FCD34D}.matrix-cell.q2 .head{color:#78350F}
+.matrix-cell.q3{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#93C5FD}.matrix-cell.q3 .head{color:#1E40AF}
+.matrix-cell.q4{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-color:#FCA5A5}.matrix-cell.q4 .head{color:#991B1B}
+
+.score{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-size:11.5px}
+.score .bar{display:inline-block;width:50px;height:5px;background:#E5E7EB;border-radius:3px;overflow:hidden;position:relative}
+.score .bar::after{content:"";position:absolute;left:0;top:0;height:100%;background:var(--ants-blue);border-radius:3px;width:var(--w,50%)}
+.score.high .bar::after{background:var(--ants-red)}
+.score.med .bar::after{background:var(--ants-amber)}
+.score.low .bar::after{background:var(--ants-green)}
+
+.cta{background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 100%);color:#fff;padding:20px 24px;border-radius:12px;margin-top:24px}
+.cta h3{margin:0 0 4px;color:#fff;font-size:17px;font-weight:700}
+.cta p{margin:0 0 10px;font-size:12.5px;color:rgba(255,255,255,.88)}
+.cta-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.cta-action{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);padding:11px 13px;border-radius:8px}
+.cta-action .ttl{font-weight:700;font-size:12px;margin-bottom:3px}
+.cta-action .meta{font-size:11px;color:rgba(255,255,255,.78);line-height:1.45}
+
+.sources{background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:20px;font-size:11.5px;color:var(--text-soft)}
+.sources b{color:var(--ants-navy)}
+.sources ul{margin:6px 0 0;padding-left:18px}
+.sources li{margin-bottom:3px;line-height:1.5}
+
+.arai{background:#0E2A47;color:#fff;padding:16px 20px;border-radius:11px;margin-top:18px;font-size:12px;line-height:1.6}
+.arai b{color:#00B5D8}
+.arai .row{margin-bottom:4px}
+.arai .row .lbl{display:inline-block;width:78px;color:#00B5D8;font-weight:600}
+
+.disc{padding:8px 11px;background:#FEF3C7;border-left:3px solid var(--ants-amber);border-radius:5px;font-size:11px;color:#78350F;margin-top:8px;line-height:1.5}
+
+@media (max-width:1024px){
+  .kpi-grid,.grid-3,.grid-4,.mstrip,.matrix{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .cta-actions{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div class="brand-meta">
+        <h1>ANTS · CX Dashboard <span class="scope-pill">v7 · 2026</span> <span class="ai-pill">⚡ INTERACTIVE</span> <span class="cx-pill">CX-ALIGNED</span></h1>
+        <div class="sub">CS → CX org rename applied · Owner mapping standardized · Reference Definitions for team alignment</div>
+      </div>
+    </div>
+    <div class="meta-right">
+      <div><b>For:</b> Nut · CEO + CX Team + DevOps + CTO</div>
+      <div><b>From:</b> Head of CX + DevOps + CTO + เฌอคูณ</div>
+      <div>28 เม.ย. 2026 · v7.0</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="lbl">เดือน · 2026:</div>
+    <div class="filter-btns">
+      <button class="filter-btn active" data-month="all" onclick="filterMonth('all')">All (Jan-Apr)</button>
+      <button class="filter-btn" data-month="jan" onclick="filterMonth('jan')">Jan</button>
+      <button class="filter-btn" data-month="feb" onclick="filterMonth('feb')">Feb</button>
+      <button class="filter-btn" data-month="mar" onclick="filterMonth('mar')">Mar</button>
+      <button class="filter-btn" data-month="apr" onclick="filterMonth('apr')">Apr (10d)</button>
+    </div>
+    <div class="filter-status"><span class="dot"></span><span id="filter-status-text">Showing: All 2026</span></div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="activated"><span class="dot"></span> Activated · Head of CX · DevOps · CTO · Senior Data · เฌอคูณ</div>
+    <h2 style="margin-top:10px"><span id="hero-month">2026 Pulse · Top 10 Analysis</span></h2>
+    <p>307 verified tickets · 19 bugs · 12 enterprise customers · CX-aligned ownership · standardized owner taxonomy across all sections</p>
+  </div>
+
+  <!-- REFERENCE BANNER (high visibility) -->
+  <div class="ref-banner">
+    <div class="head"><span class="ico">📖</span><span class="ttl">Reference Definitions · ทีมงานต้อง align กับ taxonomy นี้</span></div>
+    <div class="body">
+      <b>Org Update:</b> "CS" (Customer Support) ทุกที่ในเอกสารเปลี่ยนเป็น <b>"CX"</b> (Customer Experience) · ตำแหน่ง <b>Head of CS</b> เปลี่ยนเป็น <b>Head of Customer Experience</b> · ดู Owner Taxonomy ที่ Section 8 ก่อน mapping work item ใหม่
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi success"><div class="stripe"></div>
+      <div class="label">Total Tickets</div><div class="value" id="kpi-total">307</div>
+      <div class="delta up" id="kpi-total-delta">↑ 3.5 months</div>
+      <div class="ctx" id="kpi-total-ctx">Jan-Apr · trending +39% MoM</div>
+    </div>
+    <div class="kpi"><div class="stripe"></div>
+      <div class="label">Real Tasks</div><div class="value" id="kpi-real">111</div>
+      <div class="delta neutral" id="kpi-real-delta">36% of total</div>
+      <div class="ctx" id="kpi-real-ctx">19 Bugs + 22 Assist + 68 Inquiry</div>
+    </div>
+    <div class="kpi warn"><div class="stripe"></div>
+      <div class="label">Bug Reports</div><div class="value" id="kpi-bugs">19</div>
+      <div class="delta down" id="kpi-bugs-delta">ปัญหาจริง</div>
+      <div class="ctx" id="kpi-bugs-ctx">OTP 37% · UI 32% · Feature 21%</div>
+    </div>
+    <div class="kpi success"><div class="stripe"></div>
+      <div class="label">SLA On-Time</div><div class="value" id="kpi-sla">91%</div>
+      <div class="delta up" id="kpi-sla-delta">↑ 101 / 111</div>
+      <div class="ctx" id="kpi-sla-ctx">10 not measured · 97% close</div>
+    </div>
+  </div>
+
+  <!-- AI MAGIC -->
+  <div class="magic">
+    <div class="head"><span class="ico">✨</span><span class="ttl">v7 · CS→CX rename + Owner Taxonomy standardized</span></div>
+    <div class="body">
+      Apply <b>Org Update</b> "CS" → "CX" ทั้ง dashboard · เพิ่ม Owner badges (<code>CX</code> · <code>CTO</code> · <code>DevOps</code> · <code>Eng</code> · <code>AM</code>) · Section 8 = <b>Reference Definitions</b> สำหรับ team alignment ในอนาคต
+    </div>
+  </div>
+
+  <!-- MONTHLY STRIP -->
+  <div class="mstrip">
+    <div class="mcard jan" onclick="filterMonth('jan')"><div class="mlbl">JAN 2026</div><div class="mval">75</div><div class="mmeta">18 real · 0 bugs ✓</div></div>
+    <div class="mcard feb" onclick="filterMonth('feb')"><div class="mlbl">FEB 2026</div><div class="mval">88</div><div class="mmeta">34 real · 7 bugs · ERGO</div></div>
+    <div class="mcard mar" onclick="filterMonth('mar')"><div class="mlbl">MAR · PEAK</div><div class="mval">103</div><div class="mmeta">47 real · 7 bugs</div></div>
+    <div class="mcard apr" onclick="filterMonth('apr')"><div class="mlbl">APR (10d)</div><div class="mval">41</div><div class="mmeta">12 real · 5 bugs · GSB P1</div></div>
+  </div>
+
+  <!-- SECTION 1 · MONTHLY TREND -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span><h3>Monthly Trend &amp; Composition</h3><span class="tag">Source: Freshdesk API · 307 tickets</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Monthly Trend · Total / Real Tasks / Bugs</h4>
+        <div class="sub">+39% MoM · Mar peak · Apr 10d run-rate ~123</div>
+        <div class="chart-box h-line"><canvas id="chart-monthly"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>Ticket Composition · 307 Total</h4>
+        <div class="sub">64% noise (NotTask) · 36% real work · AI ช่วยกรองได้</div>
+        <div class="chart-box h-donut"><canvas id="chart-composition"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 · TOP 10 CRITICAL TICKETS · WITH OWNER MAPPING -->
+  <div class="section">
+    <div class="section-title"><span class="num new">2</span><h3>🥇 Top 10 Critical Tickets · 2026 (with Owner)</h3><span class="tag green">P × Customer Impact + Owner Mapping</span></div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th class="c">#</th><th>Ticket</th><th>Date</th><th class="c">P</th><th>Customer</th><th>Issue</th><th class="c">Owner</th><th class="c">Score</th></tr></thead>
+        <tbody>
+          <tr><td class="c"><span class="rank top1">1</span></td><td><b>#7025</b></td><td>09 เม.ย.</td><td class="c"><span class="badge red">P1</span></td><td><b>GSB</b> (ธ.ออมสิน)</td><td>SSL Certificate expired (Gateway)</td><td class="c"><span class="own devops">DevOps</span></td><td class="c"><span class="score high">95 <span class="bar" style="--w:95%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank top2">2</span></td><td><b>#6840</b></td><td>18 ก.พ.</td><td class="c"><span class="badge amber">P2</span></td><td><b>ERGO Insurance</b></td><td>OTP outage 5 ชม. (21:20-02:30)</td><td class="c"><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td><td class="c"><span class="score high">90 <span class="bar" style="--w:90%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank top3">3</span></td><td>#6801</td><td>06 ก.พ.</td><td class="c"><span class="badge red">P3</span></td><td><b>AXA</b></td><td>SMS Platform หน้าว่าง · โทร Critical</td><td class="c"><span class="own cx">CX</span></td><td class="c"><span class="score high">85 <span class="bar" style="--w:85%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">4</span></td><td>#6983</td><td>02 เม.ย.</td><td class="c"><span class="badge red">P3</span></td><td><b>CNES</b></td><td>SMS OTP ไม่ได้รับข้อความ</td><td class="c"><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td><td class="c"><span class="score high">80 <span class="bar" style="--w:80%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">5</span></td><td>#6890</td><td>06 มี.ค.</td><td class="c"><span class="badge amber">P2</span></td><td>Internal Infra</td><td>Memory capacity exceeded</td><td class="c"><span class="own devops">DevOps</span></td><td class="c"><span class="score high">78 <span class="bar" style="--w:78%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">6</span></td><td>#6934</td><td>22 มี.ค.</td><td class="c"><span class="badge amber">P2</span></td><td><b>LTTGame</b></td><td>Campaign ขึ้น CANCELED เอง</td><td class="c"><span class="own devops">DevOps</span> + <span class="own eng">Eng</span></td><td class="c"><span class="score high">75 <span class="bar" style="--w:75%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">7</span></td><td>#6937</td><td>23 มี.ค.</td><td class="c"><span class="badge amber">P2</span></td><td><b>Yves Rocher</b></td><td>คูปองไม่แสดงภาพ (E-Coupon SSL)</td><td class="c"><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td><td class="c"><span class="score med">72 <span class="bar" style="--w:72%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">8</span></td><td>#6951</td><td>25 มี.ค.</td><td class="c"><span class="badge amber">P2</span></td><td><b>Central Group</b></td><td>SMS Campaign status แสดงผลผิด</td><td class="c"><span class="own eng">Engineering</span></td><td class="c"><span class="score med">70 <span class="bar" style="--w:70%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">9</span></td><td>#6980</td><td>02 เม.ย.</td><td class="c"><span class="badge amber">P2</span></td><td><b>Double A</b></td><td>ไม่ได้รับ SMS API ท่อพิเศษ</td><td class="c"><span class="own devops">DevOps</span></td><td class="c"><span class="score med">68 <span class="bar" style="--w:68%"></span></span></td></tr>
+          <tr><td class="c"><span class="rank">10</span></td><td>#6835</td><td>17 ก.พ.</td><td class="c"><span class="badge amber">P2</span></td><td><b>Valuedesign</b></td><td>OTP Setting หาย</td><td class="c"><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td><td class="c"><span class="score med">65 <span class="bar" style="--w:65%"></span></span></td></tr>
+        </tbody>
+      </table>
+      <div class="disc"><b>Owner Mapping Logic:</b> Infra/SSL/Memory/API → <span class="own devops">DevOps</span> · Platform/Communication → <span class="own cx">CX</span> · Code/Logic Bug → <span class="own eng">Engineering</span> · OTP issues = ใช้ทั้ง 2 (DevOps แก้ infra + CX แจ้ง customer) · ดู Section 8 Reference Definitions สำหรับ taxonomy เต็ม</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 · TOP 10 PATTERNS -->
+  <div class="section">
+    <div class="section-title"><span class="num new">3</span><h3>🥈 Top 10 Repeat Issue Patterns · 2026</h3><span class="tag green">Frequency × Business Pain</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Pattern Distribution · 8 Categories</h4>
+        <div class="sub">5 root causes ที่กระทบมากที่สุด</div>
+        <div class="chart-box h-bar-h"><canvas id="chart-patterns"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>Pattern Detail · with Owner</h4>
+        <table class="tbl">
+          <thead><tr><th class="c">#</th><th>Pattern</th><th class="c">Cases</th><th class="c">Owner</th></tr></thead>
+          <tbody>
+            <tr><td class="c"><span class="rank top1">1</span></td><td><b>OTP Delivery Failure</b><br><span style="color:var(--text-mute);font-size:10.5px">CNES · Double A · ERGO · 425 · Bangchak</span></td><td class="c"><b>7</b></td><td class="c"><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td></tr>
+            <tr><td class="c"><span class="rank top2">2</span></td><td><b>UI/Display Bug</b><br><span style="color:var(--text-mute);font-size:10.5px">Platform หน้าว่าง · Sender nav · Credit balance</span></td><td class="c"><b>6</b></td><td class="c"><span class="own eng">Eng</span> + <span class="own cx">CX</span></td></tr>
+            <tr><td class="c"><span class="rank top3">3</span></td><td><b>Feature Malfunction</b><br><span style="color:var(--text-mute);font-size:10.5px">Slip Upload · Report ค้าง · Campaign CANCELED</span></td><td class="c"><b>4</b></td><td class="c"><span class="own eng">Eng</span></td></tr>
+            <tr><td class="c"><span class="rank">4</span></td><td><b>SSL/Cert Issue</b><br><span style="color:var(--text-mute);font-size:10.5px">GSB Gateway P1 · Yves Rocher Service</span></td><td class="c"><b>2</b></td><td class="c"><span class="own devops">DevOps</span></td></tr>
+            <tr><td class="c"><span class="rank">5</span></td><td><b>Auth/Config Loss</b><br><span style="color:var(--text-mute);font-size:10.5px">2FA · OTP Setting · Logo · Reset pwd</span></td><td class="c"><b>2</b></td><td class="c"><span class="own devops">DevOps</span></td></tr>
+            <tr><td class="c"><span class="rank">6</span></td><td><b>API Connectivity</b><br><span style="color:var(--text-mute);font-size:10.5px">Double A SMS API · 425 Server</span></td><td class="c"><b>2</b></td><td class="c"><span class="own devops">DevOps</span></td></tr>
+            <tr><td class="c"><span class="rank">7</span></td><td><b>Campaign Status Display</b><br><span style="color:var(--text-mute);font-size:10.5px">Central · LTTGame</span></td><td class="c"><b>2</b></td><td class="c"><span class="own eng">Eng</span></td></tr>
+            <tr><td class="c"><span class="rank">8</span></td><td><b>Memory/Resource</b><br><span style="color:var(--text-mute);font-size:10.5px">Memory exceeded #6890</span></td><td class="c"><b>1</b></td><td class="c"><span class="own devops">DevOps</span></td></tr>
+            <tr><td class="c"><span class="rank">9</span></td><td><b>"แจ้งครั้งที่ 3+" voice</b><br><span style="color:var(--text-mute);font-size:10.5px">Aeon-MKT (carry-over)</span></td><td class="c">—</td><td class="c"><span class="own cx">CX</span> + <span class="own eng">Eng</span></td></tr>
+            <tr><td class="c"><span class="rank">10</span></td><td><b>"นอกเวลาทำการ" voice</b><br><span style="color:var(--text-mute);font-size:10.5px">SMS UP · Promotech · ERGO 5hr</span></td><td class="c">—</td><td class="c"><span class="own cx">CX</span> + <span class="own cto">CTO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 · TEAM PERFORMANCE & CHANNELS -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span><h3>Team Performance &amp; Reporting Channels · 2026</h3><span class="tag">Resolution + Channel</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Resolution by Team · 111 Real Tasks</h4>
+        <div class="sub">CX (was CS) เป็นหลัก 41% · 30% ไม่ระบุ resolver = visibility gap</div>
+        <div class="chart-box h-donut"><canvas id="chart-team"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>Issue Reporting Channels · 111</h4>
+        <div class="sub">Email Customer dominant 54% · LINE เพิ่มเป็น 19%</div>
+        <div class="chart-box h-bar-v"><canvas id="chart-channel"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 · TOP 10 AT-RISK CUSTOMERS -->
+  <div class="section">
+    <div class="section-title"><span class="num new">5</span><h3>🥉 Top 10 At-Risk Customers · 2026</h3><span class="tag green">Freq × Tier × Severity × Voice</span></div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th class="c">#</th><th>Customer</th><th class="c">Cases</th><th>Products</th><th>Latest Issue</th><th class="c">Score</th><th>Action · Owner</th></tr></thead>
+        <tbody>
+          <tr><td class="c"><span class="rank top1">1</span></td><td><b>Bangchak Corporation</b></td><td class="c">3</td><td>SMS · OTP · 2FA</td><td>2FA ส่ง reset link · Analysis 0%</td><td class="c"><span class="score high">95 <span class="bar" style="--w:95%"></span></span></td><td><span class="badge red">Critical</span> · <span class="own cx">CX</span> + <span class="own am">AM</span></td></tr>
+          <tr><td class="c"><span class="rank top2">2</span></td><td><b>GSB</b> (ธ.ออมสิน)</td><td class="c">2</td><td>SMS Gateway</td><td><b>P1 SSL Cert</b> · 09 เม.ย.</td><td class="c"><span class="score high">93 <span class="bar" style="--w:93%"></span></span></td><td><span class="badge red">P1</span> · <span class="own devops">DevOps</span> + <span class="own am">AM</span></td></tr>
+          <tr><td class="c"><span class="rank top3">3</span></td><td><b>ERGO Insurance</b></td><td class="c">1</td><td>SMS OTP</td><td>5hr OTP outage · กลางคืน</td><td class="c"><span class="score high">88 <span class="bar" style="--w:88%"></span></span></td><td><span class="badge red">Recovery</span> · <span class="own cx">CX</span></td></tr>
+          <tr><td class="c"><span class="rank">4</span></td><td><b>Central Group</b></td><td class="c">2</td><td>SMS Platform</td><td>หน้าว่าง · Campaign status ผิด</td><td class="c"><span class="score high">82 <span class="bar" style="--w:82%"></span></span></td><td><span class="badge red">Watch</span> · <span class="own cx">CX</span></td></tr>
+          <tr><td class="c"><span class="rank">5</span></td><td><b>AXA</b></td><td class="c">1</td><td>SMS Platform</td><td>Platform down · โทร Critical</td><td class="c"><span class="score high">78 <span class="bar" style="--w:78%"></span></span></td><td><span class="badge amber">Reach out</span> · <span class="own cx">CX</span></td></tr>
+          <tr><td class="c"><span class="rank">6</span></td><td><b>LTTGame</b></td><td class="c">2</td><td>SMS</td><td>Campaign CANCELED · Slip หาย</td><td class="c"><span class="score med">70 <span class="bar" style="--w:70%"></span></span></td><td><span class="badge amber">Watch</span> · <span class="own eng">Eng</span></td></tr>
+          <tr><td class="c"><span class="rank">7</span></td><td><b>Telsms</b></td><td class="c">2</td><td>SMS</td><td>Report ค้าง · Credit balance ผิด</td><td class="c"><span class="score med">65 <span class="bar" style="--w:65%"></span></span></td><td><span class="badge amber">Watch</span> · <span class="own eng">Eng</span></td></tr>
+          <tr><td class="c"><span class="rank">8</span></td><td><b>Yves Rocher</b></td><td class="c">2</td><td>E-Coupon · LINE</td><td>คูปองไม่แสดง · สมาชิกเข้าไม่ได้</td><td class="c"><span class="score med">62 <span class="bar" style="--w:62%"></span></span></td><td><span class="badge amber">Watch</span> · <span class="own devops">DevOps</span></td></tr>
+          <tr><td class="c"><span class="rank">9</span></td><td><b>Promotech</b> (14 sub-acc)</td><td class="c">—</td><td>SMS</td><td>Concentration risk · multi-account</td><td class="c"><span class="score med">58 <span class="bar" style="--w:58%"></span></span></td><td><span class="badge purple">Dedicated AM</span> · <span class="own am">AM</span></td></tr>
+          <tr><td class="c"><span class="rank">10</span></td><td><b>Aeon Thana Sinsap</b></td><td class="c">—</td><td>SMS</td><td>"แจ้งครั้งที่ 3" voice (Q4 25)</td><td class="c"><span class="score med">55 <span class="bar" style="--w:55%"></span></span></td><td><span class="badge purple">Root-cause fix</span> · <span class="own eng">Eng</span></td></tr>
+        </tbody>
+      </table>
+      <div class="disc"><b>Score:</b> Case freq (40) + Tier (30) + Severity (20) + Voice (10) · Top-3 outreach วันนี้ · Owner column = lead team responsible</div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 · TOP 10 RECOMMENDATIONS · UPDATED OWNERS -->
+  <div class="section">
+    <div class="section-title"><span class="num new">6</span><h3>🏆 Top 10 AI Recommendations</h3><span class="tag green">Impact × Effort + Owner Updated</span></div>
+    <div class="card">
+      <h4>Priority Matrix · Impact × Effort</h4>
+      <div class="sub">Quick Wins อยู่ Q1 (HIGH × LOW) · Strategic อยู่ Q2 (HIGH × HIGH)</div>
+      <div class="matrix">
+        <div class="matrix-cell q1">
+          <div class="head">⚡ HIGH IMPACT · LOW EFFORT (DO FIRST)</div>
+          <div class="body">#1 Auto-filter Noise · #2 Required Fields · #3 Severity dropdown · #5 SSL Auto-renewal · #7 Postmortem template · #9 VIP Routing</div>
+        </div>
+        <div class="matrix-cell q2">
+          <div class="head">🚀 HIGH IMPACT · HIGH EFFORT (PLAN)</div>
+          <div class="body">#4 OTP Real-time Monitor · #6 Impact Assessment fields · #8 SLA Escalation Auto · #10 AI Weekly Report Pilot</div>
+        </div>
+        <div class="matrix-cell q3">
+          <div class="head">✅ LOW IMPACT · LOW EFFORT (FILL-IN)</div>
+          <div class="body">— ไม่มี · ทุก recommendation ผ่าน threshold</div>
+        </div>
+        <div class="matrix-cell q4">
+          <div class="head">⏸️ LOW IMPACT · HIGH EFFORT (DEFER)</div>
+          <div class="body">— ไม่มี</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h4>Top 10 Recommendations · Detailed (Owner Updated v7)</h4>
+      <table class="tbl">
+        <thead><tr><th class="c">#</th><th>Recommendation</th><th class="c">Impact</th><th class="c">Effort</th><th class="c">ETA</th><th class="c">Owner</th></tr></thead>
+        <tbody>
+          <tr><td class="c"><span class="rank top1">1</span></td><td><b>Auto-filter Noise</b> · Freshdesk Automation แยก NotTask/Notify · ลด 64% noise</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">1-2 wk</td><td class="c"><span class="own cto">CTO</span> + <span class="own cx">CX</span></td></tr>
+          <tr><td class="c"><span class="rank top2">2</span></td><td><b>Required Fields</b> · บังคับ Product · Resolved By · SLA — แก้ 30% no-resolver gap</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">1 wk</td><td class="c"><span class="own cx">Head of CX</span></td></tr>
+          <tr><td class="c"><span class="rank top3">3</span></td><td><b>Severity Dropdown S1-S4</b> · แยก Severity จาก Priority — OTP enterprise ≠ UI bug</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">1 wk</td><td class="c"><span class="own cx">Head of CX</span></td></tr>
+          <tr><td class="c"><span class="rank">4</span></td><td><b>OTP Real-time Monitor</b> · Dashboard + alert LINE/Telegram เมื่อ fail &gt;5%</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge amber">Med</span></td><td class="c">1-2 m</td><td class="c"><span class="own devops">DevOps</span> + <span class="own cto">CTO</span></td></tr>
+          <tr><td class="c"><span class="rank">5</span></td><td><b>SSL Auto-Renewal</b> · Auto-renew + alert 30 วันก่อนหมด — กัน #7025 GSB ซ้ำ</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">2-3 wk</td><td class="c"><span class="own devops">DevOps</span></td></tr>
+          <tr><td class="c"><span class="rank">6</span></td><td><b>Impact Assessment Fields</b> · Affected Customers + Revenue Impact ใน Freshdesk</td><td class="c"><span class="badge amber">High</span></td><td class="c"><span class="badge amber">Med</span></td><td class="c">1 m</td><td class="c"><span class="own cx">Head of CX</span></td></tr>
+          <tr><td class="c"><span class="rank">7</span></td><td><b>Postmortem P1-P2 Template</b> · บังคับ 48 ชม. + Root Cause + Preventive</td><td class="c"><span class="badge red">High</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">2 wk</td><td class="c"><span class="own cto">CTO</span> + <span class="own eng">Eng Lead</span></td></tr>
+          <tr><td class="c"><span class="rank">8</span></td><td><b>SLA Escalation Auto</b> · auto-escalate ก่อน breach + แจ้ง Manager</td><td class="c"><span class="badge amber">Med</span></td><td class="c"><span class="badge amber">Med</span></td><td class="c">1-2 m</td><td class="c"><span class="own cx">Head of CX</span></td></tr>
+          <tr><td class="c"><span class="rank">9</span></td><td><b>VIP Channel Routing</b> · LINE first สำหรับ Bangchak/GSB/ERGO/AXA/Central</td><td class="c"><span class="badge blue">Med</span></td><td class="c"><span class="badge green">Low</span></td><td class="c">1 wk</td><td class="c"><span class="own cx">CX</span> + <span class="own am">AM</span></td></tr>
+          <tr><td class="c"><span class="rank">10</span></td><td><b>AI Weekly Report Pilot</b> · Cherkun ทำ weekly สำหรับ 5 แผนก · scale-ready</td><td class="c"><span class="badge purple">Strategic</span></td><td class="c"><span class="badge amber">Med</span></td><td class="c">30 d</td><td class="c"><span class="own cwo">เฌอคูณ</span> + COO</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-3" style="margin-top:12px">
+      <div class="insight green"><div class="head"><span class="ico">⚡</span><span class="ttl">6 Quick Wins · 2 สัปดาห์</span></div>
+        <div class="body"><b>#1, 2, 3, 5, 7, 9</b> = low effort · high impact · ROI สูงสุด · เริ่มเลยพรุ่งนี้</div>
+      </div>
+      <div class="insight"><div class="head"><span class="ico">📅</span><span class="ttl">Strategic · 1-2 เดือน</span></div>
+        <div class="body"><b>#4, 6, 8</b> = OTP monitor + Impact tracking + Auto-escalate</div>
+      </div>
+      <div class="insight purple"><div class="head"><span class="ico">🚀</span><span class="ttl">Game-Changer · #10</span></div>
+        <div class="body"><b>AI Weekly Report Pilot</b> = scale ทุกแผนก = AI-Native จริง · เฌอคูณดูแล</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 · ENTERPRISE + POSTPAID -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span><h3>Enterprise Customer Impact + Postpaid Usage</h3><span class="tag">Mar 2026 verified</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Enterprise Customer Impact · 12 Affected</h4>
+        <div class="sub">All enterprise tier · ranked by case count</div>
+        <table class="tbl">
+          <thead><tr><th>Customer</th><th class="c">Cases</th><th>Products</th><th class="c">Risk</th></tr></thead>
+          <tbody>
+            <tr><td><b>Bangchak Corp</b></td><td class="c">3</td><td>SMS · OTP · 2FA</td><td class="c"><span class="badge red">High</span></td></tr>
+            <tr><td><b>Central Group</b></td><td class="c">2</td><td>SMS Platform</td><td class="c"><span class="badge red">High</span></td></tr>
+            <tr><td><b>GSB</b></td><td class="c">2</td><td>SMS Gateway</td><td class="c"><span class="badge red">P1</span></td></tr>
+            <tr><td><b>LTTGame</b></td><td class="c">2</td><td>SMS</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td><b>Telsms</b></td><td class="c">2</td><td>SMS</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td><b>Yves Rocher</b></td><td class="c">2</td><td>E-Coupon · LINE</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td><b>ERGO</b></td><td class="c">1</td><td>SMS OTP</td><td class="c"><span class="badge red">High</span></td></tr>
+            <tr><td><b>AXA</b></td><td class="c">1</td><td>SMS Platform</td><td class="c"><span class="badge red">High</span></td></tr>
+            <tr><td>425 Degree</td><td class="c">1</td><td>SMS OTP</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td>Valuedesign</td><td class="c">1</td><td>SMS OTP</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td>CNES</td><td class="c">1</td><td>SMS OTP</td><td class="c"><span class="badge amber">Med</span></td></tr>
+            <tr><td>Double A</td><td class="c">1</td><td>SMS API</td><td class="c"><span class="badge amber">Med</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Postpaid Usage · Mar 2026 (verified Excel)</h4>
+        <div class="sub">4 customer accounts · delivery rate ~97.8% consistent</div>
+        <table class="tbl">
+          <thead><tr><th>Account</th><th class="c">Sent</th><th class="c">Delivered</th><th class="c">Delivery %</th></tr></thead>
+          <tbody>
+            <tr><td><b>ซินแสบาร์โค้ดชีวิต</b><br><span style="color:var(--text-mute);font-size:10.5px">Line OA</span></td><td class="c r">1,864,028</td><td class="c r">—</td><td class="c"><span class="badge cyan">Line msg</span></td></tr>
+            <tr><td><b>BMW_OTP</b></td><td class="c r">53,028</td><td class="c r">51,849</td><td class="c"><span class="badge green">97.78%</span></td></tr>
+            <tr><td><b>Vimut Hospital</b><br><span style="color:var(--text-mute);font-size:10.5px">3 sub-accounts</span></td><td class="c r">5,427</td><td class="c r">5,306</td><td class="c"><span class="badge green">97.77%</span></td></tr>
+            <tr><td><b>DiorCRMTH</b></td><td class="c r">2,722</td><td class="c r">2,662</td><td class="c"><span class="badge green">97.79%</span></td></tr>
+          </tbody>
+        </table>
+        <div class="disc"><b>Revenue:</b> ซินแสบาร์โค้ดชีวิต = <b>111,841.68 THB</b> · Mar 2026 · single account</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 · 📖 REFERENCE DEFINITIONS -->
+  <div class="section">
+    <div class="section-title"><span class="num ref">8</span><h3>📖 Reference Definitions · Team Alignment</h3><span class="tag cyan">Single Source of Truth</span></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Org Renames · 2026 Update</h4>
+        <div class="sub">เมื่อ org chart เปลี่ยน · ทุกเอกสารต้อง sync</div>
+        <table class="tbl">
+          <thead><tr><th>Old Name (ก่อน)</th><th>New Name (ปัจจุบัน)</th><th>Effective</th></tr></thead>
+          <tbody>
+            <tr><td><span style="text-decoration:line-through;color:var(--text-mute)">CS · Customer Support</span></td><td><b>CX · Customer Experience</b></td><td>2026 Q1</td></tr>
+            <tr><td><span style="text-decoration:line-through;color:var(--text-mute)">Head of CS</span></td><td><b>Head of Customer Experience</b></td><td>2026 Q1</td></tr>
+            <tr><td><span style="text-decoration:line-through;color:var(--text-mute)">CS Team</span></td><td><b>CX Team</b></td><td>2026 Q1</td></tr>
+            <tr><td><span style="text-decoration:line-through;color:var(--text-mute)">Customer Support Agent</span></td><td><b>CX Agent</b></td><td>2026 Q1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h4>Owner Taxonomy · Badge Color Code</h4>
+        <div class="sub">ใช้ใน Top 10 lists ทั้งหมด · standardized</div>
+        <table class="tbl">
+          <thead><tr><th class="c">Badge</th><th>Full Name</th><th>Scope</th></tr></thead>
+          <tbody>
+            <tr><td class="c"><span class="own cx">CX</span></td><td><b>Customer Experience</b></td><td>Customer-facing · ticket triage · communication · satisfaction</td></tr>
+            <tr><td class="c"><span class="own cto">CTO</span></td><td><b>Chief Technology Officer</b></td><td>Tech strategy · architecture · cross-team tech decisions</td></tr>
+            <tr><td class="c"><span class="own devops">DevOps</span></td><td><b>DevOps Team</b></td><td>Infrastructure · SSL · servers · monitoring · API</td></tr>
+            <tr><td class="c"><span class="own eng">Eng</span></td><td><b>Engineering / Eng Lead</b></td><td>Application code · features · UI/UX bugs · platform logic</td></tr>
+            <tr><td class="c"><span class="own am">AM</span></td><td><b>Account Manager</b></td><td>Enterprise relationship · QBR · upsell · retention</td></tr>
+            <tr><td class="c"><span class="own cwo">เฌอคูณ</span></td><td><b>CWO · Chief Wisdom Officer</b></td><td>Strategy · synthesis · cross-domain orchestration</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <h4>Owner Mapping Logic · How to assign owner to a new ticket/recommendation</h4>
+      <div class="sub">ใช้เป็น decision tree เมื่อมี case ใหม่ · กัน "—" (no resolver) gap</div>
+      <table class="tbl">
+        <thead><tr><th>Issue Type / Category</th><th>Primary Owner</th><th>Secondary Owner</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td><b>SSL / Certificate / Cert renewal</b></td><td class="c"><span class="own devops">DevOps</span></td><td class="c">—</td><td>#7025 GSB</td></tr>
+          <tr><td><b>Memory / Server resource / Infra outage</b></td><td class="c"><span class="own devops">DevOps</span></td><td class="c">—</td><td>#6890 Memory exceeded</td></tr>
+          <tr><td><b>API connectivity / API ท่อพิเศษ</b></td><td class="c"><span class="own devops">DevOps</span></td><td class="c">—</td><td>#6980 Double A</td></tr>
+          <tr><td><b>OTP delivery failure</b></td><td class="c"><span class="own devops">DevOps</span></td><td class="c"><span class="own cx">CX</span></td><td>#6840 ERGO · #6983 CNES (DevOps fix infra · CX แจ้งลูกค้า)</td></tr>
+          <tr><td><b>OTP Setting / 2FA config loss</b></td><td class="c"><span class="own devops">DevOps</span></td><td class="c"><span class="own cx">CX</span></td><td>#6835 Valuedesign</td></tr>
+          <tr><td><b>UI / Display / Frontend bug</b></td><td class="c"><span class="own eng">Engineering</span></td><td class="c"><span class="own cx">CX</span></td><td>Sender page nav · Credit balance display</td></tr>
+          <tr><td><b>Campaign logic / Status display</b></td><td class="c"><span class="own eng">Engineering</span></td><td class="c">—</td><td>#6951 Central · #6934 LTTGame</td></tr>
+          <tr><td><b>Feature malfunction (Slip Upload, Report ค้าง)</b></td><td class="c"><span class="own eng">Engineering</span></td><td class="c">—</td><td>#6908 LTTGame · #6938 Telsms</td></tr>
+          <tr><td><b>Platform หน้าว่าง / Critical down</b></td><td class="c"><span class="own cx">CX</span></td><td class="c"><span class="own devops">DevOps</span></td><td>#6801 AXA (CX รับเรื่อง · DevOps ตรวจ infra)</td></tr>
+          <tr><td><b>Customer voice / "ครั้งที่ 3+" / NPS issues</b></td><td class="c"><span class="own cx">CX</span></td><td class="c"><span class="own eng">Eng</span></td><td>Aeon (CX manage relationship · Eng ทำ root-cause)</td></tr>
+          <tr><td><b>SLA / Process / Workflow improvement</b></td><td class="c"><span class="own cx">Head of CX</span></td><td class="c">—</td><td>Required Fields · SLA Escalation</td></tr>
+          <tr><td><b>Tech architecture / Cross-team improvement</b></td><td class="c"><span class="own cto">CTO</span></td><td class="c"><span class="own cx">CX</span></td><td>Auto-filter Noise · OTP Monitor</td></tr>
+          <tr><td><b>Postmortem / Root cause culture</b></td><td class="c"><span class="own cto">CTO</span></td><td class="c"><span class="own eng">Eng Lead</span></td><td>Postmortem P1-P2 Template</td></tr>
+          <tr><td><b>Enterprise relationship · QBR · upsell</b></td><td class="c"><span class="own am">AM</span></td><td class="c"><span class="own cx">CX</span></td><td>Bangchak · GSB · ERGO outreach</td></tr>
+          <tr><td><b>Strategic synthesis / cross-domain</b></td><td class="c"><span class="own cwo">เฌอคูณ</span></td><td class="c">COO</td><td>AI Weekly Report Pilot</td></tr>
+        </tbody>
+      </table>
+      <div class="disc"><b>Rule of thumb:</b> ถ้า issue มี 2 มิติ (เช่น OTP = infra problem + customer impact) ให้ใช้ <b>Primary + Secondary</b> · Primary เป็นคน fix · Secondary เป็นคน communicate · ใช้ taxonomy นี้กับ Freshdesk Required Field "Resolved By" (Rec #2)</div>
+    </div>
+  </div>
+
+  <!-- SECTION 9 · 5 THINGS CEO MUST KNOW -->
+  <div class="section">
+    <div class="section-title"><span class="num">9</span><h3>5 สิ่งที่ CEO ต้องทราบ</h3><span class="tag">เฌอคูณ Synthesis</span></div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th class="c">#</th><th>What CEO Must Know</th><th>Evidence</th><th>Owner Link</th></tr></thead>
+        <tbody>
+          <tr><td class="c"><b>1</b></td><td><b>Bangchak · GSB · ERGO = top 3 at-risk</b> outreach วันนี้</td><td>Risk score 95 · 93 · 88</td><td><span class="own cx">CX</span> + <span class="own am">AM</span></td></tr>
+          <tr><td class="c"><b>2</b></td><td><b>OTP Failure = pattern #1</b> 7 cases · enterprise ทั้งหมด</td><td>CNES · Double A · ERGO · 425 · Bangchak · Valuedesign</td><td><span class="own devops">DevOps</span> + <span class="own cx">CX</span></td></tr>
+          <tr><td class="c"><b>3</b></td><td><b>SSL #7025 P1 GSB ยังไม่ postmortem</b> · auto-renewal ทำเลย</td><td>09 เม.ย. critical · กัน recurrence</td><td><span class="own devops">DevOps</span> + <span class="own cto">CTO</span></td></tr>
+          <tr><td class="c"><b>4</b></td><td><b>6 Quick Wins ทำได้ใน 2 สัปดาห์</b> · low effort · high impact</td><td>Rec #1, 2, 3, 5, 7, 9</td><td><span class="own cx">CX</span> + <span class="own cto">CTO</span> + <span class="own devops">DevOps</span></td></tr>
+          <tr><td class="c"><b>5</b></td><td><b>AI Weekly Report Pilot = game changer</b></td><td>Dashboard นี้ = proof · 17 files → 4 นาที</td><td><span class="own cwo">เฌอคูณ</span> + COO</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>🎯 CEO Decisions · 2026 Roadmap</h3>
+    <p>Target: ลด OTP/SMS Incident 50% ใน Q3 2026 · SLA 100% · Postmortem ทุก P1-P2 · CX-aligned org</p>
+    <div class="cta-actions">
+      <div class="cta-action"><div class="ttl">⚡ This Week</div><div class="meta">6 Quick Wins · GSB Postmortem · Outreach Bangchak/ERGO · Apply CS→CX rename ทุกเอกสาร</div></div>
+      <div class="cta-action"><div class="ttl">📅 This Month</div><div class="meta">OTP Monitor · Impact fields · VIP routing · SLA Escalation · Owner taxonomy ลง Freshdesk</div></div>
+      <div class="cta-action"><div class="ttl">🚀 Q3 2026</div><div class="meta">AI Weekly Report Pilot · Postmortem culture · -50% OTP target</div></div>
+    </div>
+  </div>
+
+  <!-- ARAI -->
+  <div class="arai">
+    <div style="font-size:13px;font-weight:700;color:#00B5D8;margin-bottom:8px">📋 ARAI · v7</div>
+    <div class="row"><span class="lbl">Action:</span> Apply CS→CX rename · update Owner column ใน Top 10 Critical Tickets (10 รายการ) + Top 10 Recommendations (10 รายการ) · เพิ่ม Section 8 Reference Definitions (3 tables: Org Renames + Owner Taxonomy + Owner Mapping Logic)</div>
+    <div class="row"><span class="lbl">Result:</span> v7 dashboard · 9 sections · 6 charts · owner badges color-coded · single source of truth สำหรับ team alignment</div>
+    <div class="row"><span class="lbl">Insight:</span> Owner taxonomy ที่ standardized = แก้ root cause "30% no-resolver gap" · ทุก ticket มี Primary owner ชัดเจน · ทำให้ workflow flow ตาม Decision tree</div>
+    <div class="row"><span class="lbl">Idea:</span> นำ <b>Owner Mapping Logic table (Section 8)</b> ไปใส่ใน Freshdesk เป็น dropdown auto-suggest · CX agent เห็น issue type = AI suggest owner ทันที · automation ลด manual triage</div>
+    <div class="row"><span class="lbl">Owner:</span> <span class="own cx">Head of CX</span> + <span class="own cto">CTO</span> · ETA 2 สัปดาห์ (rule engine setup)</div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <b>📂 Verified 2026 Sources + Reference Definitions Origin</b>
+    <ul>
+      <li><b>ANTS-Incident-Executive-Summary-v2.pptx</b> · primary · 307 tickets · Freshdesk API · Jan-Apr 2026</li>
+      <li><b>Summary Ticket Dec25-Jan26 + 25Feb-25Mar26.pptx</b> · transition + latest</li>
+      <li><b>Survey Weekly Q1 2026</b> · 6 weekly files</li>
+      <li><b>Postpaid 2026/Mar2026</b> · BMW_OTP · DiorCRMTH · Vimut · ซินแสบาร์โค้ดชีวิต</li>
+      <li><b>Org Update CS→CX</b> · founder note 28 เม.ย. 26 (ANTS Q1 2026 reorganization)</li>
+      <li><b>Owner Mapping Logic</b> · derived จาก 19 bug cases observed pattern + founder examples (#7025, #6801, #6890)</li>
+    </ul>
+    <div style="margin-top:8px"><b>Reference Definitions (Section 8)</b> = single source of truth · ใช้กับทุก dashboard/report ของ ANTS ในอนาคต · update ที่นี่ก่อน · sync ไปทุกเอกสาร</div>
+  </div>
+
+</div>
+
+<script>
+const ANTS_NAVY='#0E2A47',ANTS_BLUE='#1E5AA8',ANTS_CYAN='#00B5D8',ANTS_AMBER='#F59E0B',ANTS_RED='#DC2626',ANTS_GREEN='#10B981',ANTS_PURPLE='#7C3AED';
+
+const MONTHLY_DATA = {
+  all:{label:'All 2026 (Jan-Apr)',total:307,real:111,bugs:19,sla:91,hero:'2026 Pulse · Top 10 Analysis',
+    delta:{total:'↑ 3.5 months',real:'36% of total',bugs:'ปัญหาจริง',sla:'↑ 101 / 111'},
+    ctx:{total:'Jan-Apr · trending +39% MoM',real:'19 Bugs + 22 Assist + 68 Inquiry',bugs:'OTP 37% · UI 32% · Feature 21%',sla:'10 not measured · 97% close'}},
+  jan:{label:'Jan 2026',total:75,real:18,bugs:0,sla:95,hero:'Jan 2026 Pulse',
+    delta:{total:'↓ baseline',real:'24% of total',bugs:'no bugs ✓',sla:'↑ excellent'},
+    ctx:{total:'เดือนเริ่มต้น · volume น้อย',real:'inquiry/assistance หลัก',bugs:'ไม่มี critical',sla:'normal volume ทำได้ดี'}},
+  feb:{label:'Feb 2026',total:88,real:34,bugs:7,sla:88,hero:'Feb 2026 Pulse',
+    delta:{total:'↑ +17% MoM',real:'39% of total',bugs:'7 bugs surface',sla:'↓ slight dip'},
+    ctx:{total:'+13 จาก Jan',real:'ERGO 5hr OTP outage 18 ก.พ.',bugs:'OTP Setting Valuedesign #6835',sla:'10 not measured (after-hours)'}},
+  mar:{label:'Mar 2026 · PEAK',total:103,real:47,bugs:7,sla:90,hero:'Mar 2026 · PEAK',
+    delta:{total:'↑ +17% (peak)',real:'46% of total',bugs:'7 bugs sustained',sla:'↑ recovered'},
+    ctx:{total:'peak month volume สูงสุด',real:'LTTGame · Yves Rocher · Central · Telsms',bugs:'Memory exceeded #6890 · CANCELED #6934',sla:'recovered from Feb dip'}},
+  apr:{label:'Apr 2026 (10d)',total:41,real:12,bugs:5,sla:92,hero:'Apr 2026 Pulse',
+    delta:{total:'⚠️ partial · run-rate 123',real:'29% of total',bugs:'5 bugs ใน 10 วัน',sla:'stable'},
+    ctx:{total:'10 วันแรก · ยังไม่จบเดือน',real:'CNES OTP · Double A API',bugs:'#7025 P1 GSB SSL (09 เม.ย.) ⚠️',sla:'recovery from Mar peak'}}
+};
+
+function filterMonth(m){
+  const d = MONTHLY_DATA[m];
+  document.getElementById('kpi-total').textContent=d.total;
+  document.getElementById('kpi-real').textContent=d.real;
+  document.getElementById('kpi-bugs').textContent=d.bugs;
+  document.getElementById('kpi-sla').textContent=d.sla+'%';
+  document.getElementById('kpi-total-delta').textContent=d.delta.total;
+  document.getElementById('kpi-real-delta').textContent=d.delta.real;
+  document.getElementById('kpi-bugs-delta').textContent=d.delta.bugs;
+  document.getElementById('kpi-sla-delta').textContent=d.delta.sla;
+  document.getElementById('kpi-total-ctx').textContent=d.ctx.total;
+  document.getElementById('kpi-real-ctx').textContent=d.ctx.real;
+  document.getElementById('kpi-bugs-ctx').textContent=d.ctx.bugs;
+  document.getElementById('kpi-sla-ctx').textContent=d.ctx.sla;
+  document.getElementById('hero-month').textContent=d.hero;
+  document.getElementById('filter-status-text').textContent='Showing: '+d.label;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.querySelector(`[data-month="${m}"]`);if(btn)btn.classList.add('active');
+  document.querySelectorAll('.mcard').forEach(c=>c.classList.remove('active'));
+  if(m!=='all'){const c=document.querySelector(`.mcard.${m}`);if(c)c.classList.add('active')}
+}
+
+const COMMON_OPTS = {responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:11,font:{size:11}}}}};
+
+new Chart(document.getElementById('chart-monthly'),{
+  type:'line',
+  data:{labels:['Jan 26','Feb 26','Mar 26','Apr 26 (10d)'],
+    datasets:[
+      {label:'Total Tickets',data:[75,88,103,41],borderColor:ANTS_BLUE,backgroundColor:'rgba(30,90,168,.10)',fill:true,tension:.35,pointRadius:5,pointBackgroundColor:ANTS_BLUE},
+      {label:'Real Tasks',data:[18,34,47,12],borderColor:ANTS_AMBER,fill:false,tension:.35,pointRadius:4},
+      {label:'Bugs',data:[0,7,7,5],borderColor:ANTS_RED,fill:false,tension:.35,pointRadius:4}
+    ]},
+  options:{...COMMON_OPTS,plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:11}}}},scales:{y:{beginAtZero:true,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}
+});
+
+new Chart(document.getElementById('chart-composition'),{
+  type:'doughnut',
+  data:{labels:['NotTask (Noise)','Inquiry','Assistance','Bugs'],
+    datasets:[{data:[197,68,22,19],backgroundColor:['#9CA3AF',ANTS_BLUE,ANTS_AMBER,ANTS_RED],borderWidth:2,borderColor:'#fff'}]},
+  options:{...COMMON_OPTS,plugins:{legend:{position:'right',labels:{boxWidth:11,font:{size:11}}}},cutout:'58%'}
+});
+
+new Chart(document.getElementById('chart-patterns'),{
+  type:'bar',
+  data:{labels:['OTP Delivery','UI/Display','Feature Malfunc','SSL/Cert','API Connectivity','Auth/Config','Campaign Display','Memory'],
+    datasets:[{label:'Cases',data:[7,6,4,2,2,2,2,1],backgroundColor:[ANTS_RED,ANTS_AMBER,ANTS_BLUE,ANTS_RED,ANTS_AMBER,ANTS_PURPLE,ANTS_BLUE,ANTS_RED],borderRadius:4}]},
+  options:{...COMMON_OPTS,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},x:{ticks:{font:{size:10}}}},indexAxis:'y'}
+});
+
+new Chart(document.getElementById('chart-team'),{
+  type:'doughnut',
+  data:{labels:['CX (41%)','Not Assigned (30%)','DevOps + IT (16%)','Engineering (13%)'],
+    datasets:[{data:[46,33,18,14],backgroundColor:[ANTS_GREEN,'#9CA3AF',ANTS_BLUE,ANTS_PURPLE],borderWidth:2,borderColor:'#fff'}]},
+  options:{...COMMON_OPTS,plugins:{legend:{position:'right',labels:{boxWidth:11,font:{size:10.5}}}},cutout:'58%'}
+});
+
+new Chart(document.getElementById('chart-channel'),{
+  type:'bar',
+  data:{labels:['Email Customer','LINE Customer','Email CO','Telegram','MS Team/Other'],
+    datasets:[{label:'Cases',data:[60,21,16,8,6],backgroundColor:[ANTS_BLUE,ANTS_GREEN,ANTS_CYAN,ANTS_AMBER,ANTS_PURPLE],borderRadius:4}]},
+  options:{...COMMON_OPTS,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}
+});
+</script>
+</body>
+</html>

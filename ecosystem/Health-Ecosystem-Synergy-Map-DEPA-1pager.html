@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Health Ecosystem Synergy Map · Closed-Loop Affordable Care · เสนอ DEPA / สปสช / อบจ.</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --ink:#0B1020;--ink-2:#2A2F45;--muted:#6B7280;--line:#E5E7EB;--soft:#F8FAFC;
+    --gov:#059669;--gov-dk:#047857;--gov-lt:#ECFDF5;--gov-br:#A7F3D0;
+    --brand:#0052FF;--accent:#6D28D9;--warn:#B08928;--danger:#DC2626;
+    --shadow:0 10px 30px rgba(11,16,32,.08);
+    --shadow-lg:0 18px 44px rgba(11,16,32,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#FAFBFC;color:var(--ink);font-family:'IBM Plex Sans Thai','Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+  section{margin-bottom:36px}
+  .k-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gov);font-weight:700}
+  h2.title{font-size:26px;font-weight:800;letter-spacing:-.01em;line-height:1.25;margin-top:8px;color:var(--ink)}
+  h2.title em{font-style:normal;color:var(--gov)}
+  .lede{color:var(--ink-2);font-size:14.5px;max-width:960px;margin-top:10px}
+
+  /* ==== STICKY TOP BAR ==== */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{max-width:1180px;margin:0 auto;padding:10px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .topbar .brand{display:flex;align-items:center;gap:10px}
+  .topbar .brand .mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--gov) 0%,var(--gov-dk) 100%);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+  .topbar .brand b{font-size:14px;font-weight:800;letter-spacing:-.01em}
+  .topbar .brand small{display:block;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.5px}
+  .topbar .nav{display:flex;gap:6px;flex-wrap:wrap}
+  .topbar .nav a{font-size:11.5px;font-weight:600;color:var(--ink-2);padding:6px 11px;border-radius:8px;text-decoration:none;transition:.15s}
+  .topbar .nav a:hover{background:var(--gov-lt);color:var(--gov)}
+  .topbar .back{font-size:11px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;border:1px solid var(--line)}
+  .topbar .back:hover{color:var(--ink);border-color:var(--ink-2)}
+
+  /* ==== HERO ==== */
+  .hero{
+    margin-top:24px;background:
+      radial-gradient(1200px 600px at 95% 0%, rgba(5,150,105,.10) 0%, transparent 60%),
+      linear-gradient(180deg,#FFFFFF 0%,#F9FEFB 100%);
+    border:1px solid var(--gov-br);border-radius:20px;padding:32px 36px;position:relative;overflow:hidden;
+  }
+  .hero .stamp{
+    position:absolute;top:20px;right:24px;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+    color:var(--gov);background:#fff;border:1.5px solid var(--gov);border-radius:999px;padding:6px 14px;
+  }
+  .hero .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .hero .tag{
+    font-size:11px;font-weight:700;letter-spacing:.5px;padding:5px 12px;border-radius:999px;
+    background:var(--gov-lt);color:var(--gov);border:1px solid var(--gov-br);
+  }
+  .hero h1{font-size:36px;font-weight:800;line-height:1.2;letter-spacing:-.02em;max-width:900px}
+  .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--gov) 0%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .sub{margin-top:14px;color:var(--ink-2);font-size:15px;max-width:880px}
+  .hero .cta-row{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;border:1.5px solid transparent;transition:.2s}
+  .btn.primary{background:var(--gov);color:#fff;border-color:var(--gov)}
+  .btn.primary:hover{background:var(--gov-dk);box-shadow:0 8px 20px rgba(5,150,105,.35)}
+  .btn.ghost{background:#fff;color:var(--ink-2);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--ink-2);color:var(--ink)}
+
+  /* ==== HERO KPI STRIP ==== */
+  .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+  .kpi-card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    position:relative;overflow:hidden;transition:.2s;
+  }
+  .kpi-card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:var(--gov)}
+  .kpi-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .kpi-card .ic{font-size:22px;margin-bottom:6px}
+  .kpi-card .big{font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1}
+  .kpi-card .lb{font-size:11px;color:var(--gov);font-weight:700;letter-spacing:1.3px;text-transform:uppercase;margin-top:8px}
+  .kpi-card .sub{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+  @media (max-width:860px){.kpi-strip{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:26px}.hero{padding:24px 22px}}
+
+  /* ==== JOURNEY RELATION CHART (SVG-based) ==== */
+  .chart-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 30px}
+  .chart-head{margin-bottom:22px}
+  .chart-head h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .chart-head p{color:var(--ink-2);font-size:13.5px;margin-top:4px}
+
+  .jchart{position:relative;padding:10px 0 20px}
+  .jchart .persona{
+    display:flex;align-items:center;gap:14px;margin-bottom:22px;padding:14px 18px;
+    background:linear-gradient(100deg,#F0FDF4 0%,#EFF6FF 100%);border:1px dashed var(--gov-br);border-radius:14px;
+  }
+  .jchart .persona .av{width:48px;height:48px;border-radius:50%;background:#D1FAE5;display:grid;place-items:center;font-size:24px;flex-shrink:0}
+  .jchart .persona b{font-size:14px;display:block;color:var(--gov-dk)}
+  .jchart .persona span{font-size:12.5px;color:var(--ink-2);display:block;margin-top:2px}
+  .jchart .persona .quote{font-style:italic;color:var(--gov-dk);font-weight:600;font-size:12.5px;background:#fff;padding:6px 12px;border-radius:10px;border:1px solid var(--gov-br);margin-left:auto;max-width:340px}
+
+  /* SVG-styled stages */
+  .jstages{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative}
+  .jstages .js{
+    position:relative;background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:14px 13px 16px;
+    transition:.2s;z-index:2;
+  }
+  .jstages .js:hover{border-color:var(--gov);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .jstages .js .n{
+    position:absolute;top:-14px;left:14px;width:30px;height:30px;border-radius:50%;
+    background:#fff;color:var(--gov);border:2.5px solid var(--gov);display:grid;place-items:center;
+    font-size:13px;font-weight:800;
+  }
+  .jstages .js .icn{font-size:24px;margin:4px 0 6px;line-height:1}
+  .jstages .js h5{font-size:13.5px;font-weight:800;color:var(--ink);line-height:1.3}
+  .jstages .js .who{font-size:10.5px;color:var(--gov);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-top:4px}
+  .jstages .js p{font-size:11.5px;color:var(--ink-2);margin-top:8px;line-height:1.5}
+  .jstages .js .metric{
+    margin-top:10px;padding:5px 10px;border-radius:8px;background:var(--gov-lt);
+    font-size:10.5px;color:var(--gov-dk);font-weight:700;display:inline-block;
+  }
+  .jstages .js::after{
+    content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);
+    color:var(--gov);font-size:20px;font-weight:800;z-index:3;
+    background:#fff;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;
+  }
+  .jstages .js:last-child::after{display:none}
+
+  .jloop{
+    margin-top:22px;padding:16px 20px;border-radius:14px;
+    background:linear-gradient(100deg,#F0FDF4 0%,#EDE9FE 100%);
+    border:1.5px dashed var(--accent);display:flex;align-items:center;gap:14px;
+  }
+  .jloop .arc{font-size:34px;color:var(--accent);flex-shrink:0;line-height:1}
+  .jloop b{display:block;font-size:13.5px;color:var(--ink);margin-bottom:3px}
+  .jloop span{font-size:12px;color:var(--ink-2);line-height:1.5}
+  @media (max-width:900px){.jstages{grid-template-columns:repeat(2,1fr)}.jstages .js::after{display:none}}
+
+  /* ==== APP UI MOCKUP SECTION ==== */
+  .app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:14px}
+  .phone{
+    background:linear-gradient(180deg,#1C1F2E 0%,#2A2F45 100%);
+    border-radius:32px;padding:12px 10px;box-shadow:var(--shadow-lg);
+    position:relative;aspect-ratio:9/19;max-width:280px;margin:0 auto;
+  }
+  .phone::before{
+    content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    width:80px;height:18px;border-radius:12px;background:#0B1020;z-index:5;
+  }
+  .phone .screen{
+    background:#fff;border-radius:22px;overflow:hidden;height:100%;position:relative;
+    display:flex;flex-direction:column;
+  }
+  .phone .stat{display:flex;justify-content:space-between;padding:26px 14px 6px;font-size:10px;font-weight:700;color:var(--ink)}
+  .phone .stat .r{display:flex;gap:4px;align-items:center}
+  .phone .hdr{padding:6px 14px 10px;border-bottom:1px solid var(--line)}
+  .phone .hdr h6{font-size:13px;font-weight:800;color:var(--ink)}
+  .phone .hdr small{font-size:9.5px;color:var(--muted);letter-spacing:.5px}
+  .phone .body{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+
+  /* Screen 1 — AI Screening */
+  .ph-ai-hero{
+    background:linear-gradient(135deg,#059669 0%,#047857 100%);
+    color:#fff;border-radius:12px;padding:11px 12px;position:relative;overflow:hidden;
+  }
+  .ph-ai-hero::before{content:'🧠';position:absolute;top:8px;right:10px;font-size:26px;opacity:.55}
+  .ph-ai-hero .t{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;opacity:.85;font-weight:700}
+  .ph-ai-hero b{display:block;font-size:13px;margin-top:3px;line-height:1.2}
+  .ph-ai-hero small{display:block;font-size:8.5px;margin-top:3px;opacity:.9}
+  .ph-chat{
+    background:#F3F4F6;border-radius:10px;padding:8px;flex:1;display:flex;flex-direction:column;gap:5px
+  }
+  .ph-msg{font-size:9px;padding:5px 8px;border-radius:10px;max-width:80%;line-height:1.35}
+  .ph-msg.bot{background:#fff;color:var(--ink);align-self:flex-start;border:1px solid var(--line)}
+  .ph-msg.user{background:var(--gov);color:#fff;align-self:flex-end}
+  .ph-chip{display:inline-block;padding:3px 7px;border-radius:999px;background:#D1FAE5;color:var(--gov-dk);font-size:8px;font-weight:700;margin-right:3px;margin-top:3px}
+  .ph-btn{margin-top:auto;background:var(--gov);color:#fff;padding:8px;border-radius:10px;font-size:10px;font-weight:700;text-align:center}
+
+  /* Screen 2 — Teleconsult */
+  .ph-vid{
+    background:linear-gradient(135deg,#0B1020 0%,#2A2F45 100%);border-radius:10px;height:110px;
+    position:relative;overflow:hidden;display:grid;place-items:center;color:#fff;font-size:24px;
+  }
+  .ph-vid::after{content:'';position:absolute;bottom:6px;right:6px;width:30px;height:40px;background:#047857;border-radius:5px;border:2px solid #fff}
+  .ph-vid .rec{position:absolute;top:6px;left:6px;background:#DC2626;color:#fff;font-size:7px;padding:1px 5px;border-radius:3px;font-weight:800;letter-spacing:1px}
+  .ph-docbox{background:#F3F4F6;border-radius:10px;padding:8px}
+  .ph-docbox .row{display:flex;align-items:center;gap:6px}
+  .ph-docbox .ava{width:24px;height:24px;border-radius:50%;background:#D1FAE5;display:grid;place-items:center;font-size:11px}
+  .ph-docbox b{font-size:9.5px;display:block}
+  .ph-docbox small{font-size:8px;color:var(--muted);display:block}
+  .ph-stats-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:5px}
+  .ph-stats-row .s{background:#fff;border:1px solid var(--line);border-radius:7px;padding:4px 5px;text-align:center}
+  .ph-stats-row .s b{font-size:11px;color:var(--gov);display:block;font-weight:800}
+  .ph-stats-row .s small{font-size:7.5px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;font-weight:600}
+
+  /* Screen 3 — Station Booth / Map */
+  .ph-map{
+    background:
+      linear-gradient(180deg,#ECFDF5 0%,#F0FDF4 100%);
+    border-radius:10px;flex:1;position:relative;overflow:hidden;padding:6px
+  }
+  .ph-map::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(5,150,105,.12) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(5,150,105,.12) 1px,transparent 1px);
+    background-size:22px 22px;opacity:.7;
+  }
+  .ph-pin{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--gov);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25);display:grid;place-items:center;font-size:9px;color:#fff}
+  .ph-pin.p1{top:20%;left:25%}
+  .ph-pin.p2{top:45%;left:55%}
+  .ph-pin.p3{top:30%;left:75%;background:var(--accent)}
+  .ph-pin.p4{top:70%;left:30%}
+  .ph-pin.p5{top:65%;left:68%;background:var(--warn)}
+  .ph-map-card{
+    position:absolute;bottom:8px;left:8px;right:8px;background:#fff;border-radius:10px;padding:7px 9px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);z-index:3
+  }
+  .ph-map-card b{font-size:10px;display:block}
+  .ph-map-card small{font-size:8px;color:var(--muted)}
+  .ph-map-card .tags{margin-top:3px}
+
+  .phone-caption{text-align:center;margin-top:12px;font-size:11.5px;color:var(--muted)}
+  .phone-caption b{color:var(--gov);display:block;font-size:12.5px;font-weight:700;margin-bottom:2px}
+  @media (max-width:860px){.app-grid{grid-template-columns:1fr;gap:26px}.phone{max-width:240px}}
+
+  /* ==== ASSET MAP (Ecosystem Connection) ==== */
+  .asset-box{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 30px;margin-top:0;
+  }
+  .asset-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px;position:relative;
+  }
+  .asset{
+    background:linear-gradient(180deg,#fff 0%,#FAFBFC 100%);border:1.5px solid var(--line);border-radius:14px;
+    padding:16px;position:relative;transition:.2s;
+  }
+  .asset:hover{border-color:var(--gov);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .asset .dot{width:10px;height:10px;border-radius:50%;background:var(--gov);position:absolute;top:14px;right:14px;box-shadow:0 0 0 4px rgba(5,150,105,.15)}
+  .asset .nm{font-size:14px;font-weight:800;color:var(--ink)}
+  .asset .tp{font-size:10px;color:var(--gov);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:3px}
+  .asset .desc{font-size:11.5px;color:var(--ink-2);margin-top:8px;line-height:1.5}
+  .asset ul{margin-top:8px;list-style:none;padding-left:0}
+  .asset ul li{font-size:10.5px;color:var(--ink-2);padding:2px 0 2px 14px;position:relative;line-height:1.4}
+  .asset ul li::before{content:'→';position:absolute;left:0;color:var(--gov);font-weight:700}
+  .asset-hub{
+    margin-top:18px;padding:14px 20px;border-radius:14px;
+    background:linear-gradient(100deg,#EFF6FF 0%,#F0FDF4 100%);border:1.5px solid #C7D2FE;
+    font-size:12.5px;color:var(--ink-2);line-height:1.6;
+  }
+  .asset-hub b{color:var(--brand);font-weight:800}
+  @media (max-width:900px){.asset-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ==== COST CHART + BEFORE/AFTER ==== */
+  .chartgrid{display:grid;grid-template-columns:1.15fr 1fr;gap:22px;align-items:stretch}
+  .chartgrid > div{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px}
+  .chartgrid h4{font-size:16px;font-weight:800;margin-bottom:12px}
+  .chartgrid .sub{font-size:12px;color:var(--muted);margin-top:-6px;margin-bottom:14px}
+  .chart-host{height:280px;position:relative}
+
+  .ba{display:flex;flex-direction:column;gap:10px}
+  .ba .item{border-left:3px solid var(--line);padding:8px 12px;background:#FAFBFC;border-radius:0 10px 10px 0}
+  .ba .item.bef{border-left-color:var(--danger);background:#FEF2F2}
+  .ba .item.aft{border-left-color:var(--gov);background:var(--gov-lt)}
+  .ba .item b{font-size:11.5px;display:block}
+  .ba .item span{font-size:11px;color:var(--ink-2)}
+  .ba .divider{font-size:10px;letter-spacing:3px;text-align:center;color:var(--muted);padding:4px 0;font-weight:700}
+  @media (max-width:900px){.chartgrid{grid-template-columns:1fr}}
+
+  /* ==== STAKEHOLDERS GRID ==== */
+  .stake-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+  .stake{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    position:relative;transition:.2s
+  }
+  .stake:hover{border-color:var(--gov);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .stake::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gov);border-radius:14px 0 0 14px}
+  .stake.brand::before{background:var(--brand)}
+  .stake.accent::before{background:var(--accent)}
+  .stake.warn::before{background:var(--warn)}
+  .stake h6{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.5px}
+  .stake .role{font-size:10.5px;color:var(--gov);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:3px}
+  .stake.brand .role{color:var(--brand)}
+  .stake.accent .role{color:var(--accent)}
+  .stake.warn .role{color:var(--warn)}
+  .stake p{font-size:11.5px;color:var(--ink-2);margin-top:8px;line-height:1.55}
+  .stake .gain{margin-top:8px;padding:5px 10px;border-radius:7px;background:var(--gov-lt);font-size:10px;color:var(--gov-dk);font-weight:700;display:inline-block;letter-spacing:.5px}
+  @media (max-width:900px){.stake-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ==== ROADMAP ==== */
+  .roadmap{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 30px;position:relative;
+  }
+  .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;position:relative}
+  .phases::before{
+    content:'';position:absolute;top:22px;left:12%;right:12%;height:3px;
+    background:linear-gradient(90deg,var(--gov) 0%,var(--accent) 100%);z-index:0;
+  }
+  .ph{position:relative;z-index:2;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;text-align:center}
+  .ph .n{
+    width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid var(--gov);color:var(--gov);
+    display:grid;place-items:center;font-size:16px;font-weight:800;margin:0 auto 10px;
+  }
+  .ph.p2 .n{border-color:var(--brand);color:var(--brand)}
+  .ph.p3 .n{border-color:var(--accent);color:var(--accent)}
+  .ph h5{font-size:13.5px;font-weight:800}
+  .ph .tm{font-size:10.5px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:3px}
+  .ph ul{margin-top:10px;text-align:left;list-style:none;padding:0}
+  .ph ul li{font-size:11px;color:var(--ink-2);padding:3px 0 3px 14px;position:relative;line-height:1.4}
+  .ph ul li::before{content:'•';position:absolute;left:3px;color:var(--gov);font-weight:800}
+  @media (max-width:900px){.phases{grid-template-columns:1fr}.phases::before{display:none}}
+
+  /* ==== PROOF + TEAM ==== */
+  .proof-box{
+    background:linear-gradient(100deg,#F0FDF4 0%,#F5F3FF 100%);
+    border:1px solid var(--gov-br);border-radius:18px;padding:26px 30px;
+  }
+  .partners{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .partner{padding:6px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:11.5px;font-weight:700;color:var(--ink-2)}
+  .team-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .tm{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .tm b{font-size:13px;display:block;line-height:1.3}
+  .tm span{font-size:11.5px;color:var(--gov);display:block;margin-top:3px;font-weight:600}
+  .tm small{font-size:11px;color:var(--muted);display:block;margin-top:6px;line-height:1.45}
+  @media (max-width:860px){.team-row{grid-template-columns:1fr}}
+
+  /* ==== CTA FOOTER ==== */
+  .cta{
+    margin-top:28px;background:linear-gradient(100deg,#065F46 0%,#0F172A 100%);
+    border-radius:20px;padding:34px 40px;color:#fff;display:flex;justify-content:space-between;gap:26px;align-items:center;flex-wrap:wrap;
+  }
+  .cta h4{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.3}
+  .cta p{font-size:13px;color:#C7F9E5;margin-top:6px;max-width:600px}
+  .cta .btns{display:flex;gap:10px;flex-wrap:wrap}
+  .cta .btn.primary{background:#fff;color:var(--gov-dk);border-color:#fff}
+  .cta .btn.primary:hover{background:#ECFDF5}
+  .cta .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+  .cta .btn.ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+  .footer-meta{
+    margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    font-size:11px;color:var(--muted);
+  }
+  .footer-meta b{color:var(--ink)}
+
+  @media print{
+    .topbar,.cta .btns{display:none}
+    .chart-card,.asset-box,.chartgrid > div,.roadmap,.proof-box{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<!-- =============== TOP BAR =============== -->
+<div class="topbar">
+  <div class="row">
+    <div class="brand">
+      <div class="mark">H</div>
+      <div>
+        <b>Health Ecosystem Synergy Map</b>
+        <small>Closed-Loop Affordable Care · เสนอ DEPA / สปสช / อบจ.</small>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="#why">Why now</a>
+      <a href="#journey">Patient Journey</a>
+      <a href="#app">App UI</a>
+      <a href="#assets">Ecosystem Assets</a>
+      <a href="#cost">Cost Model</a>
+      <a href="#stakeholders">Stakeholders</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+    <a href="./ANTS-Ecosystem-Dashboard.html" class="back">← กลับ Dashboard</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- =============== HERO =============== -->
+  <section class="hero">
+    <div class="stamp">● Government Project Concept</div>
+    <div class="tag-row">
+      <span class="tag">🧠 AI Screening</span>
+      <span class="tag">📞 Teleconsult</span>
+      <span class="tag">🏥 Vidé Inpatient</span>
+      <span class="tag">🧪 Lab@Home</span>
+      <span class="tag">🏘️ Community Station</span>
+      <span class="tag" style="background:#F5F3FF;color:var(--accent);border-color:#E9D8FD">↩ Closed-Loop Data</span>
+    </div>
+    <h1>คนไทยควรเข้าถึงหมอได้ใน <em>90 วินาที</em><br>ไม่ใช่ 90 วัน</h1>
+    <p class="sub">
+      Health Ecosystem Synergy Map เป็นโมเดล <b>Closed-Loop Affordable & Accessible Care</b>
+      ที่ใช้สินทรัพย์ <b>ที่มีอยู่แล้วใน ANTS</b> — MorOnline (Telemedicine + AI Screening) ·
+      Vidé Hospital (Inpatient + Specialist) · Lab@Home (Mobile Lab) ·
+      MorOnline Station (IoT Booth ในชุมชน) — ผูกด้วย ANTS MarTech CDP
+      เพื่อสร้าง <b>Single Patient Record</b> ตลอด journey และเสนอเป็น Government Project
+      สำหรับ DEPA / สปสช / อบจ.
+    </p>
+    <div class="cta-row">
+      <a href="#journey" class="btn primary">▶ ดู Patient Journey Chart</a>
+      <a href="#cost" class="btn ghost">💰 Cost Saving Model</a>
+      <a href="#roadmap" class="btn ghost">📍 36-Month Roadmap</a>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip">
+      <div class="kpi-card">
+        <div class="ic">🌏</div>
+        <div class="big">50M</div>
+        <div class="lb">Reach</div>
+        <div class="sub">คนไทยเข้าถึงได้ผ่าน LINE Mini-App + Mobile Network</div>
+      </div>
+      <div class="kpi-card">
+        <div class="ic">🏥</div>
+        <div class="big">4,860</div>
+        <div class="lb">Health Stations</div>
+        <div class="sub">รพ.สต. + 25,615 คลินิก pre-mapped · integrate ready</div>
+      </div>
+      <div class="kpi-card">
+        <div class="ic">💸</div>
+        <div class="big">60–80%</div>
+        <div class="lb">Cost Reduction</div>
+        <div class="sub">ลด Out-of-pocket ประชาชน · ลดภาระ สปสช · proven pilot</div>
+      </div>
+      <div class="kpi-card">
+        <div class="ic">⚡</div>
+        <div class="big">&lt;3 min</div>
+        <div class="lb">Time to Doctor</div>
+        <div class="sub">AI Screening + Teleconsult เทียบ 90 วันในระบบเดิม</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== WHY NOW =============== -->
+  <section id="why">
+    <div class="k-label">Why Now · ทำไมต้องตอนนี้</div>
+    <h2 class="title">3 Tailwinds + 1 Asset = <em>เราพร้อมวันแรก</em> (Day 1 Ready)</h2>
+    <p class="lede">ไม่ต้องสร้างของใหม่ ไม่ต้องรอเทคโนโลยี ไม่ต้องผ่านการทดลอง — ทุกชิ้นส่วนพร้อม deploy ภายใน 90 วัน</p>
+    <div class="stake-grid" style="margin-top:18px">
+      <div class="stake">
+        <h6>📜 นโยบาย DEPA</h6>
+        <div class="role">Policy Tailwind</div>
+        <p>Digital Health เป็น 1 ใน 8 priority sectors ของ DEPA · มาตรการ Telemedicine + AI เป็น flagship 2026-2028 budget cycle</p>
+      </div>
+      <div class="stake brand">
+        <h6>💊 สปสช งบประมาณแน่น</h6>
+        <div class="role">Demand Pull</div>
+        <p>สปสช ต้องการลดภาระค่าใช้จ่ายในระบบบัตรทอง — OPD ซ้ำซ้อนคิดเป็น 30-45% ของ claim cost ปัจจุบัน</p>
+      </div>
+      <div class="stake accent">
+        <h6>🏘️ อบจ.ทั่วประเทศ</h6>
+        <div class="role">Local Champion</div>
+        <p>อบจ./อบต./รพ.สต. ต้องการแพลตฟอร์มสำเร็จรูป · ANTS Smart City + MorOnline Station เชื่อมตรงได้</p>
+      </div>
+      <div class="stake warn">
+        <h6>✅ Assets พร้อม 100%</h6>
+        <div class="role">Existing Ecosystem</div>
+        <p>MorOnline · Vidé · Lab@Home · Station ทั้ง 4 อยู่ใน ANTS ecosystem แล้ว · ไม่มีช่องว่างที่ต้องปิด</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== JOURNEY CHART =============== -->
+  <section id="journey">
+    <div class="k-label">Customer Journey Relation Chart</div>
+    <h2 class="title">Patient Journey · จากชุมชน <em>สู่โรงพยาบาล</em> · กลับสู่ชุมชน</h2>
+    <p class="lede">โมเดล 5-Stage Closed Loop แสดงเส้นทางที่ผู้ป่วย 1 คนเคลื่อนผ่าน 4 สินทรัพย์หลักของ ANTS — พร้อมจุดที่ข้อมูลไหลกลับเข้า Single Patient Record</p>
+
+    <div class="chart-card" style="margin-top:18px">
+      <div class="jchart">
+
+        <!-- Persona starter -->
+        <div class="persona">
+          <div class="av">👨‍🦳</div>
+          <div>
+            <b>คุณสมชาย · 64 ปี · นครพนม</b>
+            <span>เบาหวาน + ความดัน · รพ.สต. ห่าง 18 กม. · ไม่มีเน็ตรถ</span>
+          </div>
+          <div class="quote">"เดินทางไปหมอทีก็ครึ่งวัน..."</div>
+        </div>
+
+        <!-- 5-stage relation -->
+        <div class="jstages">
+          <div class="js">
+            <div class="n">1</div>
+            <div class="icn">🧠</div>
+            <h5>AI Health Screening</h5>
+            <div class="who">MorOnline · LINE Mini-App</div>
+            <p>เปิด App กรอกอาการ 30 วินาที · AI ประเมิน Physical/Mental/Pediatric · 92% accuracy</p>
+            <span class="metric">⏱ &lt;3 นาที · ฟรี</span>
+          </div>
+          <div class="js">
+            <div class="n">2</div>
+            <div class="icn">📞</div>
+            <h5>Teleconsult + TelePharmacy</h5>
+            <div class="who">MorOnline Doctor Network</div>
+            <p>หมอเฉพาะทาง 20+ สาขา (เริ่ม 250฿) · Pharmacist ฟรี · ใบสั่งยา digital + ส่งยาไปบ้าน</p>
+            <span class="metric">⏱ 5–15 นาที · 4.8/5</span>
+          </div>
+          <div class="js">
+            <div class="n">3</div>
+            <div class="icn">🏥</div>
+            <h5>Vidé Inpatient &amp; Specialist</h5>
+            <div class="who">Vidé Hospital · เชียงใหม่</div>
+            <p>ถ้า AI หรือหมอตัดสินว่าต้อง admit → ส่งตรง Vidé พร้อม Patient Record · ไม่ต้องซักประวัติซ้ำ</p>
+            <span class="metric">🏥 13 ประสาทศัลย</span>
+          </div>
+          <div class="js">
+            <div class="n">4</div>
+            <div class="icn">🧪</div>
+            <h5>Lab@Home Follow-up</h5>
+            <div class="who">Mobile Lab · 108 รายการ</div>
+            <p>หลังจำหน่าย → Lab@Home มาเก็บเลือดที่บ้าน · ผลเข้า eHealth Record · แพทย์ติดตามต่อ</p>
+            <span class="metric">🧪 ไม่ต้องเดินทาง</span>
+          </div>
+          <div class="js">
+            <div class="n">5</div>
+            <div class="icn">🏘️</div>
+            <h5>Community Station</h5>
+            <div class="who">IoT Booth · รพ.สต./อบต.</div>
+            <p>ตู้ Check-up ในชุมชน · วัด BP/BMI/ECG/น้ำตาล · กดปุ่ม Teleconsult ได้ทันที · 4,860 จุด</p>
+            <span class="metric">📍 ลด 60–80% cost</span>
+          </div>
+        </div>
+
+        <!-- Loop -->
+        <div class="jloop">
+          <div class="arc">↺</div>
+          <div>
+            <b>Closed Loop · Single Patient Record · PDPA-compliant</b>
+            <span>ทุก stage ส่งข้อมูลกลับเข้า eHealth Record เดียวกัน · CDP ของ ANTS MarTech personalize การดูแลรายคน · ลดการตรวจซ้ำ 30–45% · เป็น Backbone Data ที่ DEPA/สปสช ใช้ออกแบบนโยบายระดับชาติได้</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== APP UI MOCKUPS =============== -->
+  <section id="app">
+    <div class="k-label">Application UI · Visual Proof</div>
+    <h2 class="title">ผู้ป่วยใช้งานจริงใน <em>3 หน้าจอหลัก</em> · ไม่ต้องเรียนรู้</h2>
+    <p class="lede">เปิด LINE → พิมพ์ @moronline → เข้า Mini-App ทันที ไม่ต้องดาวน์โหลด · UI ออกแบบให้ผู้สูงอายุและกลุ่มเปราะบางใช้ได้ในไม่กี่แตะ</p>
+
+    <div class="app-grid" style="margin-top:20px">
+
+      <!-- Phone 1: AI Screening -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="stat">
+              <span>9:41</span>
+              <div class="r"><span>📶</span><span>🔋</span></div>
+            </div>
+            <div class="hdr">
+              <h6>🧠 AI Health Screening</h6>
+              <small>ประเมินอาการเบื้องต้น · ฟรี</small>
+            </div>
+            <div class="body">
+              <div class="ph-ai-hero">
+                <div class="t">AI-POWERED</div>
+                <b>ปวดท้องมา 3 วัน<br>กังวลเบาหวาน</b>
+                <small>AI วิเคราะห์จากอาการ + ประวัติ</small>
+              </div>
+              <div class="ph-chat">
+                <div class="ph-msg bot">สวัสดีค่ะ เล่าอาการหน่อยได้มั้ยคะ?</div>
+                <div class="ph-msg user">ปวดท้อง คอแห้ง หิวน้ำบ่อย</div>
+                <div class="ph-msg bot">
+                  มีประวัติเบาหวาน 5 ปี · ค่าน้ำตาล 180<br>
+                  <span class="ph-chip">⚠ ปานกลาง</span>
+                  <span class="ph-chip">→ ปรึกษาหมอ</span>
+                </div>
+              </div>
+              <div class="ph-btn">→ นัดหมอออนไลน์</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-caption">
+          <b>Stage 1 · AI Screening</b>
+          ใช้ง่ายเหมือนพิมพ์หา Google
+        </div>
+      </div>
+
+      <!-- Phone 2: Teleconsult -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="stat">
+              <span>9:43</span>
+              <div class="r"><span>📶</span><span>🔋</span></div>
+            </div>
+            <div class="hdr">
+              <h6>📞 Teleconsult · หมอออนไลน์</h6>
+              <small>นพ.สมศักดิ์ · อายุรกรรม</small>
+            </div>
+            <div class="body">
+              <div class="ph-vid">
+                <span class="rec">● LIVE</span>
+                👨‍⚕️
+              </div>
+              <div class="ph-docbox">
+                <div class="row">
+                  <div class="ava">🩺</div>
+                  <div style="flex:1">
+                    <b>นพ.สมศักดิ์ ตั้งใจดี</b>
+                    <small>อายุรกรรม · 15 ปี · 4.8★</small>
+                  </div>
+                </div>
+              </div>
+              <div class="ph-stats-row">
+                <div class="s"><b>₿250</b><small>ค่าปรึกษา</small></div>
+                <div class="s"><b>12 min</b><small>ระยะเวลา</small></div>
+                <div class="s"><b>Rx</b><small>ใบสั่งยา digital</small></div>
+                <div class="s"><b>📦</b><small>ส่งยาถึงบ้าน</small></div>
+              </div>
+              <div class="ph-btn">→ รับยาที่บ้านพรุ่งนี้</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-caption">
+          <b>Stage 2 · Teleconsult</b>
+          Video call + ใบสั่งยา digital + ส่งยา
+        </div>
+      </div>
+
+      <!-- Phone 3: Station Map -->
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="stat">
+              <span>9:45</span>
+              <div class="r"><span>📶</span><span>🔋</span></div>
+            </div>
+            <div class="hdr">
+              <h6>🏘️ Station ใกล้บ้าน</h6>
+              <small>Community Health Booth · 5 จุด</small>
+            </div>
+            <div class="body">
+              <div class="ph-map">
+                <span class="ph-pin p1">1</span>
+                <span class="ph-pin p2">2</span>
+                <span class="ph-pin p3">V</span>
+                <span class="ph-pin p4">3</span>
+                <span class="ph-pin p5">L</span>
+                <div class="ph-map-card">
+                  <b>รพ.สต.นาเชือก</b>
+                  <small>⭐ 4.7 · 800 ม. · เปิด 24/7</small>
+                  <div class="tags">
+                    <span class="ph-chip">💉 วัคซีน</span>
+                    <span class="ph-chip">🩺 BP/ECG</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ph-stats-row">
+                <div class="s"><b>4,860</b><small>Stations TH</small></div>
+                <div class="s"><b>&lt;1 km</b><small>avg distance</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-caption">
+          <b>Stage 5 · Community Station</b>
+          Map + filter · ตู้เช็กสุขภาพ IoT
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =============== ECOSYSTEM ASSETS MAP =============== -->
+  <section id="assets">
+    <div class="k-label">Ecosystem Asset Integration</div>
+    <h2 class="title">4 สินทรัพย์หลัก · <em>ต่อกันเป็นวงปิด</em> ด้วย ANTS MarTech</h2>
+    <p class="lede">ทุกชิ้นอยู่ใน ANTS ecosystem แล้ว · ไม่ต้องซื้อเทคโนโลยีเพิ่ม · deploy ได้ตั้งแต่ Day 1 ของ Pilot</p>
+
+    <div class="asset-box" style="margin-top:18px">
+      <div class="asset-grid">
+        <div class="asset">
+          <div class="dot"></div>
+          <div class="nm">MorOnline</div>
+          <div class="tp">Telemedicine Backbone</div>
+          <div class="desc">Telemedicine + AI Screening + TelePharmacy ผ่าน App + LINE Mini-App</div>
+          <ul>
+            <li>AI Screening 92% accuracy</li>
+            <li>หมอเฉพาะทาง 20+ สาขา</li>
+            <li>Prescription digital</li>
+          </ul>
+        </div>
+        <div class="asset">
+          <div class="dot" style="background:var(--accent);box-shadow:0 0 0 4px rgba(109,40,217,.15)"></div>
+          <div class="nm">Vidé Hospital</div>
+          <div class="tp">Inpatient · Specialist</div>
+          <div class="desc">รพ.ดอยสะเก็ด เชียงใหม่ · Neurosurgery/Stroke/Anti-aging/Tumor DNA</div>
+          <ul>
+            <li>13 ประสาทศัลยแพทย์</li>
+            <li>CGM + IV Therapy</li>
+            <li>Integrated receiving</li>
+          </ul>
+        </div>
+        <div class="asset">
+          <div class="dot" style="background:var(--brand);box-shadow:0 0 0 4px rgba(0,82,255,.15)"></div>
+          <div class="nm">Lab@Home</div>
+          <div class="tp">Mobile Lab</div>
+          <div class="desc">บริการเก็บตัวอย่างเลือด/ปัสสาวะ ถึงบ้าน · 108 รายการตรวจ</div>
+          <ul>
+            <li>Follow-up หลัง Vidé</li>
+            <li>Results → eHealth Record</li>
+            <li>Nationwide coverage</li>
+          </ul>
+        </div>
+        <div class="asset">
+          <div class="dot" style="background:var(--warn);box-shadow:0 0 0 4px rgba(176,137,40,.15)"></div>
+          <div class="nm">MorOnline Station</div>
+          <div class="tp">Community IoT Booth</div>
+          <div class="desc">ตู้ Health Check-up ในชุมชน อบจ./รพ.สต./อบต. · BP·BMI·ECG·น้ำตาล</div>
+          <ul>
+            <li>4,860 รพ.สต. target</li>
+            <li>25,615 คลินิก integrate</li>
+            <li>Teleconsult button</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="asset-hub">
+        <b>🔗 The Invisible Glue:</b>
+        ANTS MarTech (CDP + AI Personalization) ผูกทั้ง 4 สินทรัพย์ ให้เป็น <b>Single Patient Record ฉบับเดียว</b> ต่อประชาชน 1 คน — PDPA-compliant ·
+        ลดการตรวจซ้ำ 30-45% · ทำให้ DEPA/สปสช มี Real-time Backbone Data ระดับ granular
+        สำหรับออกแบบนโยบาย/งบประมาณสาธารณสุขที่ evidence-based
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== COST + BEFORE/AFTER =============== -->
+  <section id="cost">
+    <div class="k-label">Cost-Saving Model</div>
+    <h2 class="title">ลดค่าใช้จ่าย <em>60-80%</em> ต่อ visit · ลด OPD visit ซ้ำซ้อน 30-45%</h2>
+
+    <div class="chartgrid" style="margin-top:18px">
+      <div>
+        <h4>ต้นทุนต่อ visit (THB) · ระบบเดิม vs 5-Stage Loop</h4>
+        <p class="sub">ประมาณการจาก pilot MorOnline + Vidé 2024-2025 · ข้อมูลปฐมภูมิ · อัปเดต Apr 2026</p>
+        <div class="chart-host"><canvas id="costChart"></canvas></div>
+      </div>
+      <div>
+        <h4>Before vs After · 4 จุดเปลี่ยนสำคัญ</h4>
+        <p class="sub">เปรียบเทียบต่อประชาชน 1 คน · ต่อ 1 visit</p>
+        <div class="ba">
+          <div class="item bef">
+            <b>❌ รอหมอ 90 วัน</b>
+            <span>เดินทางข้ามอำเภอ · เฉลี่ย ฿1,200/visit · ตรวจซ้ำ 30-45%</span>
+          </div>
+          <div class="divider">——————— vs ———————</div>
+          <div class="item aft">
+            <b>✓ เข้าถึงหมอ &lt;3 นาที</b>
+            <span>AI Screening ฟรี · Teleconsult 250฿ · Single Record ไม่ซ้ำ</span>
+          </div>
+
+          <div class="item bef">
+            <b>❌ Single Patient Record ไม่มี</b>
+            <span>รพ.สต. manual · ไม่มี interoperability · สปสช claim ตรวจซ้ำ</span>
+          </div>
+          <div class="divider">——————— vs ———————</div>
+          <div class="item aft">
+            <b>✓ PDPA-compliant eHealth Record</b>
+            <span>CDP ANTS MarTech · cross-facility · ลดตรวจซ้ำ 30-45%</span>
+          </div>
+
+          <div class="item bef">
+            <b>❌ DEPA/สปสช ไม่มี backbone data</b>
+            <span>นโยบายอิง sample survey · ตามสถานการณ์ไม่ทัน</span>
+          </div>
+          <div class="divider">——————— vs ———————</div>
+          <div class="item aft">
+            <b>✓ Real-time Backbone Data · granular</b>
+            <span>นโยบาย evidence-based · จัดงบแม่นยำ · ตอบเหตุเร็ว</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== STAKEHOLDERS =============== -->
+  <section id="stakeholders">
+    <div class="k-label">Stakeholder Value</div>
+    <h2 class="title">ทุกฝ่าย <em>ได้ประโยชน์จริง</em> · ทั้งภาครัฐ · แพทย์ · ประชาชน · ผู้ประกอบการ</h2>
+
+    <div class="stake-grid">
+      <div class="stake">
+        <h6>🏛️ DEPA · สำนักงานเศรษฐกิจดิจิทัล</h6>
+        <div class="role">Government · Policy</div>
+        <p>Digital Economy mandate · Health Sector priority · flagship โครงการ Telemedicine 2026-2028</p>
+        <span class="gain">+ Policy Win · Data Backbone</span>
+      </div>
+      <div class="stake brand">
+        <h6>💊 สปสช</h6>
+        <div class="role">National Health Security</div>
+        <p>ลดภาระบัตรทอง · ลด OPD ซ้ำซ้อน 30-45% · ขยาย access ไปต่างจังหวัด · ลด claim leakage</p>
+        <span class="gain">+ ประหยัดงบ 30-45%</span>
+      </div>
+      <div class="stake accent">
+        <h6>🏘️ อบจ./อบต./รพ.สต.</h6>
+        <div class="role">Local Government</div>
+        <p>Platform สำเร็จรูป · ANTS Smart City + MorOnline Station ต่อตรง · ไม่ต้องพัฒนาใหม่</p>
+        <span class="gain">+ Turnkey Deploy · 90 วัน</span>
+      </div>
+      <div class="stake warn">
+        <h6>👨‍⚕️ แพทย์ + รพ.</h6>
+        <div class="role">Healthcare Provider</div>
+        <p>Patient Record ครบ · ลดเวลาซักประวัติ · Teleconsult รายได้เสริม · Vidé referral network</p>
+        <span class="gain">+ Efficiency +60%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== ROADMAP =============== -->
+  <section id="roadmap">
+    <div class="k-label">36-Month Roadmap</div>
+    <h2 class="title">Pilot → Scale → National · <em>วัดผลจริงทุก 90 วัน</em></h2>
+
+    <div class="roadmap" style="margin-top:18px">
+      <div class="phases">
+        <div class="ph">
+          <div class="n">1</div>
+          <h5>Pilot · Proof of Concept</h5>
+          <div class="tm">90 วัน</div>
+          <ul>
+            <li>1 อบจ. + 10 รพ.สต.</li>
+            <li>5,000 ผู้ป่วยจริง</li>
+            <li>วัด Adherence + Cost-Saving</li>
+            <li>ส่งรายงาน DEPA + สปสช</li>
+          </ul>
+        </div>
+        <div class="ph p2">
+          <div class="n">2</div>
+          <h5>Scale · Regional Rollout</h5>
+          <div class="tm">12 เดือน</div>
+          <ul>
+            <li>10 อบจ. + 100 รพ.สต.</li>
+            <li>100,000 ผู้ป่วย</li>
+            <li>DEPA Tier-1 budget allocation</li>
+            <li>สปสช claim integration pilot</li>
+          </ul>
+        </div>
+        <div class="ph p3">
+          <div class="n">3</div>
+          <h5>National · Full Integration</h5>
+          <div class="tm">24 เดือน</div>
+          <ul>
+            <li>77 จังหวัด</li>
+            <li>4,860 รพ.สต. online</li>
+            <li>เชื่อม สปสช claim system</li>
+            <li>50M คนไทยเข้าถึงได้จริง</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== PROOF + TEAM =============== -->
+  <section id="proof">
+    <div class="k-label">Proof Points + Team</div>
+    <h2 class="title">ทีมพร้อม · <em>พันธมิตรยืนยัน</em> · Track record ชัดเจน</h2>
+
+    <div class="proof-box" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start">
+        <div>
+          <b style="font-size:13.5px;letter-spacing:.5px">🤝 Existing Strategic Partners</b>
+          <div class="partners">
+            <span class="partner">DEPA</span>
+            <span class="partner">TCELS</span>
+            <span class="partner">KATALYST</span>
+            <span class="partner">สสส</span>
+            <span class="partner">Thai Health Technology</span>
+            <span class="partner">กรมทางหลวง</span>
+            <span class="partner">กองทัพภาค</span>
+            <span class="partner">ไปรษณีย์ไทย</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-row">
+        <div class="tm">
+          <b>Thana Thiramanus</b>
+          <span>CEO · ex-Phyathai</span>
+          <small>ประสบการณ์บริหารโรงพยาบาลเอกชนระดับ Top 5 · นำ MorOnline</small>
+        </div>
+        <div class="tm">
+          <b>นพ.ปราชญ์ กัญญาประสิทธิ์</b>
+          <span>CMO · Vidé Hospital</span>
+          <small>ประสาทศัลยแพทย์ · คลินิก Specialist ที่เชียงใหม่</small>
+        </div>
+        <div class="tm">
+          <b>นพ.สุรพงษ์ อัมพวงษ์</b>
+          <span>Medical Advisor · DITP / MOPH</span>
+          <small>ที่ปรึกษานโยบายสาธารณสุข · เชื่อม DEPA + สปสช</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== CTA =============== -->
+  <section>
+    <div class="cta">
+      <div>
+        <h4>พร้อมนำเสนอ DEPA + สปสช ภายใน 30 วัน</h4>
+        <p>Activated Agents: <b>Senior Solution Architect Agent</b> + <b>Head of Government Affairs (B2G)</b> · เป้าหมาย: ได้ slot present 1-pager นี้กับ DEPA + สปสช ภายใน Q2 2026</p>
+      </div>
+      <div class="btns">
+        <a href="./ANTS-Ecosystem-Dashboard.html" class="btn primary">← กลับ Dashboard</a>
+        <a href="mailto:closures@gmail.com?subject=Health%20Synergy%20Map%20-%20Request%20for%20Meeting" class="btn ghost">📧 นัด present</a>
+      </div>
+    </div>
+
+    <div class="footer-meta">
+      <div>
+        <b>Health Ecosystem Synergy Map</b> · Prepared by ANTS Command Center · April 2026
+      </div>
+      <div>
+        "คืนเวลาให้ชีวิต · ขยายศักยภาพให้มนุษย์" — <b>เฌอคูณ (Cherkun), Chief Wisdom Officer</b>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ===== Cost-Saving Bar Chart =====
+const ctx = document.getElementById('costChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['AI Screening', 'Teleconsult', 'Lab Test', 'Follow-up', 'Repeat OPD'],
+    datasets: [
+      {
+        label: 'ระบบเดิม (฿/visit)',
+        data: [1200, 1200, 850, 1200, 1200],
+        backgroundColor: 'rgba(220, 38, 38, .80)',
+        borderColor: 'rgba(220, 38, 38, 1)',
+        borderWidth: 0,
+        borderRadius: 6,
+      },
+      {
+        label: '5-Stage Loop (฿/visit)',
+        data: [0, 250, 450, 0, 250],
+        backgroundColor: 'rgba(5, 150, 105, .90)',
+        borderColor: 'rgba(5, 150, 105, 1)',
+        borderWidth: 0,
+        borderRadius: 6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: { family: "'IBM Plex Sans Thai', 'Inter', sans-serif", size: 12, weight: 600 },
+          usePointStyle: true, pointStyle: 'circle', boxWidth: 8, padding: 12
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(11,16,32,.92)',
+        titleFont: { family: "'IBM Plex Sans Thai', sans-serif", size: 13 },
+        bodyFont: { family: "'IBM Plex Sans Thai', sans-serif", size: 12 },
+        padding: 10, cornerRadius: 8,
+        callbacks: {
+          label: (c) => `${c.dataset.label}: ฿${c.parsed.y.toLocaleString()}`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: "'IBM Plex Sans Thai', sans-serif", size: 11, weight: 600 }, color: '#6B7280' }
+      },
+      y: {
+        beginAtZero: true,
+        grid: { color: 'rgba(229, 231, 235, .6)' },
+        ticks: {
+          font: { family: "'Inter', sans-serif", size: 11 }, color: '#6B7280',
+          callback: (v) => '฿' + v.toLocaleString()
+        }
+      }
+    }
+  }
+});
+
+// ===== Smooth scroll for nav =====
+document.querySelectorAll('.topbar .nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 68;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

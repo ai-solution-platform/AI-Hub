@@ -1,0 +1,76 @@
+# ===== K.17.9 PUBLIC PORTFOLIO EXCLUSIONS (do not publish) =====
+# Legal/IP documents (contain full PII + signatures)
+/ObityX_Brand_Sale/
+# Personal narrative (curate before publishing)
+/founder-story/
+# Operational follow-ups with third-party emails
+/morning-briefs/
+# Legacy April 17 pack (drafts, consulting agreements, lawyer debate, dream team profiles)
+/foundational-apr17/
+# Internal QA tooling (low public value)
+/vm-qa-gate/
+# Internal transformation (HR-type content for 50-employee transformation)
+/internal-transformation/
+# Archive (old versions · historical only)
+/archive/
+# Lint/audit reports (internal)
+/reports/
+# Scripts that contain personal paths (Mac-specific publish workflow)
+# Note: scripts/ excluded · publish-to-github.sh contains absolute Mac path
+/scripts/publish-to-github.sh
+/scripts/migrate-tier1-pocs.sh
+# Internal manifest (contains K.x audit log with strategic details)
+/FILE-MOVEMENT-MANIFEST-24Apr2026.md
+# GitHub setup guide with personal email
+/GITHUB-SETUP.md
+
+# ===== ORIGINAL (technical exclusions) =====
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# OS junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Python (scripts/)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+.cache/
+
+# Sensitive (just in case Nut adds creds files later)
+.env
+.env.local
+*.key
+*.pem
+secrets/
+
+# DAS sweep auto-generated reports older than current (keep latest only · git history retains)
+# (Manual cleanup: keep last 30 days only)
+
+# Node (if any future tooling)
+node_modules/
+package-lock.json
+
+# Local-only outputs
+/local-only/
+/scratchpad/

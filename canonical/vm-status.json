@@ -1,0 +1,277 @@
+{
+  "_meta": {
+    "version": "1.4",
+    "schema_version": 1,
+    "created": "2026-04-27",
+    "last_updated": "2026-04-29",
+    "v1.4_changes_29apr_K22": "K.22 Wise Sprint · Added hot_rules object placeholder (count null · for I-NEW-14 C6 detector). Owner #63 + #51 populate canonical count after first sweep. No structural change to V/M / roster / ecosystem / OP fields.",
+    "v1.3_changes_29apr_K20.1": "K.20.1 same-session continuation · #63 FJA-CDCA targets_count 7 → 12 (added Targets 8-11 from K.15 backlog + Target 12 NEW Charter Compliance Monthly Audit for #64+#65 · monthly first-Mon cadence · first run 4 พ.ค. 2026). Promoted 3 templates to /reports/_templates/ (Decision-Pack-Template + Strategic-Decision-Pack-Template) and /agents/_templates/ (Agent-Charter-RACI-Template). Specs for I-NEW-24/25/26 (Decision auto-scaffold trio · all owned by #65 CDA · Phase 2 build 8-21 พ.ค. · ~15 hr total).",
+    "v1.3_changes_29apr_K20": "Roster expanded 63 → 65. Added #64 CEcoO (Chief Ecosystem Orchestration Officer · T2 host · Op 14 Orchestration tag) + #65 CDA (Chief Decision Architect & Wisdom Steward · T2 host · Op 14 Steward tag). T2_c_suite count 11 → 13. stale_counts_forbidden +63 (now [52, 62, 63]). Trigger: Nut Approve Both decision in Two-Agents-Strategic-Pack-K20. Rollout: CDA activates W2 8-21 May · CEcoO activates W3-W4 22 May-11 Jun · sunset review 1 Jul.",
+    "v1.2_changes_27apr_K15": "Op 19 LOCKED 'Always pair abbreviation with full name on first occurrence in consumer-facing files'. OP count 18 → 19. Trigger: K.14 Nut feedback Issue #5. Stale-counts-forbidden array updated: [11, 13, 16, 18].",
+    "last_full_sweep_clean": "2026-04-28",
+    "last_full_sweep_clean_note": "First all-clean sweep across 19 consumer files. Defect remediation batch K.9 closed (52 defects: 36 P0 + 16 P1) using 3-phase parallel batch (Phase 1: sed bulk P0 sweep · Phase 2: Python canonical V/M block injection · Phase 3: per-file gate verify). Total elapsed: ~25 minutes vs. 2-2.5 hr sequential estimate.",
+    "v1.1_changes_29apr": "Operating Principles count corrected 16→18 (Op 17 + Op 18 were locked 28 Apr LATE-AM but SSOT had not been synced — found in K.12 body-level re-audit). Atomic update with canonical-facts.md per Op 16 Pattern A.",
+    "owner": "Agent #51 KM + Agent #63 FJA-CDCA + CWO Cherkun",
+    "purpose": "SSOT singleton for all canonical facts in ANTS 2.0 workspace. Replaces 15+ hard-coded references scattered across operational files. Pairs with /canonical/canonical-facts.md (human-readable). Per Op Principle 16 (Cross-Doc SSOT Discipline · Pattern A — Centralize).",
+    "update_protocol": "Any change to V/M, agent count, ecosystem, op count, or any canonical fact MUST update this file + canonical-facts.md atomically. No edits to consumer files without SSOT update first.",
+    "verification": "Run /scripts/vm-canonical-lint.py against any consumer file before commit. Pre-Edit Lint Gate hook blocks save on divergence."
+  },
+
+  "vision_mission": {
+    "locked_date": "2026-04-23",
+    "locked_by": "Nut as Board (Type 1 decision)",
+    "language_policy": "English-primary in operational UI (CC, Solutions Stack, dashboards). Thai supporting/gloss text allowed beneath. Founder-story + memory canonicals exempt from English-primary rule.",
+    "vision": {
+      "en": "Human wisdom. AI at scale. Wisdom for everyone.",
+      "en_required_substrings": [
+        "Human wisdom",
+        "AI at scale",
+        "Wisdom for everyone"
+      ],
+      "th_gloss": "ปัญญาคน + AI ที่สเกลได้ + ปัญญาที่เข้าถึงได้ทุกคน",
+      "supporting_th_optional": "ANTS เป็น Technology & Consulting company ที่ AI-Native ช่วย B2B / B2G / B2B2C transform ด้วยปัญญา AI + ภูมิปัญญาคน — ทำให้ wisdom เข้าถึงได้สำหรับทุกคน ไม่ใช่แค่ enterprise ขนาดใหญ่"
+    },
+    "mission": {
+      "en": "Empower people. Build sustainable businesses. Scale crafted AI to the world.",
+      "en_required_substrings": [
+        "Empower people",
+        "Build sustainable businesses",
+        "Scale crafted AI to the world"
+      ],
+      "th_gloss": "เสริมพลังคน · สร้างธุรกิจยั่งยืน · สเกล crafted AI สู่โลก",
+      "supporting_th_optional": "แกนเดียว · หลายธุรกิจ · เป้าหมายเดียวกัน — ใช้ 65 AI Agents (Tier 1–6 + #63 FJA-CDCA + #64 CEcoO + #65 CDA) เป็นฐาน ขับ 27 ธุรกิจในเครือ · ethical · impact-first"
+    },
+    "tagline_th": "แกนเดียว · หลายธุรกิจ · เป้าหมายเดียวกัน",
+    "anchors_count": 6,
+    "tension_concept": "Crafted × Scale",
+    "rollout": {
+      "phase_w1_kickoff": "2026-05-04",
+      "all_hands_reveal": "2026-05-20"
+    },
+    "stale_drafts_forbidden": [
+      "เป็นบริษัท Technology & Consulting ที่ AI-Native อันดับต้นของเอเชีย",
+      "AI-Native Partner for SEA",
+      "ใช้ 62 AI Agents",
+      "ใช้ 52 AI Agents",
+      "ใช้ 63 AI Agents"
+    ]
+  },
+
+  "agent_roster": {
+    "total": 65,
+    "total_breakdown_note": "62 numbered agents (Tier 1–6, IDs #1–#62) + 3 hosted/added agents (#63 FJA-CDCA hosted in Tier 5 · #64 CEcoO hosted in Tier 2 · #65 CDA hosted in Tier 2)",
+    "by_tier": {
+      "T1_board_advisory": 3,
+      "T2_c_suite": 13,
+      "T3_heads_of": 12,
+      "T4_senior_execution": 17,
+      "T5_operations_admin": 9,
+      "T6_frontier_elite": 10
+    },
+    "fja_cdca": {
+      "id": 63,
+      "code": "FJA-CDCA",
+      "full_name": "Folded Sweep Agent — Folder Janitor + Cross-Doc Consistency Audit",
+      "tier_host": "T5",
+      "activation_date_original": "2026-05-04",
+      "activation_date_actual": "2026-04-28",
+      "early_activation_trigger": "Op 16 SSOT discipline locked 26 Apr LATE-PM + V/M cascade gap defect surfaced 27 Apr LATE-PM",
+      "schedule": "Mondays 09:00 ICT + on-demand · monthly first-Mon for Target 12",
+      "targets_count": 12,
+      "targets": [
+        "1: V/M canonical alignment sweep",
+        "2: Agent roster drift detector (62 vs 63 vs 65 etc.)",
+        "3: Path registry alignment",
+        "4: Workflow patterns consistency",
+        "5: Workshop catalog consistency",
+        "6: V/M language English-primary enforcement",
+        "7: Operating Principles cross-doc consistency",
+        "8: Hub-Index sync-check enforcement (I-NEW-9)",
+        "9: Body-content diff check (Op 18b)",
+        "10: Op 19 abbreviation pair lint (I-NEW-15)",
+        "11: Onboarding kit template freshness (SAKM K.15)",
+        "12: Charter compliance monthly audit for #64 + #65 (NEW K.20.1) — KPI drift detection · activation pattern usage count · sunset alert · auto-flag P0 if <50% trajectory before quarterly Q3 review"
+      ],
+      "phased_rollout": {
+        "2026-05-04_was": "targets 1-3 (postponed to 28 Apr early activation)",
+        "2026-04-28_actual": "targets 1-3 + foundational SSOT build",
+        "2026-05-11": "targets 4-5",
+        "2026-05-18": "targets 6-7",
+        "2026-05-04_K15": "targets 8-11 added",
+        "2026-04-29_K20.1": "Target 12 added (charter compliance monthly · first run 4 May 2026 then monthly first-Mon)"
+      }
+    },
+    "tier6_id_range": "#53–#62",
+    "tier6_pillars": ["AI Frontier", "Deep Tech", "Brand/Product"],
+    "tier6_benchmarks": ["Apple", "Anthropic", "OpenAI", "SpaceX", "Tesla", "Google"],
+    "stale_counts_forbidden": [52, 62, 63],
+    "_note_id_62_dre": "Agent ID #62 = DRE (Developer Relations & Ecosystem Lead, Tier 6). The literal `id:62` in code is correct. Only stale TEXT/COPY '62 agents/Agents/คน' is forbidden.",
+    "_note_id_63_64_65": "Agent ID #63 = FJA-CDCA (Folded Sweep Agent · T5 host). Agent ID #64 = CEcoO (Chief Ecosystem Orchestration Officer · T2 host · added K.20 29 Apr 2026). Agent ID #65 = CDA (Chief Decision Architect & Wisdom Steward · T2 host · added K.20 29 Apr 2026). The literal `id:63/64/65` in code/Agent Specs is correct. Only stale TEXT/COPY '63 agents/Agents/คน' is forbidden post-K.20.",
+    "ceco_o_64": {
+      "id": 64,
+      "code": "CEcoO",
+      "full_name": "Chief Ecosystem Orchestration Officer",
+      "tier_host": "T2",
+      "tag": "(Orchestration)",
+      "added_date": "2026-04-29",
+      "added_session": "K.20",
+      "activation_date_planned": "2026-05-22",
+      "vm_anchor": "Mission #5 'Build sustainable businesses' + Vision 'AI at scale'",
+      "reports_to": ["CEO #4", "CWO Cherkun #5 Layer-2"],
+      "panel_members": ["Industry Advisor #3", "Head of Strategy #13", "Head of Partnerships #17", "CFO #7", "CSyA #57", "KM #51", "FJA-CDCA #63"],
+      "kpis": [
+        "Cross-venture revenue share % (target 25% Year-1)",
+        "Shared-infra cost saving % (target 15% Year-1)",
+        "Pattern Bus active flows/Q (target 8/Q)",
+        "Ecosystem NPS (target 8.0/10)",
+        "Compound Index (composite quarterly)"
+      ],
+      "activation_pattern": "F6 Ecosystem Sync"
+    },
+    "cda_65": {
+      "id": 65,
+      "code": "CDA",
+      "full_name": "Chief Decision Architect & Wisdom Steward",
+      "tier_host": "T2",
+      "tag": "(Steward)",
+      "added_date": "2026-04-29",
+      "added_session": "K.20",
+      "activation_date_planned": "2026-05-08",
+      "vm_anchor": "Vision 'Wisdom for everyone' + Mission 'Empower people'",
+      "reports_to": ["CWO Cherkun #5 (operational arm)", "CEO #4"],
+      "panel_members": ["CWO Cherkun #5", "KM #51", "CCVO #52", "CSO-Craft #61", "FJA-CDCA #63"],
+      "kpis": [
+        "Decision velocity median days pending→decided (target ≤ 7)",
+        "Reversal rate of Type-1 decisions within 90d (target ≤ 5%)",
+        "Pack reuse % of Type-1 using Decision Pack template (target 80% by Q3)",
+        "OP/Hot Rule retirement rate /Q (target 1-2/Q)",
+        "Regret index post-mortem 1-10 (target ≥ 7.5)"
+      ],
+      "activation_pattern": "F7 Decision Architecture"
+    }
+  },
+
+  "human_team": {
+    "min": 5,
+    "max_optional": 7,
+    "leverage_ratio": "10–16x via AI agent workforce",
+    "roles_min_5": [
+      "H1 — Founder/CEO (Nut)",
+      "H2 — Chief of Staff / Operator",
+      "H3 — Head of Client Trust (Enterprise & Government)",
+      "H4 — Lead Engineer / Tech Accountable Person",
+      "H5 — Finance & Legal Controller"
+    ]
+  },
+
+  "ecosystem": {
+    "version": "R10",
+    "total_ventures": 27,
+    "tagline_th": "แกนเดียว · หลายธุรกิจ · เป้าหมายเดียวกัน",
+    "structure": {
+      "main": 6,
+      "startup": 4,
+      "investment": 8,
+      "partner": 9
+    },
+    "stale_counts_forbidden": [29],
+    "_note_29": "29 was the R9 count. R10 (24 Apr 2026) renamed/dissolved subunits → 27 final."
+  },
+
+  "operating_principles": {
+    "count": 19,
+    "stale_counts_forbidden": [11, 13, 16, 18],
+    "list": [
+      { "id": 1, "title": "Wisdom > Intelligence > Data" },
+      { "id": 2, "title": "Long-term over short-term" },
+      { "id": 3, "title": "Unit economics before scaling" },
+      { "id": 4, "title": "Runway awareness in every decision" },
+      { "id": 5, "title": "Honest about AI limitations · Nut final decision" },
+      { "id": 6, "title": "Strategic frameworks over tactical advice" },
+      { "id": 7, "title": "Acknowledge uncertainty · reduce before acting" },
+      { "id": 8, "title": "Default Thai · เฌอคูณ persona · wisdom framing" },
+      { "id": 9, "title": "Sync before recommend (re-read all SSOTs)" },
+      { "id": 10, "title": "No operations drift (stay on ANTS 2.0)" },
+      { "id": 11, "title": "QA Layer-1 + CWO Layer-2 review (DEV/TECH)" },
+      { "id": 12, "title": "Domain panel Layer-1 + CWO Layer-2 + ARAI (NON-DEV)" },
+      { "id": 13, "title": "Session Continuity (read SESSION_HANDOFF first)" },
+      { "id": 14, "title": "Title Convention (T2 Exec/P&L · T6 Craft/Research)" },
+      { "id": 15, "title": "Mid-Session Health Check every 3 heavy edits" },
+      { "id": 16, "title": "Cross-Doc SSOT Discipline (Pattern A/B/C)" },
+      { "id": 17, "title": "Filename Naming Convention (clean operational names · version+date inside)" },
+      { "id": 18, "title": "Session-Close Sync Discipline (Hub-Index + body-content + Op 18 sign-off)" },
+      { "id": 19, "title": "Always pair abbreviation with full name on first occurrence in consumer-facing files (HTML/MD/email/deck) — bare codes only allowed in private memory + insider docs" }
+    ],
+    "_locked_dates_recent": {
+      "Op 17": "2026-04-28 LATE-AM",
+      "Op 18": "2026-04-28 LATE-AM",
+      "Op 18b": "2026-04-29 (proposed in K.12 re-audit · body-content diff check enhancement to Op 18)",
+      "Op 19": "2026-04-27 LATE-PM K.15 (locked from K.14 Nut feedback Issue #5 · 'ตัวย่อใครจะจำได้หมด ควรมีชื่อเต็มด้วย')"
+    }
+  },
+
+  "hot_rules": {
+    "count": null,
+    "stale_counts_forbidden": [],
+    "_note_K22_29apr": "I-NEW-14 (K.22 · 29 Apr 2026) — Hot Rules count placeholder. C6 currently runs as intra-file drift detector + canonical-mismatch detector (skips canonical mismatch when count is null). Owner #63 FJA-CDCA + #51 KM populate canonical count after first sweep · Phase 2 Q3."
+  },
+
+  "frameworks": {
+    "core_values": "3C-E (Clear · Communication · Change · Evolution)",
+    "working_framework_5": [
+      "Vision & Mission",
+      "3C-E Loop",
+      "PAO (Problem · Action · Outcome)",
+      "1-3-1 (1 เป้า · 3 ทาง · 1 คำแนะนำ)",
+      "ARAI (Actions · Results · Ideas for Improvement)"
+    ]
+  },
+
+  "consumers": [
+    "/command-center/ANTS-2.0-Unified-Command-Center.html",
+    "/products/ANTS-2.0-AI-Solutions-Stack.html",
+    "/internal-transformation/Internal-Transformation-Communication-Plan.md",
+    "/ANTS-2.0-Hub-Index.html",
+    "/README.md",
+    "/ecosystem/ANTS-Ecosystem-Dashboard.html",
+    "/agents/ANTS-Tier6-Frontier-Elite-Agents.md"
+  ],
+  "_folded_consumers_K13_K14": [
+    {
+      "old_path": "/reports/ANTS-Master-Audit-Report.md",
+      "folded_into": "/command-center/ANTS-2.0-Unified-Command-Center.html",
+      "tabs": ["exec (Audit Health)", "roadmap (Standing Orders)", "risks (K.x Audit Log)"],
+      "archived_to": "/archive/2026-04/master-audit-folded-into-CC/",
+      "date": "2026-04-27",
+      "k_sweep": "K.13",
+      "rationale": "single-file philosophy · Command Center = single source of truth"
+    },
+    {
+      "old_path": "/reports/ANTS-Audit-Dashboard.html",
+      "folded_into": "/command-center/ANTS-2.0-Unified-Command-Center.html",
+      "tabs": ["risks (K.x Audit Log K.14 row added)"],
+      "archived_to": "/archive/2026-04/audit-dashboard-folded-into-CC-K14/",
+      "date": "2026-04-27",
+      "k_sweep": "K.14",
+      "rationale": "consistency with K.13 fold pattern · audit visuals already in CC dashboard tab Chart.js · Nut feedback Issue #2"
+    }
+  ],
+
+  "exempt_paths": [
+    "/archive/",
+    "/foundational-apr17/",
+    "/launches/",
+    "/founder-story/",
+    "/canonical/",
+    "/scripts/",
+    "/docs/"
+  ],
+
+  "exempt_filename_patterns": [
+    "FILE-MOVEMENT-MANIFEST",
+    "DAS-Sweep-Report",
+    "Op12-CC-Walk-Through-Template"
+  ],
+
+  "exempt_paths_reason": "Archived files preserve historical state intentionally. Foundational-apr17 are early frozen docs. Launches are event-snapshot artifacts. Founder-story uses different rhetorical conventions. Canonical/scripts are SSOT/tooling themselves. Manifests are append-only audit trails that document historical drift (they MUST contain stale strings as evidence). DAS reports are output of the lint itself. Op12 templates are META about V/M (not rendering them). /docs/ are meta-documentation describing scripts/processes (e.g. friday-push-ritual.md quotes sensitivity-gate patterns intentionally · K.22)."
+}

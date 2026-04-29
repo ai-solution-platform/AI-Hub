@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────────
+# ANTS 2.0 Commit Message Template (I-NEW-17 · K.22 · 29 Apr 2026)
+# Owner: HoEng #21 + CCVO #52 + #63 FJA-CDCA
+# Install: git config commit.template .gitmessage
+# ─────────────────────────────────────────────────────────────────
+#
+# Format (replace placeholder lines · keep section headers):
+#
+# K.<x>: <one-line summary · imperative · ≤72 chars>
+#
+# - <substantive change 1>
+# - <substantive change 2>
+# - <substantive change 3>
+#
+# ARAI:
+# A: <action — what was done>
+# R: <result — what changed · measurable>
+# I: <idea improvement — what's next · or "none">
+#
+# Refs: <I-NEW-XX or feedback memory file or "none">
+#
+# ─────────────────────────────────────────────────────────────────
+# Conventions:
+# - First line MUST start with K.<x>: (sweep marker · enables changelog-builder.py to parse)
+# - Use Thai or English freely · be specific not abstract
+# - List 2–5 substantive changes · skip trivia (formatting · whitespace)
+# - ARAI block mandatory if commit changes operational logic or canonical fact
+# - Refs links to I-NEW spec or memory file that motivated this commit
+# ─────────────────────────────────────────────────────────────────

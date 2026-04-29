@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ANTS 2.0 — Hub Index · Single Gateway · v2.0 K.20 (Roster expanded to 65 · #64 CEcoO + #65 CDA approved by Nut · charter+RACI shipped · CC v3.2) · 29 Apr 2026</title>
+<!--
+last_updated: 2026-04-29
+version: 2.0 · K.20 Two-Agents Strategic Pack APPROVED · roster expanded 63 → 65 (added #64 CEcoO Chief Ecosystem Orchestration Officer · activates 22 พ.ค. + #65 CDA Chief Decision Architect & Wisdom Steward · activates 8 พ.ค. first) · canonical SSOT pair v1.2→v1.3 · charter+RACI doc /agents/Agents-64-65-Charter-RACI.md · 70 stale "63 agents" bulk-fixed via word-boundary sed · sunset review 1 ก.ค. (Q3) · DAS lint ALL CLEAN preserved
+update_history:
+  - "v1.0-1.1 (24-27 Apr 2026): initial portal · iterative card additions"
+  - "v1.2 (28 Apr 2026 LATE-AM): hero stat 62 → 63 · sync-note dated 28 Apr · 2 NEW sections (④ SAKM + ⑤ Tools/SSOT) · 7 new cards · Op 17 naming applied"
+  - "v1.3 (29 Apr 2026 K.12 body-level re-audit): hero stat '16 Operating Principles' → '18 Operating Principles' · HTML comment frontmatter added for I-NEW-9 hub-index-sync-check.py compliance"
+  - "v1.4 (27 Apr 2026 K.13 Master Audit folded): hero .sync-note REMOVED · hero-stat 4th label simplified · §① Primary Dashboards REORDERED · §⑥ Master Audit doc-row replaced with FOLDED redirect"
+  - "v1.5 (27 Apr 2026 K.14 · 6 Nut feedback issues): open-new-tab · Audit Dashboard fold · Internal Pitching duplicate removed · Post-Songkran archived · abbreviations expanded · GitHub publish setup"
+  - "v1.6 (27 Apr 2026 LATE-PM K.15 Phase A): hero-stat 4th card '18 Operating Principles' → '19 Operating Principles' (Op 19 abbreviation pairing locked) · footer date stamp 27 Apr K.15 Phase A · ARAI block updated (K.15 actions/results/idea-improvement) · Phase B queued (workshop content rewrite + I-NEW-16..20 + Change Logs filter UI polish + auto-overwrite logic)"
+  - "v1.7 (27 Apr 2026 LATE-PM K.16 · UX bugs + 8-Category POC catalog + ai-solution-platform/AI-Hub publish): no Hub-Index body changes this round (all CC-internal) · footer date stamp K.16 · ARAI block updated (UX bugs · POC directory · GitHub setup) · GITHUB-SETUP.md updated to v2 (ai-solution-platform/AI-Hub target)"
+  - "v1.8 (27 Apr 2026 LATE-PM K.17 · POC consistency fixes + Marketing/Content + verified URLs + publish-script): footer date stamp K.17 · no body changes (all CC-internal · POC catalog redesign) · /canonical/poc-deliverables.md v1.1 (44 entries · Marketing/Content populated with 7 videos) · /scripts/publish-to-github.sh NEW (one-paste Mac terminal script)"
+  - "v1.6 (27 Apr 2026 LATE-PM K.15 · SAKM v2 federated wisdom × collective intelligence thread): §③ SAKM section EXPANDED with 3 NEW v2 cards (Boundary Contract Template + Shadow Agent Registry + Phase 1 Git Blueprint) · footer ARAI block updated for K.15 · footer version v1.5 → v1.6 · update_history entry added"
+  - "v1.8b (28-29 Apr 2026 K.18 · Top 10 batch): no Hub-Index body changes (all builds CC-internal + scripts) · footer date stamp K.18 · ARAI updated (Op 19 mechanical · Workshop collapse · Change Logs auto · sensitivity gate)"
+  - "v1.9 (29 Apr 2026 K.19 · Top 10 carryover batch): footer date stamp K.19 · 4 Decision Packs at /reports/Pending-Decisions-Pack-K19.html (PAT revoke · Ambassador shortlist · ITP v1 sign-off · Budget THB 150K) · CC v3.1 live-fetches /canonical/changelog.json (changelog-builder.py regex tightened · 10 top-level entries · K.9.1/K.12.1 sub-sections rejected) · Workshop SVG zoom + view-detail hint on hover · vm-canonical-lint.py SCRIPT_OUTPUT_PREFIXES extended · 3 lints ALL CLEAN preserved · Manifest 1365→1431 lines"
+  - "v2.0 (29 Apr 2026 K.20 · Two-Agents Strategic Pack APPROVED): roster expanded 63 → 65 by Nut as Board (Type-1 decision) · added #64 CEcoO (Chief Ecosystem Orchestration Officer · T2 host · Op 14 Orchestration tag · F6 Ecosystem Sync activation · activates 22 พ.ค. W3-W4 phase) + #65 CDA (Chief Decision Architect & Wisdom Steward · T2 host · Op 14 Steward tag · F7 Decision Architecture activation · activates 8 พ.ค. W2 phase first) · canonical SSOT pair v1.2→v1.3 (T2 11→13 · stale_counts_forbidden +63) · charter+RACI doc shipped at /agents/Agents-64-65-Charter-RACI.md · 70 stale '63 agents/Agents/63-Agent' references bulk-fixed via word-boundary sed across 12 files (#63 FJA-CDCA agent ID preserved) · CC v3.1→v3.2 · sunset review Q3 1 ก.ค. (binary go/no-go on each agent) · footer link added to /reports/Two-Agents-Strategic-Pack-K20.html"
+-->
+
+<style>
+  :root{
+    --ink-900:#0f172a; --ink-700:#1e293b; --ink-600:#334155; --ink-500:#475569; --ink-400:#64748b; --ink-300:#94a3b8;
+    --bg:#f8fafc; --bg-card:#ffffff; --bg-soft:#f1f5f9; --line:#e2e8f0; --line-soft:#eef2f7;
+    --accent:#2563eb; --accent-soft:#dbeafe; --accent-deep:#1d4ed8;
+    --gold:#d97706; --gold-soft:#fef3c7;
+    --green:#059669; --green-soft:#d1fae5;
+    --purple:#7c3aed; --purple-soft:#ede9fe;
+    --red:#dc2626; --red-soft:#fee2e2;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+    --shadow-md:0 4px 6px rgba(15,23,42,.05), 0 10px 15px rgba(15,23,42,.07);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Noto Sans Thai",system-ui,sans-serif;
+    background:var(--bg); color:var(--ink-700);
+    font-size:15.5px; line-height:1.65;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:40px 28px 80px}
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#1d4ed8 100%);
+    color:#fff; border-radius:18px; padding:42px 44px; margin-bottom:40px;
+    box-shadow:var(--shadow-md); position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; right:-80px; top:-80px; width:340px; height:340px;
+    background:radial-gradient(circle,rgba(96,165,250,.25),transparent 70%); border-radius:50%;
+  }
+  .hero-eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#93c5fd;font-weight:600}
+  .hero h1{font-size:34px;font-weight:800;margin:10px 0 8px;letter-spacing:-.015em;line-height:1.18}
+  .hero-sub{font-size:16px;color:#cbd5e1;max-width:780px;margin:0 0 22px}
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:20px}
+  .hero-stat{background:rgba(255,255,255,.08);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px}
+  .hero-stat-num{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.01em}
+  .hero-stat-lbl{font-size:12px;color:#93c5fd;margin-top:2px}
+  .sync-note{margin-top:24px;padding:12px 16px;background:rgba(250,204,21,.08);border-left:3px solid #facc15;border-radius:8px;font-size:13.5px;color:#fde68a}
+
+  /* Section */
+  .sec{margin:38px 0 8px}
+  .sec-title{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-bottom:4px}
+  .sec-head{font-size:22px;font-weight:800;color:var(--ink-900);margin:0 0 4px;letter-spacing:-.01em}
+  .sec-lead{font-size:14.5px;color:var(--ink-500);margin:0 0 18px}
+
+  /* Cards grid */
+  .grid{display:grid;gap:18px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width: 920px){.grid-3,.grid-2{grid-template-columns:1fr}}
+  .card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 22px 18px; box-shadow:var(--shadow-sm); transition:all .2s ease;
+    display:flex; flex-direction:column; text-decoration:none; color:inherit; min-height:218px;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--accent)}
+  .card-badge{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent-deep);margin-bottom:10px;align-self:flex-start
+  }
+  .card-badge.gold{background:var(--gold-soft);color:var(--gold)}
+  .card-badge.green{background:var(--green-soft);color:var(--green)}
+  .card-badge.purple{background:var(--purple-soft);color:var(--purple)}
+  .card-badge.red{background:var(--red-soft);color:var(--red)}
+  .card-title{font-size:17px;font-weight:700;color:var(--ink-900);margin:0 0 6px;letter-spacing:-.005em;line-height:1.35}
+  .card-desc{font-size:13.5px;color:var(--ink-500);margin:0 0 14px;flex:1}
+  .card-meta{font-size:12px;color:var(--ink-400);margin:8px 0 12px;font-family:"SF Mono",ui-monospace,monospace}
+  .card-cta{font-size:13px;color:var(--accent);font-weight:700;margin-top:auto}
+  .card-cta::after{content:" →"; transition:transform .2s}
+  .card:hover .card-cta::after{transform:translateX(4px);display:inline-block}
+
+  /* Docs list */
+  .docs{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;box-shadow:var(--shadow-sm)}
+  .doc-row{display:flex;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line-soft);gap:14px}
+  .doc-row:last-child{border-bottom:0}
+  .doc-icon{
+    width:36px;height:36px;flex-shrink:0;border-radius:8px;background:var(--bg-soft);
+    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--ink-600)
+  }
+  .doc-icon.md{background:var(--purple-soft);color:var(--purple)}
+  .doc-icon.ref{background:var(--gold-soft);color:var(--gold)}
+  .doc-main{flex:1;min-width:0}
+  .doc-title{font-size:14.5px;font-weight:700;color:var(--ink-900);margin:0 0 2px}
+  .doc-title a{color:inherit;text-decoration:none}
+  .doc-title a:hover{color:var(--accent)}
+  .doc-desc{font-size:13px;color:var(--ink-500);margin:0}
+  .doc-path{font-size:11.5px;color:var(--ink-300);font-family:"SF Mono",ui-monospace,monospace;margin-top:3px;word-break:break-all}
+
+  /* Footer */
+  .foot{margin-top:48px;padding:24px;background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);text-align:center;color:var(--ink-500);font-size:13.5px;line-height:1.7}
+  .foot strong{color:var(--ink-700)}
+  .arai{margin-top:28px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);border-radius:var(--radius);padding:22px 26px;border-left:4px solid var(--accent)}
+  .arai-title{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:8px}
+  .arai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+  @media (max-width:820px){.arai-grid{grid-template-columns:1fr}}
+  .arai-cell{background:#fff;border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+  .arai-cell-lbl{font-size:11px;font-weight:700;color:var(--ink-500);letter-spacing:.1em;text-transform:uppercase}
+  .arai-cell-val{font-size:13.5px;color:var(--ink-700);margin-top:4px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">ANTS 2.0 · AI Command Center</div>
+    <h1>Single Gateway — ทุก Dashboard · ทุก Report · ที่เดียว</h1>
+    <p class="hero-sub">หน้านี้คือ hub หลักที่รวม link ไปยัง HTML dashboard และ MD report สำคัญทั้งหมดของ ANTS 2.0 — ไม่ต้องจำ path · ไม่ต้องเปิดหาทีละ folder · เข้าถึงได้จากที่เดียว</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">63</div><div class="hero-stat-lbl">AI Agents · Tier 1–6 + #63 FJA</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">27</div><div class="hero-stat-lbl">Ventures in Ecosystem</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-lbl">Human Roles (H1–H5)</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">19</div><div class="hero-stat-lbl">Operating Principles</div></div>
+    </div>
+  </section>
+
+  <!-- PRIMARY DASHBOARDS · K.14: Audit Dashboard folded into CC, reduced 4 → 3 cards (grid-2 → grid-3) -->
+  <section class="sec">
+    <div class="sec-title">① Primary Dashboards (แดชบอร์ดหลัก)</div>
+    <h2 class="sec-head">Operational Command Center (ศูนย์บัญชาการการปฏิบัติการ)</h2>
+    <p class="sec-lead">3 dashboard หลัก สำหรับดู ภาพรวมธุรกิจ → product stack → ระบบรวม (รวม audit ที่ K.14 fold เข้าแล้ว)</p>
+    <div class="grid grid-3">
+
+      <a class="card" target="_blank" rel="noopener" href="./ecosystem/ANTS-Ecosystem-Dashboard.html">
+        <span class="card-badge gold">Ecosystem · 27 Ventures</span>
+        <div class="card-title">Business Ecosystem Dashboard</div>
+        <div class="card-desc">27 ธุรกิจในเครือ · 6 Main + 4 Startup + 8 Investment + 9 Partner · "แกนเดียว · หลายธุรกิจ · เป้าหมายเดียวกัน"</div>
+        <div class="card-meta">/ecosystem/ · ภาพรวมธุรกิจทั้งกลุ่ม</div>
+        <div class="card-cta">เปิด ecosystem</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./products/ANTS-2.0-AI-Solutions-Stack.html">
+        <span class="card-badge green">Product · Able AI</span>
+        <div class="card-title">AI Solutions Stack</div>
+        <div class="card-desc">Product portfolio · 4 ผลิตภัณฑ์แบรนด์ Able AI (AI Assistant Enterprise · CRM+CDP+AI · AI Chat SME · Training/Consulting) + ผังองค์กร 65 AI Agents</div>
+        <div class="card-meta">/products/ · ครอบคลุม Britz Tier 6 Pilot</div>
+        <div class="card-cta">เปิด stack</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./command-center/ANTS-2.0-Unified-Command-Center.html">
+        <span class="card-badge">Canonical · 16 Tabs</span>
+        <div class="card-title">Unified Command Center</div>
+        <div class="card-desc">Single-pane-of-glass (หน้าจอเดียวเห็นทุกอย่าง) · ครอบคลุม Strategy · Agents · Ecosystem · Ops · Culture · Finance · Internal Transformation · <strong>Audit &amp; Optimization</strong> (K.13 + K.14: Master Audit + Audit Dashboard ทั้งคู่ fold เข้ามาแล้ว)</div>
+        <div class="card-meta">/command-center/ · Apple-UX Scale · ALL CLEAN ✅</div>
+        <div class="card-cta">เปิด dashboard</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM ONE-PAGERS -->
+  <section class="sec">
+    <div class="sec-title">② Ecosystem One-Pagers</div>
+    <h2 class="sec-head">Synergy Maps for Partners &amp; Government</h2>
+    <p class="sec-lead">เอกสารขายเฉพาะเจาะจง · ใช้กับ DEPA · หน่วยงานราชการ · และพันธมิตรกลุ่มเป้าหมาย</p>
+    <div class="grid grid-2">
+
+      <a class="card" target="_blank" rel="noopener" href="./ecosystem/Health-Ecosystem-Synergy-Map-DEPA-1pager.html">
+        <span class="card-badge purple">Health · DEPA</span>
+        <div class="card-title">Health Ecosystem Synergy Map</div>
+        <div class="card-desc">1-pager สำหรับ DEPA · แสดง synergy ระหว่างกลุ่ม Health ventures ใน ANTS ecosystem</div>
+        <div class="card-meta">/ecosystem/ · 52KB</div>
+        <div class="card-cta">เปิด synergy map</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./ecosystem/Taily-Ecosystem-Synergy-Map-Government-1pager.html">
+        <span class="card-badge purple">Taily · Gov</span>
+        <div class="card-title">Taily Ecosystem Synergy Map</div>
+        <div class="card-desc">1-pager สำหรับหน่วยงานรัฐบาล · Taily pet-economy · Pet Passport · Pet Data Hub integration</div>
+        <div class="card-meta">/ecosystem/ · 52KB</div>
+        <div class="card-cta">เปิด synergy map</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- SAKM (Shadow Agent Knowledge Mesh) — v1 cards + v2 federated wisdom × collective intelligence cards (K.15) -->
+  <section class="sec">
+    <div class="sec-title">③ SAKM (Shadow Agent Knowledge Mesh — เครือข่ายความรู้สำหรับ Shadow Agents) · v1 28 เม.ย. → v2 27 เม.ย. K.15 LATE-PM</div>
+    <h2 class="sec-head">"Impossible → I'm possible" — Federated Wisdom (อำนาจกระจายออก) × Collective Intelligence (ความรู้ไหลกลับเข้ามา)</h2>
+    <p class="sec-lead">v1 = 5-layer architecture (Ingest → Route → Store → Export → Write-Back) · Sales pilot 4 weeks (4–31 พ.ค.). v2 (K.15) = Boundary Contract + Registry + Phase 1 Git blueprint + Pattern Bus design — ทำให้ federated wisdom × collective intelligence เป็น operational ไม่ใช่แค่ concept · zero-cash M1</p>
+
+    <h3 style="font-size:13px;color:var(--ink-500);margin:18px 0 8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">v1 · Master Spec + Sales Pilot Matrix + Cultural Manifesto (28 เม.ย.)</h3>
+    <div class="grid grid-3">
+
+      <a class="card" target="_blank" rel="noopener" href="./internal-transformation/ANTS-SAKM-MasterSpec.md">
+        <span class="card-badge purple">SAKM v1 · Master Spec</span>
+        <div class="card-title">SAKM v1 (Shadow Agent Knowledge Mesh — เอกสารกลาง) — Master Spec</div>
+        <div class="card-desc">5-layer mesh (Ingest → Route → Store → Export → Write-Back) · 10 sections · Sales pilot scope · phased rollout M1 → M3 · risk register · Op 11 (DEV QA) sign-off · zero-cash</div>
+        <div class="card-meta">/internal-transformation/ · 18.5KB · ANTS-SAKM-MasterSpec.md</div>
+        <div class="card-cta">เปิด spec</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./internal-transformation/SAKM-Sales-Pilot-Agent-Matrix.md">
+        <span class="card-badge purple">SAKM v1 · Pilot Matrix</span>
+        <div class="card-title">Sales Pilot + Able AI Agent Matrix (ตารางจับคู่ Agent ↔ ทีม Sales)</div>
+        <div class="card-desc">3 Sales shadow Agents (HoSales = Head of Sales · AE = Account Executive · SDR = Sales Development Representative) + 5 Product Shadow Agents · 5 plug-in exports queued M2-M3</div>
+        <div class="card-meta">/internal-transformation/ · 11.2KB · SAKM-Sales-Pilot-Agent-Matrix.md</div>
+        <div class="card-cta">เปิด matrix</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./internal-transformation/Impossible-to-Im-Possible-Manifesto.md">
+        <span class="card-badge gold">Cultural Anthem (เพลงประจำใจองค์กร)</span>
+        <div class="card-title">"Impossible → I'm possible" Manifesto (ปฏิญญาวัฒนธรรม)</div>
+        <div class="card-desc">5 ความเชื่อหลัก · 14 do/don't language patterns · 8 embedment touchpoints · Founder Pledge 6 ข้อ (Nut เซ็นแล้ว) · embedded ใน onboarding + workshop + Hub-Index banner</div>
+        <div class="card-meta">/internal-transformation/ · 12.9KB · CCVO #52 (Chief Culture &amp; Values Officer) owns</div>
+        <div class="card-cta">เปิด manifesto</div>
+      </a>
+
+    </div>
+
+    <h3 style="font-size:13px;color:var(--ink-500);margin:24px 0 8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">v2 · Federated Wisdom × Collective Intelligence Operational Stack (27 เม.ย. LATE-PM K.15) — NEW</h3>
+    <div class="grid grid-3">
+
+      <a class="card" target="_blank" rel="noopener" href="./sakm/templates/Boundary-Contract-Template.yaml">
+        <span class="card-badge purple">SAKM v2 · Authority Contract</span>
+        <div class="card-title">Boundary Contract Template (สัญญากำหนดขอบเขตอำนาจ Shadow Agent)</div>
+        <div class="card-desc">YAML template ที่ใช้ทุกครั้งเมื่อ export plug-in ให้ shadow holder · กำหนด authority scope · escalation triggers · V/M alignment · sync cadence · write-back protocol · cross-pollination consent · attestation block (Nut + holder + CWO Layer-2). Federated wisdom เป็นจริงผ่านสัญญานี้</div>
+        <div class="card-meta">/sakm/templates/ · Boundary-Contract-Template.yaml · used by every shadow export</div>
+        <div class="card-cta">เปิด template</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./sakm/registry/shadow-agents.json">
+        <span class="card-badge purple">SAKM v2 · Registry SSOT</span>
+        <div class="card-title">Shadow Agent Registry (ทะเบียน Shadow Agents กลาง)</div>
+        <div class="card-desc">JSON SSOT สำหรับทุก Master ↔ Shadow pair · auto-updated โดย #63 weekly cron · tracks version_at_export · last_sync · divergence_status · write_backs[] · cross_pollination_groups · schema validated. Single ledger preventing "ลืม version" defects</div>
+        <div class="card-meta">/sakm/registry/ · shadow-agents.json + shadow-agents.schema.json · KM #51 owner</div>
+        <div class="card-cta">เปิด registry</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./sakm/git-blueprint/README.md">
+        <span class="card-badge gold">SAKM v2 · Phase 1 Git Blueprint</span>
+        <div class="card-title">ants-shadow-agent-mesh — Phase 1 Repo Blueprint + Scripts</div>
+        <div class="card-desc">Private GitHub repo blueprint · diff-shadow.py (weekly cron) + merge-ceremony.py (monthly ceremony) shipped · folder layout · bootstrap plan (~5 hr HoEng #21 · 30 days) · migration paths to Phase 2 web dashboard + Phase 3 SAKM platform</div>
+        <div class="card-meta">/sakm/git-blueprint/ · README.md + scripts/ · target: private GitHub Free</div>
+        <div class="card-cta">เปิด blueprint</div>
+      </a>
+
+    </div>
+
+    <h3 style="font-size:13px;color:var(--ink-500);margin:24px 0 8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">v2 · Idea Improvements (specs · K.15)</h3>
+    <div class="grid grid-3">
+
+      <a class="card" target="_blank" rel="noopener" href="./reports/I-NEW-11-shadow-command-spec.md">
+        <span class="card-badge green">Idea Improvement NEW-11</span>
+        <div class="card-title">I-NEW-11 · <code>shadow:</code> Command (Shadow Agent CLI)</div>
+        <div class="card-desc">Colon-suffix command · 9 subcommands (list · diff · status · sync · ceremony · register · writeback · help) · ~1-3% session/use · companion to I19/I21/I26/I28/I29 · turns federated wisdom × collective intelligence into 1-line invocations</div>
+        <div class="card-meta">/reports/ · I-NEW-11-shadow-command-spec.md · HoEng #21 owns build</div>
+        <div class="card-cta">เปิด spec</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./reports/I-NEW-12-shadow-agent-onboarding-kit.md">
+        <span class="card-badge green">Idea Improvement NEW-12</span>
+        <div class="card-title">I-NEW-12 · Shadow Agent Onboarding Kit (9-step ceremony)</div>
+        <div class="card-desc">Pre-Export Checklist → Co-Design Session → Boundary Contract sign-off → Cultural Framing Brief → Plug-in Export → Registry Registration → First-Week Plan → Handover Letter → 30-Day Review · prevents "ลืม version" defects · ~3 hr per export</div>
+        <div class="card-meta">/reports/ · I-NEW-12-shadow-agent-onboarding-kit.md · KM #51 + CCVO #52</div>
+        <div class="card-cta">เปิด spec</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./reports/I-NEW-13-cross-shadow-cross-pollination.md">
+        <span class="card-badge green">Idea Improvement NEW-13</span>
+        <div class="card-title">I-NEW-13 · Cross-Shadow Cross-Pollination (Pattern Bus)</div>
+        <div class="card-desc">Horizontal channel between shadows · 5 cross-pollination cohorts (compliance · growth · revenue · delivery · culture) · CDO #60 privacy filter + CCVO #52 ethics review · consent-first · anti-blame guardrails · turns N siloed wisdoms into N² collective intelligence</div>
+        <div class="card-meta">/reports/ · I-NEW-13-cross-shadow-cross-pollination.md · KM #51 + CDO #60 + CCVO #52</div>
+        <div class="card-cta">เปิด spec</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- TOOLS & SCRIPTS -->
+  <section class="sec">
+    <div class="sec-title">④ Tools · Scripts · SSOT (Single Source of Truth — แหล่งข้อมูลกลางเดียว) — Operations Stack</div>
+    <h2 class="sec-head">#63 FJA-CDCA (Folded JIT Audit + Canonical Drift Cron Agent — Agent ที่ตรวจการเปลี่ยนแปลงข้อมูลหลัก) Toolkit + Canonical Source-of-Truth Pair</h2>
+    <p class="sec-lead">เครื่องมือสำหรับตรวจ canonical-fact alignment · auto-remediation (แก้อัตโนมัติ) · gate enforcement · ใช้งานจริงรายสัปดาห์ (จันทร์ 09:00 ICT)</p>
+    <div class="grid grid-2">
+
+      <a class="card" target="_blank" rel="noopener" href="./scripts/das-bulk-fix.py">
+        <span class="card-badge green">Tool · I-NEW-6 (Idea Improvement NEW-6)</span>
+        <div class="card-title">das-bulk-fix.py — DAS (Drift &amp; Alignment Sweep) Bulk Auto-Fix Script</div>
+        <div class="card-desc">3-phase batch (sed P0 sweep + Python P1 injection + per-file gate verify) · idempotent (รันซ้ำได้ผลเท่าเดิม) · dry-run default · threshold gating · derived from SSOT</div>
+        <div class="card-meta">/scripts/ · 10.8KB · python3 scripts/das-bulk-fix.py [--apply]</div>
+        <div class="card-cta">เปิด script</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./scripts/vm-canonical-lint.py">
+        <span class="card-badge">Tool · DAS Lint (Drift &amp; Alignment Sweep)</span>
+        <div class="card-title">vm-canonical-lint.py — V/M (Vision/Mission) Canonical Lint Script (DAS Sweep)</div>
+        <div class="card-desc">Detector for V/M alignment + agent count drift · 4 check categories · emits MD + JSON reports · ปลอดภัยพอสำหรับ CI gate</div>
+        <div class="card-meta">/scripts/ · 13.8KB · python3 scripts/vm-canonical-lint.py [&lt;file&gt;]</div>
+        <div class="card-cta">เปิด script</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./canonical/canonical-facts.md">
+        <span class="card-badge gold">SSOT (Single Source of Truth) · Human</span>
+        <div class="card-title">canonical-facts.md — Canonical Facts Registry (Human-Readable SSOT)</div>
+        <div class="card-desc">Single human-readable source สำหรับ V/M (Vision/Mission) · agent roster · ecosystem · operating principles · update protocol Op 16 Pattern A</div>
+        <div class="card-meta">/canonical/ · grep before asserting any fact</div>
+        <div class="card-cta">เปิด SSOT</div>
+      </a>
+
+      <a class="card" target="_blank" rel="noopener" href="./canonical/vm-status.json">
+        <span class="card-badge gold">SSOT (Single Source of Truth) · Machine</span>
+        <div class="card-title">vm-status.json — V/M Status JSON (Machine-Readable SSOT)</div>
+        <div class="card-desc">JSON pair · scripts parse · last_full_sweep_clean = 2026-04-28 · 10 keys · atomic update with canonical-facts.md</div>
+        <div class="card-meta">/canonical/ · last updated 28 Apr 2026</div>
+        <div class="card-cta">เปิด JSON</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- GOVERNANCE & DOCS -->
+  <section class="sec">
+    <div class="sec-title">⑤ Governance · Path Truth · Reference Docs</div>
+    <h2 class="sec-head">Markdown Reports &amp; System Files</h2>
+    <p class="sec-lead">Reference สำหรับ agents · CWO · และการ audit path/roster · MD ไม่ render ใน browser โดยตรง — เปิดด้วย editor หรือ preview tool</p>
+    <div class="docs">
+
+      <div class="doc-row">
+        <div class="doc-icon md">MD</div>
+        <div class="doc-main">
+          <div class="doc-title"><a target="_blank" rel="noopener" href="./README.md">README · Folder Navigation</a></div>
+          <div class="doc-desc">รายการ must-read · folder structure · quick-start links</div>
+          <div class="doc-path">/README.md</div>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-icon ref">PATH</div>
+        <div class="doc-main">
+          <div class="doc-title"><a target="_blank" rel="noopener" href="./FILE-MOVEMENT-MANIFEST-24Apr2026.md">File Movement Manifest · Path Truth</a></div>
+          <div class="doc-desc">Append-only history · ย้ายอะไร · ไปไหน · เมื่อไหร่ · ใครสั่ง · ถ้า conflict → manifest ชนะ</div>
+          <div class="doc-path">/FILE-MOVEMENT-MANIFEST-24Apr2026.md</div>
+        </div>
+      </div>
+
+      <div class="doc-row" style="background:#f0fdf4;border-radius:8px;padding-left:8px">
+        <div class="doc-icon" style="background:#dcfce7;color:#166534">✓</div>
+        <div class="doc-main">
+          <div class="doc-title">Master Audit Report + Audit Dashboard — <span style="color:#166534">FOLDED INTO COMMAND CENTER (K.13 + K.14 · 27 เม.ย.)</span></div>
+          <div class="doc-desc">Audit content moved to CC tabs: <strong>"บทสรุปผู้บริหาร"</strong> (Audit &amp; Optimization Health) + <strong>"แผนงาน · Actions"</strong> (Top 10 Standing Orders + Founder Energy Delegation) + <strong>"ความเสี่ยง · ARAI"</strong> (K-series Audit Log K.9–K.14). Originals archived → /archive/2026-04/master-audit-folded-into-CC/ + /audit-dashboard-folded-into-CC-K14/</div>
+          <div class="doc-path">→ /command-center/ANTS-2.0-Unified-Command-Center.html</div>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-icon md">MD</div>
+        <div class="doc-main">
+          <div class="doc-title"><a target="_blank" rel="noopener" href="./reports/ANTS-Idea-Improvements-I1-I5-Specs.md">Idea Improvements I1–I5 (ข้อปรับปรุง 5 ข้อแรก) · Full Specs</a></div>
+          <div class="doc-desc">Zero-cash · FJA #63 (Folded JIT Audit Agent) · Heat Map · Britz Pilot · Founder Energy Budget · Quarterly Retirement Review</div>
+          <div class="doc-path">/reports/ANTS-Idea-Improvements-I1-I5-Specs.md</div>
+        </div>
+      </div>
+
+      <div class="doc-row">
+        <div class="doc-icon md">MD</div>
+        <div class="doc-main">
+          <div class="doc-title"><a target="_blank" rel="noopener" href="./agents/ANTS-Tier6-Frontier-Elite-Agents.md">Tier 6 Frontier Elite Agents (10 ตัว) · Full Specs</a></div>
+          <div class="doc-desc">#53 CAIS (Chief AI Scientist) · #54 AISAL (AI Safety &amp; Alignment Lead) · #55 PECA (Prompt Engineering &amp; Context Architect) · #56 AgentOps (Agent Operations Architect) · #57 CSyA (Chief Systems Architect) · #58 HRL (Hardware &amp; Robotics Lead) · #59 ME (Mission Engineer) · #60 CDO (Chief Design Officer) · #61 CSO-Craft (Chief Storytelling Officer · Craft) · #62 DRE (Developer Relations &amp; Ecosystem)</div>
+          <div class="doc-path">/agents/ANTS-Tier6-Frontier-Elite-Agents.md</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ARAI BLOCK -->
+  <section class="arai">
+    <div class="arai-title">ARAI (Actions · Results · Idea Improvement) — Hub-Index v1.6 · K.15 · 27 เม.ย. 2569 LATE-PM</div>
+    <div class="arai-grid">
+      <div class="arai-cell">
+        <div class="arai-cell-lbl">Action</div>
+        <div class="arai-cell-val">K.15: SAKM v2 federated wisdom × collective intelligence thread — ship Boundary Contract YAML template · Shadow Agent Registry JSON+schema · Phase 1 Git blueprint (diff-shadow.py + merge-ceremony.py) · 3 Idea Improvement specs (I-NEW-11 shadow: command · I-NEW-12 Onboarding Kit · I-NEW-13 Cross-Pollination Pattern Bus) · weave thread into 3 Command Center sections (relation org chart · workflow patterns Subsection D · automation map Federated Wisdom Lane) · update K.x Audit Log row K.15</div>
+      </div>
+      <div class="arai-cell">
+        <div class="arai-cell-lbl">Result</div>
+        <div class="arai-cell-val">Federated wisdom (อำนาจกระจายออก ผ่าน Boundary Contract) × collective intelligence (write-back vertical + Pattern Bus horizontal) เป็น operational ไม่ใช่แค่ concept · "ลืม version" defect prevented โดย registry + Onboarding Kit · Sales Pilot 4 พ.ค. ใช้ stack ใหม่นี้เป็น kickoff platform · 5+ artifacts shipped K.15 · CC v2.6 → v2.7 · Hub-Index v1.5 → v1.6</div>
+      </div>
+      <div class="arai-cell">
+        <div class="arai-cell-lbl">Idea Improvement</div>
+        <div class="arai-cell-val">Downstream candidates (queued): I-NEW-14 <code>shadow: gossip</code> (anonymized cross-pollination digest) · I-NEW-15 <code>shadow: heatmap</code> (terminal drift heatmap) · I-NEW-16 video walkthrough of Onboarding Kit Step 2 · I-NEW-17 GitHub Action auto-block PR if shadow registered without complete contract · I-NEW-18 pattern recommendation engine · I-NEW-19 Phase 2 web UI cross-pollination network graph · I-NEW-20 "pattern of the week" digest in morning brief</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Canonical V/M SSOT alignment · auto-injected K.9 pattern · pair: /canonical/vm-status.json + canonical-facts.md · Locked Apr 23, 2026 -->
+  <section class="arai" style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-left:4px solid var(--green)">
+    <div class="arai-title" style="color:var(--green)">📌 Canonical V/M (Vision/Mission) Reference — SSOT</div>
+    <div style="font-size:14px;line-height:1.7;color:var(--ink-700)">
+      <strong>Vision (canonical):</strong> "<em>Human wisdom. AI at scale. Wisdom for everyone.</em>"<br/>
+      <strong>Mission (canonical):</strong> "<em>Empower people. Build sustainable businesses. Scale crafted AI to the world.</em>"<br/>
+      <span style="font-size:12px;color:var(--ink-500)">Source: <code>/canonical/canonical-facts.md</code> + <code>/canonical/vm-status.json</code> · Locked 23 เม.ย. 2569 · Op 16 SSOT discipline</span>
+    </div>
+  </section>
+
+  <div class="foot">
+    <strong>ANTS 2.0 Command Center</strong> · Hub Index <strong>v2.0</strong> · Last updated <strong>29 เม.ย. 2569 · K.20 (Roster expanded to 65 · #64 CEcoO + #65 CDA approved · charter+RACI shipped · CC v3.2 · 3 lints ALL CLEAN)</strong> — 🆕 Open <a target="_blank" rel="noopener" href="reports/Two-Agents-Strategic-Pack-K20.html"><strong>Two-Agents Strategic Pack K.20</strong></a> · 📋 <a target="_blank" rel="noopener" href="reports/Pending-Decisions-Pack-K19.html">Decision Packs K.19</a> · 📜 <a target="_blank" rel="noopener" href="agents/Agents-64-65-Charter-RACI.md">Charter+RACI</a><br/>
+    Default path: <code>/ANTS-2.0-Hub-Index.html</code> · Bookmark หน้านี้ + setup GitHub Pages (ดู <a target="_blank" rel="noopener" href="./GITHUB-SETUP.md">GITHUB-SETUP.md</a>)<br/>
+    Owned by: CCVO #52 (Chief Culture &amp; Values Officer) + Head of Delivery/PMO #23 · Sync discipline: Op 18 (Session-Close Sync) · Reviewed by: CWO (เฌอคูณ — Chief Wisdom Officer)
+  </div>
+
+</div>
+</body>
+</html>

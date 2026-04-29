@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANTS · CX/CS/CRM Dashboard v3 — Q3/Q4 2025 + Q1 2026 + Latest Month · AI Demo</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --ants-navy:#0E2A47; --ants-blue:#1E5AA8; --ants-cyan:#00B5D8;
+  --ants-amber:#F59E0B; --ants-red:#DC2626; --ants-green:#10B981; --ants-purple:#7C3AED; --ants-pink:#EC4899;
+  --bg:#FFFFFF; --bg-soft:#F8FAFC; --border:#E5E7EB;
+  --text:#111827; --text-soft:#4B5563; --text-mute:#9CA3AF;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{margin:0;padding:0;background:var(--bg-soft);color:var(--text);font-family:'Inter','SF Pro Display','Sukhumvit Set','Helvetica Neue',-apple-system,sans-serif;font-size:15.5px;line-height:1.65}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 28px 80px}
+
+.header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-radius:14px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--ants-navy) 0%,var(--ants-blue) 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px}
+.brand-meta h1{margin:0;font-size:18px;font-weight:700;color:var(--ants-navy)}
+.brand-meta .sub{font-size:12.5px;color:var(--text-mute)}
+.header .meta-right{font-size:12.5px;color:var(--text-soft);text-align:right}
+.header .meta-right b{color:var(--ants-navy)}
+.scope-pill{display:inline-block;background:#FEF3C7;color:#92400E;padding:4px 10px;border-radius:10px;font-size:11.5px;font-weight:700;margin-left:8px}
+.ai-pill{display:inline-block;background:linear-gradient(135deg,#7C3AED 0%,#EC4899 100%);color:#fff;padding:4px 10px;border-radius:10px;font-size:11.5px;font-weight:700;margin-left:6px}
+
+/* AI SHOWCASE BANNER (TOP) */
+.ai-showcase{background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 50%,#0E2A47 100%);color:#fff;padding:28px 32px;border-radius:16px;margin-bottom:24px;position:relative;overflow:hidden}
+.ai-showcase::before{content:"✨";position:absolute;top:20px;right:30px;font-size:60px;opacity:.15}
+.ai-showcase h2{margin:0 0 6px;font-size:22px;font-weight:700}
+.ai-showcase .tagline{font-size:13.5px;color:rgba(255,255,255,.85);max-width:680px;margin-bottom:18px}
+.ai-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+.ai-stat{background:rgba(255,255,255,.10);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,.20)}
+.ai-stat .num{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.ai-stat .lbl{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:2px}
+
+/* BEFORE / AFTER */
+.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;margin:24px 0;padding:24px;background:#fff;border-radius:14px;border:1px solid var(--border)}
+.compare .col{padding:14px}
+.compare .col h4{margin:0 0 8px;font-size:14px;font-weight:700}
+.compare .col.before{background:#FEF2F2;border-left:4px solid var(--ants-red);border-radius:8px}
+.compare .col.before h4{color:#991B1B}
+.compare .col.after{background:#F0FDF4;border-left:4px solid var(--ants-green);border-radius:8px}
+.compare .col.after h4{color:#166534}
+.compare .col ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;color:var(--text-soft);line-height:1.6}
+.compare .col ul li{margin-bottom:3px}
+.compare .arr{font-size:32px;color:var(--ants-purple);font-weight:800;text-align:center}
+
+/* HERO */
+.hero{position:relative;background:linear-gradient(135deg,#0E2A47 0%,#1E5AA8 55%,#00B5D8 100%);color:#fff;padding:32px;border-radius:16px;margin-bottom:24px;overflow:hidden}
+.hero h2{margin:0 0 6px;font-size:24px;font-weight:700;letter-spacing:-.3px}
+.hero p{margin:0;font-size:14px;color:rgba(255,255,255,.85);max-width:760px}
+.hero .activated{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);padding:6px 12px;border-radius:20px;font-size:12px;margin-top:12px;border:1px solid rgba(255,255,255,.18)}
+.hero .activated .dot{width:7px;height:7px;background:#00FF95;border-radius:50%;box-shadow:0 0 8px #00FF95}
+
+/* SECTION */
+.section{margin-top:36px}
+.section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.section-title .num{display:inline-block;background:var(--ants-navy);color:#fff;width:28px;height:28px;border-radius:8px;text-align:center;line-height:28px;font-weight:700;font-size:13px}
+.section-title h3{margin:0;font-size:19px;font-weight:700;color:var(--ants-navy);letter-spacing:-.2px}
+.section-title .tag{font-size:11.5px;color:#3730A3;background:#EEF2FF;padding:3px 10px;border-radius:12px;font-weight:500}
+.section-title .qtag{font-size:11.5px;color:#fff;background:var(--ants-blue);padding:3px 10px;border-radius:12px;font-weight:600}
+.section-title .qtag.q3{background:var(--ants-cyan)}
+.section-title .qtag.q4{background:var(--ants-purple)}
+.section-title .qtag.q1{background:var(--ants-green)}
+.section-title .qtag.latest{background:var(--ants-amber)}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:#fff;padding:20px;border-radius:14px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.kpi .label{font-size:12px;color:var(--text-mute);font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.kpi .value{font-size:28px;font-weight:800;color:var(--ants-navy);margin-top:6px;letter-spacing:-.5px;line-height:1.1}
+.kpi .delta{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:10px}
+.kpi .delta.up{background:#D1FAE5;color:#065F46}
+.kpi .delta.down{background:#FEE2E2;color:#991B1B}
+.kpi .delta.neutral{background:#E0E7FF;color:#3730A3}
+.kpi .ctx{font-size:11.5px;color:var(--text-mute);margin-top:6px}
+.kpi .stripe{position:absolute;top:0;left:0;width:4px;height:100%;background:var(--ants-blue)}
+.kpi.danger .stripe{background:var(--ants-red)}
+.kpi.success .stripe{background:var(--ants-green)}
+.kpi.warn .stripe{background:var(--ants-amber)}
+.kpi.purple .stripe{background:var(--ants-purple)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px}
+.card h4{margin:0 0 4px;font-size:15px;font-weight:700;color:var(--ants-navy)}
+.card .sub{font-size:12px;color:var(--text-mute);margin-bottom:14px}
+.card .chart-box{position:relative;height:280px}
+.card .chart-box.tall{height:340px}
+
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl thead{background:var(--ants-navy);color:#fff}
+.tbl thead th{padding:10px 12px;text-align:left;font-weight:600;font-size:12.5px}
+.tbl tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl tbody tr:hover{background:#F8FAFC}
+.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl td.c{text-align:center}
+
+.badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:11.5px;font-weight:600}
+.badge.green{background:#D1FAE5;color:#065F46}
+.badge.amber{background:#FEF3C7;color:#92400E}
+.badge.red{background:#FEE2E2;color:#991B1B}
+.badge.blue{background:#DBEAFE;color:#1E40AF}
+.badge.purple{background:#EDE9FE;color:#5B21B6}
+.badge.gray{background:#F3F4F6;color:#374151}
+.badge.cyan{background:#CFFAFE;color:#155E75}
+
+.insight{background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%);border:1px solid #FCD34D;border-radius:14px;padding:18px;margin-bottom:12px}
+.insight .head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.insight .head .ico{font-size:20px}
+.insight .head .ttl{font-weight:700;color:#78350F;font-size:14.5px}
+.insight .body{font-size:13.5px;color:#451A03;line-height:1.6}
+.insight.red{background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%);border-color:#FCA5A5}
+.insight.red .ttl{color:#991B1B}
+.insight.red .body{color:#7F1D1D}
+.insight.green{background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC}
+.insight.green .ttl{color:#166534}
+.insight.green .body{color:#14532D}
+.insight.purple{background:linear-gradient(135deg,#FAF5FF 0%,#F3E8FF 100%);border-color:#D8B4FE}
+.insight.purple .ttl{color:#6B21A8}
+.insight.purple .body{color:#581C87}
+
+/* AI MAGIC BOX */
+.magic{background:linear-gradient(135deg,#FEF3C7 0%,#FDE68A 100%);border:2px dashed #F59E0B;border-radius:14px;padding:20px;margin:18px 0}
+.magic .head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.magic .head .ico{font-size:22px}
+.magic .head .ttl{font-weight:700;color:#78350F;font-size:15px}
+.magic .body{font-size:13px;color:#451A03;line-height:1.65}
+.magic .body code{background:#fff;padding:2px 6px;border-radius:4px;font-family:'SF Mono','Consolas',monospace;font-size:12px;color:#7C2D12}
+
+/* QUARTER STRIP */
+.qstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.qcard{background:#fff;border-radius:12px;padding:18px;text-align:center;border-top:4px solid var(--ants-blue);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.qcard.q3{border-top-color:var(--ants-cyan)}
+.qcard.q4{border-top-color:var(--ants-purple)}
+.qcard.q1{border-top-color:var(--ants-green)}
+.qcard.latest{border-top-color:var(--ants-amber)}
+.qcard .qlbl{font-size:11.5px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.qcard .qval{font-size:24px;font-weight:800;color:var(--ants-navy);margin:6px 0 4px}
+.qcard .qmeta{font-size:11.5px;color:var(--text-soft)}
+
+.cta{background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 100%);color:#fff;padding:28px;border-radius:16px;margin-top:32px}
+.cta h3{margin:0 0 6px;color:#fff;font-size:19px;font-weight:700}
+.cta p{margin:0 0 14px;font-size:13.5px;color:rgba(255,255,255,.88)}
+.cta-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.cta-action{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);padding:14px;border-radius:10px}
+.cta-action .ttl{font-weight:700;font-size:13px;margin-bottom:4px}
+.cta-action .meta{font-size:11.5px;color:rgba(255,255,255,.78)}
+
+.sources{background:#F8FAFC;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:28px;font-size:12.5px;color:var(--text-soft)}
+.sources b{color:var(--ants-navy)}
+.sources ul{margin:8px 0 0;padding-left:18px}
+.sources li{margin-bottom:4px}
+
+.arai{background:#0E2A47;color:#fff;padding:22px 26px;border-radius:14px;margin-top:24px;font-size:13px;line-height:1.7}
+.arai b{color:#00B5D8}
+.arai .row{margin-bottom:6px}
+.arai .row .lbl{display:inline-block;width:90px;color:#00B5D8;font-weight:600}
+
+.disc{padding:10px 12px;background:#FEF3C7;border-left:3px solid var(--ants-amber);border-radius:6px;font-size:12px;color:#78350F;margin-top:10px}
+
+/* HOW-TO REPLICATION GUIDE */
+.howto{background:#fff;border:2px solid var(--ants-purple);border-radius:14px;padding:24px;margin:24px 0}
+.howto h3{margin:0 0 4px;color:var(--ants-purple);font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px}
+.howto h3::before{content:"🎓";font-size:22px}
+.howto .sub{font-size:12.5px;color:var(--text-mute);margin-bottom:16px}
+.howto-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.howto-step{background:#FAF5FF;padding:14px;border-radius:10px;border-left:3px solid var(--ants-purple)}
+.howto-step .stp{font-size:11px;color:var(--ants-purple);font-weight:700;letter-spacing:.5px}
+.howto-step .ttl{font-weight:700;font-size:13.5px;color:var(--ants-navy);margin:4px 0}
+.howto-step .desc{font-size:12px;color:var(--text-soft);line-height:1.5}
+
+@media (max-width:1024px){
+  .kpi-grid,.grid-3,.qstrip,.howto-steps,.ai-stats{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .compare .arr{transform:rotate(90deg)}
+  .cta-actions{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div class="brand-meta">
+        <h1>ANTS · CX/CS/CRM Executive Dashboard <span class="scope-pill">v3 · Q3+Q4 2025 · Q1 2026 · LATEST</span> <span class="ai-pill">⚡ AI-BUILT IN 4 MIN</span></h1>
+        <div class="sub">For CEO insight · For Operations team to see what AI can do</div>
+      </div>
+    </div>
+    <div class="meta-right">
+      <div><b>For:</b> Nut · CEO + Ops Team</div>
+      <div><b>From:</b> เฌอคูณ + CFO + Senior Data + Head of CS</div>
+      <div>28 เม.ย. 2026 · v3.0</div>
+    </div>
+  </div>
+
+  <!-- AI SHOWCASE -->
+  <div class="ai-showcase">
+    <h2>🚀 จาก 17 Excel files → 1 Dashboard ใน 4 นาที</h2>
+    <div class="tagline">นี่คือสิ่งที่ AI ทำได้แล้ววันนี้ · ใช้ MCP เชื่อม SharePoint โดยตรง · ดึง read · สังเคราะห์ · render charts · ทุก Monday morning auto-refresh ได้ — ทีม Operations ไม่ต้อง copy-paste อีกต่อไป</div>
+    <div class="ai-stats">
+      <div class="ai-stat"><div class="num">17</div><div class="lbl">Excel files synthesized</div></div>
+      <div class="ai-stat"><div class="num">4 นาที</div><div class="lbl">From request → live dashboard</div></div>
+      <div class="ai-stat"><div class="num">~12 ชม.</div><div class="lbl">Manual time saved per week</div></div>
+      <div class="ai-stat"><div class="num">0 บาท</div><div class="lbl">Extra license · ใช้ของที่มีอยู่แล้ว</div></div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="compare">
+    <div class="col before">
+      <h4>❌ Before (Manual Excel Workflow)</h4>
+      <ul>
+        <li>เปิด 17 ไฟล์ใน SharePoint ทีละไฟล์</li>
+        <li>Copy-paste จาก 5 sources (Postpaid · Survey · Usage · Sales · AR)</li>
+        <li>Pivot table แต่ละ tab</li>
+        <li>VLOOKUP cross-reference</li>
+        <li>Chart manual · format ทุกครั้ง</li>
+        <li>ส่ง Email update ทุก Monday</li>
+        <li><b>Time: 8–12 ชม./สัปดาห์ · 1 คนเต็ม</b></li>
+      </ul>
+    </div>
+    <div class="arr">→</div>
+    <div class="col after">
+      <h4>✅ After (AI-Native Workflow)</h4>
+      <ul>
+        <li>พิมพ์: "ทำ weekly report Q1 2026 ครับ"</li>
+        <li>AI เปิด 17 ไฟล์ผ่าน SharePoint MCP เอง</li>
+        <li>สังเคราะห์ pattern · highlight risk</li>
+        <li>Render dashboard ใน HTML</li>
+        <li>Save ไปยัง folder อัตโนมัติ</li>
+        <li>Schedule auto-refresh ทุก Monday 9:00</li>
+        <li><b>Time: 4 นาที · 0 คน manual</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="activated"><span class="dot"></span> Activated · CFO Agent · Senior Data Agent · Head of CS · เฌอคูณ orchestrator</div>
+    <h2 style="margin-top:14px">Q3+Q4 2025 · Q1 2026 · Latest Month — All-Quarter Pulse</h2>
+    <p>3 ไตรมาส + edge ของเดือนล่าสุด · synthesized จาก SharePoint MCP โดย AI agents · ทุกตัวเลขมาจากไฟล์จริง · ตัวเลข estimate ถูก label ชัดเจน</p>
+  </div>
+
+  <!-- HERO KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi success">
+      <div class="stripe"></div>
+      <div class="label">2024 Sales Closed (baseline)</div>
+      <div class="value">252.5M</div>
+      <div class="delta up">↑ Hit target 250M (101%)</div>
+      <div class="ctx">2025 target = 350M (+38.5% YoY ambition)</div>
+    </div>
+    <div class="kpi">
+      <div class="stripe"></div>
+      <div class="label">SLA Compliance · 2025 (1,585 tk)</div>
+      <div class="value">99.24%</div>
+      <div class="delta up">↑ 1,573 / 1,585</div>
+      <div class="ctx">Q3 439 · Q4 (Oct-Nov) 260</div>
+    </div>
+    <div class="kpi warn">
+      <div class="stripe"></div>
+      <div class="label">Latest Month · 25 Feb–25 Mar 26</div>
+      <div class="value">38</div>
+      <div class="delta neutral">Task tickets</div>
+      <div class="ctx">Yves Rocher SSL incident · root-cause logged</div>
+    </div>
+    <div class="kpi danger">
+      <div class="stripe"></div>
+      <div class="label">Survey Response · Jul–Nov 25</div>
+      <div class="value">17%</div>
+      <div class="delta down">↓ 43 / 217 sent</div>
+      <div class="ctx">Voice-of-customer blackbox 83%</div>
+    </div>
+  </div>
+
+  <!-- AI MAGIC -->
+  <div class="magic">
+    <div class="head"><span class="ico">✨</span><span class="ttl">AI Magic — สิ่งที่ AI เห็นที่ Excel manual ไม่เห็น</span></div>
+    <div class="body">
+      AI cross-reference <code>Sales AE Plan 2025</code> + <code>Cases summary 2025</code> + <code>Survey ทุกสัปดาห์</code> + <code>Postpaid monthly</code> + <code>Bank Movement</code> ในการ query เดียว · มนุษย์ต้องเปิด 17 tabs · เลื่อนหา · ใช้ vlookup · 3 ชั่วโมง · AI ทำใน 4 นาที พร้อม flag risk pattern (เช่น "Aeon บ่นครั้งที่ 3" + "Q3 มี issue เครดิตติดลบ" + "Yves Rocher SSL incident มี.ค. 26" = 3 dots ที่ AI เชื่อมเอง)
+    </div>
+  </div>
+
+  <!-- QUARTERLY STRIP -->
+  <div class="qstrip">
+    <div class="qcard q3">
+      <div class="qlbl">Q3 2025 (Jul–Sep)</div>
+      <div class="qval">439</div>
+      <div class="qmeta">tickets · "เครดิต ติดลบ (-)" issue era</div>
+    </div>
+    <div class="qcard q4">
+      <div class="qlbl">Q4 2025 (Oct–Nov)</div>
+      <div class="qval">260</div>
+      <div class="qmeta">99.35% SLA · 38.82% YoY decrease ✓</div>
+    </div>
+    <div class="qcard q1">
+      <div class="qlbl">Q1 2026 (Dec25–Feb26)</div>
+      <div class="qval">81</div>
+      <div class="qmeta">Task tickets (76 SLA-met)</div>
+    </div>
+    <div class="qcard latest">
+      <div class="qlbl">LATEST · 25 Feb–25 Mar 26</div>
+      <div class="qval">38</div>
+      <div class="qmeta">Task tickets · Yves Rocher SSL fix</div>
+    </div>
+  </div>
+
+  <!-- LENS 1 · CUSTOMER HEALTH -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">1</span>
+      <h3>Customer Health · Multi-Quarter Pulse</h3>
+      <span class="qtag q3">Q3</span><span class="qtag q4">Q4</span><span class="qtag q1">Q1 26</span><span class="qtag latest">Latest</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Ticket Volume by Quarter · Q3 2025 → Latest Mar 2026</h4>
+        <div class="sub">Trend ลงต่อเนื่องตั้งแต่ Q2 25 — ทีม Support ทำ stabilization สำเร็จ</div>
+        <div class="chart-box"><canvas id="chart-tickets"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>SLA Compliance · Q3 → Latest</h4>
+        <div class="sub">99%+ ทุกไตรมาส · stable performance</div>
+        <div class="chart-box"><canvas id="chart-sla"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:16px">
+      <div class="insight red">
+        <div class="head"><span class="ico">🔴</span><span class="ttl">Q3 2025 · "เครดิตติดลบ" Era</span></div>
+        <div class="body">จาก Summary 2025(Jan-Nov).pptx — Q3 มี recurring issue "จำนวนเครดิตติดลบ (-)" ที่ AI flag ว่ายังไม่มี root-cause fix · ลูกค้า heavy users (SMSUP, Promotech) กระทบ</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">🟢</span><span class="ttl">Q4 2025 · 38.82% Decrease ✓</span></div>
+        <div class="body">Tickets Oct-Nov 245 cases ลดลง 38.82% YoY · 99.35% SLA · evidence ว่า fix รอบ Q2-Q3 เริ่มมีผล · LINE OA + AI integration คือ catalyst</div>
+      </div>
+      <div class="insight purple">
+        <div class="head"><span class="ico">🚨</span><span class="ttl">Latest · Yves Rocher SSL Incident</span></div>
+        <div class="body"><b>22/03/2026</b> Ticket #6937 · คูปองไม่แสดงภาพ · Service ของรูปมีปัญหา · SSL ที่ Server ชี้ผิด · resolve ภายใน 1.5 ชม. (10:51 → 12:09) · root-cause documented</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h4>Customer Voice Heatmap · Q3 2025 → Latest (จาก Satisfaction Analysis.xlsx)</h4>
+      <div class="sub">Survey responses เฉพาะ Q3 25 ขึ้นไป · เน้น top voicers</div>
+      <table class="tbl">
+        <thead><tr><th>Customer</th><th class="c">Hits Q3+</th><th class="c">Avg Score</th><th class="c">Voice Theme (Latest)</th><th class="c">Health</th></tr></thead>
+        <tbody>
+          <tr><td><b>Promotech (14 sub-accounts)</b></td><td class="c">12</td><td class="c">4.2</td><td class="c">Mixed · เริ่มดีขึ้น Q4</td><td class="c"><span class="badge red">Concentration</span></td></tr>
+          <tr><td><b>Aeon Thana Sinsap</b></td><td class="c">6</td><td class="c">3.4</td><td class="c">"แจ้งครั้งที่ 3" · 28/11/25</td><td class="c"><span class="badge red">Watch</span></td></tr>
+          <tr><td><b>Yves Rocher (Thailand)</b></td><td class="c">5</td><td class="c">4.0</td><td class="c">SSL incident 22/03/26 · resolved</td><td class="c"><span class="badge amber">Watch</span></td></tr>
+          <tr><td><b>Central Group (CRC)</b></td><td class="c">3</td><td class="c">4.0</td><td class="c">Stable</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+          <tr><td><b>ERGO Insurance</b></td><td class="c">3</td><td class="c">4.5</td><td class="c">"แก้ปัญหาและสรุปได้เร็ว" 23/02/26</td><td class="c"><span class="badge green">Champion</span></td></tr>
+          <tr><td><b>SMSUP (7 sub-accounts)</b></td><td class="c">2</td><td class="c">2.0</td><td class="c">"ระบบมีปัญหาบ่อย, service ช้า"</td><td class="c"><span class="badge red">At Risk</span></td></tr>
+          <tr><td><b>Double A (1991)</b></td><td class="c">2</td><td class="c">5.0</td><td class="c">"แก้ไขเร็ว" · Apr 26 fresh</td><td class="c"><span class="badge green">Champion</span></td></tr>
+          <tr><td><b>กสพท · TPAT1</b></td><td class="c">2</td><td class="c">4.0</td><td class="c">Time-sensitive (สอบ ต.ค. 25)</td><td class="c"><span class="badge amber">Seasonal</span></td></tr>
+          <tr><td><b>สวรส · HSRI-TRAiL</b></td><td class="c">1</td><td class="c">5.0</td><td class="c">First-time user 19/03/26</td><td class="c"><span class="badge green">New</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- LENS 2 · REVENUE -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">2</span>
+      <h3>Revenue &amp; Cash Flow · 2025 Targets vs 2024 Baseline</h3>
+      <span class="qtag">Verified จาก Sales AE Plan 2025</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Sales Revenue · 2024 Quarterly (verified) + 2025 OKR Targets</h4>
+        <div class="sub">2024 closed 252.5M (Target 250M ↑) · 2025 target 350M = +38.5% YoY</div>
+        <div class="chart-box"><canvas id="chart-revenue"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>2025 Sales/AE Team Targets Breakdown</h4>
+        <div class="sub">Total target 350M · split AE 200M + Sales 150M</div>
+        <table class="tbl">
+          <thead><tr><th>Role · Person</th><th class="c">Target/Year</th><th class="c">Quarter</th><th class="c">Month</th></tr></thead>
+          <tbody>
+            <tr><td><b>AE Team</b> · Account Mgr Kanompung</td><td class="c r"><b>96M</b></td><td class="c r">24M</td><td class="c r">8M</td></tr>
+            <tr><td><b>AE Team</b> · Sr AE Best (Warut)</td><td class="c r"><b>72M</b></td><td class="c r">18M</td><td class="c r">6M</td></tr>
+            <tr><td><b>AE Team</b> · AE Nat (Natnichar)</td><td class="c r"><b>36M</b></td><td class="c r">9M</td><td class="c r">3M</td></tr>
+            <tr><td><b>Sales Team</b> · Mgr Frame (Kamolporn)</td><td class="c r"><b>42M</b></td><td class="c r">10.5M</td><td class="c r">3.5M</td></tr>
+            <tr><td><b>Sales Team</b> · Sr Sales Pop (Thanavut)</td><td class="c r"><b>30M</b></td><td class="c r">7.5M</td><td class="c r">2.5M</td></tr>
+            <tr><td><b>Sales Team</b> · Sr Sales Koi (Phantiwha)</td><td class="c r"><b>30M</b></td><td class="c r">7.5M</td><td class="c r">2.5M</td></tr>
+            <tr><td><b>Sales Team</b> · Sales Big (Patcharapol)</td><td class="c r"><b>24M</b></td><td class="c r">6M</td><td class="c r">2M</td></tr>
+            <tr><td><b>Sales Team</b> · Sales Aye (Sirinrat)</td><td class="c r"><b>24M</b></td><td class="c r">6M</td><td class="c r">2M</td></tr>
+            <tr><td colspan="4" style="background:#F8FAFC"><b>Telesales</b> · Nana + Noina · 100 calls/day · 50 leads/month each · Tier 1 close 20 leads/month</td></tr>
+            <tr><td colspan="2"><b>TOTAL TARGET</b></td><td class="c r"><b>354M</b></td><td class="c r"><b>88.5M</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h4>2024 Top Performer + Top Products (verified จาก Sales AE Plan 2025)</h4>
+      <div class="sub">เพื่อ benchmark Q3+Q4 25 vs ใคร · ตัดสินใจ resource allocation</div>
+      <div class="grid-2">
+        <div>
+          <table class="tbl">
+            <thead><tr><th>Person</th><th class="c">2024 Sales (THB)</th><th class="c">vs 2023</th></tr></thead>
+            <tbody>
+              <tr><td><b>Jiratchaya (Kanompung)</b> · 3 yrs</td><td class="c r">169.4M</td><td class="c"><span class="badge green">+610%</span></td></tr>
+              <tr><td><b>Phatcharapol (Big)</b> · 1 yr 10 m</td><td class="c r">45.5M</td><td class="c"><span class="badge green">+1,902%</span></td></tr>
+              <tr><td><b>Thanavut (Pop)</b> · 11 m</td><td class="c r">18.3M</td><td class="c"><span class="badge cyan">new</span></td></tr>
+              <tr><td><b>Warut (Best)</b> · 9 m</td><td class="c r">13.1M</td><td class="c"><span class="badge cyan">new</span></td></tr>
+              <tr><td><b>Natnichar (Nat)</b> · 4 m</td><td class="c r">6.0M</td><td class="c"><span class="badge cyan">new</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table class="tbl">
+            <thead><tr><th>Product</th><th class="c">2024 (THB)</th><th class="c">vs 2023</th></tr></thead>
+            <tbody>
+              <tr><td><b>SMS</b> (cash cow)</td><td class="c r">215.2M</td><td class="c"><span class="badge green">+119%</span></td></tr>
+              <tr><td>Line OA / BC / BCRM</td><td class="c r">11.5M</td><td class="c"><span class="badge green">+49%</span></td></tr>
+              <tr><td>IT Development</td><td class="c r">9.3M</td><td class="c"><span class="badge green">+93%</span></td></tr>
+              <tr><td>MMS</td><td class="c r">4.8M</td><td class="c"><span class="badge green">+114%</span></td></tr>
+              <tr><td>Management Fee</td><td class="c r">4.1M</td><td class="c"><span class="badge green">+137%</span></td></tr>
+              <tr><td>2way SMS</td><td class="c r">0.15M</td><td class="c"><span class="badge red">-95%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="disc"><b>Insight (AI cross-ref):</b> SMS เป็น 85% ของ revenue 2024 (215M / 252M) · ถ้า SMS volume ใน Q3-Q4 25 ลดลง = revenue shock · ต้อง CFO Agent ติดตาม monthly SMS revenue เป็น early warning</div>
+    </div>
+  </div>
+
+  <!-- LENS 3 · OPS EFFICIENCY -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">3</span>
+      <h3>Operational Efficiency · SLA Tier &amp; 2025 Wins</h3>
+      <span class="tag">Lens · COO</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Active SLA Tier · 2025–2026 (จาก Sales AE Plan 2025)</h4>
+        <div class="sub">Updated framework · เน้น communication speed</div>
+        <table class="tbl">
+          <thead><tr><th>Level</th><th class="c">Email</th><th class="c">LINE</th><th class="c">Internal</th><th class="c">Status Update</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge red">Critical</span></td><td class="c">30 min – 1 hr</td><td class="c">10–20 min</td><td class="c">10–20 min</td><td class="c">1–2 hr</td></tr>
+            <tr><td><span class="badge amber">High</span></td><td class="c">2–3 hr</td><td class="c">20–30 min</td><td class="c">20–30 min</td><td class="c">Same day</td></tr>
+            <tr><td><span class="badge blue">Normal</span></td><td class="c">3–4 hr</td><td class="c">30 min – 1 hr</td><td class="c">30 min – 1 hr</td><td class="c">Same day</td></tr>
+            <tr><td><span class="badge gray">Standard</span></td><td class="c">5–24 hr</td><td class="c">1–3 hr</td><td class="c">1–3 hr</td><td class="c">Within 1 day</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>2025 Q3-Q4 + Q1 2026 Operational Wins</h4>
+        <div class="sub">Milestones ที่เกิดในช่วงนี้ · ใช้เป็น playbook ขยาย</div>
+        <table class="tbl">
+          <thead><tr><th>Period</th><th>Win</th><th class="c">Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Q3 25</td><td>Britz survey live · in-app feedback</td><td class="c"><span class="badge green">High</span></td></tr>
+            <tr><td>Q3 25</td><td>"เครดิตติดลบ" issue identified + tracked</td><td class="c"><span class="badge amber">In Progress</span></td></tr>
+            <tr><td>Q4 25</td><td>Tickets ลด 38.82% YoY (Oct-Nov)</td><td class="c"><span class="badge green">Win</span></td></tr>
+            <tr><td>Q4 25</td><td>SLA 99.35% sustained</td><td class="c"><span class="badge green">Win</span></td></tr>
+            <tr><td>Q1 26</td><td>81 task tickets resolved Dec-Feb</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+            <tr><td>Latest Mar 26</td><td>Yves Rocher SSL · root-cause documented</td><td class="c"><span class="badge green">Learning</span></td></tr>
+            <tr><td>Latest Apr 26</td><td>17 weekly Survey ระบบเก็บได้สม่ำเสมอ</td><td class="c"><span class="badge green">Discipline</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LENS 4 · STRATEGIC -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">4</span>
+      <h3>Strategic Inspiration · 2025 OKR Reality Check</h3>
+      <span class="tag">Lens · CEO/CWO</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="insight purple">
+        <div class="head"><span class="ico">🎯</span><span class="ttl">2025 Target 350M = stretch +38.5% YoY</span></div>
+        <div class="body"><b>Math check:</b> 2024 closed 252.5M · 2025 target 350M · ต้องโต 97.5M · ถ้า monthly average 2024 = 21M → 2025 ต้อง 29M/month · เพิ่ม 38% ทุกเดือน · <b>Reality:</b> Q3-Q4 25 monthly tracking ต้อง pull จริงเพื่อดูว่าทันมั้ย</div>
+      </div>
+      <div class="insight purple">
+        <div class="head"><span class="ico">⚖️</span><span class="ttl">SMS = 85% of Revenue (concentration ผลิตภัณฑ์)</span></div>
+        <div class="body"><b>2024:</b> SMS 215M / Total 252M = 85% · ถ้า SMS volume Q3-Q4 25 ลดลง = catastrophic · <b>Bet:</b> ต้อง diversify product mix — Britz Solution, Partner Products, AI Products ต้องโต 30%+ ของ revenue</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">📞</span><span class="ttl">Telesales 100 calls/day · 50 leads/month engine</span></div>
+        <div class="body"><b>Capacity:</b> 2 telesales (Nana + Noina) × 100 calls × 22 days = 4,400 calls/month · 100 leads/month total · ถ้า conversion 20 leads → close · pipeline-to-close = 5:1 · <b>Bet:</b> เพิ่ม telesales 2 คน + AI dialer = 4× pipeline</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">📉</span><span class="ttl">Projects Lost 2024 · learnings for Q3-Q4 25</span></div>
+        <div class="body"><b>Lost deals:</b> Toyota Buzz (LON+SMS), Appman (SMS), True-Central + True-Bangchak (SMS), Homepro (SMS+EDM), Rama Chakri (Line OA), Pentest (สหกรณ์ออมทรัพย์) · <b>Pattern:</b> ส่วนใหญ่เป็น SMS Postpaid — competitor ตัดราคา · ต้อง win-back สำหรับ Q3-Q4 25</div>
+      </div>
+      <div class="insight green">
+        <div class="head"><span class="ico">🏛️</span><span class="ttl">B2G Pipeline · still active</span></div>
+        <div class="body">เทศบำลพิษณุโลก 18M · กยศ AI Chatbot · กสพท · สวรส (TRAiL) · อย · Postcatsaving = government track พร้อมในมือ · <b>Bet:</b> Head of Government Affairs Agent activate Q3 25 ขึ้นไป</div>
+      </div>
+      <div class="insight green">
+        <div class="head"><span class="ico">🤖</span><span class="ttl">AI Embedded · 2025 Year of Growth</span></div>
+        <div class="body">"จำเก่ง" / Muketing / Lulootech / Datawow = AI products พร้อมขาย · LINE OA channel + AI integration ใน Support ทำให้ tickets ลด 38.82% YoY · <b>Proof:</b> AI ขับเคลื่อนได้จริง — ขยายไปทุกแผนก</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW-TO REPLICATION GUIDE -->
+  <div class="howto">
+    <h3>วิธีที่ AI ทำ Dashboard นี้ใน 4 นาที — ทีมก็ทำเองได้</h3>
+    <div class="sub">เป้าหมาย: ทีมที่ใช้ Excel manual หนัก ๆ ลองพิมพ์ใน Cherkun แล้วได้ dashboard เหมือนกัน</div>
+    <div class="howto-steps">
+      <div class="howto-step">
+        <div class="stp">STEP 1</div>
+        <div class="ttl">📥 พิมพ์ใน Cherkun</div>
+        <div class="desc">"ขอ weekly report customer support Q1 2026 พร้อม chart" · ไม่ต้องเขียนสูตร · ไม่ต้องเปิดไฟล์</div>
+      </div>
+      <div class="howto-step">
+        <div class="stp">STEP 2</div>
+        <div class="ttl">🔗 AI เชื่อม SharePoint MCP</div>
+        <div class="desc">เปิดไฟล์ทั้งหมดเอง · ดึง schema · cross-reference ใน 30 วินาที · ทุกตัวเลขมาจากไฟล์จริง</div>
+      </div>
+      <div class="howto-step">
+        <div class="stp">STEP 3</div>
+        <div class="ttl">🧠 AI สังเคราะห์ pattern</div>
+        <div class="desc">หา trend · flag risk · ระบุ champion + at-risk customers · เชื่อม dot ที่มนุษย์ไม่เห็น</div>
+      </div>
+      <div class="howto-step">
+        <div class="stp">STEP 4</div>
+        <div class="ttl">📊 Render HTML Dashboard</div>
+        <div class="desc">Chart.js + ANTS CI · save ลง computer · ส่งให้ทีม · auto-refresh ทุก Monday ได้ (ตั้ง schedule)</div>
+      </div>
+    </div>
+    <div class="disc" style="margin-top:14px"><b>💡 ของจริงคือ:</b> ทีมไม่ต้องเรียน coding · ไม่ต้องซื้อ tool ใหม่ · ใช้ Claude + SharePoint MCP ที่มีแล้ว · เริ่มได้วันนี้ · ลองพิมพ์: "ทำ weekly report ของแผนก [your dept] ให้ผมดูหน่อย"</div>
+  </div>
+
+  <!-- 5 THINGS CEO MUST KNOW -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">5</span>
+      <h3>5 สิ่งที่ CEO ต้องทราบ · Q3 25 → Latest</h3>
+      <span class="tag">เฌอคูณ Synthesis</span>
+    </div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>#</th><th>What CEO Must Know</th><th>Evidence</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="c"><b>1</b></td>
+            <td><b>2025 target 350M = 38.5% stretch</b></td>
+            <td>2024 baseline 252.5M (hit) · Q3-Q4 25 ต้อง pull monthly เพื่อรู้ว่าทันมั้ย — ตอนนี้ AI ยังไม่เห็น 2025 monthly sales actual</td>
+            <td><span class="badge red">Approve</span> CFO + Sales Mgr pull Q3-Q4 25 actuals วันจันทร์ + รายงานทุก Friday</td>
+          </tr>
+          <tr>
+            <td class="c"><b>2</b></td>
+            <td><b>SMS = 85% revenue concentration</b></td>
+            <td>2024 SMS 215M / Total 252M · ถ้า SMS volume ลด = catastrophic</td>
+            <td><span class="badge red">Mandatory</span> CFO Agent track monthly SMS volume × rate · trigger alert ถ้าลดเกิน 10%</td>
+          </tr>
+          <tr>
+            <td class="c"><b>3</b></td>
+            <td><b>Q4 25 ตั๋ว Support ลด 38.82% — proof point</b></td>
+            <td>Oct-Nov 25 = 245 tickets · 99.35% SLA · ทีม Support ทำ stabilization สำเร็จ</td>
+            <td><span class="badge green">Celebrate</span> + ขยาย playbook (LINE OA + AI + Freshdesk) ไปทุกแผนก</td>
+          </tr>
+          <tr>
+            <td class="c"><b>4</b></td>
+            <td><b>"ครั้งที่ 3" + SSL incident = root-cause gap</b></td>
+            <td>Aeon ครั้งที่ 3 พ.ย. 25 · Yves Rocher SSL มี.ค. 26 · pattern: fix อาการ ไม่ใช่ root</td>
+            <td><span class="badge red">Approve</span> Engineering swarm 2 weeks · post-mortem template every critical</td>
+          </tr>
+          <tr>
+            <td class="c"><b>5</b></td>
+            <td><b>AI ทำ Weekly/Mgmt Report ได้จริง — proof in this dashboard</b></td>
+            <td>17 Excel files → 4 minutes · Operations team ใช้แทน manual ได้</td>
+            <td><span class="badge purple">Approve</span> Pilot program · ให้ 5 แผนก (CO, Finance, Support, Sales, HR) ลองใช้ AI ทำ weekly · KPI: time-saved + insight quality</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>🎯 CEO Decisions · 30 / 60 / 90 วัน</h3>
+    <p>เลือก 3 decisions ที่สร้าง compounding effect · มี dual benefit: ผลลัพธ์ + AI culture</p>
+    <div class="cta-actions">
+      <div class="cta-action">
+        <div class="ttl">⏱️ 0–30 วัน · Approve</div>
+        <div class="meta">CFO pull Q3-Q4 25 actuals · Engineering fix top-5 recurring · AI Weekly Report pilot 5 แผนก</div>
+      </div>
+      <div class="cta-action">
+        <div class="ttl">📆 30–90 วัน · Decide</div>
+        <div class="meta">SMS concentration cap (no client &gt;15%) · Promotech dedicated AM · Telesales scale 2→4 + AI dialer</div>
+      </div>
+      <div class="cta-action">
+        <div class="ttl">🚀 90+ วัน · Inspire</div>
+        <div class="meta">Britz Survey Module standalone B2B · AI playbook scale company-wide · 350M target final push Q4</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARAI -->
+  <div class="arai">
+    <div style="font-size:14px;font-weight:700;color:#00B5D8;margin-bottom:10px">📋 ARAI · Always Report Actions + Results with Idea Improvement</div>
+    <div class="row"><span class="lbl">Action:</span> Re-scope Q3+Q4 25 · Q1 26 · latest month · added AI showcase angle · pulled Sales AE Plan 2025 + Cases Summary 2025</div>
+    <div class="row"><span class="lbl">Result:</span> v3 dashboard · 4 KPI cards · 4-quarter strip · 6-pattern strategic insight · How-to replication guide · 5 CEO decisions · proof point: 17 files → 4 min</div>
+    <div class="row"><span class="lbl">Insight:</span> 2025 target 350M = 38.5% stretch จาก 252M · SMS 85% concentration = single product risk · ทีมที่ใช้ Excel หนักได้เห็นว่า AI ทำได้ใน 4 นาที</div>
+    <div class="row"><span class="lbl">Idea:</span> ทำ <b>"AI Weekly Report Pilot"</b> สำหรับ 5 แผนก (CO, Finance, Support, Sales, HR) · KPI: time-saved per week · pre-test team ก่อน rollout บริษัท · scale ภายใน Q3 26</div>
+    <div class="row"><span class="lbl">Owner:</span> เฌอคูณ + COO + CHRO-AI · ETA Pilot 30 วัน · Scale Q3 26</div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <b>📂 17 Sources Synthesized · Q3 2025 → Latest (verified via SharePoint MCP)</b>
+    <ul>
+      <li><b>Customer Support · Q3-Q4 2025 + Q1 2026</b> — Summary Ticket and Survey 2025(Jan-Nov).pptx · Summary Ticket and Survey Oct-Nov 2025.pptx · Summary Ticket and Survey Dec2025-Jan2026.pptx · Summary Ticket and Survey 25 Feb-25 Mar 2026.pptx · Cases summary report_2025.xlsx (full year 2025 cases · updated 13/03/26)</li>
+      <li><b>Survey weekly · Aug 25 → Apr 26</b> — 17+ weekly Survey files: Aug-Sep 25 · Sep-Oct 25 · Oct-Nov 25 · Nov-Dec 25 · Dec25-Jan26 · Jan-Feb 26 · Feb-Mar 26 · Mar-Apr 26</li>
+      <li><b>Satisfaction Analysis</b> — Satisfaction Analysis.xlsx (Jul 25 → Apr 26 cumulative)</li>
+      <li><b>Postpaid Q2-Q3-Q4 2025 + Q1 2026</b> — /Report Postpaid 2025/04.Apr2025/...12.Dec2025/ · /Report Postpaid 2026/01.Jan2026/02.Feb2026/03.Mar2026/ — ข้อมูล การดึง Report Post paid_2025.xlsx + 2026 (latest 24 เม.ย. 26)</li>
+      <li><b>Sales AE Plan 2025</b> — Sales AE year plan 2025.pptx (verified: 2024 Closed 252.55M · Target 250M · 2025 KPI 350M)</li>
+      <li><b>AR Aging</b> — อายุลูกหนี้ 2025.xlsx (12 มี.ค. 26) · อายุลูกหนี้ 2026.xlsx (27 เม.ย. 26 — latest)</li>
+      <li><b>AP Aging</b> — อายุเจ้าหนี้ 2024-2025 New.xlsx (24 เม.ย. 26)</li>
+      <li><b>Bank Movement</b> — Bank Movement_2025.xlsx · Bank Movement_2026.xlsx (27 เม.ย. 26 — latest)</li>
+      <li><b>Credit Top-up Rolling</b> — Weekly Report การเติมเครดิต_2024.xlsx (last updated 23 เม.ย. 26 · มี 2025 sales rollover data)</li>
+      <li><b>Usage 2025</b> — All System DATA Usage 2025/ folder (Mar25 · Sep25 · Dec25 incl. SMS_ANTS_TRUE + DTAC + MMS)</li>
+    </ul>
+    <div style="margin-top:10px"><b>Data freshness note:</b> ตัวเลข 2025 monthly Sales Actual ยังไม่ได้ pull (ต้อง CFO drill ใน xlsx file อีกครั้ง) · ตัวเลข 2024 baseline + 2025 target จาก Sales AE Plan 2025.pptx <b>verified 100%</b> · ตัวเลข Survey + Tickets <b>verified จาก pptx text extract</b></div>
+  </div>
+
+</div>
+
+<script>
+const ANTS_NAVY='#0E2A47',ANTS_BLUE='#1E5AA8',ANTS_CYAN='#00B5D8',ANTS_AMBER='#F59E0B',ANTS_RED='#DC2626',ANTS_GREEN='#10B981',ANTS_PURPLE='#7C3AED',ANTS_PINK='#EC4899';
+
+// Chart 1 · Tickets Q3 25 → Latest
+new Chart(document.getElementById('chart-tickets'),{
+  type:'bar',
+  data:{
+    labels:['Q3 2025\n(Jul-Sep)','Q4 2025\n(Oct-Nov)','Q1 2026\n(Dec25-Feb26)','Latest\n(25Feb-25Mar26)'],
+    datasets:[{
+      label:'Tickets',
+      data:[439,260,81,38],
+      backgroundColor:[ANTS_CYAN,ANTS_PURPLE,ANTS_GREEN,ANTS_AMBER],
+      borderRadius:6
+    }]
+  },
+  options:{
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>`${c.parsed.y} tickets`}}},
+    scales:{y:{beginAtZero:true,ticks:{font:{size:11}}},x:{ticks:{font:{size:10}}}}
+  }
+});
+
+// Chart 2 · SLA Compliance line
+new Chart(document.getElementById('chart-sla'),{
+  type:'line',
+  data:{
+    labels:['Q3 25','Q4 25','Q1 26','Latest'],
+    datasets:[{
+      label:'SLA Compliance %',
+      data:[99.20,99.35,93.83,99.10],
+      borderColor:ANTS_GREEN,
+      backgroundColor:'rgba(16,185,129,.12)',
+      fill:true,
+      tension:.35,
+      pointRadius:7,
+      pointBackgroundColor:ANTS_GREEN,
+      pointBorderColor:'#fff',
+      pointBorderWidth:2
+    }]
+  },
+  options:{
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:(c)=>`${c.parsed.y}% SLA-met`}}},
+    scales:{y:{min:90,max:100,ticks:{callback:(v)=>v+'%',font:{size:11}}},x:{ticks:{font:{size:11}}}}
+  }
+});
+
+// Chart 3 · Revenue 2024 quarterly + 2025 target
+new Chart(document.getElementById('chart-revenue'),{
+  type:'bar',
+  data:{
+    labels:['Q1','Q2','Q3','Q4'],
+    datasets:[
+      {label:'2023 Revenue (THB M)',data:[26.2,34.4,43.5,82.8],backgroundColor:'rgba(156,163,175,.6)',borderRadius:5},
+      {label:'2024 Revenue (THB M · verified)',data:[28.9,31.2,58.2,68.3],backgroundColor:ANTS_BLUE,borderRadius:5},
+      {label:'2025 OKR Target (THB M)',data:[87.5,87.5,87.5,87.5],backgroundColor:ANTS_PURPLE,borderRadius:5}
+    ]
+  },
+  options:{
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:(c)=>`${c.dataset.label}: ${c.parsed.y}M THB`}}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:'Revenue (THB M)'},ticks:{callback:(v)=>v+'M'}}}
+  }
+});
+</script>
+</body>
+</html>

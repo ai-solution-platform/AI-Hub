@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "generated_at": "2026-04-28T19:16:40.214313",
+    "source": "FILE-MOVEMENT-MANIFEST-24Apr2026.md",
+    "total_entries": 11,
+    "archive_threshold_days": 180,
+    "owner": "Agent #63 FJA-CDCA · weekly cron"
+  },
+  "entries": [
+    {
+      "kx": "K.12",
+      "title": "Body-Level Re-Audit Closeout",
+      "date": "2026-04-29",
+      "date_raw": "29 Apr 2026",
+      "trigger": "3rd \"อีกแล้ว\" recurrence (28 Apr LATE-AM-v3) — frontmatter version bumps without body content changes. SESSION_HANDOFF Section 6 Comprehensive Re-Audit Checklist activated as Priority 0.",
+      "action": "",
+      "status": "complete",
+      "body_preview": "**Trigger:** 3rd \"อีกแล้ว\" recurrence (28 Apr LATE-AM-v3) — frontmatter version bumps without body content changes. SESSION_HANDOFF Section 6 Comprehensive Re-Audit Checklist activated as Priority 0.  **Session protocol:** Op 18 + I-NEW-9 enforcement · per-section diff verification mandatory · update_history must list specific section IDs (no generic phrases).  ### Files re-audited at body-content level (10 files)  | # | File | Body Changes Applied | |---|---|---| | SSOT | `canonical/vm-status.j"
+    },
+    {
+      "kx": "K.13",
+      "title": "Master Audit Folded into Command Center",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026",
+      "trigger": "Nut Type-1 decision — \"review Master Audit + Command Center · merge duplication · keep ข้อดี เข้า Command Center · ไม่งั้นมันจะเรียก command center เหรอครับ\" (single-file philosophy)",
+      "action": "Full migrate Master Audit Report v1.3 → 3 CC tabs · archive original MD · update 5 cross-ref files (Hub-Index · README · canonical pair · sync-check script) · Hub-Index UX cleanup (sync-note + reorder",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut Type-1 decision — \"review Master Audit + Command Center · merge duplication · keep ข้อดี เข้า Command Center · ไม่งั้นมันจะเรียก command center เหรอครับ\" (single-file philosophy)  **Decision:** Full migrate + fold into existing CC tabs (no new tab pollution)  ### Files moved/changed  | File | From | To | Change | |---|---|---|---| | `ANTS-Master-Audit-Report.md` | `/reports/` | `/archive/2026-04/master-audit-folded-into-CC/ANTS-Master-Audit-Report-v1.3-29Apr2026-FOLDED.md` | Arc"
+    },
+    {
+      "kx": "K.14",
+      "title": "6 Nut Feedback Issues Closed",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM",
+      "trigger": "Nut Type-1 feedback (6 issues) on Hub-Index UX + abbreviation discipline + GitHub publish",
+      "action": "Close 6 Nut feedback issues (open new tab · Audit Dashboard fold · Pitching duplicate remove · Post-Songkran archive · abbreviation expansion · GitHub publish setup)",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut Type-1 feedback (6 issues) on Hub-Index UX + abbreviation discipline + GitHub publish  ### Files moved/changed  | File | From → To | Change | |---|---|---| | `reports/ANTS-Audit-Dashboard.html` | `/reports/` → `/archive/2026-04/audit-dashboard-folded-into-CC-K14/ANTS-Audit-Dashboard-v1.2-29Apr2026-FOLDED.html` | Archived (visuals already in CC via K.13) | | `launches/post-songkran-20apr/*` (7 files) | `/launches/post-songkran-20apr/` → `/archive/2026-04/post-songkran-launch-arch"
+    },
+    {
+      "kx": "K.15 Phase A",
+      "title": "Op 19 + Change Logs sub-menu + Workshop Architecture",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM",
+      "trigger": "Nut Type-1 feedback (6 issues) post K.14 verify · scope split into Phase A (this session) + Phase B (next session) per Hot Rule #12 (HTML edit ≥150KB × 3 rounds = stop).",
+      "action": "Phase A K.15 sweep — Op 19 promotion + sidebar cleanup + Change Logs sub-menu (NEW) + Workshop architecture restructure + 5 I-NEW specs · all 6 sub-tasks closed",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut Type-1 feedback (6 issues) post K.14 verify · scope split into Phase A (this session) + Phase B (next session) per Hot Rule #12 (HTML edit ≥150KB × 3 rounds = stop).  ### Phase A scope (this session) — DONE  | # | Item | Files | Status | |---|---|---|---| | 1 | Op 19 promotion · \"Always pair abbreviation with full name on first occurrence\" | `canonical/vm-status.json` v1.1 → v1.2 · `canonical/canonical-facts.md` v1.1 → v1.2 (OP count 18→19) | ✅ | | 2 | CC sidebar simplification "
+    },
+    {
+      "kx": "K.15 Phase B",
+      "title": "Workshop Rewrite + Output URLs + Filter Polish + I-NEW-16..20",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM continued",
+      "trigger": "Nut \"เริ่ม Phase B ต่อ\" + sidebar refinement (\"เก็บไว้แค่ version กับ dd mmm yyyy พอ\"). Phase A from earlier this session set foundation (Op 19 + Change Logs sub-menu + workshop merge architecture). Phase B fills in the content + builds.",
+      "action": "Phase B continuation · sidebar minimalist · workshop content rewrite (8-Week table → 4-Phase + 5 Pillars Method) · workshop output URL placeholders (14 cards · 3 active links · 11 TBD) · Change Logs f",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut \"เริ่ม Phase B ต่อ\" + sidebar refinement (\"เก็บไว้แค่ version กับ dd mmm yyyy พอ\"). Phase A from earlier this session set foundation (Op 19 + Change Logs sub-menu + workshop merge architecture). Phase B fills in the content + builds.  ### Phase B scope (this batch) — DONE  | # | Item | Files | Status | |---|---|---|---| | 0 | Sidebar minimalist · keep only \"Nut · Founder/CEO\" + \"Version: v2.7 · 27 Apr 2026\" · removed Latest + Change Log lines (per Nut explicit ask · he uses Chan"
+    },
+    {
+      "kx": "K.16",
+      "title": "UX Bug Fixes + 8-Category POC Catalog + ai-solution-platform/AI-Hub Setup",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM",
+      "trigger": "Nut K.16 verify of K.15 Phase B work surfaced 3 UX/UI bugs + provided full POC deliverables list (37 outputs · 8 categories) + asked to publish to existing org github.com/ai-solution-platform/ in folder AI-Hub.",
+      "action": "K.16 sweep · 3 UX bug fixes (W-01 score box · B-03 callout · badge wrapping) + bonus 4th (Automation Map overflow) + Workshop tab redesign to 8-Category POC catalog (14→25 entries · group-by-category ",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut K.16 verify of K.15 Phase B work surfaced 3 UX/UI bugs + provided full POC deliverables list (37 outputs · 8 categories) + asked to publish to existing org github.com/ai-solution-platform/ in folder AI-Hub.  ### Files moved/changed  | File | Change | |---|---| | `command-center/ANTS-2.0-Unified-Command-Center.html` | v2.7 → v2.8 (3 UX fixes + WORKSHOPS array completely redesigned 14→25 entries · 8-category catalog · group-by-category renderer · GitHub URLs) | | `ANTS-2.0-Hub-Ind"
+    },
+    {
+      "kx": "K.17",
+      "title": "POC Consistency Fixes + Marketing/Content + UX Redesign + Publish Script",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM",
+      "trigger": "Nut K.17 verify of K.16 — 5 issues:",
+      "action": "K.17 sweep · resolved 5 Nut issues · POC catalog now consistent (thumb↔title match · status pills · category color-coded headers) · MGC URLs corrected to verified live paths · Taily admin added · Mark",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut K.17 verify of K.16 — 5 issues: 1. POC redesign (user-friendly · interesting · click-worthy) 2. Inconsistencies: thumbnail↔title mismatches · MGC URLs broken (404) · Taily admin missing · some labels missing 3. Marketing/Content folder available at `/Desktop/Start Up/AI Production/` 4. Standardize across all use cases 5. Upload to GitHub Pages (sandbox-blocked · provide alternative)  ### Files moved/changed  | File | Change | |---|---| | `command-center/ANTS-2.0-Unified-Command-"
+    },
+    {
+      "kx": "K.17 FINAL",
+      "title": "GitHub Pages LIVE + 3 Phase B+ items",
+      "date": "2026-04-27",
+      "date_raw": "27 Apr 2026 LATE-PM closeout",
+      "trigger": "Nut \"B\" → publish via PAT → went private → Pages blocked Free plan → scrub sensitive → make public → force-push → Pages live → Nut บันทึก session with 3 follow-ups",
+      "action": "Published ANTS 2.0 portal to public GitHub Pages via PAT-based REST API + force-push from /tmp · scrubbed all sensitive content (cash · personal email · legal docs excluded) · saved session memory wit",
+      "status": "final",
+      "body_preview": "**Trigger:** Nut \"B\" → publish via PAT → went private → Pages blocked Free plan → scrub sensitive → make public → force-push → Pages live → Nut บันทึก session with 3 follow-ups  ### Final state  - ✅ **Hub-Index URL LIVE:** https://ai-solution-platform.github.io/AI-Hub/ANTS-2.0-Hub-Index.html - ✅ **Repo:** ai-solution-platform/AI-Hub (PUBLIC · 27 files · 1.2 MB) - ✅ **All main URLs HTTP 200 verified** - ✅ **Sensitivity scrubbed:** cash → \"Healthy\" · email closures@gmail → excluded · 11 sensitive "
+    },
+    {
+      "kx": "K.18",
+      "title": "Top 10 Batch",
+      "date": "2026-04-29",
+      "date_raw": "28-29 Apr 2026 · Op 15 health-checked · 6 of 6 buildable shipped",
+      "trigger": "Nut \"ทำ top 10 ก่อน และอย่าลืมประเมิณ context session ด้วย\"",
+      "action": "K.18 = Top 10 batch with Op 15 mid-session health checks · 6 buildable items shipped (4 NEW files · 2 edits · 1 Mac-runnable migration script) · 4 Nut-decision items documented for explicit approval ·",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut \"ทำ top 10 ก่อน และอย่าลืมประเมิณ context session ด้วย\"  ### Items Shipped (6 buildable + 4 Nut-decision reminders documented)  | # | Item | File | Status | |---|---|---|---| | 1 | Nut: Revoke PAT (`ghp_8La...`) | https://github.com/settings/tokens | 🔴 Pending Nut | | 2 | I-NEW-21 prep · `migrate-tier1-pocs.sh` (Mac-runnable · 4 collections) | `scripts/migrate-tier1-pocs.sh` | ✅ | | 3 | I-NEW-22 · Workshop tab collapse/expand | CC v2.9→v3.0 (CSS .poc-cat-header.collapsed + .ws-c"
+    },
+    {
+      "kx": "K.19",
+      "title": "Top 10 Carryover Batch · Decision Packs + 3 Build Sprint + Closeout",
+      "date": "2026-04-29",
+      "date_raw": "29 Apr 2026",
+      "trigger": "Nut \"ทำงานต่อจาก session ล่าสุด จัดการ top 10 priorities ที่คงเหลืออยู่ให้เรียบร้อย\" — K.18 ปิดด้วย 6 buildable items + 4 Nut-decision items ค้าง · K.18 ARAI เสนอ 3 lightweight Idea Improvements ให้ build ต่อใน K.19",
+      "action": "K.19 = Top 10 carryover · 4 Decision Packs prepared (Pack 1 PAT · Pack 2 Ambassador · Pack 3 ITP sign-off · Pack 4 Budget) · 3 lightweight builds shipped (changelog regex · CC live JSON fetch · Worksh",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut \"ทำงานต่อจาก session ล่าสุด จัดการ top 10 priorities ที่คงเหลืออยู่ให้เรียบร้อย\" — K.18 ปิดด้วย 6 buildable items + 4 Nut-decision items ค้าง · K.18 ARAI เสนอ 3 lightweight Idea Improvements ให้ build ต่อใน K.19  **Session protocol:** Op 9 sync-before-recommend · Op 12 panel review (CHRO-AI · CCVO · CFO · KM · #63) · Op 15 mid-session health check (3 checkpoints: 30% · 50% · pre-closeout) · Op 18 session-close sync · Op 19 abbreviation pairing checked  ### Phase 1 — Decision Pac"
+    },
+    {
+      "kx": "K.20",
+      "title": "Two-Agents Strategic Pack APPROVED · Roster 63 → 65",
+      "date": "2026-04-29",
+      "date_raw": "29 Apr 2026",
+      "trigger": "Nut Type-1 decision via Strategic Decision Pack (`/reports/Two-Agents-Strategic-Pack-K20.html`) · \"Approve both #64 + #65\" · sync foundation V/M+Principles+Milestones+Deliverables → 7-gap analysis → top 2 with 3 alternatives → Nut tick",
+      "action": "CWO + Op 12 panel synthesized V/M+Principles+Milestones+Deliverables → gap analysis (7 gaps · scored Impact × Urgency × 3-way Fit) → top 2 proposals (#64 CEcoO + #65 CDA) + 3 alternatives → Nut Approv",
+      "status": "complete",
+      "body_preview": "**Trigger:** Nut Type-1 decision via Strategic Decision Pack (`/reports/Two-Agents-Strategic-Pack-K20.html`) · \"Approve both #64 + #65\" · sync foundation V/M+Principles+Milestones+Deliverables → 7-gap analysis → top 2 with 3 alternatives → Nut tick  **Session protocol:** Op 9 sync-before-recommend · Op 12 panel review (Board Chair · Independent Director · Industry Advisor · CEO · CHRO-AI · Head of Strategy · KM · CCVO · CAIS · CSO-Craft · #63) · Op 14 title convention applied (Orchestration tag "
+    }
+  ]
+}

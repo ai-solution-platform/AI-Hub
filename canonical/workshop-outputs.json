@@ -1,0 +1,171 @@
+{
+  "_meta": {
+    "schema": "workshop-outputs-v1",
+    "version": "1.0",
+    "created": "2026-04-29",
+    "last_updated": "2026-04-29",
+    "purpose": "SSOT registry for workshop & POC clickable output URLs. Consumer: command-center/ANTS-2.0-Unified-Command-Center.html WORKSPACE array (rendered via fetch at runtime · I-NEW-13).",
+    "owner": "Senior Content & Copy #27 (curate) + Nut (provide URLs) + HoEng #21 (wire CC consumer)",
+    "update_protocol": "When a workshop ships a real output (live URL · file · drive · notion link), update this file. Verify with scripts/workshop-output-registry.py before commit.",
+    "states": {
+      "live": "URL accessible publicly (HTTP 200) · clickable in CC",
+      "internal": "URL accessible team-only · requires login",
+      "tbd": "output exists but URL not yet curated · placeholder only",
+      "wip": "workshop in progress · output not yet produced",
+      "private": "intentionally not surfaced to portal (e.g. confidential client POC)"
+    }
+  },
+  "items": [
+    {
+      "code": "W-01",
+      "title": "AI Sales Letter Workshop",
+      "category": "Sales / Outreach",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-02",
+      "title": "AI Customer Persona Workshop",
+      "category": "Marketing",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-03",
+      "title": "AI Cold Email Workshop",
+      "category": "Sales / Outreach",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-04",
+      "title": "AI Pitch Deck Workshop",
+      "category": "Sales / Outreach",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-05",
+      "title": "AI Battlecard Workshop",
+      "category": "Sales / Outreach",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-06",
+      "title": "AI SEO Audit Workshop",
+      "category": "Marketing",
+      "output_type": "url",
+      "state": "live",
+      "location": "https://ai-solution-platform.github.io/AI-Hub/seo-audit-portfolio/",
+      "last_updated": "2026-04-29",
+      "validated_by": "I-NEW-21 placeholder · live after Tier 1 POC migration"
+    },
+    {
+      "code": "W-07",
+      "title": "AI Performance Report Workshop",
+      "category": "Marketing",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-08",
+      "title": "AI Customer Support Triage Workshop",
+      "category": "Customer Success",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-09",
+      "title": "AI KB Article Workshop",
+      "category": "Customer Success",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "W-10",
+      "title": "AI Onboarding Plan Workshop",
+      "category": "HR / People",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "B-01",
+      "title": "Britz POC — Direction Brief",
+      "category": "Bonus / Britz",
+      "output_type": "file",
+      "state": "internal",
+      "location": "products/Britz-Direction-Brief.html",
+      "last_updated": "2026-04-29",
+      "validated_by": "Senior Content #27"
+    },
+    {
+      "code": "B-02",
+      "title": "Britz POC — Architecture",
+      "category": "Bonus / Britz",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "B-03",
+      "title": "Britz POC — Pilot Plan",
+      "category": "Bonus / Britz",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    },
+    {
+      "code": "B-04",
+      "title": "Britz POC — Investment Memo",
+      "category": "Bonus / Britz",
+      "output_type": "url",
+      "state": "tbd",
+      "location": "",
+      "last_updated": "",
+      "validated_by": ""
+    }
+  ],
+  "_categories": [
+    "Sales / Outreach",
+    "Marketing",
+    "Customer Success",
+    "HR / People",
+    "Bonus / Britz"
+  ],
+  "_confidential_workshops": {
+    "_note": "These workshops produced real outputs but are NOT to be surfaced via portal · DO NOT add real URLs to this registry",
+    "list": ["NokAir POC", "TechVue SAWAD POC", "Co-Op สหกรณ์ POC", "กยศ POC"]
+  }
+}

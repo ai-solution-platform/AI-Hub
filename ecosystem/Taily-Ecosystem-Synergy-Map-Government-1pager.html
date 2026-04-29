@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Taily — Pet Super App & Operating Platform · Pitch Page สำหรับ TAT / กระทรวงพาณิชย์ / BMA / Investor · ANTS</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FFC501'/%3E%3Ctext x='32' y='42' font-size='34' text-anchor='middle'%3E🐾%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700;800&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --ink:#3E2723;--ink-2:#5D4037;--muted:#8D6E63;--line:#EADBC8;--soft:#FFFBF0;
+    --brand:#FFC501;--brand-dark:#E5A800;--brand-hover:#D49700;
+    --on-brand:#3D2B1F;
+    --accent:#FF8C42;--green:#27AE60;
+    --bg-pattern:#FFFBEB;
+    --shadow:0 10px 30px rgba(62,39,35,.10);
+    --shadow-lg:0 20px 60px rgba(62,39,35,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{background:#fff;color:var(--ink);font-family:'IBM Plex Sans Thai','Inter',system-ui,sans-serif;line-height:1.55}
+
+  /* STICKY TOP NAV */
+  .topbar{
+    position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);
+    backdrop-filter:saturate(120%) blur(8px);border-bottom:1px solid var(--line);
+  }
+  .topbar .inner{
+    max-width:1200px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .topbar .logo{display:flex;align-items:center;gap:10px}
+  .topbar .paw{width:32px;height:32px;border-radius:50%;background:var(--brand);display:grid;place-items:center;font-size:16px;box-shadow:0 4px 10px rgba(255,197,1,.35)}
+  .topbar .logo b{font-size:15px;font-weight:800;letter-spacing:.5px}
+  .topbar nav a{font-size:12px;color:var(--ink-2);text-decoration:none;margin-left:18px;font-weight:600}
+  .topbar nav a:hover{color:var(--brand-dark)}
+  .topbar .cta{background:var(--brand);color:var(--on-brand);padding:8px 16px;border-radius:999px;font-weight:800;font-size:12px;text-decoration:none}
+  .topbar .cta:hover{background:var(--brand-hover)}
+  @media (max-width:760px){.topbar nav{display:none}}
+
+  .page{max-width:1200px;margin:0 auto;padding:32px 22px 60px}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,#FFF7D6 0%,#FFFBEB 55%,#fff 100%);
+    border:1px solid #FFE38A;border-radius:22px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden;
+  }
+  .hero::before{content:'';position:absolute;right:-100px;top:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(255,197,1,.22),transparent 70%)}
+  .hero::after{content:'🐾';position:absolute;right:40px;top:40px;font-size:140px;opacity:.08}
+  .hero .k{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand-dark);font-weight:800}
+  .hero h1{font-size:38px;font-weight:800;line-height:1.15;letter-spacing:-.015em;margin-top:8px;max-width:840px;color:var(--ink)}
+  .hero h1 em{font-style:normal;color:var(--brand-dark)}
+  .hero p.lead{margin-top:14px;font-size:16px;color:var(--ink-2);max-width:820px;line-height:1.7}
+  .hero p.lead b{color:var(--ink)}
+  .hero .chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;position:relative}
+  .hero .chip{padding:6px 14px;border-radius:999px;background:#fff;border:1px solid #FFE38A;font-size:12px;font-weight:700;color:var(--brand-dark);box-shadow:0 2px 6px rgba(255,197,1,.18)}
+  .hero .chip.green{border-color:#B8E8C9;color:var(--green)}
+  .hero .chip.orange{border-color:#FFD0A8;color:var(--accent)}
+
+  /* HERO KPI STRIP */
+  .kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px;position:relative}
+  @media (max-width:760px){.kpi-strip{grid-template-columns:repeat(2,1fr)}}
+  .kpi-strip .h{
+    border:1px solid #fff;border-radius:14px;padding:18px 16px;background:rgba(255,255,255,.95);
+    border-top:4px solid var(--brand);position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(62,39,35,.07)
+  }
+  .kpi-strip .h .ic{position:absolute;top:12px;right:14px;font-size:30px;opacity:.18}
+  .kpi-strip .h b{display:block;font-size:30px;font-weight:800;color:var(--brand-dark);letter-spacing:-1.5px;line-height:1;font-family:'Inter',sans-serif}
+  .kpi-strip .h span{display:block;font-size:11px;color:var(--muted);margin-top:8px;letter-spacing:.5px;font-weight:700;text-transform:uppercase}
+  .kpi-strip .h em{display:block;font-style:normal;font-size:11px;color:var(--ink-2);margin-top:4px;line-height:1.4}
+
+  /* SECTION HEADER */
+  section{margin-top:44px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .sec-head .tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--brand-dark);font-weight:800;background:#FFF7D6;padding:5px 12px;border-radius:999px;border:1px solid #FFE38A}
+  .sec-head h2{font-size:24px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .sec-head h2 em{font-style:normal;color:var(--brand-dark)}
+  .sec-head p{font-size:13px;color:var(--ink-2);max-width:100%;flex-basis:100%;margin-top:4px}
+
+  /* WHY NOW — REGULATORY TAILWIND CALLOUT */
+  .tailwind{
+    background:linear-gradient(100deg,#FFF7D6 0%,#FFEFE0 100%);
+    border:2px solid var(--brand);border-radius:18px;padding:24px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;
+  }
+  @media (max-width:900px){.tailwind{grid-template-columns:1fr;text-align:left}}
+  .tailwind .badge{
+    font-size:52px;background:var(--brand);color:var(--on-brand);width:92px;height:92px;
+    border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 22px rgba(255,197,1,.4)
+  }
+  .tailwind h3{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+  .tailwind h3 em{font-style:normal;color:var(--brand-dark)}
+  .tailwind p{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.65}
+  .tailwind p b{color:var(--ink)}
+  .tailwind .sig{
+    padding:14px 20px;border-radius:14px;background:#fff;border:1px solid #FFE38A;text-align:center;min-width:180px;
+  }
+  .tailwind .sig b{display:block;font-size:24px;font-weight:800;color:var(--brand-dark);letter-spacing:-.5px;font-family:'Inter',sans-serif}
+  .tailwind .sig span{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+
+  /* PROBLEM GRID */
+  .prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+  @media (max-width:900px){.prob-grid{grid-template-columns:repeat(2,1fr)}}
+  .prob{background:#FEF7F1;border:1px solid #FAD5B3;border-radius:14px;padding:18px 18px 16px;border-left:4px solid var(--accent)}
+  .prob .em{font-size:26px;margin-bottom:8px}
+  .prob h5{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:4px;line-height:1.3}
+  .prob p{font-size:12px;color:var(--ink-2);line-height:1.5}
+
+  /* CUSTOMER JOURNEY RELATION CHART */
+  .journey-wrap{
+    background:linear-gradient(135deg,#FFFBF0 0%,#fff 100%);border-radius:22px;padding:28px 24px;border:1px solid var(--line);box-shadow:var(--shadow);
+  }
+  .persona-row{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:18px 22px;background:#fff;border-radius:16px;border:1px solid var(--line);margin-bottom:24px;box-shadow:0 4px 12px rgba(62,39,35,.05)}
+  @media (max-width:760px){.persona-row{grid-template-columns:1fr;text-align:left}}
+  .persona-row .av{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-dark));display:grid;place-items:center;font-size:38px;color:var(--on-brand);box-shadow:0 6px 16px rgba(255,197,1,.35)}
+  .persona-row h4{font-size:17px;font-weight:800;color:var(--ink)}
+  .persona-row .sub{font-size:12px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:2px}
+  .persona-row p{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.6}
+  .persona-row p b{color:var(--brand-dark)}
+  .persona-row .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+  .persona-row .tg{font-size:11px;padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--ink-2);border:1px solid var(--line);font-weight:600}
+
+  /* 5-STAGE VISUAL JOURNEY */
+  .jflow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative}
+  @media (max-width:900px){.jflow{grid-template-columns:repeat(1,1fr)}}
+  .jst{
+    position:relative;border-radius:14px;padding:16px 14px 18px;background:#fff;border:2px solid var(--line);transition:all .3s ease;
+  }
+  .jst:hover{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 10px 24px rgba(255,197,1,.2)}
+  .jst .num{position:absolute;top:-14px;left:14px;width:30px;height:30px;border-radius:50%;background:var(--brand);color:var(--on-brand);display:grid;place-items:center;font-size:13px;font-weight:800;box-shadow:0 4px 10px rgba(255,197,1,.4)}
+  .jst .emoji{font-size:34px;text-align:center;margin:8px 0 10px}
+  .jst h5{font-size:14px;font-weight:800;color:var(--ink);text-align:center;line-height:1.3}
+  .jst .label{font-size:10px;color:var(--muted);text-align:center;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-top:4px}
+  .jst p{font-size:11px;color:var(--ink-2);line-height:1.55;margin-top:10px}
+  .jst .arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:24px;font-weight:800;z-index:3}
+  .jst:last-child .arrow{display:none}
+  @media (max-width:900px){.jst .arrow{display:none}}
+
+  /* CLOSED LOOP BANNER */
+  .loop{
+    margin-top:18px;padding:14px 22px;border-radius:14px;background:linear-gradient(100deg,#FFF7D6 0%,#FEF7F1 100%);
+    border:2px dashed var(--brand);font-size:13px;color:var(--ink);text-align:center;font-weight:600;
+  }
+  .loop b{color:var(--brand-dark);margin-right:6px}
+
+  /* APP MOCKUPS */
+  .mockup-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px}
+  @media (max-width:900px){.mockup-row{grid-template-columns:1fr;gap:32px}}
+  .mock-wrap{text-align:center}
+  .phone{
+    width:100%;max-width:260px;margin:0 auto;background:var(--ink);border-radius:36px;padding:10px;box-shadow:var(--shadow-lg);aspect-ratio:9/18.5;position:relative;
+  }
+  .phone::before{content:'';position:absolute;top:18px;left:50%;transform:translateX(-50%);width:80px;height:18px;background:var(--ink);border-radius:14px;z-index:3}
+  .screen{width:100%;height:100%;background:var(--soft);border-radius:28px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .ph-head{background:var(--brand);color:var(--on-brand);padding:30px 14px 10px;font-size:11px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+  .ph-head .back{font-size:14px}
+  .ph-content{flex:1;padding:12px;overflow:hidden;font-size:11px}
+  .mock-caption{margin-top:14px}
+  .mock-caption b{font-size:13px;color:var(--ink);display:block}
+  .mock-caption span{font-size:11px;color:var(--muted);display:block;margin-top:4px}
+
+  /* Mock 1 — Map pin search */
+  .map-bg{background:linear-gradient(160deg,#E8F5E9 0%,#C8E6C9 50%,#A5D6A7 100%);height:140px;border-radius:8px;position:relative;overflow:hidden}
+  .map-bg::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 20px,rgba(46,125,50,.08) 20px 21px)}
+  .pin{position:absolute;font-size:22px;animation:bounce 2s ease infinite}
+  .pin.p1{top:30%;left:20%}
+  .pin.p2{top:55%;left:60%;animation-delay:.3s}
+  .pin.p3{top:20%;left:70%;animation-delay:.6s}
+  .pin.p4{top:70%;left:30%;animation-delay:.9s}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .search-box{background:#fff;padding:8px 10px;border-radius:10px;margin:10px 0 6px;border:1px solid var(--line);display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+  .list-item{background:#fff;padding:8px 10px;border-radius:8px;margin-bottom:6px;border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:10px}
+  .list-item b{color:var(--ink);font-size:11px}
+  .list-item .dist{color:var(--brand-dark);font-weight:700;font-size:9px}
+  .tag-verified{display:inline-block;background:var(--green);color:#fff;padding:1px 6px;border-radius:4px;font-size:8px;font-weight:700;margin-left:4px}
+
+  /* Mock 2 — Pet Passport */
+  .passport-card{
+    background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);color:var(--on-brand);
+    border-radius:14px;padding:14px;margin:8px 0;box-shadow:0 6px 14px rgba(255,197,1,.4);
+  }
+  .passport-card .pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .passport-card .pp-top b{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  .passport-card .pp-pet{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px dashed rgba(61,43,31,.3);border-bottom:1px dashed rgba(61,43,31,.3)}
+  .passport-card .pp-avatar{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:20px}
+  .passport-card .pp-name{font-size:12px;font-weight:800}
+  .passport-card .pp-breed{font-size:9px;opacity:.75}
+  .passport-card .pp-mid{font-size:9px;margin-top:8px;letter-spacing:.5px}
+  .qr-box{
+    background:#fff;margin-top:10px;padding:10px;border-radius:10px;display:flex;flex-direction:column;align-items:center;border:1px solid var(--line);
+  }
+  .qr-box .qr-grid{width:70px;height:70px;background:
+    linear-gradient(90deg,var(--ink) 0%,var(--ink) 50%,transparent 50%,transparent 100%),
+    linear-gradient(0deg,var(--ink) 0%,var(--ink) 50%,transparent 50%,transparent 100%),
+    repeating-conic-gradient(var(--ink) 0 25%,#fff 0 50%);background-size:14px 14px;border:4px solid #fff}
+  .qr-box .qr-lab{font-size:9px;color:var(--muted);margin-top:6px;letter-spacing:1px;text-transform:uppercase}
+  .health-row{font-size:10px;padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+  .health-row b{color:var(--ink)}
+  .health-row .ok{color:var(--green);font-weight:700}
+
+  /* Mock 3 — Marketplace + Wallet */
+  .wallet-card{
+    background:linear-gradient(135deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;
+    border-radius:12px;padding:12px;margin-bottom:10px;
+  }
+  .wallet-card .wl-top{font-size:9px;opacity:.7;letter-spacing:1px;text-transform:uppercase}
+  .wallet-card .amt{font-size:22px;font-weight:800;font-family:'Inter',sans-serif;margin-top:4px;color:var(--brand)}
+  .wallet-card .coins{font-size:10px;margin-top:6px;display:flex;justify-content:space-between}
+  .wallet-card .coins b{color:var(--brand)}
+  .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .prod{background:#fff;border-radius:8px;padding:6px;border:1px solid var(--line)}
+  .prod .pic{background:linear-gradient(135deg,#FFF7D6,#FFE38A);height:38px;border-radius:6px;display:grid;place-items:center;font-size:20px;margin-bottom:4px}
+  .prod b{display:block;font-size:9px;color:var(--ink);line-height:1.3}
+  .prod .price{font-size:10px;color:var(--brand-dark);font-weight:800;margin-top:2px}
+
+  /* ECOSYSTEM ASSETS (4 cards) */
+  .assets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media (max-width:900px){.assets-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:500px){.assets-grid{grid-template-columns:1fr}}
+  .asset{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px;border-top:4px solid var(--brand);transition:all .3s;position:relative;overflow:hidden}
+  .asset:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .asset .ico{font-size:38px;margin-bottom:10px}
+  .asset h5{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px;line-height:1.3}
+  .asset .role{font-size:10px;color:var(--brand-dark);letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .asset p{font-size:12px;color:var(--ink-2);line-height:1.55}
+  .asset ul{list-style:none;margin-top:10px;padding:0}
+  .asset ul li{font-size:11px;color:var(--ink-2);padding:4px 0;border-top:1px dashed var(--line);display:flex;justify-content:space-between}
+  .asset ul li b{color:var(--brand-dark);font-weight:700}
+  .asset.accent2{border-top-color:var(--accent)}
+  .asset.accent3{border-top-color:var(--green)}
+  .asset.accent4{border-top-color:var(--ink)}
+
+  /* REVENUE CHART */
+  .chart-wrap{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+  .chart-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+  .chart-head h4{font-size:16px;font-weight:800;color:var(--ink)}
+  .chart-head p{font-size:12px;color:var(--muted);margin-top:2px}
+  .chart-box{position:relative;height:330px}
+  .chart-note{font-size:11px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.5}
+  .chart-note b{color:var(--brand-dark)}
+
+  /* BEFORE / AFTER */
+  .compare{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin-top:12px}
+  @media (max-width:900px){.compare{grid-template-columns:1fr}.compare .arr-mid{transform:rotate(90deg);justify-self:center;margin:10px 0}}
+  .compare .col{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+  .compare .col.bad{border-left:5px solid #DC2626;background:#FEF2F2}
+  .compare .col.good{border-left:5px solid var(--brand-dark);background:#FFF7D6}
+  .compare .col h6{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;margin-bottom:10px}
+  .compare .col.bad h6{color:#DC2626}
+  .compare .col.good h6{color:var(--brand-dark)}
+  .compare .col ul{padding-left:18px;font-size:13px;color:var(--ink-2);line-height:1.7}
+  .compare .col li{margin-bottom:6px}
+  .compare .col li b{color:var(--ink)}
+  .compare .arr-mid{display:grid;place-items:center;font-size:26px;color:var(--brand-dark);font-weight:800;background:var(--brand);color:var(--on-brand);border-radius:50%;width:52px;height:52px;align-self:center;box-shadow:0 6px 14px rgba(255,197,1,.4)}
+
+  /* STAKEHOLDERS */
+  .stake{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media (max-width:900px){.stake{grid-template-columns:repeat(2,1fr)}}
+  .stake .sk{border:1px solid var(--line);border-radius:16px;padding:18px 18px;background:#fff;border-top:4px solid var(--brand)}
+  .stake .sk.green{border-top-color:var(--green)}
+  .stake .sk.orange{border-top-color:var(--accent)}
+  .stake .sk.dark{border-top-color:var(--ink)}
+  .stake h5{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:6px}
+  .stake h6{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:10px;line-height:1.2}
+  .stake p{font-size:12px;color:var(--ink-2);line-height:1.6}
+  .stake p b{color:var(--ink)}
+
+  /* ROADMAP */
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative}
+  @media (max-width:900px){.road{grid-template-columns:1fr}}
+  .road::before{content:'';position:absolute;top:50%;left:6%;right:6%;height:3px;background:linear-gradient(90deg,var(--brand) 0%,var(--accent) 50%,var(--green) 100%);z-index:0;opacity:.5}
+  @media (max-width:900px){.road::before{display:none}}
+  .road .ph{border:2px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff;position:relative;z-index:1}
+  .road .ph.p1{border-color:var(--brand)}
+  .road .ph.p2{border-color:var(--accent)}
+  .road .ph.p3{border-color:var(--green)}
+  .road .p-tag{font-size:10px;color:var(--brand-dark);font-weight:800;letter-spacing:2px;text-transform:uppercase}
+  .road .p2 .p-tag{color:var(--accent)}
+  .road .p3 .p-tag{color:var(--green)}
+  .road h6{font-size:16px;font-weight:800;margin-top:6px;color:var(--ink)}
+  .road p{margin-top:8px;font-size:12px;color:var(--ink-2);line-height:1.6}
+  .road ul{margin-top:8px;padding-left:18px;font-size:11px;color:var(--ink-2);line-height:1.6}
+
+  /* TEAM */
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+  @media (max-width:760px){.team{grid-template-columns:1fr}}
+  .tm{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;display:flex;gap:14px;align-items:center}
+  .tm .av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-dark));display:grid;place-items:center;font-size:26px;color:var(--on-brand);flex-shrink:0}
+  .tm h6{font-size:14px;font-weight:800;color:var(--ink)}
+  .tm .role{font-size:11px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;font-weight:700;margin-top:2px}
+  .tm p{font-size:11px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+
+  /* CTA FOOTER */
+  .cta-big{
+    margin-top:40px;padding:32px 36px;border-radius:22px;
+    background:linear-gradient(120deg,var(--ink) 0%,var(--ink-2) 100%);color:#fff;
+    display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;box-shadow:var(--shadow-lg);position:relative;overflow:hidden
+  }
+  .cta-big::before{content:'🐾';position:absolute;right:-10px;bottom:-30px;font-size:220px;opacity:.06}
+  @media (max-width:760px){.cta-big{grid-template-columns:1fr;text-align:center}}
+  .cta-big .ct-tag{font-size:11px;letter-spacing:3px;color:var(--brand);text-transform:uppercase;font-weight:800}
+  .cta-big h4{font-size:22px;font-weight:800;margin-top:6px;line-height:1.3}
+  .cta-big p{color:rgba(255,255,255,.7);font-size:13px;margin-top:6px;max-width:640px}
+  .cta-big a{background:var(--brand);color:var(--on-brand);padding:14px 28px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;white-space:nowrap;box-shadow:0 10px 28px rgba(255,197,1,.4);transition:all .3s}
+  .cta-big a:hover{background:var(--brand-hover);transform:translateY(-2px)}
+
+  /* FOOTER META */
+  .ftmeta{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--muted);flex-wrap:wrap;gap:10px}
+  .sig{color:var(--accent);font-style:italic}
+
+  @media print{
+    .topbar{display:none}
+    .page{padding:16px}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== STICKY TOPBAR ===== -->
+<div class="topbar">
+  <div class="inner">
+    <div class="logo">
+      <div class="paw">🐾</div>
+      <b>TAILY</b>
+      <span style="color:var(--muted);font-size:11px;letter-spacing:2px">· PET ECONOMY OS</span>
+    </div>
+    <nav>
+      <a href="#why-now">Why Now</a>
+      <a href="#journey">Customer Journey</a>
+      <a href="#assets">Ecosystem</a>
+      <a href="#revenue">Revenue</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <a href="mailto:closures@gmail.com?subject=Taily Pet Economy Briefing" class="cta">Request Briefing →</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <div class="k">Pet Economy Pitch · 1-pager · Gov / Private / Investor</div>
+    <h1>Taily — <em>Pet Super App & Operating Platform</em> ที่รวม ฿92,000 ล้านบาทให้อยู่ในระบบเดียว</h1>
+    <p class="lead">เราไม่ได้สร้างแค่ app หา<b>ร้าน pet-friendly</b> — เราสร้าง <b>OS เดียวที่รวม Discovery → Community → Marketplace → Pet Passport → Pet Insurance → Data Intelligence</b> สำหรับเศรษฐกิจสัตว์เลี้ยงไทย ฿92B/ปี — ถูกขับเคลื่อนโดย <b>DataHub v19 (19,415 verified places · 16 countries)</b> และ <b>กฎหมาย Microchip กทม. 2026</b></p>
+    <div class="chips">
+      <span class="chip">🐾 Pet Economy Flagship</span>
+      <span class="chip green">✓ DataHub v19 · 19,415 verified</span>
+      <span class="chip orange">⚡ Regulatory Tailwind · Microchip 2026</span>
+      <span class="chip">📱 LINE Mini-App + Web + Native</span>
+      <span class="chip">🔒 PDPA-compliant</span>
+    </div>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip">
+      <div class="h"><span class="ic">💰</span><b>฿92B</b><span>Thai Pet TAM</span><em>Krungsri Research 2024</em></div>
+      <div class="h"><span class="ic">🐾</span><b>19,415</b><span>Verified places</span><em>16 countries · v19</em></div>
+      <div class="h"><span class="ic">📱</span><b>500K</b><span>MAU target Y3</span><em>LINE + Web + Native</em></div>
+      <div class="h"><span class="ic">📈</span><b>฿291M</b><span>Y3 revenue</span><em>85% recurring · 7 streams</em></div>
+    </div>
+  </div>
+
+  <!-- ===== WHY NOW — REGULATORY TAILWIND ===== -->
+  <section id="why-now">
+    <div class="sec-head">
+      <span class="tag">Why Now</span>
+      <h2>กฎหมาย Microchip 2026 เป็น <em>ช่องทองคำเปิดครั้งเดียว</em> ของเศรษฐกิจสัตว์เลี้ยงไทย</h2>
+    </div>
+
+    <div class="tailwind">
+      <div class="badge">⚡</div>
+      <div>
+        <h3>กฎหมาย Microchip กทม. <em>2026-2027</em> บังคับให้สัตว์เลี้ยงทุกตัวจดทะเบียน</h3>
+        <p><b>ทุก stakeholder ต้องการ spend layer ที่อยู่เหนือ registry:</b> กทม. ต้องการแพลตฟอร์ม lookup, เจ้าของต้องการที่เก็บข้อมูลสุขภาพ, ร้านค้า/โรงแรมต้องการระบบ verify — <b>Taily = discovery + spend layer บน registry ใหม่</b> ที่ประเทศไทยจะมีครั้งเดียวใน 20 ปี</p>
+      </div>
+      <div class="sig">
+        <b>2026-2027</b>
+        <span>Regulatory Window</span>
+      </div>
+    </div>
+
+    <div class="prob-grid" style="margin-top:18px">
+      <div class="prob">
+        <div class="em">🗺️</div>
+        <h5>ตลาดกระจัดกระจาย</h5>
+        <p>฿92B ใน SME + Retail + Vet + Pet-friendly ที่ไม่มี OS รวม — หาจาก Facebook/Google ที่ไม่ verified</p>
+      </div>
+      <div class="prob">
+        <div class="em">📄</div>
+        <h5>Pet Passport ไม่มี</h5>
+        <p>ข้อมูลสุขภาพสัตว์เลี้ยงยังเป็นกระดาษ vet แต่ละแห่งไม่เชื่อมกัน · Vaccine record หาย</p>
+      </div>
+      <div class="prob">
+        <div class="em">💳</div>
+        <h5>SME ไม่มี Digital Channel</h5>
+        <p>ร้านคาเฟ่/ดูแล/ตัดขน ไม่มี subscription tier ที่จ่ายไหว (฿99) · Booking ยังโทร/LINE</p>
+      </div>
+      <div class="prob">
+        <div class="em">📊</div>
+        <h5>ไม่มี Data Backbone</h5>
+        <p>TAT/MOC/BMA ไม่มี real-time Pet Economy data · Investor ไม่รู้ market depth</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CUSTOMER JOURNEY RELATION CHART ===== -->
+  <section id="journey">
+    <div class="sec-head">
+      <span class="tag">Customer Journey</span>
+      <h2>Relation Chart · <em>Pet Lover → Business → Data</em> ผ่าน 5 stages บน Taily OS</h2>
+      <p>จากการ Discover ไปจนถึง Insight — ข้อมูลทุก touchpoint กลับมาเป็น Pet Economy Intelligence สำหรับเจ้าของ, SME, ภาครัฐ และนักลงทุน</p>
+    </div>
+
+    <div class="journey-wrap">
+      <!-- Persona -->
+      <div class="persona-row">
+        <div class="av">👩🏻</div>
+        <div>
+          <h4>คุณแนน · 28 ปี · กรุงเทพ · เจ้าของ Golden 2 ตัว</h4>
+          <div class="sub">PET OWNER PERSONA · URBAN MILLENNIAL · THB 40-60K/mo income</div>
+          <p>อยากพา<b>ลูก ๆ ไปเที่ยว</b> ห้าง/คาเฟ่/โรงแรมที่รับสัตว์เลี้ยง · ต้องการ <b>Pet Passport ดิจิทัล</b> เก็บ vaccine + microchip · สนใจ Pet Insurance และ Taily Pay + Coins</p>
+          <div class="tags">
+            <span class="tg">🗺️ Map-first</span>
+            <span class="tg">📱 LINE daily user</span>
+            <span class="tg">💳 Cashless</span>
+            <span class="tg">🏥 2-3 vet visits/yr</span>
+            <span class="tg">🛒 ฿2,500/mo pet spend</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5-STAGE FLOW -->
+      <div class="jflow">
+        <div class="jst">
+          <div class="num">1</div>
+          <div class="emoji">🔍</div>
+          <h5>Discover</h5>
+          <div class="label">LINE · Web · Map</div>
+          <p>แนนค้น "คาเฟ่สุนัข อารีย์" บน Taily Map · เห็น <b>19,415 verified places</b> · ดู Taily Score™ · รูปจริง · รีวิว · ระยะทาง</p>
+          <div class="arrow">→</div>
+        </div>
+        <div class="jst">
+          <div class="num">2</div>
+          <div class="emoji">💬</div>
+          <h5>Engage</h5>
+          <div class="label">Pet Social</div>
+          <p>Join Golden Retriever Group · โพสต์รูปลูก ๆ · Stories · ตามดูคอมมูนิตี้ pet lovers · แชทกับเจ้าของคาเฟ่โดยตรง</p>
+          <div class="arrow">→</div>
+        </div>
+        <div class="jst">
+          <div class="num">3</div>
+          <div class="emoji">🛒</div>
+          <h5>Transact</h5>
+          <div class="label">Marketplace · Taily Pay</div>
+          <p>จองโต๊ะคาเฟ่ · ซื้ออาหาร Royal Canin · ใช้ <b>Taily Pay</b> → สะสม <b>Taily Coins</b> · ส่วนลด 10% ครั้งต่อไป</p>
+          <div class="arrow">→</div>
+        </div>
+        <div class="jst">
+          <div class="num">4</div>
+          <div class="emoji">🛡️</div>
+          <h5>Verify & Protect</h5>
+          <div class="label">Pet Passport · Insurance</div>
+          <p><b>Pet Passport</b> เก็บ Microchip + Vaccine + Vet records · Scan QR ที่ร้าน → verify ใน 2 วิ · ซื้อ Pet Insurance ในแอป</p>
+          <div class="arrow">→</div>
+        </div>
+        <div class="jst">
+          <div class="num">5</div>
+          <div class="emoji">📊</div>
+          <h5>Insight</h5>
+          <div class="label">Intelligence SaaS</div>
+          <p><b>ข้อมูลทั้งหมด PDPA-compliant</b> → DataHub → <b>TAT/MOC/BMA</b> เห็น real-time pet economy · SME เห็น customer · Investor เห็น market depth</p>
+        </div>
+      </div>
+
+      <div class="loop"><b>🔄 Closed-Loop Pet Economy:</b> ทุก stage → DataHub → Intelligence → กลับมาปรับ Discovery/Ads/Subscription/Insurance · <b>Taily OS ตัวเดียวครบ — ขับเคลื่อนทั้งระบบ</b></div>
+    </div>
+  </section>
+
+  <!-- ===== APP UI MOCKUPS ===== -->
+  <section id="mockups">
+    <div class="sec-head">
+      <span class="tag">Product Demo</span>
+      <h2>3 จอหลักของ Taily OS · <em>คุณแนนเห็นอะไรในแต่ละ stage</em></h2>
+      <p>LINE Mini-App-first · เปิดได้ทันทีบน LINE · Native App + Web รองรับ PWA · UI ภาษาไทย/อังกฤษ/จีน</p>
+    </div>
+
+    <div class="mockup-row">
+      <!-- Mock 1: Map pin + list -->
+      <div class="mock-wrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="ph-head">
+              <span class="back">←</span>
+              <span>Taily Map · อารีย์</span>
+              <span>🔔</span>
+            </div>
+            <div class="ph-content">
+              <div class="search-box">
+                🔍 <span>คาเฟ่สุนัข อารีย์</span>
+              </div>
+              <div class="map-bg">
+                <span class="pin p1">📍</span>
+                <span class="pin p2">📍</span>
+                <span class="pin p3">📍</span>
+                <span class="pin p4">📍</span>
+              </div>
+              <div style="margin-top:10px">
+                <div class="list-item">
+                  <div>
+                    <b>Dogs Café Ari <span class="tag-verified">✓</span></b>
+                    <div style="color:var(--muted);font-size:9px;margin-top:2px">⭐ 4.8 · Taily Score 92</div>
+                  </div>
+                  <span class="dist">0.4 km</span>
+                </div>
+                <div class="list-item">
+                  <div>
+                    <b>Paws & Brew <span class="tag-verified">✓</span></b>
+                    <div style="color:var(--muted);font-size:9px;margin-top:2px">⭐ 4.6 · Taily Score 88</div>
+                  </div>
+                  <span class="dist">0.8 km</span>
+                </div>
+                <div class="list-item">
+                  <div>
+                    <b>Dog Park Cafe</b>
+                    <div style="color:var(--muted);font-size:9px;margin-top:2px">⭐ 4.5 · Taily Score 85</div>
+                  </div>
+                  <span class="dist">1.2 km</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-caption">
+          <b>🗺️ Discover — Pet Map</b>
+          <span>19,415 verified places · Taily Score™ · filter by breed size, pet fee</span>
+        </div>
+      </div>
+
+      <!-- Mock 2: Pet Passport + QR -->
+      <div class="mock-wrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="ph-head">
+              <span class="back">←</span>
+              <span>Pet Passport</span>
+              <span>⋯</span>
+            </div>
+            <div class="ph-content">
+              <div class="passport-card">
+                <div class="pp-top">
+                  <b>🐾 Pet Passport</b>
+                  <span style="font-size:9px">BMA-verified</span>
+                </div>
+                <div class="pp-pet">
+                  <div class="pp-avatar">🐕</div>
+                  <div>
+                    <div class="pp-name">Mochi</div>
+                    <div class="pp-breed">Golden Retriever · ♀ 3y</div>
+                  </div>
+                </div>
+                <div class="pp-mid">Microchip: 764-081-2026-TH</div>
+              </div>
+              <div class="qr-box">
+                <div class="qr-grid"></div>
+                <div class="qr-lab">Scan to Verify</div>
+              </div>
+              <div style="margin-top:8px">
+                <div class="health-row"><b>Vaccine DHPP</b><span class="ok">✓ Updated</span></div>
+                <div class="health-row"><b>Rabies</b><span class="ok">✓ Mar 2026</span></div>
+                <div class="health-row"><b>Pet Insurance</b><span class="ok">✓ Active</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-caption">
+          <b>🛡️ Verify — Pet Passport + QR</b>
+          <span>Microchip + Vaccine + Insurance · เชื่อม BMA Registry 2026</span>
+        </div>
+      </div>
+
+      <!-- Mock 3: Marketplace + Wallet -->
+      <div class="mock-wrap">
+        <div class="phone">
+          <div class="screen">
+            <div class="ph-head">
+              <span class="back">←</span>
+              <span>Marketplace · Wallet</span>
+              <span>🛒</span>
+            </div>
+            <div class="ph-content">
+              <div class="wallet-card">
+                <div class="wl-top">Taily Wallet</div>
+                <div class="amt">฿1,250.00</div>
+                <div class="coins">
+                  <span>🪙 Taily Coins</span>
+                  <b>2,480</b>
+                </div>
+              </div>
+              <div style="font-size:10px;font-weight:800;margin:8px 0 6px;color:var(--ink)">FOR MOCHI 🐕</div>
+              <div class="product-grid">
+                <div class="prod">
+                  <div class="pic">🥣</div>
+                  <b>Royal Canin Golden</b>
+                  <div class="price">฿1,890</div>
+                </div>
+                <div class="prod">
+                  <div class="pic">🧴</div>
+                  <b>Shampoo Organic</b>
+                  <div class="price">฿450</div>
+                </div>
+                <div class="prod">
+                  <div class="pic">🦴</div>
+                  <b>Dental Chew 10 ชิ้น</b>
+                  <div class="price">฿290</div>
+                </div>
+                <div class="prod">
+                  <div class="pic">🎾</div>
+                  <b>Rubber Ball Toy</b>
+                  <div class="price">฿180</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-caption">
+          <b>🛒 Transact — Marketplace + Taily Pay</b>
+          <span>Taily Coins loyalty · 2-5% fee · 40 SKU curated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ECOSYSTEM ASSETS ===== -->
+  <section id="assets">
+    <div class="sec-head">
+      <span class="tag">Ecosystem</span>
+      <h2>สินทรัพย์ 4 ตัว · <em>ทำงานร่วมกันเป็น Pet Economy OS</em></h2>
+      <p>แต่ละตัวใช้คนละ stage ของ Customer Journey — รวมกันเป็น Closed Loop ที่คู่แข่งจำลองไม่ได้ใน 3-5 ปี</p>
+    </div>
+
+    <div class="assets-grid">
+      <div class="asset">
+        <div class="ico">📱</div>
+        <h5>Taily App</h5>
+        <div class="role">Stage 1-3 · Discover/Engage/Pay</div>
+        <p>LINE Mini-App + Web + Native · 5-tab super app (Home/Explore/Market/Social/Me)</p>
+        <ul>
+          <li>Platform <b>LINE-first</b></li>
+          <li>Launch <b>v2.2.1 live</b></li>
+          <li>Target Y1 MAU <b>50K</b></li>
+        </ul>
+      </div>
+      <div class="asset accent2">
+        <div class="ico">🗂️</div>
+        <h5>DataHub v19</h5>
+        <div class="role">Stage 5 · Intelligence</div>
+        <p>19,415 verified records · 16 countries · 8 data sheets (Places/Vets/Shops/Services/Brands/Influencers/Events/Communities)</p>
+        <ul>
+          <li>Records <b>19,415</b></li>
+          <li>Countries <b>16</b></li>
+          <li>Schema <b>46-col verified</b></li>
+        </ul>
+      </div>
+      <div class="asset accent3">
+        <div class="ico">🛡️</div>
+        <h5>Pet Passport</h5>
+        <div class="role">Stage 4 · Verify & Protect</div>
+        <p>Digital health record · Microchip ID · Vaccine history · Pet Insurance marketplace · เชื่อม BMA registry 2026</p>
+        <ul>
+          <li>Compliance <b>PDPA</b></li>
+          <li>Insurance partners <b>3-5 Y1</b></li>
+          <li>Microchip law <b>2026</b></li>
+        </ul>
+      </div>
+      <div class="asset accent4">
+        <div class="ico">💰</div>
+        <h5>Taily Pay</h5>
+        <div class="role">Stage 3 · Transact</div>
+        <p>In-app wallet + Taily Coins loyalty · 2-5% transaction fee · future fintech rails (insurance, lending)</p>
+        <ul>
+          <li>Commission <b>2-5%</b></li>
+          <li>Coins loyalty <b>Live</b></li>
+          <li>Fintech tie-ups <b>Y2</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVENUE CHART ===== -->
+  <section id="revenue">
+    <div class="sec-head">
+      <span class="tag">Revenue</span>
+      <h2>Y1 → Y3 Revenue Projection · <em>85% recurring</em> · 7 streams</h2>
+      <p>Stack ของ Taily Revenue ไม่ได้พึ่งแค่ subscription — แต่รวม Ads + Commission + Insurance + B2B SaaS ให้ resilient</p>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-head">
+        <div>
+          <h4>💵 Revenue Stack · Y1 ฿6.35M → Y3 ฿291.9M</h4>
+          <p>6 revenue streams · 85% recurring ≈ investor-friendly SaaS-like multiple</p>
+        </div>
+        <div style="font-size:11px;color:var(--muted);text-align:right">
+          <b style="color:var(--brand-dark);font-size:14px">46x</b><br>
+          Y1→Y3 growth
+        </div>
+      </div>
+      <div class="chart-box">
+        <canvas id="revChart"></canvas>
+      </div>
+      <div class="chart-note">* Year 3 projection · Subscription (28%) + Ads (25%) + Transaction (15%) + Brand (12%) + Insurance (10%) + B2B Data (10%) · <b>ทั้งหมดขยายได้โดยไม่ต้อง retrain team</b></div>
+    </div>
+  </section>
+
+  <!-- ===== BEFORE/AFTER ===== -->
+  <section>
+    <div class="sec-head">
+      <span class="tag">Before vs After</span>
+      <h2>Pet Economy แบบเก่า vs <em>Taily Pet Economy OS</em></h2>
+    </div>
+    <div class="compare">
+      <div class="col bad">
+        <h6>❌ ปัจจุบัน · Pet Economy แบบเก่า</h6>
+        <ul>
+          <li>ตลาด <b>฿92B</b> กระจัดกระจายใน Facebook · Google · ไม่มี OS เดียว</li>
+          <li>หาร้าน pet-friendly ไม่ verified · ไม่รู้ว่าจริงไหม</li>
+          <li>Pet Passport ยังเป็น<b>กระดาษ</b> · vet หาย · insurance ลำบาก</li>
+          <li>SME ไม่มี digital channel ที่จ่ายไหว · booking ผ่าน LINE</li>
+          <li>รัฐไม่มี real-time data สำหรับ Pet Economy</li>
+        </ul>
+      </div>
+      <div class="arr-mid">→</div>
+      <div class="col good">
+        <h6>✓ Taily Pet Economy OS</h6>
+        <ul>
+          <li><b>OS เดียว</b> · Discovery → Pay → Insurance → Health → Intelligence</li>
+          <li><b>19,415 verified</b> · Taily Score™ · BMA-integrated registry</li>
+          <li><b>Pet Passport</b> ดิจิทัลเชื่อม Microchip Law 2026 · vet, insurance ในแอป</li>
+          <li>Subscription tier <b>฿99-฿4,990</b> · LINE-first onboarding</li>
+          <li>DataHub real-time สำหรับ TAT/MOC/BMA · B2B SaaS ฿30K-100K/mo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STAKEHOLDERS ===== -->
+  <section>
+    <div class="sec-head">
+      <span class="tag">Stakeholders</span>
+      <h2>ใครชนะเมื่อ Taily ทำงาน · <em>Win-Win-Win-Win</em></h2>
+    </div>
+    <div class="stake">
+      <div class="sk">
+        <h5>Government</h5>
+        <h6>TAT · MOC · BMA</h6>
+        <p><b>TAT:</b> เปิด Pet Tourism vertical ใหม่<br><b>MOC:</b> Digitize SME สัตว์เลี้ยง ฿92B<br><b>BMA:</b> เชื่อม Microchip Law 2026</p>
+      </div>
+      <div class="sk orange">
+        <h5>Private Sector</h5>
+        <h6>Retail · Property · Vet</h6>
+        <p><b>Central/Siam/The Mall:</b> Verified pet traffic<br><b>Pet-friendly condo:</b> Premium segment<br><b>Arak/Thonglor vets:</b> Lead gen + Insurance</p>
+      </div>
+      <div class="sk green">
+        <h5>Community</h5>
+        <h6>Pet Owners + SMEs</h6>
+        <p><b>Owners:</b> ค้น + health record + insurance + community ในที่เดียว<br><b>SMEs:</b> Listing + Booking + Loyalty tier ฿99+</p>
+      </div>
+      <div class="sk dark">
+        <h5>Investor</h5>
+        <h6>Seed ฿20M Ask</h6>
+        <p><b>TAM:</b> ไทย ฿92B · SEA ~$12B<br><b>Moat:</b> 5-tier subscription + regulatory lock-in + 16-country DataHub<br><b>Proj:</b> Y1 ฿6.35M → Y3 ฿291.9M</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROADMAP ===== -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <span class="tag">Roadmap</span>
+      <h2>3-Phase Rollout · <em>Bangkok → National → SEA</em> ใน 36 เดือน</h2>
+    </div>
+    <div class="road">
+      <div class="ph p1">
+        <div class="p-tag">Phase 1 · 0-6 เดือน</div>
+        <h6>Bangkok Pilot</h6>
+        <p>BMA Microchip Registry + 500 SMEs + 50 Malls pilot</p>
+        <ul>
+          <li>Verified listing 77 เขต กทม.</li>
+          <li>Pilot Arak + 10 Vet Hospitals</li>
+          <li>Baseline DEPA/MOC KPI</li>
+          <li>10,000 pet-friendly places</li>
+        </ul>
+      </div>
+      <div class="ph p2">
+        <div class="p-tag">Phase 2 · 6-18 เดือน</div>
+        <h6>National Scale</h6>
+        <p>77 จังหวัด · TAT "Pet-Friendly Thailand" + Insurance launch</p>
+        <ul>
+          <li>50K MAU · 40K+ verified places</li>
+          <li>TAT Pet Tourism campaign</li>
+          <li>MOC SME 5,000 onboard</li>
+          <li>Pet Insurance launch (15-25% comm.)</li>
+        </ul>
+      </div>
+      <div class="ph p3">
+        <div class="p-tag">Phase 3 · 18-36 เดือน</div>
+        <h6>SEA Expansion + SaaS</h6>
+        <p>VN · ID · PH · MY + B2B Intelligence SaaS</p>
+        <ul>
+          <li>500K MAU target</li>
+          <li>Pet Intelligence B2B (฿30K-100K/mo)</li>
+          <li>Taily Box subscription</li>
+          <li>Y3 Revenue ฿291.9M</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEAM ===== -->
+  <section>
+    <div class="sec-head">
+      <span class="tag">Team</span>
+      <h2>คนที่จะทำให้ Taily เกิดจริง</h2>
+    </div>
+    <div class="team">
+      <div class="tm">
+        <div class="av">👨‍💼</div>
+        <div>
+          <h6>Nut (ณัฐวัฒน์)</h6>
+          <div class="role">FOUNDER & CEO · ANTS × TAILY</div>
+          <p>Architect ทั้ง ANTS 2.0 AI Command Center + Taily OS · 20+ ปี Tech/Consulting · Product + Business</p>
+        </div>
+      </div>
+      <div class="tm">
+        <div class="av">🐾</div>
+        <div>
+          <h6>CPO Taily (Agent)</h6>
+          <div class="role">HEAD OF PRODUCT · AI-NATIVE</div>
+          <p>Own Taily app roadmap · 5-tab super app architecture · LINE Mini-App + Web + Native</p>
+        </div>
+      </div>
+      <div class="tm">
+        <div class="av">🏛️</div>
+        <div>
+          <h6>Head of Gov Affairs (B2G)</h6>
+          <div class="role">GOVERNMENT BRIDGE</div>
+          <p>TAT · MOC · BMA relationship · Microchip Registry integration · Pet Tourism vertical</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FOOTER ===== -->
+  <div class="cta-big">
+    <div>
+      <div class="ct-tag">The Ask</div>
+      <h4>30 นาที Pet Economy Briefing + Live Demo (LINE Mini-App + DataHub v19 + Pet Passport prototype)</h4>
+      <p>ภายใน 30 วัน กับทีม TAT + MOC + BMA + Investor · Taily + ANTS พร้อม co-fund และ deploy <b>Bangkok Pilot ใน 90 วัน</b> หลัง greenlight</p>
+    </div>
+    <a href="mailto:closures@gmail.com?subject=Taily Pet Economy Briefing">Request Briefing →</a>
+  </div>
+
+  <!-- ===== FOOTER META ===== -->
+  <div class="ftmeta">
+    <div>
+      <div>ANTS 2.0 Command Center · Taily Pet Economy OS · Prepared by [CPO Taily] + [Head of Government Affairs B2G] + [Head of Partnerships B2B2C]</div>
+      <div class="sig">Orchestrated by เฌอคูณ (Cherkun), Chief Wisdom Officer · April 2026</div>
+    </div>
+    <div style="text-align:right">
+      <div>Confidential · For TAT / MOC / BMA / Investor leadership</div>
+      <div>Taily · ANTS · ai-solution-platform.github.io/Taily/app/</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Revenue stacked bar chart
+  const ctx = document.getElementById('revChart');
+  if(ctx){
+    new Chart(ctx, {
+      type:'bar',
+      data:{
+        labels:['Year 1 · ฿6.35M','Year 2 · ฿58.1M','Year 3 · ฿291.9M'],
+        datasets:[
+          {label:'Subscription (28%)',data:[2.5,20.0,81.7],backgroundColor:'#FFC501',borderRadius:4,stack:'rev'},
+          {label:'Ads Platform (25%)',data:[1.2,16.0,73.0],backgroundColor:'#E5A800',borderRadius:4,stack:'rev'},
+          {label:'Transaction Commission (15%)',data:[0.8,9.5,43.8],backgroundColor:'#FF8C42',borderRadius:4,stack:'rev'},
+          {label:'Brand Partnerships (12%)',data:[0.6,6.0,35.0],backgroundColor:'#3E2723',borderRadius:4,stack:'rev'},
+          {label:'Insurance/Fintech (10%)',data:[0.5,4.5,29.2],backgroundColor:'#27AE60',borderRadius:4,stack:'rev'},
+          {label:'B2B Data Intelligence (10%)',data:[0.75,2.1,29.2],backgroundColor:'#8D6E63',borderRadius:4,stack:'rev'}
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{position:'bottom',labels:{boxWidth:12,font:{size:11,family:"'IBM Plex Sans Thai',sans-serif"},color:'#5D4037'}},
+          tooltip:{callbacks:{label:c=>c.dataset.label+': ฿'+c.parsed.y.toFixed(1)+'M'}}
+        },
+        scales:{
+          x:{stacked:true,grid:{display:false},ticks:{font:{size:11,family:"'IBM Plex Sans Thai',sans-serif",weight:'700'},color:'#3E2723'}},
+          y:{stacked:true,grid:{color:'rgba(234,219,200,.6)'},ticks:{font:{size:10,family:"'Inter',sans-serif"},color:'#8D6E63',callback:v=>'฿'+v+'M'}}
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

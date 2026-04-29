@@ -1,0 +1,183 @@
+# =============================================================================
+# ANTS SAKM v2 — Boundary Contract Template (v1.0)
+# =============================================================================
+# Purpose: Every shadow agent exported from Master (CC) MUST have a Boundary
+#          Contract. This file defines the agent's authority, escalation rules,
+#          alignment requirements, and sync mechanics.
+#
+# Philosophy:
+#   - Federated wisdom — shadow agents hold real authority within scope
+#   - Collective intelligence — write-backs flow upward; everyone learns
+#   - Boundary = trust enabler, not control mechanism
+#
+# Usage:
+#   1. Copy this file → /sakm/registry/contracts/{agent_id}--{exported_to}.yaml
+#   2. Fill all required fields (REQUIRED markers below)
+#   3. Co-sign by Master owner (Nut/CWO) + Shadow holder (e.g. SC, Growth Lead)
+#   4. Register in /sakm/registry/shadow-agents.json
+#   5. Re-review at every sync ceremony (monthly default)
+#
+# Locked: 2026-04-27 (K.15) · Owner: KM #51 + #63 FJA-CDCA · CWO Layer-2
+# =============================================================================
+
+contract_meta:
+  contract_id: ""              # REQUIRED · format: agent_{nn}__shadow_{holder}__{YYYYMMDD}
+  schema_version: "1.0"
+  created_date: ""             # REQUIRED · YYYY-MM-DD
+  last_reviewed: ""            # REQUIRED · YYYY-MM-DD
+  review_cadence: monthly      # weekly · monthly · quarterly
+  status: draft                # draft · active · suspended · retired
+
+agent_identity:
+  agent_id: ""                 # REQUIRED · e.g. "#34" · "#52" · "#14"
+  agent_name: ""               # REQUIRED · e.g. "Senior Legal & Compliance"
+  master_version: ""           # REQUIRED · e.g. "v3.5"
+  master_path: ""              # REQUIRED · path in ANTS workspace
+  shadow_export_version: ""    # REQUIRED · e.g. "v3.5+SC.local.0"
+  shadow_holder:
+    type: ""                   # REQUIRED · "human" · "team" · "external_partner"
+    name: ""                   # REQUIRED · e.g. "SC (Strategic Compliance dream-team member)"
+    contact: ""                # email or chat handle for sync ceremonies
+
+# -----------------------------------------------------------------------------
+# AUTHORITY SCOPE — what the shadow agent CAN decide on its own
+# -----------------------------------------------------------------------------
+authority_scope:
+  decision_authority:          # explicit list · default = empty (= NO authority)
+    - ""                       # e.g. "PDPA review for contracts ≤ 100K THB"
+    - ""                       # e.g. "Vendor compliance pre-screening"
+  data_access:
+    can_read: []               # e.g. ["company_policies", "regulator_bulletins"]
+    can_write: []              # e.g. ["compliance_log", "case_pattern_db"]
+    cannot_access: []          # explicit denials · e.g. ["finance_full", "HR_PII"]
+  output_authority:
+    auto_publish: false        # true = output goes live without review
+    auto_publish_categories: []
+    requires_review: true      # default · safer
+
+# -----------------------------------------------------------------------------
+# ESCALATION TRIGGERS — when shadow MUST hand off to Master/Nut
+# -----------------------------------------------------------------------------
+escalation_triggers:
+  hard_triggers:               # MUST escalate · zero exceptions
+    - amount_threshold_thb: 100000
+    - involves_legal_signature: true
+    - involves_regulator_inquiry: true
+    - involves_cross_border_data: true
+    - involves_layoff_or_termination: true
+    - involves_public_crisis_comms: true
+  soft_triggers:               # SHOULD escalate · agent uses judgment
+    - novelty_score_above: 0.7  # how unprecedented vs prior cases
+    - confidence_below: 0.6
+    - cross_team_impact: true
+  escalation_path:
+    primary: ""                # REQUIRED · e.g. "Nut" · "CWO via Cowork session"
+    backup: ""                 # e.g. "KM #51"
+    response_sla_hours: 24
+
+# -----------------------------------------------------------------------------
+# ALIGNMENT REQUIREMENTS — what shadow MUST stay synced to
+# -----------------------------------------------------------------------------
+must_align_with:
+  vision_mission_lock_date: "2026-04-23"   # CANONICAL · do not edit per agent
+  vision_substring: "Human wisdom. AI at scale. Wisdom for everyone."
+  mission_substring: "Empower people"      # see /canonical/canonical-facts.md §1
+  framework_required:
+    - "3C-E (Clear · Communication · Change · Evolution)"
+    - "ARAI block on every output (Actions · Results · Idea Improvements)"
+    - "Op 11 (dev) or Op 12 (non-dev) review pattern"
+  cultural_framing:
+    - "Impossible → I'm possible (SAKM cultural manifesto)"
+    - "AI augments people · NEVER 'AI replaces'"
+  hot_rules_observed: []       # list rule numbers shadow must observe (default: all)
+
+# -----------------------------------------------------------------------------
+# SYNC MECHANICS — keep Master ↔ Shadow on the same page
+# -----------------------------------------------------------------------------
+sync_cadence:
+  auto_diff:
+    frequency: weekly          # daily · weekly · monthly
+    day: monday
+    time_ict: "09:00"
+    runner: "#63 FJA-CDCA"
+    script: "/sakm/git-blueprint/scripts/diff-shadow.py"
+  manual_ceremony:
+    frequency: monthly
+    day_of_month: 1
+    duration_minutes: 30
+    participants:
+      - "Nut"
+      - "shadow_holder"
+      - "KM #51"
+    agenda_template: "/sakm/templates/Sync-Ceremony-Agenda.md"
+
+drift_thresholds:
+  warning_days: 14             # diverge > 14d = yellow flag
+  blocker_days: 30             # diverge > 30d = force merge ceremony
+  blocker_section_count: 3     # 3+ sections changed in shadow = force review
+
+# -----------------------------------------------------------------------------
+# WRITE-BACK PROTOCOL — knowledge flows upward
+# -----------------------------------------------------------------------------
+write_back:
+  trigger_events:              # shadow holder MUST flag for write-back when:
+    - "new regulation / law identified"
+    - "3+ recurring case patterns observed"
+    - "explicit shadow_holder flag"
+    - "knowledge gap discovered in Master"
+  format: "PR-style markdown diff against /agents/{agent_id}/knowledge/"
+  review_layer1: "KM #51"
+  review_layer2: "เฌอคูณ (CWO)"
+  merge_cadence: weekly        # batch reviews on Mondays
+
+# -----------------------------------------------------------------------------
+# COLLECTIVE INTELLIGENCE — cross-shadow learning
+# -----------------------------------------------------------------------------
+cross_pollination:
+  share_anonymized_patterns: true   # other shadows see your case patterns
+  receive_anonymized_patterns: true
+  privacy_filter:
+    redact_client_names: true
+    redact_amounts_above_thb: 50000
+    redact_personal_pii: true
+  cross_shadow_groups: []      # e.g. ["compliance_cohort", "growth_cohort"]
+
+# -----------------------------------------------------------------------------
+# CONFLICT RESOLUTION — when Master and Shadow disagree
+# -----------------------------------------------------------------------------
+conflict_policy:
+  on_diverge:
+    layer1_decision: "KM #51 reads diff · proposes merge/split/preserve"
+    layer2_decision: "CWO (เฌอคูณ) final call · invokes Op 12 panel if needed"
+  master_wins_categories:      # canonical decisions Master never gives up
+    - "Vision/Mission language"
+    - "Operating Principles 1–18"
+    - "Hot Rules"
+    - "Agent count canonical (63)"
+  shadow_wins_categories:      # shadow's local context wins
+    - "regulatory specifics for shadow_holder's jurisdiction"
+    - "client-specific case history"
+    - "vendor-specific procurement tactics"
+  unresolved_path: "Nut final decision (human-in-the-loop)"
+
+# -----------------------------------------------------------------------------
+# ATTESTATION — both sides sign here
+# -----------------------------------------------------------------------------
+attestation:
+  master_owner:
+    name: ""                   # REQUIRED · e.g. "Nut (Founder/CEO)"
+    signature_date: ""         # REQUIRED · YYYY-MM-DD
+  shadow_holder:
+    name: ""                   # REQUIRED
+    signature_date: ""         # REQUIRED
+  cwo_layer2:
+    approved: false            # REQUIRED · must be true to activate
+    approval_date: ""
+
+# =============================================================================
+# CHANGE LOG · update at every ceremony
+# =============================================================================
+change_log:
+  - date: ""
+    by: ""
+    change: ""                 # e.g. "v1.0 initial draft"

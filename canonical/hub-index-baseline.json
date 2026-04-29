@@ -1,0 +1,27 @@
+{
+  "_meta": {
+    "schema": "hub-index-baseline-v1",
+    "captured_date": "2026-04-28",
+    "captured_by": "scripts/hub-index-visual-test.py --update-baseline",
+    "purpose": "Visual regression baseline for ANTS-2.0-Hub-Index.html · I-NEW-20 · K.22"
+  },
+  "metrics": {
+    "a_href_count": 26,
+    "footer_link_count": 0,
+    "count_section_h2": 5,
+    "count_section": 5,
+    "count_hero": 1,
+    "count_arai": 2,
+    "required_anchors_present": {
+      "Single Gateway": true,
+      "Operational Command Center": true,
+      "Federated Wisdom": true,
+      "FJA-CDCA": true,
+      "Markdown Reports": true,
+      "Human wisdom. AI at scale. Wisdom for everyone.": true,
+      "Empower people. Build sustainable businesses.": true
+    },
+    "all_anchors_present": true,
+    "file_size_bytes": 36677
+  }
+}

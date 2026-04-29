@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ants.local/sakm/registry/shadow-agents.schema.json",
+  "title": "ANTS SAKM v2 — Shadow Agent Registry",
+  "description": "Single source of truth for every Master-shadow pair. Federated wisdom is real, but the registry is the ledger. Updated by KM #51 + #63 FJA-CDCA weekly cron.",
+  "type": "object",
+  "required": ["_meta", "shadows"],
+  "properties": {
+    "_meta": {
+      "type": "object",
+      "required": ["schema_version", "registry_version", "last_updated", "owner"],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "registry_version": { "type": "string", "pattern": "^v\\d+\\.\\d+$" },
+        "last_updated": { "type": "string", "format": "date" },
+        "last_full_sweep": { "type": "string", "format": "date" },
+        "owner": { "type": "string" },
+        "vm_status_ref": { "type": "string", "default": "/canonical/vm-status.json" },
+        "canonical_facts_ref": { "type": "string", "default": "/canonical/canonical-facts.md" }
+      }
+    },
+    "shadows": {
+      "type": "array",
+      "description": "One entry per Master-Shadow pair",
+      "items": {
+        "type": "object",
+        "required": [
+          "shadow_id",
+          "agent_id",
+          "agent_name",
+          "exported_to",
+          "version_at_export",
+          "current_shadow_version",
+          "boundary_contract_ref",
+          "status"
+        ],
+        "properties": {
+          "shadow_id": {
+            "type": "string",
+            "description": "Composite key: agent_{nn}__shadow_{holder_slug}__{YYYYMMDD}",
+            "pattern": "^agent_\\d{2}__shadow_[a-z0-9_-]+__\\d{8}$"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Canonical agent ID from /canonical/vm-status.json",
+            "pattern": "^#\\d{1,2}$"
+          },
+          "agent_name": { "type": "string" },
+          "tier": { "type": "integer", "minimum": 1, "maximum": 6 },
+          "exported_to": {
+            "type": "object",
+            "required": ["holder_type", "holder_name"],
+            "properties": {
+              "holder_type": { "enum": ["dream_team_member", "internal_team", "external_partner", "client_facing"] },
+              "holder_name": { "type": "string", "description": "e.g. SC, Growth Team, Sales Pilot AE" },
+              "contact": { "type": "string" }
+            }
+          },
+          "version_at_export": { "type": "string", "description": "Master version at time of export, e.g. v3.5" },
+          "current_shadow_version": { "type": "string", "description": "Local-augmented version, e.g. v3.5+SC.local.2" },
+          "current_master_version": { "type": "string", "description": "Auto-tracked · what Master is at right now" },
+          "boundary_contract_ref": { "type": "string", "description": "Path to YAML contract" },
+          "status": { "enum": ["pending_signature", "active", "drift_warning", "drift_blocker", "suspended", "retired"] },
+          "exported_date": { "type": "string", "format": "date" },
+          "last_sync_date": { "type": "string", "format": "date" },
+          "last_diff": {
+            "type": "object",
+            "properties": {
+              "run_date": { "type": "string", "format": "date" },
+              "diff_score": { "type": "number", "minimum": 0, "maximum": 1, "description": "0 = identical · 1 = total divergence" },
+              "sections_changed": { "type": "integer", "minimum": 0 },
+              "lines_changed": { "type": "integer", "minimum": 0 },
+              "report_path": { "type": "string" }
+            }
+          },
+          "divergence_status": {
+            "type": "string",
+            "enum": ["green", "yellow_warning", "red_blocker"],
+            "description": "Computed from drift_thresholds in Boundary Contract"
+          },
+          "write_backs": {
+            "type": "array",
+            "description": "Knowledge flowing shadow→master · evidence of collective intelligence",
+            "items": {
+              "type": "object",
+              "required": ["date", "summary", "merged"],
+              "properties": {
+                "date": { "type": "string", "format": "date" },
+                "summary": { "type": "string" },
+                "merged": { "type": "boolean" },
+                "merge_decision_by": { "type": "string" },
+                "section_path": { "type": "string" }
+              }
+            }
+          },
+          "cross_pollination_groups": {
+            "type": "array",
+            "description": "Groups this shadow shares anonymized patterns with",
+            "items": { "type": "string" }
+          },
+          "next_ceremony_date": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

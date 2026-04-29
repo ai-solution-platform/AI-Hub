@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<title>Britz · Direction Brief — 1-Page Summary (24 Apr 2026)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=SF+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1E; --mute:#6E6E73; --line:#E5E5EA; --bg:#FFFFFF; --bg-soft:#F7F7F7;
+    --brand:#8B2332; --brand-ink:#6A1B28; --warm:#E8833A; --warm-soft:#FEF3C7; --gold:#C9A961;
+    --sky:#0EA5E9; --green:#10B981; --red:#DC2626; --amber:#F59E0B; --purple:#7C3AED;
+    --r-lg:14px; --r-md:10px; --r-sm:8px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04), 0 1px 3px rgba(0,0,0,.04);
+  }
+  *,*::before,*::after{ box-sizing:border-box }
+  html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans Thai','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:15.5px; line-height:1.65; letter-spacing:.005em;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; }
+  .page{ width:210mm; min-height:297mm; margin:0 auto; padding:14mm 13mm; background:#fff;
+    box-shadow:0 8px 32px rgba(0,0,0,.08); position:relative; }
+
+  /* ===== Header ===== */
+  .hdr{ display:grid; grid-template-columns:1fr auto; gap:12px; align-items:flex-end;
+    padding-bottom:10px; border-bottom:2px solid var(--brand); margin-bottom:12px; }
+  .hdr .logo{ font-family:'Inter',sans-serif; font-weight:800; font-size:11px; letter-spacing:.22em; color:var(--brand); }
+  .hdr h1{ margin:2px 0 0; font-size:22px; font-weight:800; color:var(--ink); line-height:1.2; letter-spacing:-.01em; }
+  .hdr .sub{ font-size:12px; color:var(--mute); margin-top:2px; }
+  .hdr .meta{ text-align:right; font-size:10.5px; color:var(--mute); line-height:1.5; font-family:'SF Mono',ui-monospace,monospace; }
+  .hdr .meta b{ color:var(--brand); font-weight:700; }
+
+  /* ===== Section ===== */
+  section{ margin-bottom:11px; page-break-inside:avoid; }
+  .sh{ display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
+  .sh .num{ font-family:'SF Mono',monospace; font-size:10px; color:var(--warm); letter-spacing:.14em; font-weight:800; }
+  .sh h2{ margin:0; font-size:15px; font-weight:800; color:var(--ink); letter-spacing:-.005em; }
+  .sh .tag{ margin-left:auto; font-size:9.5px; color:var(--mute); letter-spacing:.08em; font-family:'SF Mono',monospace; }
+
+  /* ===== Objective cards ===== */
+  .obj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .obj{ background:linear-gradient(135deg,rgba(139,35,50,.04),rgba(232,131,58,.04));
+    border:1px solid rgba(139,35,50,.18); border-left:4px solid var(--brand); border-radius:var(--r-md);
+    padding:11px 13px; }
+  .obj .lb{ font-family:'SF Mono',monospace; font-size:9.5px; color:var(--brand); letter-spacing:.14em; font-weight:800; margin-bottom:3px; }
+  .obj .t{ font-size:13px; font-weight:700; line-height:1.4; color:var(--ink); margin-bottom:4px; }
+  .obj .d{ font-size:12px; color:var(--mute); line-height:1.55; }
+  .obj:nth-child(2){ border-left-color:var(--warm); }
+  .obj:nth-child(2) .lb{ color:var(--warm); }
+
+  /* ===== Pain cards ===== */
+  .pain-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; }
+  .pain{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:10px 12px; position:relative; overflow:hidden; }
+  .pain::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); }
+  .pain .ic{ font-size:18px; line-height:1; margin-bottom:4px; }
+  .pain .t{ font-size:12.5px; font-weight:700; color:var(--ink); line-height:1.35; margin-bottom:3px; }
+  .pain .d{ font-size:11px; color:var(--mute); line-height:1.5; }
+
+  /* ===== Roadmap matrix ===== */
+  .rm{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:9px; }
+  .rm-col{ background:#fff; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
+  .rm-h{ padding:7px 11px; font-size:11px; font-weight:800; color:#fff; letter-spacing:.08em; display:flex; justify-content:space-between; align-items:center; }
+  .rm-h .pri{ background:rgba(255,255,255,.22); font-size:9.5px; padding:2px 6px; border-radius:4px; font-family:'SF Mono',monospace; }
+  .rm-p1 .rm-h{ background:linear-gradient(90deg,#DC2626,#EF4444); }
+  .rm-p2 .rm-h{ background:linear-gradient(90deg,#F59E0B,#FBBF24); }
+  .rm-p3 .rm-h{ background:linear-gradient(90deg,#14B8A6,#2DD4BF); }
+  .rm-body{ padding:9px 11px; }
+  .rm-body ul{ margin:0; padding:0 0 0 15px; font-size:11.5px; color:var(--ink); line-height:1.55; }
+  .rm-body li{ margin-bottom:2px; }
+  .rm-body li b{ font-weight:700; color:var(--brand-ink); }
+
+  /* ===== Team / Scope ===== */
+  .team{ display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:9px; }
+  .tc{ background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--r-md); padding:10px 12px; }
+  .tc .r{ font-family:'SF Mono',monospace; font-size:9.5px; letter-spacing:.14em; color:var(--warm); font-weight:800; margin-bottom:3px; }
+  .tc h4{ margin:0 0 3px; font-size:12.5px; font-weight:700; color:var(--ink); }
+  .tc .n{ font-size:11.5px; color:var(--ink); line-height:1.5; }
+  .tc .n b{ color:var(--brand); }
+  .tc.ex{ background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(14,165,233,.04)); border-color:rgba(124,58,237,.25); }
+  .tc.ex .r{ color:var(--purple); }
+  .tc.po{ background:linear-gradient(135deg,rgba(232,131,58,.06),rgba(201,169,97,.05)); border-color:rgba(232,131,58,.28); }
+  .tc.pt{ background:linear-gradient(135deg,rgba(16,185,129,.05),rgba(14,165,233,.04)); border-color:rgba(16,185,129,.25); }
+  .tc.pt .r{ color:var(--green); }
+
+  /* ===== Success criteria strip ===== */
+  .sc{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:4px; }
+  .sc-item{ background:var(--warm-soft); border:1px solid rgba(232,131,58,.3); border-radius:var(--r-sm); padding:7px 10px; text-align:center; }
+  .sc-item .k{ font-family:'SF Mono',monospace; font-size:9.5px; color:var(--warm); font-weight:800; letter-spacing:.1em; margin-bottom:2px; }
+  .sc-item .v{ font-size:12px; font-weight:700; color:var(--ink); line-height:1.3; }
+
+  /* ===== Footer ===== */
+  .ft{ margin-top:10px; padding-top:8px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; font-size:10px; color:var(--mute); font-family:'SF Mono',monospace; letter-spacing:.05em; }
+  .ft .brand{ color:var(--brand); font-weight:800; letter-spacing:.15em; }
+
+  /* ===== Print ===== */
+  @page { size: A4; margin: 0; }
+  @media print{
+    html,body{ background:#fff; }
+    .page{ box-shadow:none; margin:0; width:210mm; min-height:297mm; padding:13mm 12mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== Header ===== -->
+  <header class="hdr">
+    <div>
+      <div class="logo">ANTS · BRITZ · ENGAGEMENT PLATFORM</div>
+      <h1>Britz — Direction &amp; Requirement Brief</h1>
+      <div class="sub">1-page summary สำหรับ ExCom · Product Owner · Partner — sync เข้าใจตรงกัน</div>
+    </div>
+    <div class="meta">
+      <div><b>Version</b> · 1.0</div>
+      <div><b>Date</b> · 24 Apr 2026</div>
+      <div><b>Owner</b> · Nut (Founder/CEO)</div>
+    </div>
+  </header>
+
+  <!-- ===== 1. OBJECTIVES ===== -->
+  <section>
+    <div class="sh"><span class="num">01</span><h2>🎯 Objectives — เราทำสิ่งนี้เพื่ออะไร</h2><span class="tag">NORTH-STAR</span></div>
+    <div class="obj-grid">
+      <div class="obj">
+        <div class="lb">OBJ · 1 · PLATFORM</div>
+        <div class="t">สร้าง Britz ให้เป็น Engagement Platform ที่ scale สู่ตลาดต่างประเทศได้</div>
+        <div class="d">Tech Stack + AI พร้อม scale · รองรับ multi-market · consolidate ทุก channel (SMS/LINE/Email/eCommerce/CRM) ให้เข้าจุดเดียว · พร้อม global-ready จาก day-1</div>
+      </div>
+      <div class="obj">
+        <div class="lb">OBJ · 2 · AI LEVERAGE</div>
+        <div class="t">ใช้ AI Orchestration + knowledge/skills ของ partner สร้าง ANTS AI Standard Framework</div>
+        <div class="d">เพิ่ม efficiency ใน 3 ด้านหลัก — (a) Development · (b) Testing/QA · (c) Documentation — ให้ทีมเล็กทำงานได้เท่าทีมใหญ่ (10–16× leverage)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. PAIN POINTS ===== -->
+  <section>
+    <div class="sh"><span class="num">02</span><h2>⚠️ Background &amp; Pain Points — ทำไมต้องทำตอนนี้</h2><span class="tag">WHY NOW</span></div>
+    <div class="pain-grid">
+      <div class="pain">
+        <div class="ic">🧩</div>
+        <div class="t">Fragmented Platforms</div>
+        <div class="d">ลูกค้าต้องเข้าหลาย URL · หลาย username/password — ไม่มี single entry point. สร้าง friction + support cost สูง</div>
+      </div>
+      <div class="pain">
+        <div class="ic">📦</div>
+        <div class="t">300+ Duplicate Products</div>
+        <div class="d">Application/Infra ปัจจุบันจัดการ at scale ไม่ได้ — prods ซ้ำกันมากเพราะแยกตาม environment. Maintenance + deployment เกิด error ง่าย</div>
+      </div>
+      <div class="pain">
+        <div class="ic">🛠️</div>
+        <div class="t">Manual Maintenance Overhead</div>
+        <div class="d">ตรวจสอบ/แก้ไข/ deploy ยังเป็นงาน manual เยอะ — เสี่ยงต่อ human error · ช้า · ไม่ audit-trail ชัด. ต้องการ AI-assisted automation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. ROADMAP ===== -->
+  <section>
+    <div class="sh"><span class="num">03</span><h2>📅 Consolidated Roadmap — Priority P1 → P3</h2><span class="tag">PHASED DELIVERY</span></div>
+    <div class="rm">
+      <div class="rm-col rm-p1">
+        <div class="rm-h"><span>P1 · HIGH · Communication Core</span><span class="pri">NOW</span></div>
+        <div class="rm-body">
+          <ul>
+            <li><b>SMS</b> — legacy cash-cow · migrate ไป Britz</li>
+            <li><b>Email</b> — transactional + marketing</li>
+            <li><b>LINE LON</b> — LINE Official + Notify</li>
+            <li><b>eCommerce</b> — checkout + product catalog</li>
+            <li><b>Payment Gateway</b> — unified checkout</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rm-col rm-p2">
+        <div class="rm-h"><span>P2 · MEDIUM · Ops &amp; Advanced Comms</span><span class="pri">NEXT</span></div>
+        <div class="rm-body">
+          <ul>
+            <li><b>MMS</b> — rich media messaging</li>
+            <li><b>2-way SMS</b> — inbound reply routing</li>
+            <li><b>Admin Modules</b> — Permission · Routing · User Management</li>
+            <li><b>Operational tooling</b> — audit logs · monitoring</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rm-col rm-p3">
+        <div class="rm-h"><span>P3 · LOW · CRM &amp; Loyalty</span><span class="pri">LATER</span></div>
+        <div class="rm-body">
+          <ul>
+            <li><b>Page</b> · landing/campaign builder</li>
+            <li><b>People</b> · contact database</li>
+            <li><b>eCoupon</b> · digital coupon engine</li>
+            <li><b>Reward · Point · Redemption</b></li>
+            <li><b>Gamification</b> — engagement mechanics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. TEAM ===== -->
+  <section>
+    <div class="sh"><span class="num">04</span><h2>👥 Team &amp; Scope — ใครทำอะไร</h2><span class="tag">ACCOUNTABILITY</span></div>
+    <div class="team">
+      <div class="tc ex">
+        <div class="r">EXECUTIVE COMMITTEE · EXCOM</div>
+        <h4>Direction &amp; Governance</h4>
+        <div class="n"><b>CEO × 2</b> — vision, strategy, budget approval<br/><b>CTO × 2</b> — tech architecture, standard review</div>
+      </div>
+      <div class="tc po">
+        <div class="r">PRODUCT OWNER · FULL-STACK</div>
+        <h4>Delivery Lead</h4>
+        <div class="n"><b>จาว</b> — Product ownership, backlog prioritization, full-stack build &amp; integration</div>
+      </div>
+      <div class="tc pt">
+        <div class="r">PARTNER TEAM</div>
+        <h4>AI Orchestration &amp; Skills</h4>
+        <div class="n"><b>พร</b> · <b>มอส</b> — AI framework co-build, knowledge/skill transfer ไปยัง ANTS standard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. SUCCESS CRITERIA ===== -->
+  <section>
+    <div class="sh"><span class="num">05</span><h2>✅ Success Criteria — เราจะรู้ได้อย่างไรว่าสำเร็จ</h2><span class="tag">KPI · 90–180 DAYS</span></div>
+    <div class="sc">
+      <div class="sc-item"><div class="k">SINGLE ENTRY</div><div class="v">1 URL · 1 login<br/>ลด 300+ prods ซ้ำ ≥ 70%</div></div>
+      <div class="sc-item"><div class="k">P1 LIVE</div><div class="v">SMS · Email · LINE · eComm · Payment<br/>ใช้งานจริง ≤ 90 วัน</div></div>
+      <div class="sc-item"><div class="k">AI EFFICIENCY</div><div class="v">Dev/QA/Doc<br/>เร็วขึ้น ≥ 3×</div></div>
+      <div class="sc-item"><div class="k">GLOBAL READY</div><div class="v">Multi-region infra<br/>พร้อมรับ client ตปท.</div></div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="ft">
+    <div class="brand">ANTS 2.0 · BRITZ DIRECTION BRIEF</div>
+    <div>1-Page Summary · v1.0 · 24 Apr 2026 · กรุณา comment ใน Notion comment thread</div>
+  </footer>
+
+</div>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- Canonical V/M SSOT alignment · auto-injected · do not remove   -->
+<!-- Pair: /canonical/vm-status.json + canonical-facts.md           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section style="margin:32px auto;max-width:960px;padding:18px 22px;background:#f8fafc;border-left:4px solid #6366f1;border-radius:8px;font:13px/1.6 -apple-system,BlinkMacSystemFont,sans-serif;color:#475569;">
+  <div style="font-weight:600;color:#1e293b;margin-bottom:8px;">📌 Canonical V/M Reference (SSOT)</div>
+  <div style="margin:4px 0;"><strong>Vision (canonical):</strong> <em>Human wisdom. AI at scale. Wisdom for everyone.</em></div>
+  <div style="margin:4px 0;"><strong>Mission (canonical):</strong> <em>Empower people. Build sustainable businesses. Scale crafted AI to the world.</em></div>
+  <div style="font-size:11px;color:#94a3b8;margin-top:8px;">Source: <code>/canonical/canonical-facts.md</code> + <code>/canonical/vm-status.json</code> · Locked Apr 23, 2026 · Op 16 SSOT discipline</div>
+</section>
+
+</body>
+</html>

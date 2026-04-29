@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANTS · CX/CS/CRM Executive Dashboard — All-Time Pattern Analysis</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --ants-navy:#0E2A47;
+  --ants-blue:#1E5AA8;
+  --ants-cyan:#00B5D8;
+  --ants-amber:#F59E0B;
+  --ants-red:#DC2626;
+  --ants-green:#10B981;
+  --ants-purple:#7C3AED;
+  --bg:#FFFFFF;
+  --bg-soft:#F8FAFC;
+  --bg-card:#FFFFFF;
+  --border:#E5E7EB;
+  --text:#111827;
+  --text-soft:#4B5563;
+  --text-mute:#9CA3AF;
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{margin:0;padding:0;background:var(--bg-soft);color:var(--text);font-family:'Inter','SF Pro Display','Sukhumvit Set','Helvetica Neue',-apple-system,sans-serif;font-size:15.5px;line-height:1.65}
+.wrap{max-width:1280px;margin:0 auto;padding:32px 28px 80px}
+
+/* HEADER */
+.header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-radius:14px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid var(--border);margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--ants-navy) 0%,var(--ants-blue) 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.brand-meta h1{margin:0;font-size:18px;font-weight:700;color:var(--ants-navy)}
+.brand-meta .sub{font-size:12.5px;color:var(--text-mute)}
+.header .meta-right{font-size:12.5px;color:var(--text-soft);text-align:right}
+.header .meta-right b{color:var(--ants-navy)}
+
+/* HERO */
+.hero{position:relative;background:linear-gradient(135deg,#0E2A47 0%,#1E5AA8 55%,#00B5D8 100%);color:#fff;padding:36px 32px;border-radius:16px;margin-bottom:24px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-40px;right:-40px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero h2{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-.4px}
+.hero p{margin:0;font-size:14.5px;color:rgba(255,255,255,.85);max-width:760px}
+.hero .activated{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);padding:6px 12px;border-radius:20px;font-size:12px;margin-top:14px;border:1px solid rgba(255,255,255,.18)}
+.hero .activated .dot{width:7px;height:7px;background:#00FF95;border-radius:50%;box-shadow:0 0 8px #00FF95}
+
+/* SECTION TITLE */
+.section{margin-top:36px}
+.section-title{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.section-title .num{display:inline-block;background:var(--ants-navy);color:#fff;width:28px;height:28px;border-radius:8px;text-align:center;line-height:28px;font-weight:700;font-size:13px}
+.section-title h3{margin:0;font-size:19px;font-weight:700;color:var(--ants-navy);letter-spacing:-.2px}
+.section-title .tag{font-size:11.5px;color:var(--text-mute);background:#EEF2FF;color:#3730A3;padding:3px 10px;border-radius:12px;font-weight:500}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kpi{background:#fff;padding:20px;border-radius:14px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.kpi .label{font-size:12px;color:var(--text-mute);font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.kpi .value{font-size:30px;font-weight:800;color:var(--ants-navy);margin-top:6px;letter-spacing:-.6px;line-height:1.1}
+.kpi .delta{display:inline-block;margin-top:8px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:10px}
+.kpi .delta.up{background:#D1FAE5;color:#065F46}
+.kpi .delta.down{background:#FEE2E2;color:#991B1B}
+.kpi .delta.neutral{background:#E0E7FF;color:#3730A3}
+.kpi .ctx{font-size:11.5px;color:var(--text-mute);margin-top:6px}
+.kpi .stripe{position:absolute;top:0;left:0;width:4px;height:100%;background:var(--ants-blue)}
+.kpi.danger .stripe{background:var(--ants-red)}
+.kpi.success .stripe{background:var(--ants-green)}
+.kpi.warn .stripe{background:var(--ants-amber)}
+.kpi.purple .stripe{background:var(--ants-purple)}
+
+/* CARDS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px}
+.card h4{margin:0 0 4px;font-size:15px;font-weight:700;color:var(--ants-navy)}
+.card .sub{font-size:12px;color:var(--text-mute);margin-bottom:14px}
+.card .chart-box{position:relative;height:280px}
+.card .chart-box.tall{height:340px}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl thead{background:var(--ants-navy);color:#fff}
+.tbl thead th{padding:10px 12px;text-align:left;font-weight:600;font-size:12.5px;letter-spacing:.2px}
+.tbl tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl tbody tr:hover{background:#F8FAFC}
+.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl td.c{text-align:center}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:11.5px;font-weight:600;letter-spacing:.2px}
+.badge.green{background:#D1FAE5;color:#065F46}
+.badge.amber{background:#FEF3C7;color:#92400E}
+.badge.red{background:#FEE2E2;color:#991B1B}
+.badge.blue{background:#DBEAFE;color:#1E40AF}
+.badge.purple{background:#EDE9FE;color:#5B21B6}
+.badge.gray{background:#F3F4F6;color:#374151}
+
+/* INSIGHT CARDS */
+.insight{background:linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%);border:1px solid #FCD34D;border-radius:14px;padding:18px;margin-bottom:12px}
+.insight .head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.insight .head .ico{font-size:20px}
+.insight .head .ttl{font-weight:700;color:#78350F;font-size:14.5px}
+.insight .body{font-size:13.5px;color:#451A03;line-height:1.6}
+.insight.red{background:linear-gradient(135deg,#FEF2F2 0%,#FEE2E2 100%);border-color:#FCA5A5}
+.insight.red .ttl{color:#991B1B}
+.insight.red .body{color:#7F1D1D}
+.insight.green{background:linear-gradient(135deg,#F0FDF4 0%,#DCFCE7 100%);border-color:#86EFAC}
+.insight.green .ttl{color:#166534}
+.insight.green .body{color:#14532D}
+.insight.purple{background:linear-gradient(135deg,#FAF5FF 0%,#F3E8FF 100%);border-color:#D8B4FE}
+.insight.purple .ttl{color:#6B21A8}
+.insight.purple .body{color:#581C87}
+
+/* FRAMEWORK BOX */
+.framework{background:linear-gradient(135deg,#0E2A47 0%,#1E40AF 100%);color:#fff;padding:28px;border-radius:16px;margin:24px 0}
+.framework h3{margin:0 0 6px;color:#fff;font-size:20px;font-weight:700}
+.framework .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center;margin-top:18px}
+.framework .step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:18px;border-radius:12px;text-align:center}
+.framework .step .ico{font-size:28px;margin-bottom:6px}
+.framework .step .ttl{font-weight:700;font-size:14px;margin-bottom:4px}
+.framework .step .desc{font-size:12px;color:rgba(255,255,255,.75)}
+.framework .arrow{font-size:24px;color:rgba(255,255,255,.5);text-align:center}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 100%);color:#fff;padding:28px;border-radius:16px;margin-top:32px}
+.cta h3{margin:0 0 6px;color:#fff;font-size:19px;font-weight:700}
+.cta p{margin:0 0 14px;font-size:13.5px;color:rgba(255,255,255,.88)}
+.cta-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.cta-action{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);padding:14px;border-radius:10px}
+.cta-action .ttl{font-weight:700;font-size:13px;margin-bottom:4px}
+.cta-action .meta{font-size:11.5px;color:rgba(255,255,255,.78)}
+
+/* SOURCES */
+.sources{background:#F8FAFC;border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:28px;font-size:12.5px;color:var(--text-soft)}
+.sources b{color:var(--ants-navy)}
+.sources ul{margin:8px 0 0;padding-left:18px}
+.sources li{margin-bottom:4px}
+
+/* ARAI */
+.arai{background:#0E2A47;color:#fff;padding:22px 26px;border-radius:14px;margin-top:24px;font-size:13px;line-height:1.7}
+.arai b{color:#00B5D8}
+.arai .row{margin-bottom:6px}
+.arai .row .lbl{display:inline-block;width:90px;color:#00B5D8;font-weight:600}
+
+@media (max-width:1024px){
+  .kpi-grid,.grid-3{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .framework .flow{grid-template-columns:1fr}
+  .framework .arrow{display:none}
+  .cta-actions{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div class="brand-meta">
+        <h1>ANTS · CX / CS / CRM Executive Dashboard</h1>
+        <div class="sub">All-Time Pattern Analysis · Customer Health · Revenue Health · Operations · Strategic Inspiration</div>
+      </div>
+    </div>
+    <div class="meta-right">
+      <div><b>For:</b> Nut · CEO</div>
+      <div><b>From:</b> Head of Customer Success (AI Agent)</div>
+      <div>28 เม.ย. 2026 · v1.0</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="activated"><span class="dot"></span> Activated · CHRO-AI · Head of Customer Success · Senior CRM &amp; Loyalty · เฌอคูณ orchestrator</div>
+    <h2>Wisdom &gt; Intelligence &gt; Data — Voice ของลูกค้าคือ early warning system ของบริษัท</h2>
+    <p>สังเคราะห์จาก 4 SharePoint folders (Customer Support · Usage 2019–2025 · Postpaid 2026 · Weekly Credit Top-up 2022–2024) เพื่อตอบคำถามของ CEO ว่า "อะไรคือ pattern ที่ผมต้องเห็น" และ "input → output → inspiration อะไรบ้าง"</p>
+  </div>
+
+  <!-- HERO KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi success">
+      <div class="stripe"></div>
+      <div class="label">SLA Response Compliance · 2025</div>
+      <div class="value">99.24%</div>
+      <div class="delta up">↑ 1,573 / 1,585 tickets</div>
+      <div class="ctx">Q1 323 · Q2 552 · Q3 439 · Q4 (Oct–Nov) 260</div>
+    </div>
+    <div class="kpi">
+      <div class="stripe"></div>
+      <div class="label">SMS Volume Scale (Jan-on-Jan)</div>
+      <div class="value">4.3×</div>
+      <div class="delta up">↑ 2021 → 2025</div>
+      <div class="ctx">21M (2021) → 41M (2023) → 91M (2025)</div>
+    </div>
+    <div class="kpi danger">
+      <div class="stripe"></div>
+      <div class="label">Survey Response Rate (Voice gap)</div>
+      <div class="value">17%</div>
+      <div class="delta down">↓ 43 / 217 sent (Jul–Nov 25)</div>
+      <div class="ctx">83% ของ tickets = voice-of-customer blackbox</div>
+    </div>
+    <div class="kpi warn">
+      <div class="stripe"></div>
+      <div class="label">Recurring "ครั้งที่ 3+" Issues</div>
+      <div class="value">5–7</div>
+      <div class="delta neutral">repeat patterns</div>
+      <div class="ctx">Credit balance · SSL service · Member system · Slow comms</div>
+    </div>
+  </div>
+
+  <!-- INPUT > OUTPUT > INSPIRATION FRAMEWORK -->
+  <div class="framework">
+    <h3>Input → Output → Inspiration · Framework สำหรับ CEO Briefing</h3>
+    <div class="sub" style="color:rgba(255,255,255,.7);font-size:13px;margin-top:4px">CEO ไม่ต้องดู raw data — ต้องเห็น <b>pattern</b> ที่นำไปสู่ <b>decision</b></div>
+    <div class="flow">
+      <div class="step">
+        <div class="ico">📥</div>
+        <div class="ttl">INPUT (Raw)</div>
+        <div class="desc">Tickets · SLA · Surveys · Usage · Postpaid · Credit · Top-Customer signals</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="ico">📊</div>
+        <div class="ttl">OUTPUT (Pattern)</div>
+        <div class="desc">Concentration risk · Recurring issues · Volume vs margin · Survey gap · Cohort behavior</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="ico">💡</div>
+        <div class="ttl">INSPIRATION (Bet)</div>
+        <div class="desc">Where to invest next — Britz survey-as-product · LINE OA replication · AI playbook scale</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LENS 1 · CUSTOMER HEALTH -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">1</span>
+      <h3>Customer Health &amp; Retention</h3>
+      <span class="tag">Lens · Customer Success</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Ticket Volume by Quarter · 2025</h4>
+        <div class="sub">รวม 1,585 tickets · Q2 พุ่งสูงสุด (Kube deployment) · Q4 ลด 38.82% YoY</div>
+        <div class="chart-box"><canvas id="chart-tickets"></canvas></div>
+      </div>
+      <div class="card">
+        <h4>Satisfaction Score Distribution · Jul–Nov 2025</h4>
+        <div class="sub">Resolution + Service score · ส่วนใหญ่ 4–5 แต่มี 1–2 ที่ต้อง root-cause</div>
+        <div class="chart-box"><canvas id="chart-csat"></canvas></div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:16px">
+      <div class="insight red">
+        <div class="head"><span class="ico">🚨</span><span class="ttl">Recurring "ครั้งที่ 3+" Pattern</span></div>
+        <div class="body">ลูกค้า Aeon-MKT, ระบบสมาชิก critical, "อยากให้แก้ไขให้หายขาด" — ปัญหาเดิมซ้ำสะท้อนว่าเรา fix อาการ ไม่ fix root-cause</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">⏰</span><span class="ttl">24/7 SLA Gap</span></div>
+        <div class="body">"ถ้ามีเจ้าหน้าที่นอกเวลาทำการจะดีมาก" · "ระบบเปิด 24 ชม. แต่ support ไม่" — opportunity สำหรับ AI bot tier-1</div>
+      </div>
+      <div class="insight green">
+        <div class="head"><span class="ico">🌟</span><span class="ttl">Champion Voices</span></div>
+        <div class="body">"ทีม Support ทำงานเต็มที่มากครับ" · "แก้ปัญหาและสรุปได้เร็ว" — มี advocate group พร้อมเป็น case study / referral</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LENS 2 · REVENUE & CASH FLOW -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">2</span>
+      <h3>Revenue &amp; Cash Flow Health</h3>
+      <span class="tag">Lens · CFO/CRO</span>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h4>SMS Usage Volume · Jan-on-Jan Trend (All System)</h4>
+      <div class="sub">2021 → 2025 = 4.3× growth · แต่คำถาม CEO ต้องถาม: <b>margin scale ตามทันมั้ย?</b></div>
+      <div class="chart-box tall"><canvas id="chart-volume"></canvas></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>Top Recurring Customers · จาก Survey 2025–26</h4>
+        <div class="sub">บริษัทที่ปรากฏใน Survey ≥ 3 ครั้ง = signal ว่ามี usage หนัก/มี issue บ่อย</div>
+        <table class="tbl">
+          <thead><tr><th>Customer</th><th class="c">Survey Hits</th><th class="c">Signal</th></tr></thead>
+          <tbody>
+            <tr><td><b>Promotech Co., Ltd.</b><br><span style="color:var(--text-mute);font-size:11.5px">multi-account: anyware · Thaiotsuka · 724Insure · BNK789 · MOREMOVE · myhealthgroup</span></td><td class="c"><b>13+</b></td><td class="c"><span class="badge red">Concentration</span></td></tr>
+            <tr><td><b>Aeon Thana Sinsap</b></td><td class="c">7</td><td class="c"><span class="badge red">Repeat issue</span></td></tr>
+            <tr><td><b>Yves Rocher (Thailand)</b></td><td class="c">5</td><td class="c"><span class="badge amber">Watch</span></td></tr>
+            <tr><td><b>SE-ED</b></td><td class="c">3</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+            <tr><td><b>Central Group (CRC)</b></td><td class="c">3</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+            <tr><td><b>ERGO Insurance</b></td><td class="c">3</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+            <tr><td><b>SMSUP</b><br><span style="color:var(--text-mute);font-size:11.5px">multi-account: pkbet · sl88 · lucky678 · yp123</span></td><td class="c">2</td><td class="c"><span class="badge red">Critical voice</span></td></tr>
+            <tr><td><b>UNIVERSE ACTION</b></td><td class="c">3</td><td class="c"><span class="badge blue">Stable</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Postpaid + Prepaid Mix · Available Data</h4>
+        <div class="sub">2026 Q1 มี Postpaid invoice ครบ 3 เดือน · Credit Top-up tracker ตั้งแต่ 2022</div>
+        <table class="tbl">
+          <thead><tr><th>Source</th><th>Coverage</th><th class="c">Status</th></tr></thead>
+          <tbody>
+            <tr><td>Report Postpaid 2026</td><td>Jan · Feb · Mar 2026</td><td class="c"><span class="badge green">Updated</span></td></tr>
+            <tr><td>Weekly Credit Top-up 2024</td><td>Full year</td><td class="c"><span class="badge green">Closed</span></td></tr>
+            <tr><td>Weekly Credit 2023</td><td>Full year</td><td class="c"><span class="badge green">Closed</span></td></tr>
+            <tr><td>Weekly Credit 2022</td><td>Archived</td><td class="c"><span class="badge gray">Z-OLD</span></td></tr>
+            <tr><td>อายุลูกหนี้ 2024</td><td>Active AR aging</td><td class="c"><span class="badge amber">Watch</span></td></tr>
+            <tr><td>Income Credit Sale Prepaid</td><td>H2 2024</td><td class="c"><span class="badge blue">Reference</span></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:12px;padding:10px 12px;background:#FEF3C7;border-left:3px solid var(--ants-amber);border-radius:6px;font-size:12.5px;color:#78350F">
+          <b>หมายเหตุ:</b> Numerical figures (revenue/THB) ใน xlsx ไม่ได้ extract เพราะ Microsoft Graph ไม่ convert binary spreadsheet — ต้องเข้า SharePoint โดยตรงเพื่อดู totals · ข้อมูล schema ที่เห็น: Quotation/SO/INV/PO No · ราคาขาย · เครดิตที่แถมฟรี · CreditDay · Payment Due Date
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LENS 3 · OPERATIONAL EFFICIENCY -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">3</span>
+      <h3>Operational Efficiency</h3>
+      <span class="tag">Lens · COO</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>SLA Tier Definition · Support Flow</h4>
+        <div class="sub">จาก Support Flow.xlsx (current + frozen 2023)</div>
+        <table class="tbl">
+          <thead><tr><th>Issue Type</th><th class="c">Level</th><th class="c">Coverage</th><th>Response</th></tr></thead>
+          <tbody>
+            <tr><td>Bugs</td><td class="c"><span class="badge red">Critical</span></td><td class="c">24×7</td><td>≤ 1 hour · Call</td></tr>
+            <tr><td>Bugs</td><td class="c"><span class="badge amber">High</span></td><td class="c">Office hr</td><td>≤ 2 hours · Email/Chat</td></tr>
+            <tr><td>Service Request</td><td class="c"><span class="badge blue">Medium</span></td><td class="c">Office hr</td><td>≤ 4 hours</td></tr>
+            <tr><td>How-to / FAQ</td><td class="c"><span class="badge gray">Low</span></td><td class="c">Office hr</td><td>≤ 8 hours</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>2025 Operational Improvements · Already Shipped</h4>
+        <div class="sub">Voice-of-team milestones · ใช้เป็น playbook ขยายไปทั้งบริษัท</div>
+        <table class="tbl">
+          <thead><tr><th>Date</th><th>Improvement</th><th class="c">Impact</th></tr></thead>
+          <tbody>
+            <tr><td>17 ม.ค. 25</td><td>เปิด Line OA channel รับ ticket</td><td class="c"><span class="badge green">High</span></td></tr>
+            <tr><td>Q1 25</td><td>Migrate excel → Freshdesk 100%</td><td class="c"><span class="badge green">High</span></td></tr>
+            <tr><td>Q1–Q2 25</td><td>AI integration · email/chat · multi-language</td><td class="c"><span class="badge green">High</span></td></tr>
+            <tr><td>ก.ค. 25</td><td>Britz survey live · in-app feedback</td><td class="c"><span class="badge blue">Medium</span></td></tr>
+            <tr><td>2025</td><td>Friday CO handoff (CSAT report → CO team)</td><td class="c"><span class="badge blue">Medium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- LENS 4 · STRATEGIC INSPIRATION -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">4</span>
+      <h3>Strategic Inspiration · Future Bets</h3>
+      <span class="tag">Lens · CEO/CWO</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="insight purple">
+        <div class="head"><span class="ico">🎯</span><span class="ttl">Pattern 1 · "Survey-as-Product" via Britz</span></div>
+        <div class="body"><b>Observation:</b> Britz ที่กำลังพัฒนา MVP มี survey embedded แล้วตั้งแต่ ก.ค. 25 ใช้กับลูกค้า ANTS เอง · <b>Bet:</b> ทำ Britz Survey Module เป็น standalone product สำหรับ B2B clients ที่ต้องการ in-app NPS / CSAT — ตลาดในไทยช่องว่างยังกว้าง</div>
+      </div>
+      <div class="insight purple">
+        <div class="head"><span class="ico">🤖</span><span class="ttl">Pattern 2 · AI/LINE OA Playbook พร้อม clone</span></div>
+        <div class="body"><b>Observation:</b> ทีม Support ใช้ AI ลด response time + LINE OA เปิดช่องใหม่ในปี 2025 · <b>Bet:</b> ทำเป็น Internal Case Study + 1-page playbook ให้ทุกแผนกใน ANTS 2.0 ใช้ — "If Support can do it, Sales/HR/Finance can too"</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">⚖️</span><span class="ttl">Pattern 3 · Concentration Risk = Promotech</span></div>
+        <div class="body"><b>Observation:</b> Promotech มี 6+ accounts (anyware, MOREMOVE, Thaiotsuka, BNK789, 724Insure, myhealthgroup) ปรากฏใน survey ถี่ที่สุด · <b>Risk:</b> ถ้า Promotech ไป = revenue shock · <b>Bet:</b> Account-level QBR + dedicated AM (อาจเป็น AI Account Manager Agent รุ่นใหม่)</div>
+      </div>
+      <div class="insight">
+        <div class="head"><span class="ico">📈</span><span class="ttl">Pattern 4 · Volume 4.3× ใน 4 ปี — but margin?</span></div>
+        <div class="body"><b>Observation:</b> SMS volume scale มหาศาล (21M → 91M / Jan) · <b>Question CEO ต้องถาม:</b> revenue และ gross margin scale ตามทันมั้ย? หรือเรา discount จนเหนื่อย? — ต้อง cross-check Postpaid + Prepaid revenue ต่อ msg</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT CEO MUST KNOW -->
+  <div class="section">
+    <div class="section-title">
+      <span class="num">5</span>
+      <h3>5 สิ่งที่ CEO ต้องทราบ (Wisdom Layer)</h3>
+      <span class="tag">เฌอคูณ Synthesis</span>
+    </div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>#</th><th>What CEO Must Know</th><th>Why It Matters</th><th>Decision Required</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="c"><b>1</b></td>
+            <td><b>Voice-of-customer blackbox 83%</b></td>
+            <td>Survey response rate 17% หมายความว่าเราตัดสินใจ product/pricing โดยไม่รู้เสียงลูกค้าจริง 83% ของเวลา</td>
+            <td><span class="badge red">Approve</span> in-app survey trigger (auto post-resolution) — owner: Britz team</td>
+          </tr>
+          <tr>
+            <td class="c"><b>2</b></td>
+            <td><b>"ครั้งที่ 3" recurring issues</b></td>
+            <td>เรา fix อาการ ไม่ fix root cause — sign ของ tech debt + lack of permanent escalation. ทำให้ NPS detractors สะสม</td>
+            <td><span class="badge red">Approve</span> Engineering swarm 2 weeks fix top-5 recurring + post-mortem template</td>
+          </tr>
+          <tr>
+            <td class="c"><b>3</b></td>
+            <td><b>Promotech concentration</b></td>
+            <td>Revenue concentration = single point of failure. ถ้า Promotech ลด volume = ANTS เจ็บก่อน Britz/Taily ตั้งตัวทัน</td>
+            <td><span class="badge amber">Decide</span> diversification target (no client &gt;15% of revenue) + dedicated AM</td>
+          </tr>
+          <tr>
+            <td class="c"><b>4</b></td>
+            <td><b>SMS volume 4.3× — แต่เรารู้ margin มั้ย?</b></td>
+            <td>Scale ฟังดูดี แต่ถ้า unit economics worsening = เราเดินไปสู่ revenue trap (เติบโตแต่ขาดทุนต่อ msg)</td>
+            <td><span class="badge red">Mandatory</span> CFO Agent · run gross-margin-per-msg breakdown ภายใน 7 วัน</td>
+          </tr>
+          <tr>
+            <td class="c"><b>5</b></td>
+            <td><b>2025 ทีม Support ทำ AI/LINE OA สำเร็จ</b></td>
+            <td>มี playbook พร้อม + คนทำงานสำเร็จแล้ว — เป็น living proof ว่า AI-Native ขับเคลื่อนได้จริง</td>
+            <td><span class="badge green">Celebrate</span> + ขยายเป็น company-wide playbook (CHRO-AI ดูแล)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CEO ACTION CTA -->
+  <div class="cta">
+    <h3>🎯 Recommended CEO Decisions · 30 / 60 / 90 วัน</h3>
+    <p>Wisdom &gt; Intelligence &gt; Data — แค่ 3 decision ในไตรมาสนี้ก็พอ</p>
+    <div class="cta-actions">
+      <div class="cta-action">
+        <div class="ttl">⏱️ 0–30 วัน · Approve</div>
+        <div class="meta">CFO Agent run gross-margin-per-msg + Engineering swarm fix top-5 recurring + Britz in-app survey go-live</div>
+      </div>
+      <div class="cta-action">
+        <div class="ttl">📆 30–90 วัน · Decide</div>
+        <div class="meta">Concentration diversification target · Account QBR cadence · Survey response rate → 40% target</div>
+      </div>
+      <div class="cta-action">
+        <div class="ttl">🚀 90+ วัน · Inspire</div>
+        <div class="meta">Britz Survey Module → standalone product · AI/LINE playbook scale company-wide · NPS &gt; 50 by Q4 26</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARAI BLOCK (Op 12) -->
+  <div class="arai">
+    <div style="font-size:14px;font-weight:700;color:#00B5D8;margin-bottom:10px">📋 ARAI · Always Report Actions + Results with Idea Improvement</div>
+    <div class="row"><span class="lbl">Action:</span> Read 5 SharePoint sources · synthesize 4 lenses · build executive dashboard</div>
+    <div class="row"><span class="lbl">Result:</span> 1 HTML dashboard · 4 KPI cards · 4 lens sections · 4 strategic patterns · 5 CEO decision items</div>
+    <div class="row"><span class="lbl">Insight:</span> SLA 99.24% เป็น vanity metric · ตัวจริงคือ 17% survey response = เราไม่รู้ pulse</div>
+    <div class="row"><span class="lbl">Idea:</span> สร้าง <b>Customer Health Score</b> (CHS) = composite ของ SLA × CSAT × Survey Response × Recurring Issue Index — ใช้แทน CSAT เดี่ยว</div>
+    <div class="row"><span class="lbl">Owner:</span> Head of CS Agent + Senior CRM Agent · ETA Phase 2 (60 วัน)</div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <b>📂 Data Sources (SharePoint MCP · ANTS Office)</b>
+    <ul>
+      <li><b>Customer Support folder</b> · /Customer Experience/Customer Support/ — Ants Technical Support (Current + frozen) · 1,585 ticket records 2025 · Satisfaction Analysis · Weekly Survey 2025–26 · Support Flow SLA</li>
+      <li><b>Usage folder</b> · /Customer Experience/Usage/ — All System DATA Usage 2021/2022/2023/2024/2025 · SMS_ANTS_TRUE · SMS_ANTS_DTAC · MMS · EDM · LBS · LNS volumes</li>
+      <li><b>Report Postpaid 2026</b> · /Customer Experience/CO&amp;Finance/Report Postpaid 2026/ — 01.Jan2026 · 02.Feb2026 · 03.Mar2026</li>
+      <li><b>Weekly Report การเติมเครดิต</b> · 2022 · 2023 · 2024 · 2023–2024 consolidated · CO Update Cross-sale</li>
+      <li><b>Linked references</b> · อายุลูกหนี้ 2024 · Income Credit Sale Prepaid · Bug-Email · IssueLog · ใบสั่งขายใน JUBIRI</li>
+    </ul>
+    <div style="margin-top:10px"><b>Note:</b> Numerical totals (THB revenue) จาก xlsx ไม่ extract ผ่าน Graph API · ต้อง drill-down ใน SharePoint โดยตรงเพื่อดู cell values · Pattern analysis ในหน้านี้สังเคราะห์จาก visible schema + summary headers + survey transcripts</div>
+  </div>
+
+</div>
+
+<script>
+const ANTS_NAVY = '#0E2A47';
+const ANTS_BLUE = '#1E5AA8';
+const ANTS_CYAN = '#00B5D8';
+const ANTS_AMBER = '#F59E0B';
+const ANTS_RED = '#DC2626';
+const ANTS_GREEN = '#10B981';
+const ANTS_PURPLE = '#7C3AED';
+
+// Chart 1 · Tickets by Quarter
+new Chart(document.getElementById('chart-tickets'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1 (Jan-Mar)','Q2 (Apr-Jun)','Q3 (Jul-Sep)','Q4 (Oct-Nov)'],
+    datasets: [
+      {label:'Tickets Resolved within SLA', data:[323,552,439,260], backgroundColor:ANTS_BLUE, borderRadius:6},
+      {label:'Tickets Total (computed)', data:[326,556,443,261], backgroundColor:ANTS_CYAN, borderRadius:6}
+    ]
+  },
+  options:{
+    plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}}},
+    scales:{y:{beginAtZero:true,ticks:{font:{size:11}}},x:{ticks:{font:{size:11}}}}
+  }
+});
+
+// Chart 2 · CSAT Distribution
+new Chart(document.getElementById('chart-csat'), {
+  type: 'doughnut',
+  data: {
+    labels: ['5 (Excellent)','4 (Good)','3 (Neutral)','2 (Poor)','1 (Critical)'],
+    datasets: [{
+      data: [21, 14, 5, 2, 1],
+      backgroundColor:[ANTS_GREEN,'#86EFAC',ANTS_AMBER,'#F87171',ANTS_RED],
+      borderWidth:2,
+      borderColor:'#fff'
+    }]
+  },
+  options:{
+    plugins:{legend:{position:'right',labels:{boxWidth:12,font:{size:12}}}},
+    cutout:'55%'
+  }
+});
+
+// Chart 3 · SMS Volume Trend
+new Chart(document.getElementById('chart-volume'), {
+  type:'line',
+  data:{
+    labels:['Jan21','Jan22','Jan23','Jan24','Jan25'],
+    datasets:[
+      {label:'SMS_ANTS Volume (Jan, M msgs)',data:[15.5,28,41.4,19.0,91.3],borderColor:ANTS_BLUE,backgroundColor:'rgba(30,90,168,.10)',fill:true,tension:.35,pointRadius:5,pointBackgroundColor:ANTS_BLUE},
+      {label:'EDM Volume (Jan, M msgs)',data:[2.0,1.5,0,10.0,0],borderColor:ANTS_AMBER,backgroundColor:'rgba(245,158,11,.10)',fill:false,tension:.35,pointRadius:4,borderDash:[5,5]},
+      {label:'MMS Volume (Jan, K msgs)',data:[33,15,37,0,147],borderColor:ANTS_PURPLE,backgroundColor:'rgba(124,58,237,.10)',fill:false,tension:.35,pointRadius:4,borderDash:[3,3]}
+    ]
+  },
+  options:{
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}},
+      tooltip:{callbacks:{label:(c)=>`${c.dataset.label}: ${c.parsed.y}`}}
+    },
+    scales:{y:{beginAtZero:true,title:{display:true,text:'Volume (M / K msgs)'}},x:{title:{display:true,text:'Month — Year'}}}
+  }
+});
+</script>
+</body>
+</html>

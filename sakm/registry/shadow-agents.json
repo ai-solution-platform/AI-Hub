@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "registry_version": "v1.0",
+    "last_updated": "2026-04-27",
+    "last_full_sweep": null,
+    "owner": "KM #51 + #63 FJA-CDCA",
+    "vm_status_ref": "/canonical/vm-status.json",
+    "canonical_facts_ref": "/canonical/canonical-facts.md",
+    "schema_ref": "/sakm/registry/shadow-agents.schema.json",
+    "philosophy": "Federated wisdom is real authority, not delegation. Collective intelligence is the write-back loop, not surveillance.",
+    "drift_thresholds_default": { "warning_days": 14, "blocker_days": 30, "blocker_section_count": 3 }
+  },
+  "shadows": [
+    {
+      "shadow_id": "agent_TBD__shadow_sc__20260427",
+      "agent_id": "#TBD",
+      "agent_name": "TBD — confirm with SC in 30-min session (see SESSION_HANDOFF Priority 0)",
+      "tier": null,
+      "exported_to": {
+        "holder_type": "dream_team_member",
+        "holder_name": "SC (Strategic Compliance)",
+        "contact": "TBD"
+      },
+      "version_at_export": "TBD",
+      "current_shadow_version": "TBD",
+      "current_master_version": "TBD",
+      "boundary_contract_ref": "/sakm/registry/contracts/agent_TBD__shadow_sc__20260427.yaml",
+      "status": "pending_signature",
+      "exported_date": "2026-04-TBD",
+      "last_sync_date": null,
+      "last_diff": null,
+      "divergence_status": "green",
+      "write_backs": [],
+      "cross_pollination_groups": ["compliance_cohort"],
+      "next_ceremony_date": "2026-05-04",
+      "notes": "First shadow registered · proof-point case study · feedback positive per Nut conversation 27 Apr 2026 K.15. Identify exact agent_id + version in next session with SC."
+    }
+  ]
+}

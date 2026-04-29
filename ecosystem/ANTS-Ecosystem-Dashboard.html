@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>ANTS Ecosystem — One Vision, Many Vehicles · R10 · v1.1 K.12 verified 29 Apr 2026</title>
+<!--
+last_updated: 2026-04-29
+version: 1.1 · R10 · K.12 body-level re-audit verified
+update_history:
+  - "v1.0 (Apr 22 2026): Initial R9 dashboard (29-venture Main/Startup/Invest/Partner baseline)"
+  - "v1.0+R10 patch (Apr 24 2026): R10 update — 'ANTS 2.0' group renamed → 'AI Agent Orchestration' (aiao); AI Content Channels + AI Digital Agency capabilities absorbed into aiao; reordered Startup L→R: aiao · taily · themantra · finops; reordered Partner Inner: workmotion · techflow · speedtech · touchtech. Total reduced from twenty-nine → 27 ventures (R10 canonical)."
+  - "v1.1 (29 Apr 2026 K.12 body-level re-audit): VERIFIED R10 fully applied · zero stale R9 baseline refs found in operational body · canonical 27-ventures count consistent across navlink (L680) · subtitle (L707) · section heading (L783) · count-all chip (L788) · ENTITY DATA comment (L910) · STARTUP/PARTNER ordering (L1607, 1634) · cleared SESSION_HANDOFF carryover blocker (was incorrectly flagged as 'pending since 22 Apr')"
+status_resolution_29apr: "Carryover blocker CLEARED. Ecosystem Dashboard is current. Hub-Index card to be updated to v1.3 with verification badge."
+-->
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#0B1020;
+    --ink-2:#2A2F45;
+    --muted:#6B7280;
+    --line:#E5E7EB;
+    --soft:#F8FAFC;
+    --brand:#0052FF;     /* ANTS electric blue */
+    --brand-2:#6D28D9;   /* Deep violet — wisdom */
+    --gold:#B08928;      /* Subtle Jobs-like gold */
+    --main:#0052FF;      /* ANTS Main */
+    --startup:#7C3AED;   /* Startup side projects */
+    --invest:#059669;    /* Investment Portfolio */
+    --partner:#EA580C;   /* Side Partner */
+    --shadow: 0 10px 30px rgba(11,16,32,.08);
+    --shadow-lg: 0 20px 50px rgba(11,16,32,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai','Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:96px 0 72px;
+    background:
+      radial-gradient(1000px 400px at 85% -10%, rgba(0,82,255,.08), transparent 60%),
+      radial-gradient(800px 500px at -5% 15%, rgba(109,40,217,.06), transparent 60%),
+      #fff;
+    border-bottom:1px solid var(--line);
+  }
+  .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:40px}
+  .logo-mark{
+    width:52px;height:52px;border-radius:14px;
+    background:conic-gradient(from 220deg,var(--brand),var(--brand-2),#0891b2,var(--brand));
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;
+    box-shadow:var(--shadow);
+    letter-spacing:.5px;
+  }
+  .brand-txt{display:flex;flex-direction:column}
+  .brand-txt b{font-size:18px;letter-spacing:.2px}
+  .brand-txt span{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:6px 14px;border:1px solid var(--line);border-radius:999px;
+    color:var(--brand-2);background:#fff;font-size:13px;font-weight:500;
+    margin-bottom:28px;
+  }
+  .eyebrow .dot{width:7px;height:7px;background:var(--brand);border-radius:50%;display:inline-block;box-shadow:0 0 0 4px rgba(0,82,255,.15)}
+
+  h1.title{
+    font-size:clamp(36px,5vw,62px);
+    line-height:1.1;font-weight:800;
+    letter-spacing:-.02em;color:var(--ink);
+    max-width:1000px;
+  }
+  h1.title em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--brand),var(--brand-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{
+    max-width:760px;color:var(--ink-2);font-size:18px;margin-top:22px;
+  }
+
+  .vision-card{
+    margin-top:44px;
+    border:1px solid var(--line);border-radius:20px;padding:28px 30px;
+    background:linear-gradient(180deg,#fff, #FBFCFF);
+    box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+  }
+  .vision-card .kicker{font-size:11px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+  .vision-card h2{font-size:28px;font-weight:700;color:var(--ink);line-height:1.25}
+  .vision-card h2 span{color:var(--brand)}
+  .vision-card p{margin-top:10px;color:var(--ink-2);max-width:720px}
+  .vision-dna{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;text-align:right}
+  @media (max-width:720px){.vision-card{grid-template-columns:1fr} .vision-dna{text-align:left}}
+
+  .stat-row{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;
+  }
+  .stat{
+    padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:#fff;
+  }
+  .stat b{display:block;font-size:28px;font-weight:800;letter-spacing:-.01em}
+  .stat span{color:var(--muted);font-size:13px}
+  .stat.main b{color:var(--main)}
+  .stat.startup b{color:var(--startup)}
+  .stat.invest b{color:var(--invest)}
+  .stat.partner b{color:var(--partner)}
+  @media (max-width:720px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+
+  /* ===== ECOSYSTEM MAP ===== */
+  .section{padding:90px 0;border-bottom:1px solid var(--line)}
+  .section.soft{background:var(--soft)}
+  .sec-head{max-width:880px;margin-bottom:44px}
+  .sec-head.wide{max-width:1180px}
+  .sec-head.full{max-width:100%}
+  .sec-kicker{font-size:12px;letter-spacing:3px;color:var(--brand);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .sec-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.01em;line-height:1.2}
+  .sec-head.wide h2{font-size:clamp(26px,2.8vw,36px)}
+  .sec-head p{margin-top:14px;color:var(--ink-2);font-size:17px}
+
+  .orbit-wrap{
+    position:relative;
+    height:760px;width:100%;border:1px solid var(--line);border-radius:24px;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(0,82,255,.05), transparent 55%),
+      repeating-radial-gradient(circle at 50% 50%, rgba(0,82,255,.035) 0 1px, transparent 1px 78px),
+      #fff;
+    overflow:hidden;
+  }
+  .core{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:138px;height:138px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,#2563EB,var(--brand-2));
+    display:grid;place-items:center;color:#fff;text-align:center;
+    box-shadow:0 0 0 8px rgba(0,82,255,.08), 0 0 0 18px rgba(0,82,255,.04), var(--shadow-lg);
+    z-index:2;
+  }
+  .core b{display:block;font-size:24px;font-weight:800;letter-spacing:.5px}
+  .core span{font-size:10px;opacity:.85;letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+  .orbit{
+    position:absolute;left:50%;top:50%;border:1px dashed rgba(0,82,255,.18);border-radius:50%;transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .orbit.o1{width:300px;height:300px}
+  .orbit.o2{width:500px;height:500px}
+  .orbit.o3{width:700px;height:700px}
+
+  /* Quadrant labels — edge-centered: MAIN top-center, STARTUP bottom-center,
+     INVEST center-left (vertical), PARTNER center-right (vertical) */
+  .quad-label{
+    position:absolute;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+    font-weight:700;color:var(--muted);background:rgba(255,255,255,.95);
+    padding:5px 12px;border-radius:999px;border:1px solid var(--line);z-index:6;
+    white-space:nowrap;
+  }
+  .quad-label.main  {top:14px;   left:50%; transform:translateX(-50%); color:var(--main)}
+  .quad-label.start {bottom:14px;left:50%; transform:translateX(-50%); color:var(--startup)}
+  .quad-label.inv   {top:50%;    left:28px; transform:translate(-50%,-50%) rotate(-90deg); color:var(--invest)}
+  .quad-label.part  {top:50%;    right:28px;transform:translate(50%,-50%) rotate(90deg);   color:var(--partner)}
+
+  .node{
+    position:absolute;
+    width:172px;min-height:70px;
+    padding:8px 10px 8px 40px;border-radius:11px;
+    background:#fff;border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    text-align:left;font-size:11.5px;font-weight:700;color:var(--ink);
+    cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;
+    z-index:3;line-height:1.22;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .node:hover{transform:translate(-50%,-50%) scale(1.08);box-shadow:var(--shadow-lg);z-index:5}
+  .node .nm{
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;white-space:normal;line-height:1.22;
+  }
+  .node small{
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;white-space:normal;
+    font-weight:500;color:var(--muted);font-size:9.5px;line-height:1.22;margin-top:3px;
+  }
+  .node .logo{
+    position:absolute;left:6px;top:50%;transform:translateY(-50%);
+    width:28px;height:28px;border-radius:7px;background:#F4F7FB;
+    display:grid;place-items:center;overflow:hidden;
+    font-size:15px;line-height:1;border:1px solid var(--line);
+  }
+  .node .logo img{width:100%;height:100%;object-fit:contain;background:#fff}
+  /* Brand-styled logo badges for ventures without verified favicon */
+  .node .logo.brand-karawa{
+    background:linear-gradient(135deg,#8B0000 0%,#C41E3A 100%);
+    color:#fff;border-color:#8B0000;font-weight:800;
+  }
+  .node .logo.brand-mazu{
+    background:linear-gradient(135deg,#0B2845 0%,#2A6FAE 100%);
+    color:#fff;border-color:#0B2845;font-weight:800;
+  }
+  .node .logo.brand-taily{
+    background:linear-gradient(135deg,#FFC501 0%,#E5A800 100%);
+    color:#3D2B1F;border-color:#B48700;font-weight:800;
+  }
+  .node .logo.brand-thesold{
+    background:linear-gradient(135deg,#1A1A2E 0%,#3D2B1F 100%);
+    color:#FFC501;border-color:#1A1A2E;font-weight:800;
+  }
+  .node .logo.brand-techvue{
+    background:linear-gradient(135deg,#4338CA 0%,#7C3AED 100%);
+    color:#fff;border-color:#4338CA;font-weight:800;
+  }
+  .node.main{border-top:3px solid var(--main)}
+  .node.startup{border-top:3px solid var(--startup)}
+  .node.invest{border-top:3px solid var(--invest)}
+  .node.partner{border-top:3px solid var(--partner)}
+
+  .legend{
+    position:absolute;bottom:14px;left:14px;
+    display:flex;gap:12px;flex-wrap:wrap;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(6px);
+    padding:8px 12px;border-radius:10px;border:1px solid var(--line);
+    font-size:11px;
+  }
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+  /* Mobile fallback — switch from orbit to category-grouped list */
+  .orbit-mobile{display:none}
+  @media (max-width:900px){
+    .orbit-wrap{display:none}
+    .orbit-mobile{display:grid;grid-template-columns:1fr;gap:18px}
+    .orbit-mobile .cat-group{
+      border:1px solid var(--line);border-radius:16px;padding:18px;background:#fff;
+    }
+    .orbit-mobile .cat-group h5{
+      font-size:11px;letter-spacing:2px;text-transform:uppercase;
+      font-weight:700;margin-bottom:12px;
+    }
+    .orbit-mobile .cat-group.main h5{color:var(--main)}
+    .orbit-mobile .cat-group.startup h5{color:var(--startup)}
+    .orbit-mobile .cat-group.invest h5{color:var(--invest)}
+    .orbit-mobile .cat-group.partner h5{color:var(--partner)}
+    .orbit-mobile .node-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .orbit-mobile .node-list .m-node{
+      position:relative;padding:10px 10px 10px 36px;border:1px solid var(--line);
+      border-radius:10px;background:var(--soft);font-size:12px;font-weight:600;cursor:pointer;
+    }
+    .orbit-mobile .node-list .m-node .logo{
+      position:absolute;left:6px;top:50%;transform:translateY(-50%);
+      width:22px;height:22px;border-radius:6px;background:#fff;
+      display:grid;place-items:center;overflow:hidden;font-size:13px;
+      border:1px solid var(--line);
+    }
+    .orbit-mobile .node-list .m-node .logo img{width:100%;height:100%;object-fit:contain}
+    .orbit-mobile .node-list .m-node small{display:block;font-weight:400;color:var(--muted);font-size:10px;margin-top:2px}
+  }
+
+  /* ===== FILTERS + GRID ===== */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;align-items:center}
+  .chip{
+    padding:9px 16px;border:1px solid var(--line);border-radius:999px;
+    background:#fff;cursor:pointer;font-size:14px;font-weight:500;color:var(--ink-2);
+    transition:all .2s;
+  }
+  .chip:hover{border-color:var(--brand);color:var(--brand)}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .chip .count{margin-left:6px;background:var(--soft);padding:1px 8px;border-radius:999px;font-size:11px;color:var(--muted)}
+  .chip.active .count{background:rgba(255,255,255,.18);color:#fff}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr}}
+
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;
+    cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;
+    position:relative;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:transparent}
+  .card .card-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .card .c-logo{
+    width:36px;height:36px;border-radius:9px;background:#F4F7FB;
+    display:grid;place-items:center;overflow:hidden;flex-shrink:0;
+    font-size:18px;line-height:1;border:1px solid var(--line);
+  }
+  .card .c-logo img{width:100%;height:100%;object-fit:contain;background:#fff}
+  .card .c-logo.brand-karawa{background:linear-gradient(135deg,#8B0000 0%,#C41E3A 100%);color:#fff;border-color:#8B0000;font-weight:800}
+  .card .c-logo.brand-mazu{background:linear-gradient(135deg,#0B2845 0%,#2A6FAE 100%);color:#fff;border-color:#0B2845;font-weight:800}
+  .card .c-logo.brand-taily{background:linear-gradient(135deg,#FFC501 0%,#E5A800 100%);color:#3D2B1F;border-color:#B48700;font-weight:800}
+  .card .c-logo.brand-thesold{background:linear-gradient(135deg,#1A1A2E 0%,#3D2B1F 100%);color:#FFC501;border-color:#1A1A2E;font-weight:800}
+  .card .c-logo.brand-techvue{background:linear-gradient(135deg,#4338CA 0%,#7C3AED 100%);color:#fff;border-color:#4338CA;font-weight:800}
+  .card .tag{
+    display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;
+    letter-spacing:.5px;text-transform:uppercase;
+  }
+  .card .tag.main{background:rgba(0,82,255,.1);color:var(--main)}
+  .card .tag.startup{background:rgba(124,58,237,.1);color:var(--startup)}
+  .card .tag.invest{background:rgba(5,150,105,.1);color:var(--invest)}
+  .card .tag.partner{background:rgba(234,88,12,.1);color:var(--partner)}
+  .card h3{font-size:15px;font-weight:700;margin-top:4px;letter-spacing:-.01em;line-height:1.25}
+  .card .sub{color:var(--muted);font-size:11.5px;margin-top:3px;line-height:1.35}
+  .card p{margin-top:9px;color:var(--ink-2);font-size:12.5px;line-height:1.5;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .card .meta{display:flex;gap:6px;margin-top:auto;padding-top:10px;font-size:10.5px;color:var(--muted);flex-wrap:wrap}
+  .card .meta span{display:inline-flex;align-items:center;gap:3px;background:var(--soft);padding:2px 7px;border-radius:999px}
+  .card .accent{
+    position:absolute;top:0;right:0;width:80px;height:80px;
+    border-radius:0 0 0 100%;opacity:.07;pointer-events:none;
+  }
+  .card.main .accent{background:var(--main)}
+  .card.startup .accent{background:var(--startup)}
+  .card.invest .accent{background:var(--invest)}
+  .card.partner .accent{background:var(--partner)}
+
+  /* ===== MODAL ===== */
+  .modal-backdrop{
+    position:fixed;inset:0;background:rgba(11,16,32,.55);
+    display:none;align-items:center;justify-content:center;padding:24px;z-index:50;
+    backdrop-filter:blur(4px);
+  }
+  .modal-backdrop.open{display:flex}
+  .modal{
+    background:#fff;border-radius:24px;max-width:760px;width:100%;max-height:86vh;overflow-y:auto;
+    padding:36px;box-shadow:0 30px 80px rgba(11,16,32,.28);
+    position:relative;
+  }
+  .modal .close{
+    position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;
+    background:var(--soft);border:none;cursor:pointer;font-size:20px;color:var(--ink-2);
+  }
+  .modal .tag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;letter-spacing:.5px;text-transform:uppercase}
+  .modal .tag.main{background:rgba(0,82,255,.1);color:var(--main)}
+  .modal .tag.startup{background:rgba(124,58,237,.1);color:var(--startup)}
+  .modal .tag.invest{background:rgba(5,150,105,.1);color:var(--invest)}
+  .modal .tag.partner{background:rgba(234,88,12,.1);color:var(--partner)}
+  .modal h3{font-size:28px;margin-top:14px;font-weight:800;letter-spacing:-.01em}
+  .modal .sub{color:var(--muted);font-size:14px}
+  .modal h4{font-size:14px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-top:22px;margin-bottom:8px}
+  .modal p, .modal li{color:var(--ink-2);font-size:15px;line-height:1.7}
+  .modal ul{padding-left:18px;margin-top:4px}
+  .modal .kv{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin-top:14px;font-size:14px}
+  .modal .kv b{color:var(--muted);font-weight:500}
+  .modal .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .modal .links a{
+    display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;
+    background:var(--soft);font-size:13px;color:var(--brand);text-decoration:none;border:1px solid var(--line);
+  }
+  .modal .links a:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .modal .links.social a{color:#6D28D9;border-color:#E9D8FD;background:#F5EEFF}
+  .modal .links.social a:hover{background:#6D28D9;color:#fff;border-color:#6D28D9}
+  .modal .links.app a{color:#059669;border-color:#BBF7D0;background:#ECFDF5}
+  .modal .links.app a:hover{background:#059669;color:#fff;border-color:#059669}
+  .modal .channel-sub{
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin-top:14px;margin-bottom:6px;
+  }
+  .modal .channel-empty{
+    margin-top:8px;padding:10px 14px;border-radius:10px;
+    background:#FFF7ED;border:1px dashed #FDBA74;color:#9A3412;
+    font-size:12px;
+  }
+
+  /* ===== CHARTS ===== */
+  .chart-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:stretch}
+  .chart-grid > .panel{min-width:0;overflow:hidden}  /* CRITICAL: lets grid track shrink + clips canvas overflow */
+  @media (max-width:900px){.chart-grid{grid-template-columns:1fr}}
+  .panel{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;
+    min-width:0;
+  }
+  .panel h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  /* fixed-height canvas wrapper — prevents Chart.js responsive grow-loop */
+  .chart-box{position:relative;width:100%;max-width:100%;height:340px;overflow:hidden}
+  .chart-box canvas{max-width:100%!important;height:100%!important}
+  .chart-box.tall{height:420px}
+
+  /* ===== KANBAN LIFECYCLE BOARD ===== */
+  .kanban{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    margin-top:8px;
+  }
+  @media (max-width:900px){.kanban{grid-template-columns:1fr 1fr}}
+  @media (max-width:600px){.kanban{grid-template-columns:1fr}}
+  .k-col{
+    background:#F8FAFC;border:1px solid var(--line);border-radius:14px;
+    padding:14px;min-height:260px;display:flex;flex-direction:column;
+  }
+  .k-col.pre   {border-top:4px solid #94A3B8;background:linear-gradient(180deg,#F1F5F9 0%,#F8FAFC 40%)}
+  .k-col.pilot {border-top:4px solid #F59E0B;background:linear-gradient(180deg,#FFFBEB 0%,#FFFEF7 40%)}
+  .k-col.rev   {border-top:4px solid #059669;background:linear-gradient(180deg,#ECFDF5 0%,#F7FEFB 40%)}
+  .k-col.cash  {border-top:4px solid #0052FF;background:linear-gradient(180deg,#EFF6FF 0%,#F7FAFF 40%)}
+  .k-col h5{
+    font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:800;
+    color:var(--ink);display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:4px;
+  }
+  .k-col .k-count{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:24px;height:22px;padding:0 8px;border-radius:999px;
+    font-size:11px;font-weight:700;background:#fff;border:1px solid var(--line);color:var(--ink-2);
+  }
+  .k-col .k-sub{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.4}
+  .k-card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;margin-bottom:8px;cursor:pointer;
+    transition:transform .15s ease,box-shadow .15s ease;
+    display:flex;align-items:center;gap:10px;
+  }
+  .k-card:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .k-card .k-emoji{font-size:18px;flex-shrink:0}
+  .k-card .k-body{flex:1;min-width:0}
+  .k-card .k-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .k-card .k-meta{font-size:10.5px;color:var(--muted);margin-top:2px}
+  .k-card .k-cat-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:4px;vertical-align:middle}
+  .k-card.main   .k-cat-dot{background:#0052FF}
+  .k-card.startup .k-cat-dot{background:#7C3AED}
+  .k-card.invest .k-cat-dot{background:#059669}
+  .k-card.partner .k-cat-dot{background:#EA580C}
+  .kanban-legend{
+    margin-top:18px;display:flex;flex-wrap:wrap;gap:18px;
+    padding-top:14px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted);
+  }
+  .kanban-legend span{display:inline-flex;align-items:center;gap:6px}
+  .kanban-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+  /* ===== LINEAR RELATIONSHIP GRAPH (กราฟความสัมพันธ์เชิงเส้น) ===== */
+  .linear-graph-wrap{
+    position:relative;width:100%;height:480px;
+    background:linear-gradient(180deg,#FAFBFC 0%,#fff 100%);
+    border:1px solid var(--line);border-radius:14px;padding:18px;
+    overflow:hidden;
+  }
+  .linear-graph-wrap canvas{max-width:100%!important;height:100%!important}
+  .lg-axis-label{
+    position:absolute;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;
+    font-weight:700;color:var(--muted);
+  }
+  .lg-axis-label.x{bottom:6px;left:50%;transform:translateX(-50%)}
+  .lg-axis-label.y{top:50%;left:6px;transform:translateY(-50%) rotate(-90deg);transform-origin:left center}
+  .lg-quadrant-label{
+    position:absolute;font-size:10px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:rgba(0,0,0,.25);pointer-events:none;
+  }
+  .lg-quadrant-label.tl{top:24px;left:50px}
+  .lg-quadrant-label.tr{top:24px;right:24px}
+  .lg-quadrant-label.bl{bottom:32px;left:50px}
+  .lg-quadrant-label.br{bottom:32px;right:24px}
+  .lg-legend{
+    margin-top:16px;display:flex;flex-wrap:wrap;gap:18px;
+    padding-top:14px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted);
+  }
+  .lg-legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg-legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .lg-legend .size-note{
+    margin-left:auto;color:var(--muted);font-size:11px;font-style:italic
+  }
+
+  /* ===== INTENT NARRATIVE ===== */
+  .flow{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;
+  }
+  @media (max-width:900px){.flow{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.flow{grid-template-columns:1fr}}
+  .flow-item{
+    position:relative;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff;
+  }
+  .flow-item .step{position:absolute;top:-14px;left:22px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:1px}
+  .flow-item h5{font-size:16px;font-weight:700;margin-bottom:8px}
+  .flow-item p{color:var(--ink-2);font-size:14px}
+  .flow-item .arrow{position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:20px;z-index:2}
+  @media (max-width:900px){.flow-item .arrow{display:none}}
+
+  /* ===== FOOTER ===== */
+  footer{padding:56px 0;text-align:center;color:var(--muted);font-size:13px}
+  footer .signature{margin-top:14px;font-style:italic;color:var(--brand-2)}
+
+  /* ===== TOP NAV (sticky tabs) ===== */
+  .topnav{
+    position:sticky;top:0;z-index:30;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topnav .wrap{display:flex;align-items:center;gap:8px;height:54px;overflow-x:auto}
+  .navlink{
+    padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;
+    color:var(--ink-2);cursor:pointer;white-space:nowrap;text-decoration:none;
+    transition:all .15s;
+  }
+  .navlink:hover{background:var(--soft);color:var(--brand)}
+  .navlink.active{background:var(--ink);color:#fff}
+  .navlink i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle}
+
+  /* ===== HEALTH SYNERGY MAP ===== */
+  .health-hero{
+    border:1px solid var(--line);border-radius:24px;padding:32px;
+    background:
+      radial-gradient(800px 300px at 80% -20%, rgba(5,150,105,.08), transparent 60%),
+      radial-gradient(600px 400px at -10% 50%, rgba(0,82,255,.06), transparent 60%),
+      linear-gradient(180deg,#fff,#F6FBF9);
+    margin-bottom:36px;
+  }
+  .health-hero .gov-badge{
+    display:inline-flex;gap:8px;align-items:center;
+    padding:6px 14px;border:1px solid #059669;border-radius:999px;
+    font-size:12px;font-weight:600;color:#059669;background:#fff;margin-bottom:14px;
+  }
+  .health-hero h3{font-size:30px;font-weight:800;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+  .health-hero p{margin-top:10px;color:var(--ink-2);font-size:16px;max-width:840px}
+
+  .journey{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px;position:relative;
+  }
+  @media (max-width:1100px){.journey{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.journey{grid-template-columns:1fr}}
+  .stage{
+    position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;
+    padding:20px 18px;display:flex;flex-direction:column;
+  }
+  .stage::after{
+    content:'→';position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+    color:var(--invest);font-size:24px;font-weight:700;z-index:2;
+  }
+  .stage:last-child::after{content:''}
+  @media (max-width:1100px){.stage::after{display:none}}
+  .stage .num{
+    width:34px;height:34px;border-radius:50%;background:#059669;color:#fff;
+    display:grid;place-items:center;font-weight:800;font-size:14px;margin-bottom:12px;
+  }
+  .stage h5{font-size:16px;font-weight:700;line-height:1.3}
+  .stage .who{font-size:11px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-top:4px;font-weight:600}
+  .stage p{margin-top:10px;color:var(--ink-2);font-size:13px;line-height:1.55;flex:1}
+  .stage .kpi{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px;color:var(--invest);font-weight:600}
+
+  .feedback-loop{
+    margin-top:28px;padding:22px 26px;border-radius:18px;
+    background:linear-gradient(90deg,#ECFDF5,#EFF6FF);
+    border:1px dashed #059669;
+    display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+  }
+  .feedback-loop .arrow-back{
+    width:54px;height:54px;border-radius:50%;background:#fff;border:2px solid #059669;
+    color:#059669;display:grid;place-items:center;font-size:24px;font-weight:800;
+  }
+  .feedback-loop b{display:block;font-size:15px;color:var(--ink);margin-bottom:4px}
+  .feedback-loop span{color:var(--ink-2);font-size:13px;line-height:1.55}
+
+  .gov-grid{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:36px;
+  }
+  @media (max-width:900px){.gov-grid{grid-template-columns:1fr}}
+  .gov-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
+  .gov-panel h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .gov-panel ul{padding-left:20px;color:var(--ink-2);font-size:14px;line-height:1.8}
+  .gov-panel li{margin-bottom:6px}
+  .gov-panel li b{color:var(--ink)}
+  .gov-stat{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+  }
+  .gov-stat .s{
+    padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--soft);
+  }
+  .gov-stat .s b{display:block;font-size:24px;font-weight:800;color:var(--invest);letter-spacing:-.01em}
+  .gov-stat .s span{font-size:12px;color:var(--muted)}
+
+  .agent-banner{
+    margin-top:36px;padding:22px 26px;border-radius:16px;
+    background:#0B1020;color:#fff;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;
+  }
+  .agent-banner .who{font-size:12px;letter-spacing:2px;color:#9CA3AF;text-transform:uppercase}
+  .agent-banner b{font-size:18px;font-weight:700;display:block;margin-top:4px}
+  .agent-banner .cta{
+    background:#fff;color:#0B1020;padding:10px 18px;border-radius:999px;
+    font-weight:700;font-size:13px;text-decoration:none;
+  }
+
+  /* ===== SYNERGY HERO KPI STRIP — visual focal point ===== */
+  .syn-hero-kpi{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;
+  }
+  @media (max-width:900px){.syn-hero-kpi{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.syn-hero-kpi{grid-template-columns:1fr}}
+  .syn-hero-kpi .k{
+    background:#fff;border-radius:18px;padding:22px 22px;
+    border:1px solid var(--line);position:relative;overflow:hidden;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .syn-hero-kpi .k:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .syn-hero-kpi .k .ic{
+    width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    font-size:22px;margin-bottom:14px;
+  }
+  .syn-hero-kpi .k b{display:block;font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.05;color:var(--ink)}
+  .syn-hero-kpi .k .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:6px}
+  .syn-hero-kpi .k .sub{font-size:13px;color:var(--ink-2);margin-top:10px;line-height:1.45}
+  .syn-hero-kpi .k::after{
+    content:'';position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;
+    border-radius:50%;opacity:.06;
+  }
+  /* Health KPIs (green theme) */
+  #health-synergy .syn-hero-kpi .k{border-top:4px solid #059669}
+  #health-synergy .syn-hero-kpi .k .ic{background:#ECFDF5;color:#059669}
+  #health-synergy .syn-hero-kpi .k::after{background:#059669}
+  /* Taily KPIs (gold theme) */
+  #taily-synergy .syn-hero-kpi .k{border-top:4px solid #FFC501}
+  #taily-synergy .syn-hero-kpi .k .ic{background:#FFFBEB;color:#B48700}
+  #taily-synergy .syn-hero-kpi .k::after{background:#FFC501}
+
+  /* Synergy "before vs after" comparison */
+  .syn-compare{
+    display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;
+    margin-top:24px;
+  }
+  @media (max-width:780px){.syn-compare{grid-template-columns:1fr}}
+  .syn-compare .col{padding:22px 24px;border-radius:18px;border:1px solid var(--line);background:#fff}
+  .syn-compare .col.before{background:#FEF2F2;border-color:#FECACA}
+  .syn-compare .col.after.green{background:#ECFDF5;border-color:#A7F3D0}
+  .syn-compare .col.after.gold{background:#FFFBEB;border-color:#FCD34D}
+  .syn-compare .col h6{
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-bottom:10px;
+  }
+  .syn-compare .col.before h6{color:#B91C1C}
+  .syn-compare .col.after.green h6{color:#047857}
+  .syn-compare .col.after.gold h6{color:#B48700}
+  .syn-compare .col ul{list-style:none;padding:0;margin:0}
+  .syn-compare .col ul li{font-size:13.5px;line-height:1.6;color:var(--ink);padding:5px 0;display:flex;gap:8px}
+  .syn-compare .col ul li::before{content:'·';font-weight:700;color:inherit;font-size:18px;line-height:1}
+  .syn-compare .col.before ul li::before{content:'×';color:#B91C1C}
+  .syn-compare .col.after ul li::before{content:'✓';font-size:14px;color:#059669}
+  .syn-compare .col.after.gold ul li::before{color:#B48700}
+  .syn-compare .vs{
+    display:grid;place-items:center;font-size:18px;font-weight:800;color:var(--muted);
+    background:#fff;border-radius:50%;width:48px;height:48px;border:2px dashed var(--line);
+    align-self:center;letter-spacing:1px;
+  }
+  @media (max-width:780px){.syn-compare .vs{display:none}}
+
+  /* ===== TAILY SYNERGY MAP — gold/brown theme ===== */
+  #taily-synergy .health-hero{
+    background:
+      radial-gradient(800px 300px at 80% -20%, rgba(255,197,1,.16), transparent 60%),
+      radial-gradient(600px 400px at -10% 50%, rgba(62,39,35,.06), transparent 60%),
+      linear-gradient(180deg,#fff,#FFFBF0);
+  }
+  #taily-synergy .gov-badge{border-color:#E5A800;color:#B48700}
+  #taily-synergy .stage .num{background:#FFC501;color:#3D2B1F}
+  #taily-synergy .stage::after{color:#E5A800}
+  #taily-synergy .stage .kpi{color:#B48700}
+  #taily-synergy .feedback-loop{
+    background:linear-gradient(90deg,#FFF7D6,#FFFBF0);
+    border:1px dashed #E5A800;
+  }
+  #taily-synergy .feedback-loop .arrow-back{border-color:#E5A800;color:#B48700}
+  #taily-synergy .gov-stat .s b{color:#B48700}
+  #taily-synergy .agent-banner{background:#3E2723}
+  #taily-synergy .agent-banner .cta{background:#FFC501;color:#3D2B1F}
+  #taily-synergy .agent-banner .who{color:#E0C4B4}
+  .taily-audience{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;
+  }
+  @media (max-width:900px){.taily-audience{grid-template-columns:repeat(2,1fr)}}
+  .taily-audience .ta{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 18px;
+    border-top:4px solid #FFC501;
+  }
+  .taily-audience .ta.g{border-top-color:#27AE60}
+  .taily-audience .ta.p{border-top-color:#FF8C42}
+  .taily-audience .ta.i{border-top-color:#3E2723}
+  .taily-audience h5{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px}
+  .taily-audience h6{font-size:15px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:8px}
+  .taily-audience p{font-size:12.5px;color:var(--ink-2);line-height:1.55}
+
+  /* Hidden helper */
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- ============ STICKY TOP NAV ============ -->
+<nav class="topnav" id="topnav">
+  <div class="wrap">
+    <a class="navlink active" href="#hero" data-target="hero">Overview</a>
+    <a class="navlink" href="#map" data-target="map">Ecosystem Map</a>
+    <a class="navlink" href="#grid-section" data-target="grid-section">27 Ventures</a>
+    <a class="navlink" href="#flow-section" data-target="flow-section">Intent Flow</a>
+    <a class="navlink" href="#portfolio" data-target="portfolio">Portfolio Lens</a>
+    <a class="navlink" href="./Health-Ecosystem-Synergy-Map-DEPA-1pager.html" target="_blank" rel="noopener"><i style="background:#059669"></i>Health Synergy Map ↗</a>
+    <a class="navlink" href="./Taily-Ecosystem-Synergy-Map-Government-1pager.html" target="_blank" rel="noopener"><i style="background:#FFC501"></i>Taily Pet Economy Map ↗</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="logo-mark">A</div>
+      <div class="brand-txt">
+        <b>ANTS Ecosystem</b>
+        <span>One Vision · Many Vehicles</span>
+      </div>
+    </div>
+
+    <span class="eyebrow"><span class="dot"></span> ANTS Command Center · Ecosystem Map · April 2026</span>
+
+    <h1 class="title">
+      คืนเวลาให้ชีวิต<br/>
+      <em>ขยายศักยภาพให้มนุษย์</em>
+    </h1>
+
+    <p class="lede">
+      ระบบนิเวศของ Nut &amp; ANTS ครอบคลุม <b>27 ventures</b>
+      — Main Business, Startup Side Projects, Investment Portfolio, และ Partner Ventures —
+      <b>ทุกธุรกิจใช้เทคโนโลยีและ AI ร่วมกัน</b>
+      และมุ่งสู่เป้าหมายเดียว: ยกระดับชีวิตคนไทยและผู้คนทั่วโลก
+    </p>
+
+    <!-- VISION CARD -->
+    <div class="vision-card">
+      <div>
+        <div class="kicker">VISION · วิสัยทัศน์</div>
+        <h2>Technology gives people their <span>time</span> back,<br/>and <span>amplifies</span> what humans can do.</h2>
+        <p>
+          เรา<b>สร้างเทคโนโลยีและ AI</b> ที่ประหยัดเวลาให้ผู้คนและเสริมศักยภาพในทุกด้าน —
+          เป็นโครงสร้างพื้นฐานที่มองไม่เห็นแต่ทำให้ชีวิตดีขึ้นจริง
+          ตั้งแต่ MarTech ของแบรนด์ระดับประเทศ, เมืองอัจฉริยะใน 7,000+ เทศบาล, ไปจนถึงชีวิตคนและสัตว์เลี้ยงในบ้านหลังเล็ก ๆ
+        </p>
+      </div>
+      <div class="vision-dna">DNA · ปัญญา &gt; ความฉลาด<br>Wisdom &gt; Intelligence &gt; Data</div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-row">
+      <div class="stat main"><b>6</b><span>Main · ANTS + โซลูชันหลัก</span></div>
+      <div class="stat startup"><b>4</b><span>Startup Side Projects</span></div>
+      <div class="stat invest"><b>8</b><span>Investment Portfolio</span></div>
+      <div class="stat partner"><b>9</b><span>Partner Ventures</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ECOSYSTEM MAP ============ -->
+<section class="section" id="map">
+  <div class="wrap">
+    <div class="sec-head wide">
+      <div class="sec-kicker">Ecosystem Map</div>
+      <h2>แกนเดียว · หลายธุรกิจ · เป้าหมายเดียวกัน</h2>
+      <p><b>ANTS คือแกนกลาง</b> — พลัง AI, Data, MarTech, และ Delivery ไหลจากแกนไปเสริมทุก Startup, Investment และ Partner
+      ให้ทุกธุรกิจต่อยอดกันและกันเป็น <b>Network Effect</b> ที่เติบโตแบบทวีคูณ</p>
+    </div>
+
+    <div class="orbit-wrap" id="orbit">
+      <div class="orbit o1"></div>
+      <div class="orbit o2"></div>
+      <div class="orbit o3"></div>
+
+      <div class="quad-label main">Main Business</div>
+      <div class="quad-label start">Startup Side Projects</div>
+      <div class="quad-label inv">Investment Portfolio</div>
+      <div class="quad-label part">Partner Ventures</div>
+
+      <div class="core">
+        <div>
+          <b>ANTS</b>
+          <span>The Core</span>
+        </div>
+      </div>
+
+      <!-- Nodes populated via JS to position them on orbits -->
+      <div class="legend">
+        <span><i style="background:var(--main)"></i>Main</span>
+        <span><i style="background:var(--startup)"></i>Startup</span>
+        <span><i style="background:var(--invest)"></i>Investment</span>
+        <span><i style="background:var(--partner)"></i>Partner</span>
+      </div>
+    </div>
+
+    <!-- Mobile fallback: category-grouped list -->
+    <div class="orbit-mobile" id="orbit-mobile"></div>
+  </div>
+</section>
+
+<!-- ============ FILTERS + ENTITY GRID ============ -->
+<section class="section soft" id="grid-section">
+  <div class="wrap">
+    <div class="sec-head wide">
+      <div class="sec-kicker">Venture Directory</div>
+      <h2>27 โครงการในระบบนิเวศ · Ventures Portfolio</h2>
+      <p>คลิกที่การ์ดเพื่อดูรายละเอียด: เว็บไซต์ · Social Media · App Store · ประเภท · จุดเชื่อมโยงกับ ANTS · Intent ที่ตอบ</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <div class="chip active" data-filter="all">ทั้งหมด <span class="count" id="count-all">27</span></div>
+      <div class="chip" data-filter="main"><i style="background:var(--main)"></i>Main <span class="count">6</span></div>
+      <div class="chip" data-filter="startup"><i style="background:var(--startup)"></i>Startup Side Projects <span class="count">4</span></div>
+      <div class="chip" data-filter="invest"><i style="background:var(--invest)"></i>Investment Portfolio <span class="count">8</span></div>
+      <div class="chip" data-filter="partner"><i style="background:var(--partner)"></i>Partner Ventures <span class="count">9</span></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ============ INTENT NARRATIVE ============ -->
+<section class="section" id="flow-section">
+  <div class="wrap">
+    <div class="sec-head wide">
+      <div class="sec-kicker">Strategic Flow</div>
+      <h2>ทำไมทุกอย่างเชื่อมกัน — Intent Architecture</h2>
+      <p>ทุกโครงการในระบบนิเวศเสริมกันใน 4 จังหวะ: <b>สร้างขีดความสามารถ → ทดลองกับลูกค้าจริง → ขยายสเกล → คืนคุณค่ากลับสู่แกน</b></p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-item">
+        <span class="step">01 · CREATE</span>
+        <h5>ANTS สร้าง Core Capability</h5>
+        <p>MarTech, AI Agents, Smart City, Smart Classroom — ทุน 23 ปีของ ANTS สะสม know-how, ทีมวิศวกร, และ Customer Base</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="flow-item">
+        <span class="step">02 · INCUBATE</span>
+        <h5>Startup Side Projects ทดลอง Thesis</h5>
+        <p>AI Agent Orchestration (51 Agents · 100M Solo Thesis), Taily (Pet OS), The Mantra (Horoscope Platform), FinOps Backbot — ใช้ลูกค้า &amp; ทีมของ ANTS เป็น Sandbox</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="flow-item">
+        <span class="step">03 · INVEST</span>
+        <h5>Portfolio ขยายไปยัง Domain อื่น</h5>
+        <p>Health (Vidé Hospital · Virtualmed/MorOnline), Agri (NestTech), FinCoop (Unitier), F&amp;B (Karawa, Mazu, The Sold) — เทคเดียว หลายอุตสาหกรรม</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="flow-item">
+        <span class="step">04 · COMPOUND</span>
+        <h5>Partner Ventures ปิด Loop</h5>
+        <p>CTRL-G (eSport), Techvue (HR AI), Insurance Embedded, Payment Gateway, ENGENIUS (EdTech), และ SI Turnkey quad (WorkMotion · Speed Tech Laos · TechFlow · Touch Tech) — Infrastructure + Delivery ที่ทุก Vertical ใช้ซ้ำ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHARTS ============ -->
+<section class="section soft" id="portfolio">
+  <div class="wrap">
+    <div class="sec-head wide">
+      <div class="sec-kicker">Portfolio Lens</div>
+      <h2>ระบบนิเวศมองในเชิงตัวเลข</h2>
+      <p>กระจายความเสี่ยงในหลายอุตสาหกรรม · มีทั้งหน่วยที่สร้าง Cash Flow และหน่วยที่สร้าง Future Option</p>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel">
+        <h4>Intent Coverage · การกระจายหน่วยงานตาม Intent ที่ตอบ</h4>
+        <div class="chart-box"><canvas id="radarChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Category Mix · สัดส่วนหน่วยงานในระบบนิเวศ</h4>
+        <div class="chart-box"><canvas id="donutChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:28px">
+      <h4>Lifecycle Board · แต่ละ Venture อยู่ขั้นไหนของ Revenue Journey</h4>
+      <div class="kanban" id="kanban"></div>
+      <div class="kanban-legend">
+        <span><i style="background:#94A3B8"></i> Pre-Revenue · ยังไม่ generate รายได้</span>
+        <span><i style="background:#F59E0B"></i> Pilot · ทดสอบตลาด / early revenue</span>
+        <span><i style="background:#059669"></i> Revenue-Gen · สร้างรายได้ต่อเนื่อง</span>
+        <span><i style="background:#0052FF"></i> Cash Cow · รายได้มั่นคง + Margin สูง</span>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:28px">
+      <h4>Linear Relationship Graph · ความสัมพันธ์เชิงเส้น Lifecycle × Strategic Value</h4>
+      <p style="color:var(--ink-2);font-size:13.5px;line-height:1.6;margin:-6px 0 16px">
+        แต่ละ <b>Venture</b> วางบนแกน <b>Lifecycle Maturity</b> (Pre → Pilot → Rev → Cash) และ <b>Strategic Value</b> ต่อระบบนิเวศ ANTS ·
+        ขนาดฟอง = Revenue Impact (ปัจจุบัน + ที่คาดการณ์) · สี = หมวดธุรกิจ ·
+        ใช้ดูได้ทันทีว่า Venture ไหน <b>"high value · early stage"</b> (Top-Left = ต้องเร่ง) และ <b>"cash-cow consolidation"</b> (Top-Right = ต้องป้องกัน)
+      </p>
+      <div class="linear-graph-wrap">
+        <span class="lg-quadrant-label tl">▲ High Value · Early Stage</span>
+        <span class="lg-quadrant-label tr">★ Cash Cow Zone</span>
+        <span class="lg-quadrant-label bl">○ Seed / Concept</span>
+        <span class="lg-quadrant-label br">◐ Mature · Lower Strategic</span>
+        <canvas id="linearGraph"></canvas>
+      </div>
+      <div class="lg-legend">
+        <span><i style="background:#0052FF"></i> Main Business</span>
+        <span><i style="background:#7C3AED"></i> Startup Side Projects</span>
+        <span><i style="background:#059669"></i> Investment Portfolio</span>
+        <span><i style="background:#EA580C"></i> Partner Ventures</span>
+        <span class="size-note">Bubble size = Revenue impact (THB scale, log-adjusted)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>ANTS Ecosystem Command Center · Prepared for Nut · April 2026</div>
+    <div class="signature">"คืนเวลาให้ชีวิต · ขยายศักยภาพให้มนุษย์"<br>— เฌอคูณ (Cherkun), Chief Wisdom Officer</div>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal" id="modal-body">
+    <button class="close" onclick="closeModal()">×</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ENTITY DATA — 27 ventures (Main 6 / Startup 4 / Investment 8 / Partner 9)
+   · R10: ANTS 2.0 renamed → "AI Agent Orchestration" (id: aiao)
+   · R10: AI Content Channels + AI Digital Agency capabilities absorbed into aiao (entities removed)
+   · R10: Startup L→R order: aiao · taily · themantra · finops
+   · R10: Partner Inner col order: workmotion · techflow · speedtech · touchtech
+   ============================================================ */
+const entities = [
+  // ===== MAIN (6) — ANTS core + 5 platform solutions =====
+  {
+    id:'ants',
+    cat:'main',
+    stage:'cash',
+    name:'ANTS',
+    sub:'Technology & Consulting Company · 23+ ปี',
+    desc:'บริษัทแม่ (HQ Bangkok) — MarTech, Communication Platform, AI Solutions, Turnkey Projects ให้ภาครัฐและเอกชน',
+    why:'แกนกลางของระบบนิเวศ · สร้าง Know-how, Talent, Customer Base ที่เป็นสินทรัพย์ให้ทุก Side Project',
+    intent:['Save Time','Amplify','Scale'],
+    links:[{n:'Website',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=ANTS%20Technology%20Thailand'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'🐜',
+    detail:[
+      'ให้บริการ B2B / B2G / B2B2C ระดับประเทศและ regional',
+      'ลูกค้าหลัก: Enterprise, Government, Municipality',
+      'ทีม: Delivery + MarTech + AI + Solutions Engineering'
+    ]
+  },
+  {
+    id:'martech',
+    cat:'main',
+    stage:'rev',
+    order:0,
+    name:'Marketing Technology',
+    sub:'Solution · CDP + CRM + AI Marketing',
+    desc:'แพลตฟอร์มการตลาดครบวงจร — CDP, CRM, Journey Orchestration, AI Chatbot, Loyalty, และ Performance Dashboard',
+    why:'Flagship Revenue ของ ANTS · แหล่งลูกค้า Enterprise ที่ Private AI Practice จะต่อยอดขายได้ทันที',
+    intent:['Save Time','Amplify','Scale'],
+    links:[{n:'Website',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=ANTS%20Technology%20Thailand'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'📊',
+    detail:[
+      'CDP + Segmentation + Journey Orchestration',
+      'CRM + Loyalty + Coupon Engine',
+      'AI Chatbot (Britz), AI Copywriter, Performance Dashboard',
+      'Use case: B-Quik, Sawad, Yves Rocher, Cute Press, Oriental Princess'
+    ]
+  },
+  {
+    id:'commplatform',
+    cat:'main',
+    stage:'cash',
+    name:'Communication Platform',
+    sub:'Solution · SMS + Email + LINE Agency + Voice',
+    desc:'แพลตฟอร์มสื่อสารครบวงจร — SMS Gateway, Email Marketing, LINE Official Account Agency, Voice & OTT · Infrastructure Layer ของทุก MarTech/CRM',
+    why:'Cash-cow ของ ANTS · Recurring Revenue สูง · Gateway สู่ Enterprise ทุกกลุ่ม · License จำนวนจำกัดในไทย (LINE Authorized Partner)',
+    intent:['Save Time','Amplify','Scale'],
+    links:[{n:'Website',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=ANTS%20Technology%20Thailand'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'💬',
+    detail:[
+      'SMS Gateway — Enterprise-scale, 99.9% delivery SLA',
+      'Email Marketing + Transactional',
+      'LINE Official Account Authorized Agency',
+      'Voice Broadcast + OTT (WhatsApp, Viber)',
+      'เชื่อมกับ Marketing Technology CDP แบบ native'
+    ]
+  },
+  {
+    id:'smartcity',
+    cat:'main',
+    stage:'pilot',
+    order:3,
+    name:'Smart City Platform',
+    sub:'Solution · Government · IoT + City OS',
+    desc:'แพลตฟอร์มเมืองอัจฉริยะให้เทศบาลและหน่วยงานภาครัฐ — เชื่อม IoT, Data, และ Citizen Service',
+    why:'เข้าถึง 7,000+ เทศบาลไทย · เส้นทางเข้า B2G ที่ยาวและ sustainable',
+    intent:['Scale','Public Good','Amplify'],
+    links:[{n:'ANTS',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=ANTS%20Technology%20Thailand'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'🏙️',
+    detail:[
+      'IoT + CCTV + Environmental Sensor integration',
+      'Dashboard สำหรับนายก/ปลัดเทศบาล',
+      'ต่อยอดเป็น EcoSort และ Citizen App'
+    ]
+  },
+  {
+    id:'smartclass',
+    cat:'main',
+    stage:'pilot',
+    order:4,
+    name:'Smart Classroom',
+    sub:'Solution · EdTech · K-12 + Higher Ed',
+    desc:'แพลตฟอร์มห้องเรียนอัจฉริยะ — Content, Assessment, AI Tutor, Teacher Analytics',
+    why:'สร้าง Funnel เยาวชน → ไปต่อที่ CTRL-G eSport + Education ได้',
+    intent:['Amplify','Public Good'],
+    links:[{n:'ANTS',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=ANTS%20Smart%20Classroom'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'🎓',
+    detail:[
+      'Content Library + Interactive Lesson',
+      'AI Tutor และ Auto-grading',
+      'Dashboard สำหรับครูและผู้บริหาร'
+    ]
+  },
+  {
+    id:'ecosort',
+    cat:'main',
+    stage:'pilot',
+    order:2,
+    name:'EcoSort',
+    sub:'Solution · Municipal Waste Billing SaaS',
+    desc:'SaaS เก็บค่าธรรมเนียมขยะสำหรับเทศบาล — จับคู่บ้าน, ถังขยะ, QR, บิล, และรายงานราชการ',
+    why:'สร้าง Recurring Revenue จาก 7,000+ เทศบาล + ลด Friction ของราชการ',
+    intent:['Save Time','Scale','Public Good'],
+    links:[{n:'ANTS',u:'https://www.ants.co.th'}],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=EcoSort%20ANTS'},
+      {n:'LinkedIn',u:'https://www.linkedin.com/company/ants-co-th/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=ants.co.th&sz=128',
+    emoji:'♻️',
+    detail:[
+      'Household ↔ Bin ↔ QR ↔ Invoice mapping',
+      'Route Optimization สำหรับรถเก็บขยะ',
+      'Open API เชื่อมกับระบบราชการ'
+    ]
+  },
+
+  // ===== STARTUP (4) — high-upside Nut-personal ventures · L→R: aiao · taily · themantra · finops =====
+  {
+    id:'aiao',
+    cat:'startup',
+    stage:'pre',
+    order:0,
+    name:'AI Agent Orchestration',
+    sub:'AI-Native Operating Layer · 100M THB Solo Goal',
+    desc:'Command Center AI — 51 Agents (Board, C-Suite, Heads, Execution, Ops) ทำงานแทน 50–80 คน · รวม capabilities ของ Content production (video/avatar) + AEO/SEO/Digital Agency delivery ไว้ในหน่วยเดียว',
+    why:'Thesis: ผู้ประกอบการเดี่ยวทำ 100M ได้ด้วย AI Workforce · เป็นเครื่องยนต์หลักของ ANTS ที่ส่งมอบได้ทั้ง Content, AEO/SEO, Production, และ Ops อัตโนมัติ',
+    intent:['Save Time','Amplify'],
+    links:[{n:'Internal',u:'#'}],
+    social:[],
+    app:[],
+    emoji:'🤖',
+    detail:[
+      '51 Agents ครอบคลุม Board → Ops',
+      'เฌอคูณ (Chief Wisdom Officer) เป็น Master Orchestrator',
+      'Tier A tools: Claude Max/API, Cursor, n8n, HubSpot, Notion',
+      'Content & Creative arm — AI Avatar, Voice Clone, Video/Image production (ดูดซับจาก AI Content Channels เดิม)',
+      'Digital Agency arm — AEO/GEO/SEO Audit + Campaign delivery (ดูดซับจาก AI Digital Agency เดิม)',
+      'Case Studies: B-Quik, Sawad, Yves Rocher, Cute Press, Oriental Princess'
+    ]
+  },
+  {
+    id:'taily',
+    cat:'startup',
+    stage:'pre',
+    order:2,
+    name:'Taily',
+    sub:'Pet Super App & Operating Platform · Thailand',
+    desc:'Pet OS + Community + DataHub — PetFriendly Places, Taily Score, Pet Passport, Taily Pay',
+    why:'ตลาด Pet Economy ไทย + เอเชียกำลังโต · ทดสอบ Embedded Services (Insurance, Payment, Loyalty)',
+    intent:['Save Time','Amplify','Scale'],
+    links:[
+      {n:'Web App',u:'https://ai-solution-platform.github.io/Taily/app/'},
+      {n:'Landing',u:'https://ai-solution-platform.github.io/Taily/'}
+    ],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=Taily%20pet%20friendly'},
+      {n:'Instagram',u:'https://www.instagram.com/explore/tags/tailypetfriendly/'},
+      {n:'TikTok',u:'https://www.tiktok.com/search?q=taily%20pet%20friendly'},
+      {n:'LINE OA',u:'#'}
+    ],
+    app:[
+      {n:'Apple App Store',u:'#'},
+      {n:'Google Play',u:'#'}
+    ],
+    logo:'',
+    emoji:'🐾',
+    detail:[
+      'DataHub 20,000+ records (v19+) · Pet-friendly places',
+      'Taily Score · Pet Passport · Taily Pay (embedded finance)',
+      'Spin-out model · private investor — separate from ANTS',
+      'App Store + Google Play launch planned (ปัจจุบัน Web SPA)'
+    ]
+  },
+  {
+    id:'themantra',
+    cat:'startup',
+    stage:'pilot',
+    order:3,
+    name:'The Mantra',
+    sub:'Horoscope Platform · Facebook launched',
+    desc:'แพลตฟอร์มดูดวง · เปิดตัวผ่าน Facebook · ต่อยอดเป็น Premium horoscope + content commerce',
+    why:'High emotional engagement · Recurring daily traffic · เชื่อม Taily Community + AI Agent Orchestration ได้',
+    intent:['Scale','Amplify'],
+    links:[],
+    social:[{n:'Facebook', u:'https://www.facebook.com/profile.php?id=61574788920267'}],
+    app:[],
+    emoji:'🔮',
+    detail:[
+      'Daily horoscope content (Facebook live)',
+      'Horoscope-as-a-service (Premium tier opportunity)',
+      'Integration candidate: Taily community + AI Agent Orchestration'
+    ]
+  },
+  {
+    id:'finops',
+    cat:'startup',
+    stage:'pre',
+    order:4,
+    name:'FinOps Backbot',
+    sub:'AI Finance Operations · Expense + Finance Backbot',
+    desc:'AI Agents สำหรับงานการเงินและค่าใช้จ่าย — Expense Backbot, Finance Backbot, Bluecode Global FinOps',
+    why:'ตอบโจทย์ SME ไทย ที่การเงินเป็น bottleneck · ต่อยอดจาก CRM/MarTech ให้กลายเป็น Full-Stack',
+    intent:['Save Time','Amplify'],
+    links:[{n:'Internal',u:'#'}],
+    social:[],
+    app:[],
+    emoji:'💰',
+    detail:[
+      'Expense Backbot — จัดการค่าใช้จ่ายอัตโนมัติ',
+      'Finance Backbot — AP/AR, Reconciliation',
+      'Bluecode Global FinOps 2026 — Cloud cost + Vendor spend'
+    ]
+  },
+
+  // ===== INVESTMENT (8) =====
+  {
+    id:'nesttech',
+    cat:'invest',
+    stage:'pre',
+    name:'NestTech',
+    sub:'1-Rai Sufficiency Economy + IoT Smart Farming',
+    desc:'โครงการ 1 ไร่พอเพียง + IoT + Community Center — เกษตรอัจฉริยะสำหรับรายย่อย',
+    why:'ดีมานด์ Soft Power + ESG · แพลตฟอร์มที่ ANTS Smart City นำไปเชื่อมต่อกับเทศบาลได้',
+    intent:['Public Good','Amplify','Scale'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'}
+    ],
+    app:[],
+    emoji:'🌾',
+    detail:[
+      'Smart Farm Sensor + Auto-irrigation',
+      'Community Center สำหรับ Training + Commerce',
+      'เป้าหมาย: Replicable ได้หลายหมู่บ้าน'
+    ]
+  },
+  {
+    id:'unitier',
+    cat:'invest',
+    stage:'pilot',
+    order:1,
+    name:'Unitier — FinTech',
+    sub:'Core System for Savings Cooperatives · จัดตั้งภายในปี',
+    desc:'ระบบกลางสำหรับสหกรณ์ออมทรัพย์ — เงินฝาก, เงินกู้, Loan Insurance, Reporting',
+    why:'สหกรณ์ไทย 1,300+ แห่ง · ต่อยอด Embedded Insurance (Loan Insurance) + Payment Gateway ได้ทันที',
+    intent:['Save Time','Scale','Public Good'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[],
+    app:[],
+    emoji:'🏦',
+    detail:[
+      'Core Banking Module สำหรับสหกรณ์',
+      'Embedded Loan Insurance',
+      'Reporting ให้กรมส่งเสริมสหกรณ์'
+    ]
+  },
+  {
+    id:'vide',
+    cat:'invest',
+    stage:'rev',
+    order:2,
+    name:'Vidé Hospital',
+    sub:'โรงพยาบาลวีเด้ · ดอยสะเก็ด เชียงใหม่ · Neurosurgery & Longevity',
+    desc:'โรงพยาบาลเฉพาะทาง Neurosurgery + Stroke Prevention + Anti-aging + Rehabilitation · นำโดย นพ.ปราชญ์ กัญญาประสิทธิ์ (ประสาทศัลยแพทย์) พร้อมทีมประสาทศัลยแพทย์ 13 ท่าน และแพทย์เฉพาะทาง 10+ สาขา',
+    why:'Health Data + Patient Journey ที่สมบูรณ์ที่สุดในเครือ · เชื่อมกับ MorOnline (Teleconsult) + Lab@Home ได้ทันที · กลุ่มเป้าหมาย Wellness/Longevity เป็นเซกเมนต์กำไรสูงสุดในธุรกิจสุขภาพไทย',
+    intent:['Amplify','Save Time','Public Good'],
+    links:[
+      {n:'vide.care',u:'https://www.vide.care'}
+    ],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/videhospital/'},
+      {n:'LINE',u:'https://lin.ee/46CKj3q'},
+      {n:'Instagram',u:'https://www.instagram.com/videhospital/'}
+    ],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=vide.care&sz=128',
+    emoji:'🏥',
+    detail:[
+      'Location: 139 ต.เชิงดอย อ.ดอยสะเก็ด จ.เชียงใหม่ 50220',
+      'ศูนย์ประสาทวิทยา & Stroke (ป้องกัน + ฟื้นฟู)',
+      'Anti-aging & Longevity Medicine',
+      'IV Drip Therapy (Detox / Brightening)',
+      'Cryotherapy & Rehabilitation Medicine',
+      'Weight Management (Mounjaro / Wegovy)',
+      'CGM — Continuous Glucose Monitoring',
+      'Tumor DNA Screening (มะเร็งระดับพันธุกรรม)',
+      'Full Check-up Program + Inpatient Care',
+      'ทีมแพทย์: 13 ประสาทศัลยแพทย์ + 10+ แพทย์เฉพาะทาง'
+    ]
+  },
+  {
+    id:'virtualmed',
+    cat:'invest',
+    stage:'rev',
+    order:3,
+    name:'Virtualmed (VM+) · MorOnline',
+    sub:'The HealthTech Ecosystem · virtualmed.co.th · 50M Addressable Users',
+    desc:'แพลตฟอร์ม HealthTech ครบวงจร — AI Health Screening + Teleconsult + TelePharmacy + Lab@Home + MorOnline Station (IoT Booth) · ภายใต้ Vision: Affordable · Accessible · Accountable Medical Care',
+    why:'Telemedicine ไทย Addressable Market 50 ล้านคน (วัยทำงาน 38M + สูงวัย 12M) · มี Strategic Partners ระดับ DEPA / TCELS / สสส / KATALYST / Thai Health Technology · ANTS เสริม CDP + AI Personalization + MarTech ได้ทันที',
+    intent:['Save Time','Amplify','Public Good'],
+    links:[
+      {n:'Virtualmed',u:'https://virtualmed.co.th'}
+    ],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/search/top?q=Virtualmed%20MorOnline'},
+      {n:'LINE Mini-App',u:'#'}
+    ],
+    app:[
+      {n:'Apple App Store',u:'#'},
+      {n:'Google Play',u:'#'}
+    ],
+    logo:'https://www.google.com/s2/favicons?domain=virtualmed.co.th&sz=128',
+    emoji:'💊',
+    detail:[
+      '🧠 AI Health Screening — Free, 24/7, ความแม่นยำ 92% (Physical/Mental/Pediatric)',
+      '👨‍⚕️ Doctor Consult — แพทย์เฉพาะทาง 20+ สาขา · เริ่ม 250 บาท · มีใบสั่งยา + ใบรับรองแพทย์',
+      '💊 TelePharmacy — Pharmacist Chat ฟรี · ยา 3,000+ รายการ · OTC',
+      '🧪 Lab Test @ Home — 108 รายการตรวจ Mobile Lab',
+      '👩‍⚕️ Nurse Hotline — พยาบาลวิชาชีพ Standby (ฟรี)',
+      '💎 Membership — เริ่ม 199 บาท/เดือน · 4.8/5 Rating',
+      '🏥 MorOnline Station — ตู้ IoT Health Check-up + Online Service สำหรับชุมชน/อบจ./รพ.สต.',
+      '📂 eHealth Record — PDPA-compliant · Patient Journey ครบวงจร',
+      '🎯 Target Market: 50M users · 22,205 Drug Stores · 25,615 Clinics · 4,860 รพ.สต. · 354 General Hospitals · 46 University Campuses · 29,449 Schools',
+      '🤝 Partners: DEPA · TCELS · KATALYST · สสส · Thai Health Technology · D8 · Pure Pharmacy · LABMOVE · Bangkok Medical Lab · ArcNovo · AHSCU',
+      '🏛️ Government: อบจ · กรมทางหลวง · กองทัพภาค · ไปรษณีย์ไทย',
+      '👥 Team: Thana Thiramanus (CEO, ex-Phyathai/Bangpakok) · Korn Wichitrakorn (CBD, ex-True Healthcare CIO) · นพ.ชูชาติ วินิจวัฒนาคุณ (CMO, ex-รพ.กรุงเทพ) · Weerakit Naowarat (CTO, KMUTT)',
+      '👔 Board: นพ.สุรพงษ์ อัมพวงษ์ (ที่ปรึกษา DITP/MOPH, Co-founder Phyathai) · Peerapong Jirasevijinda CFA (CEO BBL Asset) · Bunsak Sripraserting (SME Bank)',
+      '🎯 Strategic Framework: เข้าถึง · เข้าใจ · เข้าร่วม → เทคโนโลยี + ข้อมูล + ประชาสัมพันธ์',
+      '🔄 Revenue Model: Service Charge + Subscription + Membership + Project Contract + MA + Pay-per-use'
+    ]
+  },
+  {
+    id:'karawa',
+    cat:'invest',
+    stage:'rev',
+    order:5,
+    name:'Karawa Omakase',
+    sub:'Restaurant · Premium Japanese Omakase',
+    desc:'ร้าน Omakase พรีเมียม — Experience-driven dining',
+    why:'Hospitality + Data Case · ทดลอง CRM + Loyalty + AI Reservation สำหรับร้านพรีเมียม',
+    intent:['Amplify','Save Time'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'},
+      {n:'Instagram',u:'#'}
+    ],
+    app:[],
+    emoji:'🍣',
+    detail:[
+      'Omakase experience · Chef-led',
+      'CRM สำหรับ Regular Guest',
+      'Data-driven inventory & supplier management'
+    ]
+  },
+  {
+    id:'mazu',
+    cat:'invest',
+    stage:'rev',
+    order:6,
+    name:'Mazu Omakase',
+    sub:'Restaurant · Premium Japanese Omakase',
+    desc:'ร้าน Omakase พรีเมียม — Chef-led Japanese Fine Dining · Experience-driven concept',
+    why:'ทดสอบ CRM + Loyalty + AI Reservation สำหรับกลุ่ม Premium Diner · ข้อมูลลูกค้า High-Net-Worth',
+    intent:['Amplify','Save Time'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'},
+      {n:'Instagram',u:'#'}
+    ],
+    app:[],
+    emoji:'🍱',
+    detail:[
+      'Premium Japanese Omakase · Chef-led experience',
+      'CRM สำหรับ Regular Guest / High-Net-Worth',
+      'Cross-promotion กับ Karawa Omakase + The Sold'
+    ]
+  },
+  {
+    id:'thesold',
+    cat:'invest',
+    stage:'rev',
+    order:7,
+    name:'The Sold',
+    sub:'Pub & Restaurant · Lifestyle Concept Bar & Dining',
+    desc:'ร้าน Concept lifestyle — แนว Bar + Dining + Experience · แยกธุรกิจจาก Mazu Omakase',
+    why:'ขยายพอร์ต Hospitality ไปเซกเมนต์ Social / Night-Life · ทดสอบ Event Commerce + Loyalty แบบคนละโทนกับ Omakase',
+    intent:['Amplify','Save Time'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'},
+      {n:'Instagram',u:'#'},
+      {n:'TikTok',u:'#'}
+    ],
+    app:[],
+    emoji:'🍸',
+    detail:[
+      'Lifestyle Concept Bar · Social dining',
+      'กลุ่มลูกค้า Young Professional + Creatives',
+      'Event + Night-Life commerce experiments',
+      'เป็นธุรกิจแยกจาก Mazu Omakase แต่แชร์ CRM + Loyalty stack'
+    ]
+  },
+  {
+    id:'proprins',
+    cat:'invest',
+    stage:'rev',
+    order:4,
+    name:'Insurance Broker',
+    sub:'InsurTech · Non-life Broker (Property · Motor · Commercial · Personal)',
+    desc:'โบรกเกอร์ประกันวินาศภัยครบไลน์ — ประกันบ้าน/คอนโด, รถ, ธุรกิจ, อุบัติเหตุ, สุขภาพ, ประกันอาชีพ (ทุกประเภทยกเว้นประกันชีวิต)',
+    why:'Data บ้าน + รถ + ธุรกิจ + สุขภาพ · ต่อยอด Embedded Insurance ได้ทุก Vertical (Taily, Unitier, Vidé, ANTS clients)',
+    intent:['Save Time','Amplify'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'},
+      {n:'LINE OA',u:'#'}
+    ],
+    app:[],
+    emoji:'🛡️',
+    detail:[
+      'Non-life Insurance หลายบริษัท (Property, Motor, Commercial, Liability)',
+      'Personal Accident + Travel + Health (Non-life)',
+      'ข้อมูลลูกค้า + Property + Risk Profile',
+      'Pipeline ให้ Embedded Insurance Platform'
+    ]
+  },
+
+  // ===== PARTNER (9) — 5 Strategic/Vertical + 4 SI Turnkey & Software Dev =====
+  {
+    id:'ctrlg',
+    cat:'partner',
+    stage:'pilot',
+    order:5,
+    name:'CTRL-G',
+    sub:'eSport Platform + Education + To Be Number One',
+    desc:'แพลตฟอร์ม eSport + สมาคมการศึกษา eSport + ต่อยอด To Be Number One',
+    why:'เจาะกลุ่มเยาวชน · ต่อ Smart Classroom + AI Channels + Sponsorship กับ Karawa/Taily ได้',
+    intent:['Amplify','Public Good','Scale'],
+    links:[{n:'Deck',u:'#'}],
+    social:[
+      {n:'Facebook',u:'#'},
+      {n:'YouTube',u:'#'},
+      {n:'TikTok',u:'#'}
+    ],
+    app:[],
+    emoji:'🎮',
+    detail:[
+      'eSport Platform + Tournament',
+      'สมาคมการศึกษา eSport',
+      'To Be Number One partnership'
+    ]
+  },
+  {
+    id:'techvue',
+    cat:'partner',
+    stage:'rev',
+    order:1,
+    name:'Techvue + AscendHR',
+    sub:'HR AI Platform · techvue.co',
+    desc:'HR AI — Recruitment, Performance, Engagement · AscendHR strategic partner (US)',
+    why:'HR เป็น Vertical ที่ ANTS ยังไม่แข็ง · ร่วมกับ Techvue/AscendHR ปิด gap ได้เร็ว',
+    intent:['Save Time','Amplify'],
+    links:[{n:'Techvue',u:'https://techvue.co'}],
+    social:[
+      {n:'LinkedIn',u:'https://www.linkedin.com/search/results/companies/?keywords=Techvue'}
+    ],
+    app:[],
+    logo:'',
+    emoji:'👥',
+    detail:[
+      'HR AI Platform (Recruitment, Perf, Engagement)',
+      'AscendHR — Strategic Partnership Package',
+      'ต่อกับ Marketing Technology สำหรับ Employer Branding'
+    ]
+  },
+  {
+    id:'insurtech',
+    cat:'partner',
+    stage:'pre',
+    name:'InsureTech',
+    sub:'Embedded Insurance · Pet, Loan, Health',
+    desc:'แพลตฟอร์มประกันภัยฝังตัว — Taily→Pet Insurance, Savings Coop→Loan Insurance, Health→Medical',
+    why:'สร้าง Recurring Revenue จากทุก Vertical · เป็น Backbone ร่วมให้ Taily, Unitier, Vidé',
+    intent:['Save Time','Scale','Amplify'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[],
+    app:[],
+    emoji:'☂️',
+    detail:[
+      'Pet Insurance ผ่าน Taily',
+      'Loan Insurance ผ่าน Unitier (สหกรณ์)',
+      'Health Insurance ผ่าน Vidé / MorOnline'
+    ]
+  },
+  {
+    id:'payment',
+    cat:'partner',
+    stage:'cash',
+    order:1,
+    name:'Payment Gateway',
+    sub:'Fintech · Merchant Payment',
+    desc:'Payment Gateway + Merchant Services เป็น Infra ร่วมให้ทุก Vertical',
+    why:'Infrastructure Layer · ทำให้ทุก Startup/Investment มี Payment flow รวมได้',
+    intent:['Save Time','Scale'],
+    links:[{n:'Inquiry',u:'#'}],
+    social:[],
+    app:[],
+    emoji:'💳',
+    detail:[
+      'Card + QR + e-Wallet + Installment',
+      'Merchant Settlement & Reconciliation',
+      'ต่อกับ FinOps Backbot'
+    ]
+  },
+  // ===== SI Turnkey & Software Development (4 partners) =====
+  {
+    id:'workmotion',
+    cat:'partner',
+    stage:'rev',
+    order:2,
+    name:'WorkMotion',
+    sub:'SI Turnkey · Software Dev · workmotion.co.th',
+    desc:'พาร์ทเนอร์ SI Turnkey + Software Development ในไทย · ขยายกำลัง delivery ให้ ANTS',
+    why:'เพิ่ม Delivery Capacity สำหรับโปรเจค B2B/B2G · Hardware+Software Integration',
+    intent:['Save Time','Scale','Amplify'],
+    links:[{n:'WorkMotion',u:'https://workmotion.co.th/'}],
+    social:[],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=workmotion.co.th&sz=128',
+    emoji:'🔧',
+    detail:[
+      'SI Turnkey Integration',
+      'Software Development outsourcing',
+      'Delivery augmentation สำหรับ Smart City + Smart Classroom'
+    ]
+  },
+  {
+    id:'techflow',
+    cat:'partner',
+    stage:'rev',
+    order:3,
+    name:'TechFlow Solution',
+    sub:'Asia SI · techflow.asia',
+    desc:'SI + Software Development partner ระดับภูมิภาค · เสริมกำลัง delivery ให้ ANTS',
+    why:'Delivery scale + Regional reach · ต่อ Smart City / Turnkey Solution ได้',
+    intent:['Save Time','Scale'],
+    links:[{n:'TechFlow',u:'https://techflow.asia/'}],
+    social:[],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=techflow.asia&sz=128',
+    emoji:'🌊',
+    detail:[
+      'SI Turnkey + Software Development',
+      'Asia regional presence',
+      'Partner สำหรับ Turnkey Hardware + IoT projects'
+    ]
+  },
+  {
+    id:'speedtech',
+    cat:'partner',
+    stage:'pilot',
+    order:4,
+    name:'Speed Tech (Laos)',
+    sub:'Regional SI · Laos · CLMV Gateway',
+    desc:'SI Turnkey พาร์ทเนอร์ในลาว · ประตูสู่ตลาด CLMV (กัมพูชา, ลาว, เมียนมา, เวียดนาม)',
+    why:'Regional Expansion Bridge · เข้าตลาดลาวได้โดยตรง · ต่อยอดเป็น Hub สู่ CLMV',
+    intent:['Scale','Amplify'],
+    links:[],
+    social:[
+      {n:'Facebook',u:'https://www.facebook.com/profile.php?id=61565347504293'}
+    ],
+    app:[],
+    emoji:'⚡',
+    detail:[
+      'Regional SI partner (Laos)',
+      'CLMV market access',
+      'Support Smart City + Communication Platform expansion'
+    ]
+  },
+  {
+    id:'touchtech',
+    cat:'partner',
+    stage:'rev',
+    order:4,
+    name:'Touch Tech Design',
+    sub:'Design-Led Tech · touchtechdesign.com',
+    desc:'SI + Design-driven software development · เสริม UX/UI + Creative Engineering ให้ ANTS',
+    why:'Design × Engineering bridge · เสริมคุณภาพ UX ของ Smart City / Smart Classroom',
+    intent:['Save Time','Amplify'],
+    links:[{n:'Touch Tech',u:'https://www.touchtechdesign.com/'}],
+    social:[],
+    app:[],
+    logo:'https://www.google.com/s2/favicons?domain=touchtechdesign.com&sz=128',
+    emoji:'🎨',
+    detail:[
+      'Design-led SI + Software',
+      'UX/UI + Creative Engineering',
+      'Co-delivery สำหรับ flagship products (Britz, Taily, Smart Class)'
+    ]
+  },
+  // ===== Education Partner (1) =====
+  {
+    id:'engenius',
+    cat:'partner',
+    stage:'pilot',
+    order:3,
+    name:'ENGENIUS Group',
+    sub:'EdTech · engenius.co.th · Read It Go',
+    desc:'EdTech group · เจ้าของ Read It Go Solution (iOS) · สะพานเชื่อม Smart Classroom ↔ ภาครัฐ ↔ eSport',
+    why:'Education vertical gateway · เชื่อม Smart Classroom Platform → Smart City ผ่านภาครัฐ + CTRL-G eSport',
+    intent:['Amplify','Public Good','Scale'],
+    links:[{n:'ENGENIUS',u:'https://engenius.co.th/'}],
+    social:[],
+    app:[
+      {n:'Read It Go · App Store',u:'https://apps.apple.com/th/app/readitgo/id6749751504'}
+    ],
+    logo:'https://www.google.com/s2/favicons?domain=engenius.co.th&sz=128',
+    emoji:'📚',
+    detail:[
+      'Read It Go — iOS reading app (EdTech)',
+      'Bridge: Smart Classroom ↔ Government (MOE / สพฐ) ↔ CTRL-G eSport',
+      'ต่อยอด AI Agent Orchestration (Content arm) + Smart City Education pillar'
+    ]
+  }
+];
+
+/* ============================================================
+   ORBIT POSITIONING — compact, responsive, fits 1200px wrap
+   — Canvas: 100%W × 760px H · Core 138px at center
+   — MAIN top · STARTUP bottom · INVEST left (2 cols) · PARTNER right (2 cols)
+   — Below 900px viewport, we switch to mobile fallback (see renderOrbitMobile)
+   ============================================================ */
+
+/* Brand badge map — applied for entities without verifiable favicon */
+const BRAND_BADGE = {
+  karawa:  'brand-karawa',
+  mazu:    'brand-mazu',
+  taily:   'brand-taily',
+  thesold: 'brand-thesold',
+  techvue: 'brand-techvue'
+};
+
+function layoutOrbit(){
+  const orbit = document.getElementById('orbit');
+  if(!orbit || window.innerWidth < 900){ return; }
+  const W = orbit.clientWidth, H = orbit.clientHeight;
+  const cx = W/2, cy = H/2;
+
+  // dx/dy placements · Node = 158 wide, ~46 tall · Canvas reach ≈ 1100x720.
+  // Top/Bottom rows pushed to ±305 to fit 760px-tall canvas
+  // Horizontal spacing 220px (62px gap between 158px-wide nodes)
+  const PLACE = {
+    // === MAIN TOP ROW — 5 nodes L→R
+    martech:     {dx:-440, dy:-300},
+    commplatform:{dx:-220, dy:-300},
+    smartcity:   {dx:   0, dy:-300},
+    smartclass:  {dx:+220, dy:-300},
+    ecosort:     {dx:+440, dy:-300},
+
+    // === STARTUP BOTTOM ROW — 4 top-level nodes L→R (R10 order: AI Agent Orchestration · Taily · The Mantra · FinOps)
+    aiao:        {dx:-330, dy:+300},
+    taily:       {dx:-110, dy:+300},
+    themantra:   {dx:+110, dy:+300},
+    finops:      {dx:+330, dy:+300},
+
+    // === INVEST (LEFT) — 8 items in 2 sub-columns
+    // Outer col x=-460 (3): Agri · Finance
+    // Inner col x=-260 (5): Health (2) · Hospitality (3: Karawa, Mazu, The Sold)
+    nesttech:    {dx:-460, dy:-150},
+    unitier:     {dx:-460, dy:   0},
+    proprins:    {dx:-460, dy:+150},
+    vide:        {dx:-260, dy:-200},
+    virtualmed:  {dx:-260, dy:-100},
+    karawa:      {dx:-260, dy:   0},
+    mazu:        {dx:-260, dy:+100},
+    thesold:     {dx:-260, dy:+200},
+
+    // === PARTNER (RIGHT) — 9 items in 2 sub-columns
+    // Outer col x=+460 (5): Strategic / Vertical partners — eSport · HR · Insurance · Payment · EdTech
+    // Inner col x=+260 (4): SI Turnkey & Software Dev partners
+    ctrlg:       {dx:+460, dy:-220},
+    techvue:     {dx:+460, dy:-110},
+    insurtech:   {dx:+460, dy:   0},
+    payment:     {dx:+460, dy:+110},
+    engenius:    {dx:+460, dy:+220},
+
+    // R10 order: WorkMotion → TechFlow → Speed Tech (Laos) → Touch Tech
+    workmotion:  {dx:+260, dy:-165},
+    techflow:    {dx:+260, dy: -55},
+    speedtech:   {dx:+260, dy: +55},
+    touchtech:   {dx:+260, dy:+165},
+  };
+
+  entities.forEach(e=>{
+    if(e.id==='ants') return;
+    const p = PLACE[e.id];
+    if(!p) return;
+    const x = cx + p.dx;
+    const y = cy + p.dy;
+    const el = document.createElement('div');
+    el.className = 'node ' + e.cat;
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+    el.style.transform = 'translate(-50%,-50%)';
+    const brandCls = BRAND_BADGE[e.id] || '';
+    const logoHtml = e.logo
+      ? `<span class="logo ${brandCls}"><img src="${e.logo}" alt="${e.name}" onerror="this.parentElement.classList.add('${brandCls||'fallback'}');this.parentElement.textContent='${e.emoji||'•'}'"/></span>`
+      : `<span class="logo ${brandCls}">${e.emoji||'•'}</span>`;
+    el.innerHTML = `${logoHtml}<span class="nm">${e.name}</span><small>${(e.sub.split('·')[0]||'').trim()}</small>`;
+    el.onclick = ()=> openModal(e.id);
+    orbit.appendChild(el);
+
+    // Faint connector from core to node
+    const line = document.createElement('div');
+    line.className = 'orbit-line';
+    const dx = x - cx, dy = y - cy;
+    const len = Math.hypot(dx,dy);
+    const ang = Math.atan2(dy,dx);
+    line.style.cssText = `
+      position:absolute;left:${cx}px;top:${cy}px;
+      width:${len}px;height:1px;background:rgba(0,82,255,.1);
+      transform-origin:0 0;transform:rotate(${ang}rad);
+      z-index:1;pointer-events:none;
+    `;
+    orbit.insertBefore(line, orbit.firstChild);
+  });
+}
+
+/* Mobile fallback — category groups with tappable node cards */
+function renderOrbitMobile(){
+  const host = document.getElementById('orbit-mobile');
+  if(!host) return;
+  host.innerHTML = '';
+  const cats = [
+    {k:'main',    label:'Main Business',      subtitle:'ANTS + แกนหลักของระบบนิเวศ'},
+    {k:'startup', label:'Startup Side Projects', subtitle:'หน่วยทดลอง thesis ใหม่'},
+    {k:'invest',  label:'Investment Portfolio', subtitle:'ธุรกิจที่ลงทุน / ร่วมทุน'},
+    {k:'partner', label:'Partner Ventures',    subtitle:'พันธมิตรเชิงกลยุทธ์'},
+  ];
+  cats.forEach(({k,label,subtitle})=>{
+    const group = document.createElement('div');
+    group.className = 'cat-group ' + k;
+    const list = entities.filter(e => e.cat===k && (k!=='main' || e.id!=='ants'));
+    group.innerHTML = `
+      <h5>${label} · <span style="color:var(--muted);font-weight:500">${subtitle}</span></h5>
+      <div class="node-list">
+        ${list.map(e=>{
+          const brandCls = BRAND_BADGE[e.id] || '';
+          const logoHtml = e.logo
+            ? `<span class="logo ${brandCls}"><img src="${e.logo}" alt="${e.name}" onerror="this.parentElement.classList.add('${brandCls||'fallback'}');this.parentElement.textContent='${e.emoji||'•'}'"/></span>`
+            : `<span class="logo ${brandCls}">${e.emoji||'•'}</span>`;
+          return `<div class="m-node" data-id="${e.id}">${logoHtml}<span class="nm">${e.name}</span><small>${(e.sub.split('·')[0]||'').trim()}</small></div>`;
+        }).join('')}
+      </div>
+    `;
+    host.appendChild(group);
+  });
+  host.querySelectorAll('.m-node').forEach(n=>{
+    n.addEventListener('click', ()=>openModal(n.dataset.id));
+  });
+}
+
+/* ============================================================
+   GRID RENDER
+   ============================================================ */
+function renderGrid(filter='all'){
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  const list = entities.filter(e => filter==='all' || e.cat===filter);
+  list.forEach(e=>{
+    const card = document.createElement('div');
+    card.className = 'card ' + e.cat;
+    card.onclick = ()=>openModal(e.id);
+    const brandCls = BRAND_BADGE[e.id] || '';
+    const logoHtml = e.logo
+      ? `<span class="c-logo ${brandCls}"><img src="${e.logo}" alt="${e.name}" onerror="this.parentElement.classList.add('${brandCls||'fallback'}');this.parentElement.textContent='${e.emoji||'•'}'"/></span>`
+      : `<span class="c-logo ${brandCls}">${e.emoji||'•'}</span>`;
+    card.innerHTML = `
+      <div class="accent"></div>
+      <div class="card-head">
+        ${logoHtml}
+        <span class="tag ${e.cat}">${labelCat(e.cat)}</span>
+      </div>
+      <h3>${e.name}</h3>
+      <div class="sub">${e.sub}</div>
+      <p>${e.desc}</p>
+      <div class="meta">
+        ${e.intent.map(i=>`<span>◆ ${i}</span>`).join('')}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  document.getElementById('count-all').textContent = entities.length;
+}
+function labelCat(c){
+  return ({main:'Main',startup:'Startup',invest:'Investment',partner:'Partner'})[c];
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+function chLinkList(arr, kind){
+  // kind: '' | 'social' | 'app'
+  if(!arr || !arr.length) return '';
+  // Filter out placeholder '#' that has not been set up — show as muted
+  const live = arr.filter(l => l.u && l.u !== '#');
+  const planned = arr.filter(l => !l.u || l.u === '#');
+  let html = '';
+  if(live.length){
+    html += `<div class="links ${kind}">${live.map(l=>`<a href="${l.u}" target="_blank" rel="noopener">${l.n} ↗</a>`).join('')}</div>`;
+  }
+  if(planned.length){
+    html += `<div class="links ${kind}" style="margin-top:6px">${planned.map(l=>`<a href="#" onclick="event.preventDefault()" style="opacity:.55;cursor:not-allowed" title="ยังไม่เปิดให้บริการ / Coming soon">${l.n} · soon</a>`).join('')}</div>`;
+  }
+  return html;
+}
+function renderChannels(e){
+  const hasW = e.links && e.links.length;
+  const hasS = e.social && e.social.length;
+  const hasA = e.app && e.app.length;
+  if(!hasW && !hasS && !hasA){
+    return `<div class="channel-empty">ยังไม่มีช่องทาง public · Internal-only ในขณะนี้</div>`;
+  }
+  let out = '';
+  if(hasW){
+    out += `<div class="channel-sub">Website</div>${chLinkList(e.links,'')}`;
+  }
+  if(hasS){
+    out += `<div class="channel-sub">Social Media</div>${chLinkList(e.social,'social')}`;
+  }
+  if(hasA){
+    out += `<div class="channel-sub">App Store</div>${chLinkList(e.app,'app')}`;
+  }
+  return out;
+}
+function openModal(id){
+  const e = entities.find(x=>x.id===id);
+  if(!e) return;
+  const html = `
+    <span class="tag ${e.cat}">${labelCat(e.cat)}</span>
+    <h3>${e.name}</h3>
+    <div class="sub">${e.sub}</div>
+
+    <h4>What it is</h4>
+    <p>${e.desc}</p>
+
+    <h4>ทำไมต้องมีในระบบนิเวศ</h4>
+    <p>${e.why}</p>
+
+    <h4>Intent ที่ตอบ</h4>
+    <div class="meta" style="margin-top:6px">
+      ${e.intent.map(i=>`<span class="tag ${e.cat}" style="margin-right:6px">${i}</span>`).join('')}
+    </div>
+
+    <h4>รายละเอียด</h4>
+    <ul>${e.detail.map(d=>`<li>${d}</li>`).join('')}</ul>
+
+    <h4>ช่องทาง</h4>
+    ${renderChannels(e)}
+  `;
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+document.getElementById('modal').addEventListener('click', e=>{ if(e.target.id==='modal') closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ============================================================
+   FILTERS
+   ============================================================ */
+document.querySelectorAll('#filters .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#filters .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    renderGrid(chip.dataset.filter);
+  });
+});
+
+/* ============================================================
+   CHARTS
+   ============================================================ */
+function buildCharts(){
+  // RADAR — Intent coverage
+  const intents = ['Save Time','Amplify','Scale','Public Good'];
+  const catColors = {
+    main:    {border:'#0052FF', fill:'rgba(0,82,255,.18)'},
+    startup: {border:'#7C3AED', fill:'rgba(124,58,237,.18)'},
+    invest:  {border:'#059669', fill:'rgba(5,150,105,.18)'},
+    partner: {border:'#EA580C', fill:'rgba(234,88,12,.18)'},
+  };
+  const datasets = Object.keys(catColors).map(cat=>{
+    const data = intents.map(it => entities.filter(e=>e.cat===cat && e.intent.includes(it)).length);
+    return {
+      label: labelCat(cat),
+      data,
+      borderColor: catColors[cat].border,
+      backgroundColor: catColors[cat].fill,
+      borderWidth: 2,
+      pointBackgroundColor: catColors[cat].border,
+      pointRadius: 4,
+    };
+  });
+  new Chart(document.getElementById('radarChart'),{
+    type:'radar',
+    data:{labels:intents, datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{font:{family:'IBM Plex Sans Thai'}}}},
+      scales:{r:{beginAtZero:true,suggestedMax:6,grid:{color:'#E5E7EB'},angleLines:{color:'#E5E7EB'},pointLabels:{font:{size:13,family:'IBM Plex Sans Thai'}}}}
+    }
+  });
+
+  // DONUT — Category share
+  const counts = ['main','startup','invest','partner'].map(c=>entities.filter(e=>e.cat===c).length);
+  new Chart(document.getElementById('donutChart'),{
+    type:'doughnut',
+    data:{labels:['Main','Startup Side Projects','Investment Portfolio','Partner Ventures'],
+      datasets:[{data:counts, backgroundColor:['#0052FF','#7C3AED','#059669','#EA580C'],borderWidth:3,borderColor:'#fff'}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{font:{family:'IBM Plex Sans Thai'}}}},
+      cutout:'65%'
+    }
+  });
+
+  // KANBAN LIFECYCLE BOARD — renders directly from entities[].stage
+  renderKanban();
+
+  // LINEAR RELATIONSHIP GRAPH — Lifecycle × Strategic Value bubble chart
+  buildLinearGraph();
+}
+
+function renderKanban(){
+  const container = document.getElementById('kanban');
+  if(!container) return;
+  const cols = [
+    {key:'pre',   title:'Pre-Revenue',  sub:'Concept / MVP / Pre-launch'},
+    {key:'pilot', title:'Pilot',        sub:'Early customers · validating PMF'},
+    {key:'rev',   title:'Revenue-Gen',  sub:'Active recurring revenue'},
+    {key:'cash',  title:'Cash Cow',     sub:'Mature · stable margin · low CAC'}
+  ];
+  container.innerHTML = cols.map(col=>{
+    const items = entities
+      .filter(e=>e.stage===col.key)
+      .sort((a,b)=>((a.order??99)-(b.order??99)) || a.name.localeCompare(b.name));
+    const cards = items.map(e=>`
+      <div class="k-card ${e.cat}" onclick="openModal('${e.id}')">
+        <div class="k-emoji">${e.emoji}</div>
+        <div class="k-body">
+          <div class="k-name">${e.name}</div>
+          <div class="k-meta"><span class="k-cat-dot"></span>${labelCat(e.cat)}</div>
+        </div>
+      </div>
+    `).join('');
+    return `
+      <div class="k-col ${col.key}">
+        <h5>${col.title} <span class="k-count">${items.length}</span></h5>
+        <div class="k-sub">${col.sub}</div>
+        ${cards || '<div style="color:#94A3B8;font-size:12px;padding:10px 0">— ไม่มี ventures ในขั้นนี้ —</div>'}
+      </div>
+    `;
+  }).join('');
+}
+
+/* ============================================================
+   LINEAR RELATIONSHIP GRAPH (กราฟความสัมพันธ์เชิงเส้น)
+   X = Lifecycle Maturity (0=Pre, 1=Pilot, 2=Rev, 3=Cash)
+   Y = Strategic Value (0–100)
+   r = Revenue Impact (1–24)
+   color = Category
+   ============================================================ */
+const stageX = {pre:0.5, pilot:1.5, rev:2.5, cash:3.5};
+// Strategic value (0–100): how essential is this venture to the ANTS Master Strategy
+const STRATEGIC = {
+  // MAIN — flagship + infra, all high
+  ants:95, martech:92, commplatform:90, smartcity:78, smartclass:62, ecosort:72,
+  // STARTUP — 4 top-level (R10: AI Content Channels + AI Digital Agency capabilities absorbed into aiao)
+  aiao:96, taily:84, themantra:55, finops:60,
+  // INVESTMENT — strategic + revenue
+  nesttech:50, unitier:74, vide:88, virtualmed:90, karawa:48, mazu:50, thesold:45, proprins:78,
+  // PARTNER — leverage plays
+  ctrlg:52, techvue:70, insurtech:75, payment:82,
+  // PARTNER · SI Turnkey + EdTech
+  workmotion:60, speedtech:55, techflow:58, touchtech:54, engenius:72
+};
+// Revenue impact (1–24): bubble radius reflects ฿ scale (current + projected)
+const REV_IMPACT = {
+  ants:22, martech:20, commplatform:24, smartcity:14, smartclass:8, ecosort:11,
+  // STARTUP — R10: aiao absorbs former AI Content Channels + AI Digital Agency revenue impact
+  aiao:22, taily:16, themantra:5, finops:7,
+  nesttech:6, unitier:14, vide:18, virtualmed:20, karawa:8, mazu:9, thesold:7, proprins:13,
+  ctrlg:6, techvue:11, insurtech:13, payment:17,
+  workmotion:8, speedtech:5, techflow:7, touchtech:6, engenius:7
+};
+function buildLinearGraph(){
+  const cv = document.getElementById('linearGraph');
+  if(!cv) return;
+  const catColors = {
+    main:    {bg:'rgba(0,82,255,.55)',   border:'#0052FF'},
+    startup: {bg:'rgba(124,58,237,.55)', border:'#7C3AED'},
+    invest:  {bg:'rgba(5,150,105,.55)',  border:'#059669'},
+    partner: {bg:'rgba(234,88,12,.55)',  border:'#EA580C'},
+  };
+
+  /* ----- Anti-overlap layout: for each stage, fan bubbles out horizontally
+          across the stage band (x ∈ stageCenter ± 0.42). Within a stage,
+          sort by Y descending so tallest strategic value anchors the center. ----- */
+  const stageList = Object.keys(stageX);
+  const plotMap = {}; // id -> {x, y, r, posIndex}
+  stageList.forEach(stg=>{
+    const pool = entities.filter(e=>e.stage===stg);
+    // sort by strategic y desc to put high-strategy in center
+    pool.sort((a,b)=> (STRATEGIC[b.id]||0) - (STRATEGIC[a.id]||0));
+    const n = pool.length;
+    const bandHalf = 0.42;
+    const center = stageX[stg] ?? 0.5;
+    pool.forEach((e,i)=>{
+      // Order positions around the center: 0, -1, +1, -2, +2, ... (so high strategy stays center)
+      const rank = i;
+      const signed = rank === 0 ? 0
+                   : (rank % 2 === 1 ? -Math.ceil(rank/2) : +Math.ceil(rank/2));
+      const spread = n > 1 ? (signed / Math.max(1, Math.floor(n/2))) * bandHalf : 0;
+      plotMap[e.id] = {
+        x: center + spread,
+        posIndex: rank
+      };
+    });
+  });
+
+  const datasets = ['main','startup','invest','partner'].map(cat=>{
+    const data = entities
+      .filter(e=>e.cat===cat)
+      .map(e=>{
+        const pos = plotMap[e.id] || {x:(stageX[e.stage]||0.5), posIndex:0};
+        return {
+          x: pos.x,
+          y: STRATEGIC[e.id] ?? 50,
+          r: REV_IMPACT[e.id] ?? 8,
+          posIndex: pos.posIndex,
+          id: e.id,
+          name: e.name,
+          emoji: e.emoji,
+          sub: e.sub
+        };
+      });
+    return {
+      label: labelCat(cat),
+      data,
+      backgroundColor: catColors[cat].bg,
+      borderColor: catColors[cat].border,
+      borderWidth: 1.5,
+      hoverBorderWidth: 3,
+    };
+  });
+  new Chart(cv,{
+    type:'bubble',
+    data:{datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      layout:{padding:{top:10,right:18,bottom:10,left:10}},
+      plugins:{
+        legend:{position:'bottom',labels:{font:{family:'IBM Plex Sans Thai',size:12},usePointStyle:true,padding:14}},
+        tooltip:{
+          backgroundColor:'#0B1020',padding:12,
+          titleFont:{family:'IBM Plex Sans Thai',size:13,weight:'700'},
+          bodyFont:{family:'IBM Plex Sans Thai',size:12},
+          callbacks:{
+            title:ctx=>{
+              const d=ctx[0].raw;
+              return `${d.emoji||''} ${d.name}`;
+            },
+            label:ctx=>{
+              const d=ctx.raw;
+              const stageLbl = ['Pre-Revenue','Pilot','Revenue-Gen','Cash Cow'][Math.floor(d.x)];
+              return [
+                `${d.sub||''}`,
+                `Stage: ${stageLbl}`,
+                `Strategic Value: ${d.y}/100`,
+                `Revenue Impact: ${d.r}/24`
+              ];
+            }
+          }
+        }
+      },
+      onClick:(evt, items)=>{
+        if(items && items.length){
+          const d = items[0].element.$context.raw;
+          if(d && d.id) openModal(d.id);
+        }
+      },
+      scales:{
+        x:{
+          min:0, max:4,
+          grid:{color:'#E5E7EB'},
+          border:{display:false},
+          ticks:{
+            stepSize:1,
+            callback:(v)=> ['Pre-Rev','Pilot','Rev-Gen','Cash Cow',''][Math.round(v)] || '',
+            font:{family:'IBM Plex Sans Thai',size:12,weight:'600'},
+            color:'#475569'
+          },
+          title:{display:true,text:'Lifecycle Maturity →',color:'#64748B',font:{family:'IBM Plex Sans Thai',size:11,weight:'700'}}
+        },
+        y:{
+          min:30, max:100,
+          grid:{color:'#E5E7EB'},
+          border:{display:false},
+          ticks:{
+            stepSize:10,
+            font:{family:'IBM Plex Sans Thai',size:11},
+            color:'#64748B'
+          },
+          title:{display:true,text:'↑ Strategic Value to ANTS Ecosystem',color:'#64748B',font:{family:'IBM Plex Sans Thai',size:11,weight:'700'}}
+        }
+      }
+    },
+    plugins:[{
+      id:'bubbleLabels',
+      afterDatasetsDraw(chart){
+        const {ctx} = chart;
+        ctx.save();
+        ctx.font = '600 10px IBM Plex Sans Thai, Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Collect all placed label rects, skip drawing if overlap
+        const placed = [];
+        const rectsOverlap = (a,b)=> !(a.x+a.w < b.x || b.x+b.w < a.x || a.y+a.h < b.y || b.y+b.h < a.y);
+
+        // Build list of all bubbles with context for sorting
+        const all = [];
+        chart.data.datasets.forEach((ds, di)=>{
+          const meta = chart.getDatasetMeta(di);
+          meta.data.forEach((pt, i)=>{
+            const d = ds.data[i];
+            if(!d) return;
+            all.push({pt, d});
+          });
+        });
+        // Sort by radius desc — biggest bubbles get labeled first (priority)
+        all.sort((a,b)=> (b.d.r||0) - (a.d.r||0));
+
+        all.forEach(({pt,d})=>{
+          const r = d.r || 8;
+          // Alternate above/below based on posIndex parity to split crowding
+          const flip = ((d.posIndex||0) % 2 === 1) ? -1 : 1;
+          const offY = (r + 11) * flip;
+          const tx = pt.x, ty = pt.y + offY;
+
+          // Approximate label width
+          const w = ctx.measureText(d.name).width;
+          const rect = {x: tx - w/2 - 3, y: ty - 7, w: w + 6, h: 14};
+
+          // Collision check — if overlaps, try the opposite side, else skip
+          let chosen = rect;
+          let chosenTy = ty;
+          if(placed.some(p=>rectsOverlap(p, rect))){
+            const ty2 = pt.y - offY;
+            const rect2 = {x: tx - w/2 - 3, y: ty2 - 7, w: w + 6, h: 14};
+            if(!placed.some(p=>rectsOverlap(p, rect2))){
+              chosen = rect2; chosenTy = ty2;
+            } else {
+              // skip this label to avoid overlap
+              return;
+            }
+          }
+          placed.push(chosen);
+
+          // Draw soft white background for legibility
+          ctx.fillStyle = 'rgba(255,255,255,.82)';
+          ctx.fillRect(chosen.x, chosen.y, chosen.w, chosen.h);
+          ctx.fillStyle = '#0B1020';
+          ctx.fillText(d.name, tx, chosenTy);
+        });
+        ctx.restore();
+      }
+    }]
+  });
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+window.addEventListener('load',()=>{
+  renderGrid('all');
+  setTimeout(()=>{ layoutOrbit(); renderOrbitMobile(); }, 50);
+  buildCharts();
+  initScrollSpy();
+});
+
+/* ============================================================
+   SCROLL-SPY for sticky nav
+   ============================================================ */
+function initScrollSpy(){
+  const sections = ['hero','map','grid-section','flow-section','portfolio']
+    .map(id=>document.getElementById(id)).filter(Boolean);
+  const links = document.querySelectorAll('.navlink');
+  // Smooth scroll + account for sticky navbar height (skip external links)
+  links.forEach(l=>{
+    l.addEventListener('click', ev=>{
+      const id = l.dataset.target;
+      if(!id) return;  // external link (target=_blank) — let browser handle it
+      const el = document.getElementById(id);
+      if(!el) return;
+      ev.preventDefault();
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({top:y, behavior:'smooth'});
+    });
+  });
+  // Highlight active
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.toggle('active', l.dataset.target===e.target.id));
+      }
+    });
+  },{rootMargin:'-30% 0px -60% 0px'});
+  sections.forEach(s=>obs.observe(s));
+}
+let _resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(()=>{
+    document.querySelectorAll('#orbit .node, #orbit .orbit-line').forEach(n=>n.remove());
+    layoutOrbit();
+    renderOrbitMobile();
+  }, 150);
+});
+</script>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- Canonical V/M SSOT alignment · auto-injected · do not remove   -->
+<!-- Pair: /canonical/vm-status.json + canonical-facts.md           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<section style="margin:32px auto;max-width:960px;padding:18px 22px;background:#f8fafc;border-left:4px solid #6366f1;border-radius:8px;font:13px/1.6 -apple-system,BlinkMacSystemFont,sans-serif;color:#475569;">
+  <div style="font-weight:600;color:#1e293b;margin-bottom:8px;">📌 Canonical V/M Reference (SSOT)</div>
+  <div style="margin:4px 0;"><strong>Vision (canonical):</strong> <em>Human wisdom. AI at scale. Wisdom for everyone.</em></div>
+  <div style="margin:4px 0;"><strong>Mission (canonical):</strong> <em>Empower people. Build sustainable businesses. Scale crafted AI to the world.</em></div>
+  <div style="font-size:11px;color:#94a3b8;margin-top:8px;">Source: <code>/canonical/canonical-facts.md</code> + <code>/canonical/vm-status.json</code> · Locked Apr 23, 2026 · Op 16 SSOT discipline</div>
+</section>
+
+</body>
+</html>
